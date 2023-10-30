@@ -23,6 +23,7 @@ The repository is broken up into subdirectories: scirpts, data, paper, and info.
 **info**
 
 - Outline_30-10-23.Rmd: Initial outline produced during a brainstorming session between AW, JM, and CK
+- Timeline_Tasks.Rmd: Description of tasks that need to be completed, a brief timeline that I think could work, and who I think should be in charge of each task
 
 **paper**
 
