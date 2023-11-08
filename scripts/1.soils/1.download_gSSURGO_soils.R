@@ -18,6 +18,10 @@ library(dplyr)
 # Helper function for dividing the state into four quadrants
 source('scripts/1.soils/define_bounds.R')
 
+## Bounding boxes by states from the following link: 
+## https://observablehq.com/@rdmurphy/u-s-state-bounding-boxes
+## in WGS84 = EPSG:4326
+
 ## Illinois
 
 # Split IL into four quadrants
@@ -174,34 +178,35 @@ a_WI4 <- sf::st_bbox(
   crs = sf::st_crs(4326)
 )
 
-# fetch gSSURGO map unit keys at 80m resolution (lowest possible = 30m)
-# lowest resolution possible for all states
-# (resolution limited by extent of Michigain)
+# fetch gSSURGO map unit keys at 3000m resolution 
+# (lowest possible = 30m, highest possible = 3000m)
+# highest resolution possible for all states
+# (lowest resolution limited by extent of Michigain)
 # will need to be rescaled for use in analysis
-mu_IL1 <- soilDB::mukey.wcs(aoi = a_IL1, db = 'gssurgo', res = 3000)
-mu_IL2 <- soilDB::mukey.wcs(aoi = a_IL2, db = 'gssurgo', res = 3000)
-mu_IL3 <- soilDB::mukey.wcs(aoi = a_IL3, db = 'gssurgo', res = 3000)
-mu_IL4 <- soilDB::mukey.wcs(aoi = a_IL4, db = 'gssurgo', res = 3000)
+mu_IL1 <- soilDB::mukey.wcs(list(aoi = a_IL1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IL2 <- soilDB::mukey.wcs(list(aoi = a_IL2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IL3 <- soilDB::mukey.wcs(list(aoi = a_IL3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IL4 <- soilDB::mukey.wcs(list(aoi = a_IL4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
 
-mu_IN1 <- soilDB::mukey.wcs(aoi = a_IN1, db = 'gssurgo', res = 3000)
-mu_IN2 <- soilDB::mukey.wcs(aoi = a_IN2, db = 'gssurgo', res = 3000)
-mu_IN3 <- soilDB::mukey.wcs(aoi = a_IN3, db = 'gssurgo', res = 3000)
-mu_IN4 <- soilDB::mukey.wcs(aoi = a_IN4, db = 'gssurgo', res = 3000)
+mu_IN1 <- soilDB::mukey.wcs(list(aoi = a_IN1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IN2 <- soilDB::mukey.wcs(list(aoi = a_IN2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IN3 <- soilDB::mukey.wcs(list(aoi = a_IN3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IN4 <- soilDB::mukey.wcs(list(aoi = a_IN4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
 
-mu_MI1 <- soilDB::mukey.wcs(aoi = a_MI1, db = 'gssurgo', res = 3000)
-mu_MI2 <- soilDB::mukey.wcs(aoi = a_MI2, db = 'gssurgo', res = 3000)
-mu_MI3 <- soilDB::mukey.wcs(aoi = a_MI3, db = 'gssurgo', res = 3000)
-mu_MI4 <- soilDB::mukey.wcs(aoi = a_MI4, db = 'gssurgo', res = 3000)
+mu_MI1 <- soilDB::mukey.wcs(list(aoi = a_MI1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MI2 <- soilDB::mukey.wcs(list(aoi = a_MI2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MI3 <- soilDB::mukey.wcs(list(aoi = a_MI3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MI4 <- soilDB::mukey.wcs(list(aoi = a_MI4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
 
-mu_MN1 <- soilDB::mukey.wcs(aoi = a_MN1, db = 'gssurgo', res = 3000)
-mu_MN2 <- soilDB::mukey.wcs(aoi = a_MN2, db = 'gssurgo', res = 3000)
-mu_MN3 <- soilDB::mukey.wcs(aoi = a_MN3, db = 'gssurgo', res = 3000)
-mu_MN4 <- soilDB::mukey.wcs(aoi = a_MN4, db = 'gssurgo', res = 3000)
+mu_MN1 <- soilDB::mukey.wcs(list(aoi = a_MN1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MN2 <- soilDB::mukey.wcs(list(aoi = a_MN2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MN3 <- soilDB::mukey.wcs(list(aoi = a_MN3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MN4 <- soilDB::mukey.wcs(list(aoi = a_MN4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
 
-mu_WI1 <- soilDB::mukey.wcs(aoi = a_WI1, db = 'gssurgo', res = 3000)
-mu_WI2 <- soilDB::mukey.wcs(aoi = a_WI2, db = 'gssurgo', res = 3000)
-mu_WI3 <- soilDB::mukey.wcs(aoi = a_WI3, db = 'gssurgo', res = 3000)
-mu_WI4 <- soilDB::mukey.wcs(aoi = a_WI4, db = 'gssurgo', res = 3000)
+mu_WI1 <- soilDB::mukey.wcs(list(aoi = a_WI1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_WI2 <- soilDB::mukey.wcs(list(aoi = a_WI2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_WI3 <- soilDB::mukey.wcs(list(aoi = a_WI3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_WI4 <- soilDB::mukey.wcs(list(aoi = a_WI4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
 
 # extract RAT for thematic mapping for each state
 rat_IL1 <- terra::cats(mu_IL1)[[1]]
