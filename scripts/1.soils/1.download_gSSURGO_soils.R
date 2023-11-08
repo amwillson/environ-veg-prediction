@@ -2,6 +2,9 @@
 ## Data processing has to proceed directly from downloads or you get error
 ## "external pointer is not valid"
 
+## difference between weighted average and dominant component
+## explained here: https://www.nrcs.usda.gov/sites/default/files/2022-08/WSS-Four-Steps.pdf
+
 ## Author: AM Willson
 
 rm(list = ls())
@@ -175,30 +178,30 @@ a_WI4 <- sf::st_bbox(
 # lowest resolution possible for all states
 # (resolution limited by extent of Michigain)
 # will need to be rescaled for use in analysis
-mu_IL1 <- soilDB::mukey.wcs(aoi = a_IL1, db = 'gssurgo', res = 80)
-mu_IL2 <- soilDB::mukey.wcs(aoi = a_IL2, db = 'gssurgo', res = 80)
-mu_IL3 <- soilDB::mukey.wcs(aoi = a_IL3, db = 'gssurgo', res = 80)
-mu_IL4 <- soilDB::mukey.wcs(aoi = a_IL4, db = 'gssurgo', res = 80)
+mu_IL1 <- soilDB::mukey.wcs(aoi = a_IL1, db = 'gssurgo', res = 3000)
+mu_IL2 <- soilDB::mukey.wcs(aoi = a_IL2, db = 'gssurgo', res = 3000)
+mu_IL3 <- soilDB::mukey.wcs(aoi = a_IL3, db = 'gssurgo', res = 3000)
+mu_IL4 <- soilDB::mukey.wcs(aoi = a_IL4, db = 'gssurgo', res = 3000)
 
-mu_IN1 <- soilDB::mukey.wcs(aoi = a_IN1, db = 'gssurgo', res = 80)
-mu_IN2 <- soilDB::mukey.wcs(aoi = a_IN2, db = 'gssurgo', res = 80)
-mu_IN3 <- soilDB::mukey.wcs(aoi = a_IN3, db = 'gssurgo', res = 80)
-mu_IN4 <- soilDB::mukey.wcs(aoi = a_IN4, db = 'gssurgo', res = 80)
+mu_IN1 <- soilDB::mukey.wcs(aoi = a_IN1, db = 'gssurgo', res = 3000)
+mu_IN2 <- soilDB::mukey.wcs(aoi = a_IN2, db = 'gssurgo', res = 3000)
+mu_IN3 <- soilDB::mukey.wcs(aoi = a_IN3, db = 'gssurgo', res = 3000)
+mu_IN4 <- soilDB::mukey.wcs(aoi = a_IN4, db = 'gssurgo', res = 3000)
 
-mu_MI1 <- soilDB::mukey.wcs(aoi = a_MI1, db = 'gssurgo', res = 80)
-mu_MI2 <- soilDB::mukey.wcs(aoi = a_MI2, db = 'gssurgo', res = 80)
-mu_MI3 <- soilDB::mukey.wcs(aoi = a_MI3, db = 'gssurgo', res = 80)
-mu_MI4 <- soilDB::mukey.wcs(aoi = a_MI4, db = 'gssurgo', res = 80)
+mu_MI1 <- soilDB::mukey.wcs(aoi = a_MI1, db = 'gssurgo', res = 3000)
+mu_MI2 <- soilDB::mukey.wcs(aoi = a_MI2, db = 'gssurgo', res = 3000)
+mu_MI3 <- soilDB::mukey.wcs(aoi = a_MI3, db = 'gssurgo', res = 3000)
+mu_MI4 <- soilDB::mukey.wcs(aoi = a_MI4, db = 'gssurgo', res = 3000)
 
-mu_MN1 <- soilDB::mukey.wcs(aoi = a_MN1, db = 'gssurgo', res = 80)
-mu_MN2 <- soilDB::mukey.wcs(aoi = a_MN2, db = 'gssurgo', res = 80)
-mu_MN3 <- soilDB::mukey.wcs(aoi = a_MN3, db = 'gssurgo', res = 80)
-mu_MN4 <- soilDB::mukey.wcs(aoi = a_MN4, db = 'gssurgo', res = 80)
+mu_MN1 <- soilDB::mukey.wcs(aoi = a_MN1, db = 'gssurgo', res = 3000)
+mu_MN2 <- soilDB::mukey.wcs(aoi = a_MN2, db = 'gssurgo', res = 3000)
+mu_MN3 <- soilDB::mukey.wcs(aoi = a_MN3, db = 'gssurgo', res = 3000)
+mu_MN4 <- soilDB::mukey.wcs(aoi = a_MN4, db = 'gssurgo', res = 3000)
 
-mu_WI1 <- soilDB::mukey.wcs(aoi = a_WI1, db = 'gssurgo', res = 80)
-mu_WI2 <- soilDB::mukey.wcs(aoi = a_WI2, db = 'gssurgo', res = 80)
-mu_WI3 <- soilDB::mukey.wcs(aoi = a_WI3, db = 'gssurgo', res = 80)
-mu_WI4 <- soilDB::mukey.wcs(aoi = a_WI4, db = 'gssurgo', res = 80)
+mu_WI1 <- soilDB::mukey.wcs(aoi = a_WI1, db = 'gssurgo', res = 3000)
+mu_WI2 <- soilDB::mukey.wcs(aoi = a_WI2, db = 'gssurgo', res = 3000)
+mu_WI3 <- soilDB::mukey.wcs(aoi = a_WI3, db = 'gssurgo', res = 3000)
+mu_WI4 <- soilDB::mukey.wcs(aoi = a_WI4, db = 'gssurgo', res = 3000)
 
 # extract RAT for thematic mapping for each state
 rat_IL1 <- terra::cats(mu_IL1)[[1]]
@@ -421,6 +424,11 @@ ssc_MN2 <- terra::project(x = ssc_MN2, 'EPSG:4326')
 ssc_MN3 <- terra::project(x = ssc_MN3, 'EPSG:4326')
 ssc_MN4 <- terra::project(x = ssc_MN4, 'EPSG:4326')
 
+ssc_WI1 <- terra::project(x = ssc_WI1, 'EPSG:4326')
+ssc_WI2 <- terra::project(x = ssc_WI2, 'EPSG:4326')
+ssc_WI3 <- terra::project(x = ssc_WI3, 'EPSG:4326')
+ssc_WI4 <- terra::project(x = ssc_WI4, 'EPSG:4326')
+
 # Convert to data frame
 df_IL1 <- raster::as.data.frame(x = ssc_IL1, xy = TRUE)
 df_IL2 <- raster::as.data.frame(x = ssc_IL2, xy = TRUE)
@@ -454,8 +462,10 @@ df_MI <- rbind(df_MI1, df_MI2, df_MI3, df_MI4)
 df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
-save(df_IL, df_IN, df_MI, df_MN, df_WI,
-     file = 'data/raw/gssurgo_dominant_030.RData')
+df_all <- rbind(df_IL, df_IN, df_MI, df_MN, df_WI)
+
+save(df_IL, df_IN, df_MI, df_MN, df_WI, df_all,
+     file = 'data/raw/gssurgo_dominant_030_3000m.RData')
 
 #### EXPERIMENT 2 ####
 
@@ -639,6 +649,11 @@ ssc_MN2 <- terra::project(x = ssc_MN2, 'EPSG:4326')
 ssc_MN3 <- terra::project(x = ssc_MN3, 'EPSG:4326')
 ssc_MN4 <- terra::project(x = ssc_MN4, 'EPSG:4326')
 
+ssc_WI1 <- terra::project(x = ssc_WI1, 'EPSG:4326')
+ssc_WI2 <- terra::project(x = ssc_WI2, 'EPSG:4326')
+ssc_WI3 <- terra::project(x = ssc_WI3, 'EPSG:4326')
+ssc_WI4 <- terra::project(x = ssc_WI4, 'EPSG:4326')
+
 # Convert to data frame
 df_IL1 <- raster::as.data.frame(x = ssc_IL1, xy = TRUE)
 df_IL2 <- raster::as.data.frame(x = ssc_IL2, xy = TRUE)
@@ -672,8 +687,10 @@ df_MI <- rbind(df_MI1, df_MI2, df_MI3, df_MI4)
 df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
-save(df_IL, df_IN, df_MI, df_MN, df_WI,
-     file = 'data/raw/gssurgo_dominant_2550.RData')
+df_all <- rbind(df_IL, df_IN, df_MI, df_MN, df_WI)
+
+save(df_IL, df_IN, df_MI, df_MN, df_WI, df_all,
+     file = 'data/raw/gssurgo_dominant_2550_3000m.RData')
 
 #### EXPERIMENT 3 ####
 
@@ -857,6 +874,11 @@ ssc_MN2 <- terra::project(x = ssc_MN2, 'EPSG:4326')
 ssc_MN3 <- terra::project(x = ssc_MN3, 'EPSG:4326')
 ssc_MN4 <- terra::project(x = ssc_MN4, 'EPSG:4326')
 
+ssc_WI1 <- terra::project(x = ssc_WI1, 'EPSG:4326')
+ssc_WI2 <- terra::project(x = ssc_WI2, 'EPSG:4326')
+ssc_WI3 <- terra::project(x = ssc_WI3, 'EPSG:4326')
+ssc_WI4 <- terra::project(x = ssc_WI4, 'EPSG:4326')
+
 # Convert to data frame
 df_IL1 <- raster::as.data.frame(x = ssc_IL1, xy = TRUE)
 df_IL2 <- raster::as.data.frame(x = ssc_IL2, xy = TRUE)
@@ -890,8 +912,10 @@ df_MI <- rbind(df_MI1, df_MI2, df_MI3, df_MI4)
 df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
-save(df_IL, df_IN, df_MI, df_MN, df_WI,
-     file = 'data/raw/gssurgo_average_030.RData')
+df_all <- rbind(df_IL, df_IN, df_MI, df_MN, df_WI)
+
+save(df_IL, df_IN, df_MI, df_MN, df_WI, df_all,
+     file = 'data/raw/gssurgo_average_030_3000m.RData')
 
 #### EXPERIMENT 4 ####
 
@@ -1113,5 +1137,7 @@ df_MI <- rbind(df_MI1, df_MI2, df_MI3, df_MI4)
 df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
-save(df_IL, df_IN, df_MI, df_MN, df_WI,
-     file = 'data/raw/gssurgo_average_2550.RData')
+df_all <- rbind(df_IL, df_IN, df_MI, df_MN, df_WI)
+
+save(df_IL, df_IN, df_MI, df_MN, df_WI, df_all,
+     file = 'data/raw/gssurgo_average_2550_3000m.RData')
