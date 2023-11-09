@@ -1,5 +1,8 @@
 # Figures of raw soil data
 
+# https://pubmed.ncbi.nlm.nih.gov/28307854/
+# ^ for global root distribution
+
 rm(list = ls())
 
 library(ggplot2)
