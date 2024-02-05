@@ -5,39 +5,25 @@
 
 rm(list = ls())
 
-library(ggplot2)
-library(tidyr)
-library(cowplot)
-
 ## Loading data and renaming to compare different experiments
-load('data/raw/gssurgo_average_030_3000m.RData')
+load('data/raw/soils/gssurgo_average_030_500m.RData')
 
 df_average_030 <- df_all
 
-rm(df_all, df_IL, df_IN, df_MI, df_MN, df_WI)
-
-load('data/raw/gssurgo_average_2550_3000m.RData')
-
-df_average_2550 <- df_all
-
-rm(df_all, df_IL, df_IN, df_MI, df_MN, df_WI)
-
-load('data/raw/gssurgo_dominant_030_3000m.RData')
+load('data/raw/soils/gssurgo_dominant_030_500m.RData')
 
 df_dominant_030 <- df_all
-
-rm(df_all, df_IL, df_IN, df_MI, df_MN, df_WI)
-
-load('data/raw/gssurgo_dominant_2550_3000m.RData')
-
-df_dominant_2550 <- df_all
-
-rm(df_all, df_IL, df_IN, df_MI, df_MN, df_WI)
 
 states <- ggplot2::map_data('state', region = c('illinois', 'indiana', 'michigan',
                                                 'minnesota', 'wisconsin'))
 
-## Average 0-30 cm
+#### Average 0-30 cm ####
+df_average_030 |>
+  dplyr::select(x, y, claytotal_r) |>
+  dplyr::filter(claytotal_r >= 0 & claytotal_r <= 100) |>
+  ggplot2::ggplot(ggplot2::aes(x = x, y = y, color = claytotal_r)) +
+  ggplot2::geom_point() #+
+  ggplot2::geom_
 average_030 <- df_average_030 |>
   tidyr::pivot_longer(cols = claytotal_r:silttotal_r, names_to = 'var', values_to = 'val') |>
   dplyr::mutate(var = dplyr::if_else(var == 'claytotal_r', 'Clay', var),

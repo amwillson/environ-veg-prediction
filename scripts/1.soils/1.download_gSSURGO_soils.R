@@ -9,12 +9,6 @@
 
 rm(list = ls())
 
-library(sf)
-library(soilDB)
-library(terra)
-library(ggplot2)
-library(dplyr)
-
 # Helper function for dividing the state into four quadrants
 source('scripts/1.soils/define_bounds.R')
 
@@ -178,35 +172,35 @@ a_WI4 <- sf::st_bbox(
   crs = sf::st_crs(4326)
 )
 
-# fetch gSSURGO map unit keys at 3000m resolution 
-# (lowest possible = 30m, highest possible = 3000m)
+# fetch gSSURGO map unit keys at 100m resolution 
+# (highest possible = 30m, lowest possible = 3000m)
 # highest resolution possible for all states
-# (lowest resolution limited by extent of Michigain)
+# (lowest resolution limited by extent of Michigan)
 # will need to be rescaled for use in analysis
-mu_IL1 <- soilDB::mukey.wcs(list(aoi = a_IL1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_IL2 <- soilDB::mukey.wcs(list(aoi = a_IL2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_IL3 <- soilDB::mukey.wcs(list(aoi = a_IL3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_IL4 <- soilDB::mukey.wcs(list(aoi = a_IL4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IL1 <- soilDB::mukey.wcs(list(aoi = a_IL1, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_IL2 <- soilDB::mukey.wcs(list(aoi = a_IL2, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_IL3 <- soilDB::mukey.wcs(list(aoi = a_IL3, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_IL4 <- soilDB::mukey.wcs(list(aoi = a_IL4, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
 
-mu_IN1 <- soilDB::mukey.wcs(list(aoi = a_IN1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_IN2 <- soilDB::mukey.wcs(list(aoi = a_IN2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_IN3 <- soilDB::mukey.wcs(list(aoi = a_IN3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_IN4 <- soilDB::mukey.wcs(list(aoi = a_IN4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_IN1 <- soilDB::mukey.wcs(list(aoi = a_IN1, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_IN2 <- soilDB::mukey.wcs(list(aoi = a_IN2, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_IN3 <- soilDB::mukey.wcs(list(aoi = a_IN3, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_IN4 <- soilDB::mukey.wcs(list(aoi = a_IN4, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
 
-mu_MI1 <- soilDB::mukey.wcs(list(aoi = a_MI1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_MI2 <- soilDB::mukey.wcs(list(aoi = a_MI2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_MI3 <- soilDB::mukey.wcs(list(aoi = a_MI3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_MI4 <- soilDB::mukey.wcs(list(aoi = a_MI4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MI1 <- soilDB::mukey.wcs(list(aoi = a_MI1, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_MI2 <- soilDB::mukey.wcs(list(aoi = a_MI2, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_MI3 <- soilDB::mukey.wcs(list(aoi = a_MI3, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_MI4 <- soilDB::mukey.wcs(list(aoi = a_MI4, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
 
-mu_MN1 <- soilDB::mukey.wcs(list(aoi = a_MN1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_MN2 <- soilDB::mukey.wcs(list(aoi = a_MN2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_MN3 <- soilDB::mukey.wcs(list(aoi = a_MN3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_MN4 <- soilDB::mukey.wcs(list(aoi = a_MN4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_MN1 <- soilDB::mukey.wcs(list(aoi = a_MN1, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_MN2 <- soilDB::mukey.wcs(list(aoi = a_MN2, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_MN3 <- soilDB::mukey.wcs(list(aoi = a_MN3, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_MN4 <- soilDB::mukey.wcs(list(aoi = a_MN4, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
 
-mu_WI1 <- soilDB::mukey.wcs(list(aoi = a_WI1, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_WI2 <- soilDB::mukey.wcs(list(aoi = a_WI2, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_WI3 <- soilDB::mukey.wcs(list(aoi = a_WI3, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
-mu_WI4 <- soilDB::mukey.wcs(list(aoi = a_WI4, crs = 'EPSG:4326'), db = 'gssurgo', res = 3000)
+mu_WI1 <- soilDB::mukey.wcs(list(aoi = a_WI1, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_WI2 <- soilDB::mukey.wcs(list(aoi = a_WI2, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_WI3 <- soilDB::mukey.wcs(list(aoi = a_WI3, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
+mu_WI4 <- soilDB::mukey.wcs(list(aoi = a_WI4, crs = 'EPSG:4326'), db = 'gssurgo', res = 700)
 
 # extract RAT for thematic mapping for each state
 rat_IL1 <- terra::cats(mu_IL1)[[1]]
@@ -245,7 +239,7 @@ rat_WI4 <- terra::cats(mu_WI4)[[1]]
 # mukeys = look-up
 # top depth  & bottom depth are varied as experiments to see sensitivity
 
-vars <- c('claytotal_r', 'sandtotal_r', 'silttotal_r')
+vars <- c('claytotal_r', 'sandtotal_r', 'silttotal_r', 'caco3_r', 'awc_r')
 
 #### EXPERIMENT 1 ####
 
@@ -467,12 +461,12 @@ df_MI <- rbind(df_MI1, df_MI2, df_MI3, df_MI4)
 df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
-df_all <- rbind(df_IL, df_IN, df_MI, df_MN, df_WI)
-
-save(df_IL, df_IN, df_MI, df_MN, df_WI, df_all,
-     file = 'data/raw/gssurgo_dominant_030_3000m.RData')
+save(df_IL, df_IN, df_MI, df_MN, df_WI,
+     file = 'data/raw/soils/gssurgo_dominant_030_500m.RData')
 
 #### EXPERIMENT 2 ####
+
+## Not being used at this time
 
 # method = dominant component
 # depth = 25-50 cm
@@ -917,12 +911,12 @@ df_MI <- rbind(df_MI1, df_MI2, df_MI3, df_MI4)
 df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
-df_all <- rbind(df_IL, df_IN, df_MI, df_MN, df_WI)
-
-save(df_IL, df_IN, df_MI, df_MN, df_WI, df_all,
-     file = 'data/raw/gssurgo_average_030_3000m.RData')
+save(df_IL, df_IN, df_MI, df_MN, df_WI,
+     file = 'data/raw/soils/gssurgo_average_030_500m.RData')
 
 #### EXPERIMENT 4 ####
+
+## not used
 
 # method = weighted average
 # depth = 25-50cm
