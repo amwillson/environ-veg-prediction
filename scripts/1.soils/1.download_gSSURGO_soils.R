@@ -346,7 +346,7 @@ tab_WI3 <- soilDB::get_SDA_property(property = vars,
                                     bottom_depth = 30)
 tab_WI4 <- soilDB::get_SDA_property(property = vars,
                                     method = 'Dominant Component (Numeric)',
-                                    mukeys = as.integer(rat_WI3$mukey),
+                                    mukeys = as.integer(rat_WI4$mukey),
                                     top_depth = 0,
                                     bottom_depth = 30)
 
@@ -462,7 +462,7 @@ df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
 save(df_IL, df_IN, df_MI, df_MN, df_WI,
-     file = 'data/raw/soils/gssurgo_dominant_030_500m.RData')
+     file = 'data/raw/soils/gssurgo_dominant_030_700m.RData')
 
 #### EXPERIMENT 2 ####
 
@@ -571,7 +571,7 @@ tab_WI3 <- soilDB::get_SDA_property(property = vars,
                                     bottom_depth = 50)
 tab_WI4 <- soilDB::get_SDA_property(property = vars,
                                     method = 'Dominant Component (Numeric)',
-                                    mukeys = as.integer(rat_WI3$mukey),
+                                    mukeys = as.integer(rat_WI4$mukey),
                                     top_depth = 25,
                                     bottom_depth = 50)
 
@@ -796,7 +796,7 @@ tab_WI3 <- soilDB::get_SDA_property(property = vars,
                                     bottom_depth = 30)
 tab_WI4 <- soilDB::get_SDA_property(property = vars,
                                     method = 'Weighted Average',
-                                    mukeys = as.integer(rat_WI3$mukey),
+                                    mukeys = as.integer(rat_WI4$mukey),
                                     top_depth = 0,
                                     bottom_depth = 30)
 
@@ -912,7 +912,7 @@ df_MN <- rbind(df_MN1, df_MN2, df_MN3, df_MN4)
 df_WI <- rbind(df_WI1, df_WI2, df_WI3, df_WI4)
 
 save(df_IL, df_IN, df_MI, df_MN, df_WI,
-     file = 'data/raw/soils/gssurgo_average_030_500m.RData')
+     file = 'data/raw/soils/gssurgo_average_030_700m.RData')
 
 #### EXPERIMENT 4 ####
 
@@ -1021,7 +1021,7 @@ tab_WI3 <- soilDB::get_SDA_property(property = vars,
                                     bottom_depth = 50)
 tab_WI4 <- soilDB::get_SDA_property(property = vars,
                                     method = 'Weighted Average',
-                                    mukeys = as.integer(rat_WI3$mukey),
+                                    mukeys = as.integer(rat_WI4$mukey),
                                     top_depth = 25,
                                     bottom_depth = 50)
 
