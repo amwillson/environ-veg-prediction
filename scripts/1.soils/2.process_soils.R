@@ -1,10 +1,13 @@
-## CHECK COORDINATES??
 rm(list = ls())
 
 #### ILLINOIS ####
-load('gssurgo_dominant_030_500m.RData')
+load('data/raw/soils/gssurgo_dominant_030_700m.RData')
 
-load('illinois_format.RData')
+load('data/processed/PLS/illinois_format.RData')
+
+# Remove NAs from soil data
+df_IL <- df_IL |>
+  tidyr::drop_na()
 
 # Format illinois data
 illinois <- illinois |>
@@ -68,84 +71,84 @@ colnames(coords_illinois1) <- colnames(coords_illinois2) <- colnames(coords_illi
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
 coords_df_IL1 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois1$long) - 0.05 & x <= max(coords_illinois1$long) + 0.05 &
-                  y >= min(coords_illinois1$lat) - 0.05 & y <= max(coords_illinois1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois1$long) - 0.1 & x <= max(coords_illinois1$long) + 0.1 &
+                  y >= min(coords_illinois1$lat) - 0.1 & y <= max(coords_illinois1$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL2 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois2$long) - 0.05 & x <= max(coords_illinois2$long) + 0.05 &
-                  y >= min(coords_illinois2$lat) - 0.05 & y <= max(coords_illinois2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois2$long) - 0.1 & x <= max(coords_illinois2$long) + 0.1 &
+                  y >= min(coords_illinois2$lat) - 0.1 & y <= max(coords_illinois2$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL3 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois3$long) - 0.05 & x <= max(coords_illinois3$long) + 0.05 &
-                  y >= min(coords_illinois3$lat) - 0.05 & y <= max(coords_illinois3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois3$long) - 0.1 & x <= max(coords_illinois3$long) + 0.1 &
+                  y >= min(coords_illinois3$lat) - 0.1 & y <= max(coords_illinois3$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL4 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois4$long) - 0.05 & x <= max(coords_illinois4$long) + 0.05 &
-                  y >= min(coords_illinois4$lat) - 0.05 & y <= max(coords_illinois4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois4$long) - 0.1 & x <= max(coords_illinois4$long) + 0.1 &
+                  y >= min(coords_illinois4$lat) - 0.1 & y <= max(coords_illinois4$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL5 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois5$long) - 0.05 & x <= max(coords_illinois5$long) + 0.05 &
-                  y >= min(coords_illinois5$lat) - 0.05 & y <= max(coords_illinois5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois5$long) - 0.1 & x <= max(coords_illinois5$long) + 0.1 &
+                  y >= min(coords_illinois5$lat) - 0.1 & y <= max(coords_illinois5$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL6 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois6$long) - 0.05 & x <= max(coords_illinois6$long) + 0.05 &
-                  y >= min(coords_illinois6$lat) - 0.05 & y <= max(coords_illinois6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois6$long) - 0.1 & x <= max(coords_illinois6$long) + 0.1 &
+                  y >= min(coords_illinois6$lat) - 0.1 & y <= max(coords_illinois6$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL7 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois7$long) - 0.05 & x <= max(coords_illinois7$long) + 0.05 &
-                  y >= min(coords_illinois7$lat) - 0.05 & y <= max(coords_illinois7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois7$long) - 0.1 & x <= max(coords_illinois7$long) + 0.1 &
+                  y >= min(coords_illinois7$lat) - 0.1 & y <= max(coords_illinois7$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL8 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois8$long) - 0.05 & x <= max(coords_illinois8$long) + 0.05 &
-                  y >= min(coords_illinois8$lat) - 0.05 & y <= max(coords_illinois8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois8$long) - 0.1 & x <= max(coords_illinois8$long) + 0.1 &
+                  y >= min(coords_illinois8$lat) - 0.1 & y <= max(coords_illinois8$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL9 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois9$long) - 0.05 & x <= max(coords_illinois9$long) + 0.05 &
-                  y >= min(coords_illinois9$lat) - 0.05 & y <= max(coords_illinois9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois9$long) - 0.1 & x <= max(coords_illinois9$long) + 0.1 &
+                  y >= min(coords_illinois9$lat) - 0.1 & y <= max(coords_illinois9$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL10 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois10$long) - 0.05 & x <= max(coords_illinois10$long) + 0.05 &
-                  y >= min(coords_illinois10$lat) - 0.05 & y <= max(coords_illinois10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois10$long) - 0.1 & x <= max(coords_illinois10$long) + 0.1 &
+                  y >= min(coords_illinois10$lat) - 0.1 & y <= max(coords_illinois10$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL11 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois11$long) - 0.05 & x <= max(coords_illinois11$long) + 0.05 &
-                  y >= min(coords_illinois11$lat) - 0.05 & y <= max(coords_illinois11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois11$long) - 0.1 & x <= max(coords_illinois11$long) + 0.1 &
+                  y >= min(coords_illinois11$lat) - 0.1 & y <= max(coords_illinois11$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL12 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois12$long) - 0.05 & x <= max(coords_illinois12$long) + 0.05 &
-                  y >= min(coords_illinois12$lat) - 0.05 & y <= max(coords_illinois12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois12$long) - 0.1 & x <= max(coords_illinois12$long) + 0.1 &
+                  y >= min(coords_illinois12$lat) - 0.1 & y <= max(coords_illinois12$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL13 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois13$long) - 0.05 & x <= max(coords_illinois13$long) + 0.05 &
-                  y >= min(coords_illinois13$lat) - 0.05 & y <= max(coords_illinois13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois13$long) - 0.1 & x <= max(coords_illinois13$long) + 0.1 &
+                  y >= min(coords_illinois13$lat) - 0.1 & y <= max(coords_illinois13$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL14 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois14$long) - 0.05 & x <= max(coords_illinois14$long) + 0.05 &
-                  y >= min(coords_illinois14$lat) - 0.05 & y <= max(coords_illinois14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois14$long) - 0.1 & x <= max(coords_illinois14$long) + 0.1 &
+                  y >= min(coords_illinois14$lat) - 0.1 & y <= max(coords_illinois14$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL15 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois15$long) - 0.05 & x <= max(coords_illinois15$long) + 0.05 &
-                  y >= min(coords_illinois15$lat) - 0.05 & y <= max(coords_illinois15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois15$long) - 0.1 & x <= max(coords_illinois15$long) + 0.1 &
+                  y >= min(coords_illinois15$lat) - 0.1 & y <= max(coords_illinois15$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL16 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois16$long) - 0.05 & x <= max(coords_illinois16$long) + 0.05 &
-                  y >= min(coords_illinois16$lat) - 0.05 & y <= max(coords_illinois16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois16$long) - 0.1 & x <= max(coords_illinois16$long) + 0.1 &
+                  y >= min(coords_illinois16$lat) - 0.1 & y <= max(coords_illinois16$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL17 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois17$long) - 0.05 & x <= max(coords_illinois17$long) + 0.05 &
-                  y >= min(coords_illinois17$lat) - 0.05 & y <= max(coords_illinois17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois17$long) - 0.1 & x <= max(coords_illinois17$long) + 0.1 &
+                  y >= min(coords_illinois17$lat) - 0.1 & y <= max(coords_illinois17$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL18 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois18$long) - 0.05 & x <= max(coords_illinois18$long) + 0.05 &
-                  y >= min(coords_illinois18$lat) - 0.05 & y <= max(coords_illinois18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois18$long) - 0.1 & x <= max(coords_illinois18$long) + 0.1 &
+                  y >= min(coords_illinois18$lat) - 0.1 & y <= max(coords_illinois18$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL19 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois19$long) - 0.05 & x <= max(coords_illinois19$long) + 0.05 &
-                  y >= min(coords_illinois19$lat) - 0.05 & y <= max(coords_illinois19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois19$long) - 0.1 & x <= max(coords_illinois19$long) + 0.1 &
+                  y >= min(coords_illinois19$lat) - 0.1 & y <= max(coords_illinois19$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IL20 <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois20$long) - 0.05 & x <= max(coords_illinois20$long) + 0.05 &
-                  y >= min(coords_illinois20$lat) - 0.05 & y <= max(coords_illinois20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois20$long) - 0.1 & x <= max(coords_illinois20$long) + 0.1 &
+                  y >= min(coords_illinois20$lat) - 0.1 & y <= max(coords_illinois20$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes
@@ -160,8 +163,8 @@ rm(dists)
 # We'll add to this subsequently
 select_df_IL <- df_IL |>
   # Filter as done above to make sure indexing matches
-  dplyr::filter(x >= min(coords_illinois1$long) - 0.05 & x <= max(coords_illinois1$long) + 0.05 &
-                  y >= min(coords_illinois1$lat) - 0.05 & y <= max(coords_illinois1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois1$long) - 0.1 & x <= max(coords_illinois1$long) + 0.1 &
+                  y >= min(coords_illinois1$lat) - 0.1 & y <= max(coords_illinois1$lat) + 0.1) |>
   # subset by row numbers given by which.min
   dplyr::slice(closest_points)
 
@@ -179,8 +182,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois2$long) - 0.05 & x <= max(coords_illinois2$long) + 0.05 &
-                  y >= min(coords_illinois2$lat) - 0.05 & y <= max(coords_illinois2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois2$long) - 0.1 & x <= max(coords_illinois2$long) + 0.1 &
+                  y >= min(coords_illinois2$lat) - 0.1 & y <= max(coords_illinois2$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois2)
@@ -194,8 +197,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois3$long) - 0.05 & x <= max(coords_illinois3$long) + 0.05 &
-                  y >= min(coords_illinois3$lat) - 0.05 & y <= max(coords_illinois3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois3$long) - 0.1 & x <= max(coords_illinois3$long) + 0.1 &
+                  y >= min(coords_illinois3$lat) - 0.1 & y <= max(coords_illinois3$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois3)
@@ -209,8 +212,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois4$long) - 0.05 & x <= max(coords_illinois4$long) + 0.05 &
-                  y >= min(coords_illinois4$lat) - 0.05 & y <= max(coords_illinois4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois4$long) - 0.1 & x <= max(coords_illinois4$long) + 0.1 &
+                  y >= min(coords_illinois4$lat) - 0.1 & y <= max(coords_illinois4$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois4)
@@ -224,8 +227,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois5$long) - 0.05 & x <= max(coords_illinois5$long) + 0.05 &
-                  y >= min(coords_illinois5$lat) - 0.05 & y <= max(coords_illinois5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois5$long) - 0.1 & x <= max(coords_illinois5$long) + 0.1 &
+                  y >= min(coords_illinois5$lat) - 0.1 & y <= max(coords_illinois5$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois5)
@@ -239,8 +242,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois6$long) - 0.05 & x <= max(coords_illinois6$long) + 0.05 &
-                  y >= min(coords_illinois6$lat) - 0.05 & y <= max(coords_illinois6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois6$long) - 0.1 & x <= max(coords_illinois6$long) + 0.1 &
+                  y >= min(coords_illinois6$lat) - 0.1 & y <= max(coords_illinois6$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois6)
@@ -254,8 +257,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois7$long) - 0.05 & x <= max(coords_illinois7$long) + 0.05 &
-                  y >= min(coords_illinois7$lat) - 0.05 & y <= max(coords_illinois7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois7$long) - 0.1 & x <= max(coords_illinois7$long) + 0.1 &
+                  y >= min(coords_illinois7$lat) - 0.1 & y <= max(coords_illinois7$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois7)
@@ -269,8 +272,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois8$long) - 0.05 & x <= max(coords_illinois8$long) + 0.05 &
-                  y >= min(coords_illinois8$lat) - 0.05 & y <= max(coords_illinois8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois8$long) - 0.1 & x <= max(coords_illinois8$long) + 0.1 &
+                  y >= min(coords_illinois8$lat) - 0.1 & y <= max(coords_illinois8$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois8)
@@ -284,8 +287,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois9$long) - 0.05 & x <= max(coords_illinois9$long) + 0.05 &
-                  y >= min(coords_illinois9$lat) - 0.05 & y <= max(coords_illinois9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois9$long) - 0.1 & x <= max(coords_illinois9$long) + 0.1 &
+                  y >= min(coords_illinois9$lat) - 0.1 & y <= max(coords_illinois9$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois9)
@@ -299,8 +302,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois10$long) - 0.05 & x <= max(coords_illinois10$long) + 0.05 &
-                  y >= min(coords_illinois10$lat) - 0.05 & y <= max(coords_illinois10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois10$long) - 0.1 & x <= max(coords_illinois10$long) + 0.1 &
+                  y >= min(coords_illinois10$lat) - 0.1 & y <= max(coords_illinois10$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois10)
@@ -314,8 +317,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois11$long) - 0.05 & x <= max(coords_illinois11$long) + 0.05 &
-                  y >= min(coords_illinois11$lat) - 0.05 & y <= max(coords_illinois11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois11$long) - 0.1 & x <= max(coords_illinois11$long) + 0.1 &
+                  y >= min(coords_illinois11$lat) - 0.1 & y <= max(coords_illinois11$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois11)
@@ -329,8 +332,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois12$long) - 0.05 & x <= max(coords_illinois12$long) + 0.05 &
-                  y >= min(coords_illinois12$lat) - 0.05 & y <= max(coords_illinois12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois12$long) - 0.1 & x <= max(coords_illinois12$long) + 0.1 &
+                  y >= min(coords_illinois12$lat) - 0.1 & y <= max(coords_illinois12$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois12)
@@ -344,8 +347,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois13$long) - 0.05 & x <= max(coords_illinois13$long) + 0.05 &
-                  y >= min(coords_illinois13$lat) - 0.05 & y <= max(coords_illinois13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois13$long) - 0.1 & x <= max(coords_illinois13$long) + 0.1 &
+                  y >= min(coords_illinois13$lat) - 0.1 & y <= max(coords_illinois13$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois13)
@@ -359,8 +362,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois14$long) - 0.05 & x <= max(coords_illinois14$long) + 0.05 &
-                  y >= min(coords_illinois14$lat) - 0.05 & y <= max(coords_illinois14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois14$long) - 0.1 & x <= max(coords_illinois14$long) + 0.1 &
+                  y >= min(coords_illinois14$lat) - 0.1 & y <= max(coords_illinois14$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois14)
@@ -374,8 +377,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois15$long) - 0.05 & x <= max(coords_illinois15$long) + 0.05 &
-                  y >= min(coords_illinois15$lat) - 0.05 & y <= max(coords_illinois15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois15$long) - 0.1 & x <= max(coords_illinois15$long) + 0.1 &
+                  y >= min(coords_illinois15$lat) - 0.1 & y <= max(coords_illinois15$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois15)
@@ -389,8 +392,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois16$long) - 0.05 & x <= max(coords_illinois16$long) + 0.05 &
-                  y >= min(coords_illinois16$lat) - 0.05 & y <= max(coords_illinois16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois16$long) - 0.1 & x <= max(coords_illinois16$long) + 0.1 &
+                  y >= min(coords_illinois16$lat) - 0.1 & y <= max(coords_illinois16$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois16)
@@ -404,8 +407,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois17$long) - 0.05 & x <= max(coords_illinois17$long) + 0.05 &
-                  y >= min(coords_illinois17$lat) - 0.05 & y <= max(coords_illinois17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois17$long) - 0.1 & x <= max(coords_illinois17$long) + 0.1 &
+                  y >= min(coords_illinois17$lat) - 0.1 & y <= max(coords_illinois17$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois17)
@@ -419,8 +422,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois18$long) - 0.05 & x <= max(coords_illinois18$long) + 0.05 &
-                  y >= min(coords_illinois18$lat) - 0.05 & y <= max(coords_illinois18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois18$long) - 0.1 & x <= max(coords_illinois18$long) + 0.1 &
+                  y >= min(coords_illinois18$lat) - 0.1 & y <= max(coords_illinois18$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois18)
@@ -434,8 +437,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois19$long) - 0.05 & x <= max(coords_illinois19$long) + 0.05 &
-                  y >= min(coords_illinois19$lat) - 0.05 & y <= max(coords_illinois19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois19$long) - 0.1 & x <= max(coords_illinois19$long) + 0.1 &
+                  y >= min(coords_illinois19$lat) - 0.1 & y <= max(coords_illinois19$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois19)
@@ -449,8 +452,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IL <- df_IL |>
-  dplyr::filter(x >= min(coords_illinois20$long) - 0.05 & x <= max(coords_illinois20$long) + 0.05 &
-                  y >= min(coords_illinois20$lat) - 0.05 & y <= max(coords_illinois20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_illinois20$long) - 0.1 & x <= max(coords_illinois20$long) + 0.1 &
+                  y >= min(coords_illinois20$lat) - 0.1 & y <= max(coords_illinois20$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois20)
@@ -465,14 +468,18 @@ colnames(IL_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
 
 # Save IL soil. Confirmed in same order as illinois and illinois_ecosystem
 IL_soil <- dplyr::select(IL_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(IL_soil, file = 'processed_soil_il.RData')
+save(IL_soil, file = 'data/processed/soils/processed_soil_il.RData')
 
 #### INDIANA ####
 rm(list = ls())
 
-load('gssurgo_dominant_030_500m.RData')
+load('data/raw/soils/gssurgo_dominant_030_700m.RData')
 
-load('indiana_format.RData')
+load('data/processed/PLS/indiana_format.RData')
+
+# Remove NAs from soil data
+df_IN <- df_IN |>
+  tidyr::drop_na()
 
 # Format indiana data
 indiana <- indiana |>
@@ -535,84 +542,84 @@ colnames(coords_indiana1) <- colnames(coords_indiana2) <- colnames(coords_indian
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
 coords_df_IN1 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana1$long) - 0.05 & x <= max(coords_indiana1$long) + 0.05 &
-                  y >= min(coords_indiana1$lat) - 0.05 & y <= max(coords_indiana1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana1$long) - 0.1 & x <= max(coords_indiana1$long) + 0.1 &
+                  y >= min(coords_indiana1$lat) - 0.1 & y <= max(coords_indiana1$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN2 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana2$long) - 0.05 & x <= max(coords_indiana2$long) + 0.05 &
-                  y >= min(coords_indiana2$lat) - 0.05 & y <= max(coords_indiana2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana2$long) - 0.1 & x <= max(coords_indiana2$long) + 0.1 &
+                  y >= min(coords_indiana2$lat) - 0.1 & y <= max(coords_indiana2$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN3 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana3$long) - 0.05 & x <= max(coords_indiana3$long) + 0.05 &
-                  y >= min(coords_indiana3$lat) - 0.05 & y <= max(coords_indiana3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana3$long) - 0.1 & x <= max(coords_indiana3$long) + 0.1 &
+                  y >= min(coords_indiana3$lat) - 0.1 & y <= max(coords_indiana3$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN4 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana4$long) - 0.05 & x <= max(coords_indiana4$long) + 0.05 &
-                  y >= min(coords_indiana4$lat) - 0.05 & y <= max(coords_indiana4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana4$long) - 0.1 & x <= max(coords_indiana4$long) + 0.1 &
+                  y >= min(coords_indiana4$lat) - 0.1 & y <= max(coords_indiana4$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN5 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana5$long) - 0.05 & x <= max(coords_indiana5$long) + 0.05 &
-                  y >= min(coords_indiana5$lat) - 0.05 & y <= max(coords_indiana5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana5$long) - 0.1 & x <= max(coords_indiana5$long) + 0.1 &
+                  y >= min(coords_indiana5$lat) - 0.1 & y <= max(coords_indiana5$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN6 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana6$long) - 0.05 & x <= max(coords_indiana6$long) + 0.05 &
-                  y >= min(coords_indiana6$lat) - 0.05 & y <= max(coords_indiana6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana6$long) - 0.1 & x <= max(coords_indiana6$long) + 0.1 &
+                  y >= min(coords_indiana6$lat) - 0.1 & y <= max(coords_indiana6$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN7 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana7$long) - 0.05 & x <= max(coords_indiana7$long) + 0.05 &
-                  y >= min(coords_indiana7$lat) - 0.05 & y <= max(coords_indiana7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana7$long) - 0.1 & x <= max(coords_indiana7$long) + 0.1 &
+                  y >= min(coords_indiana7$lat) - 0.1 & y <= max(coords_indiana7$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN8 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana8$long) - 0.05 & x <= max(coords_indiana8$long) + 0.05 &
-                  y >= min(coords_indiana8$lat) - 0.05 & y <= max(coords_indiana8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana8$long) - 0.1 & x <= max(coords_indiana8$long) + 0.1 &
+                  y >= min(coords_indiana8$lat) - 0.1 & y <= max(coords_indiana8$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN9 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana9$long) - 0.05 & x <= max(coords_indiana9$long) + 0.05 &
-                  y >= min(coords_indiana9$lat) - 0.05 & y <= max(coords_indiana9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana9$long) - 0.1 & x <= max(coords_indiana9$long) + 0.1 &
+                  y >= min(coords_indiana9$lat) - 0.1 & y <= max(coords_indiana9$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN10 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana10$long) - 0.05 & x <= max(coords_indiana10$long) + 0.05 &
-                  y >= min(coords_indiana10$lat) - 0.05 & y <= max(coords_indiana10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana10$long) - 0.1 & x <= max(coords_indiana10$long) + 0.1 &
+                  y >= min(coords_indiana10$lat) - 0.1 & y <= max(coords_indiana10$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN11 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana11$long) - 0.05 & x <= max(coords_indiana11$long) + 0.05 &
-                  y >= min(coords_indiana11$lat) - 0.05 & y <= max(coords_indiana11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana11$long) - 0.1 & x <= max(coords_indiana11$long) + 0.1 &
+                  y >= min(coords_indiana11$lat) - 0.1 & y <= max(coords_indiana11$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN12 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana12$long) - 0.05 & x <= max(coords_indiana12$long) + 0.05 &
-                  y >= min(coords_indiana12$lat) - 0.05 & y <= max(coords_indiana12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana12$long) - 0.1 & x <= max(coords_indiana12$long) + 0.1 &
+                  y >= min(coords_indiana12$lat) - 0.1 & y <= max(coords_indiana12$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN13 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana13$long) - 0.05 & x <= max(coords_indiana13$long) + 0.05 &
-                  y >= min(coords_indiana13$lat) - 0.05 & y <= max(coords_indiana13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana13$long) - 0.1 & x <= max(coords_indiana13$long) + 0.1 &
+                  y >= min(coords_indiana13$lat) - 0.1 & y <= max(coords_indiana13$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN14 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana14$long) - 0.05 & x <= max(coords_indiana14$long) + 0.05 &
-                  y >= min(coords_indiana14$lat) - 0.05 & y <= max(coords_indiana14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana14$long) - 0.1 & x <= max(coords_indiana14$long) + 0.1 &
+                  y >= min(coords_indiana14$lat) - 0.1 & y <= max(coords_indiana14$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN15 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana15$long) - 0.05 & x <= max(coords_indiana15$long) + 0.05 &
-                  y >= min(coords_indiana15$lat) - 0.05 & y <= max(coords_indiana15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana15$long) - 0.1 & x <= max(coords_indiana15$long) + 0.1 &
+                  y >= min(coords_indiana15$lat) - 0.1 & y <= max(coords_indiana15$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN16 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana16$long) - 0.05 & x <= max(coords_indiana16$long) + 0.05 &
-                  y >= min(coords_indiana16$lat) - 0.05 & y <= max(coords_indiana16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana16$long) - 0.1 & x <= max(coords_indiana16$long) + 0.1 &
+                  y >= min(coords_indiana16$lat) - 0.1 & y <= max(coords_indiana16$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN17 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana17$long) - 0.05 & x <= max(coords_indiana17$long) + 0.05 &
-                  y >= min(coords_indiana17$lat) - 0.05 & y <= max(coords_indiana17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana17$long) - 0.1 & x <= max(coords_indiana17$long) + 0.1 &
+                  y >= min(coords_indiana17$lat) - 0.1 & y <= max(coords_indiana17$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN18 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana18$long) - 0.05 & x <= max(coords_indiana18$long) + 0.05 &
-                  y >= min(coords_indiana18$lat) - 0.05 & y <= max(coords_indiana18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana18$long) - 0.1 & x <= max(coords_indiana18$long) + 0.1 &
+                  y >= min(coords_indiana18$lat) - 0.1 & y <= max(coords_indiana18$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN19 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana19$long) - 0.05 & x <= max(coords_indiana19$long) + 0.05 &
-                  y >= min(coords_indiana19$lat) - 0.05 & y <= max(coords_indiana19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana19$long) - 0.1 & x <= max(coords_indiana19$long) + 0.1 &
+                  y >= min(coords_indiana19$lat) - 0.1 & y <= max(coords_indiana19$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_IN20 <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana20$long) - 0.05 & x <= max(coords_indiana20$long) + 0.05 &
-                  y >= min(coords_indiana20$lat) - 0.05 & y <= max(coords_indiana20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana20$long) - 0.1 & x <= max(coords_indiana20$long) + 0.1 &
+                  y >= min(coords_indiana20$lat) - 0.1 & y <= max(coords_indiana20$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of pls (1) and soil (2) dataframes
@@ -627,8 +634,8 @@ rm(dists)
 # We'll add to this subsequently
 select_df_IN <- df_IN |>
   # Filter as done above to make sure indexing matches
-  dplyr::filter(x >= min(coords_indiana1$long) - 0.05 & x <= max(coords_indiana1$long) + 0.05 &
-                  y >= min(coords_indiana1$lat) - 0.05 & y <= max(coords_indiana1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana1$long) - 0.1 & x <= max(coords_indiana1$long) + 0.1 &
+                  y >= min(coords_indiana1$lat) - 0.1 & y <= max(coords_indiana1$lat) + 0.1) |>
   # subset by row numbers given by which.min
   dplyr::slice(closest_points)
 
@@ -646,8 +653,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana2$long) - 0.05 & x <= max(coords_indiana2$long) + 0.05 &
-                  y >= min(coords_indiana2$lat) - 0.05 & y <= max(coords_indiana2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana2$long) - 0.1 & x <= max(coords_indiana2$long) + 0.1 &
+                  y >= min(coords_indiana2$lat) - 0.1 & y <= max(coords_indiana2$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana2)
@@ -661,8 +668,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana3$long) - 0.05 & x <= max(coords_indiana3$long) + 0.05 &
-                  y >= min(coords_indiana3$lat) - 0.05 & y <= max(coords_indiana3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana3$long) - 0.1 & x <= max(coords_indiana3$long) + 0.1 &
+                  y >= min(coords_indiana3$lat) - 0.1 & y <= max(coords_indiana3$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana3)
@@ -676,8 +683,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana4$long) - 0.05 & x <= max(coords_indiana4$long) + 0.05 &
-                  y >= min(coords_indiana4$lat) - 0.05 & y <= max(coords_indiana4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana4$long) - 0.1 & x <= max(coords_indiana4$long) + 0.1 &
+                  y >= min(coords_indiana4$lat) - 0.1 & y <= max(coords_indiana4$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana4)
@@ -691,8 +698,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana5$long) - 0.05 & x <= max(coords_indiana5$long) + 0.05 &
-                  y >= min(coords_indiana5$lat) - 0.05 & y <= max(coords_indiana5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana5$long) - 0.1 & x <= max(coords_indiana5$long) + 0.1 &
+                  y >= min(coords_indiana5$lat) - 0.1 & y <= max(coords_indiana5$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana5)
@@ -706,14 +713,14 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana6$long) - 0.05 & x <= max(coords_indiana6$long) + 0.05 &
-                  y >= min(coords_indiana6$lat) - 0.05 & y <= max(coords_indiana6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana6$long) - 0.1 & x <= max(coords_indiana6$long) + 0.1 &
+                  y >= min(coords_indiana6$lat) - 0.1 & y <= max(coords_indiana6$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana6)
 IN_soil_pls <- rbind(IN_soil_pls, temp)
 
-rm(closest_points, coords_df_IN16, coords_indiana6, select_df_IN, indiana6)
+rm(closest_points, coords_df_IN6, coords_indiana6, select_df_IN, indiana6)
 
 # Subset 7
 dists <- fields::rdist(coords_df_IN7, coords_indiana7)
@@ -721,8 +728,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana7$long) - 0.05 & x <= max(coords_indiana7$long) + 0.05 &
-                  y >= min(coords_indiana7$lat) - 0.05 & y <= max(coords_indiana7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana7$long) - 0.1 & x <= max(coords_indiana7$long) + 0.1 &
+                  y >= min(coords_indiana7$lat) - 0.1 & y <= max(coords_indiana7$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana7)
@@ -736,8 +743,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana8$long) - 0.05 & x <= max(coords_indiana8$long) + 0.05 &
-                  y >= min(coords_indiana8$lat) - 0.05 & y <= max(coords_indiana8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana8$long) - 0.1 & x <= max(coords_indiana8$long) + 0.1 &
+                  y >= min(coords_indiana8$lat) - 0.1 & y <= max(coords_indiana8$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana8)
@@ -751,8 +758,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana9$long) - 0.05 & x <= max(coords_indiana9$long) + 0.05 &
-                  y >= min(coords_indiana9$lat) - 0.05 & y <= max(coords_indiana9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana9$long) - 0.1 & x <= max(coords_indiana9$long) + 0.1 &
+                  y >= min(coords_indiana9$lat) - 0.1 & y <= max(coords_indiana9$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana9)
@@ -766,8 +773,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana10$long) - 0.05 & x <= max(coords_indiana10$long) + 0.05 &
-                  y >= min(coords_indiana10$lat) - 0.05 & y <= max(coords_indiana10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana10$long) - 0.1 & x <= max(coords_indiana10$long) + 0.1 &
+                  y >= min(coords_indiana10$lat) - 0.1 & y <= max(coords_indiana10$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana10)
@@ -781,8 +788,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana11$long) - 0.05 & x <= max(coords_indiana11$long) + 0.05 &
-                  y >= min(coords_indiana11$lat) - 0.05 & y <= max(coords_indiana11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana11$long) - 0.1 & x <= max(coords_indiana11$long) + 0.1 &
+                  y >= min(coords_indiana11$lat) - 0.1 & y <= max(coords_indiana11$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana11)
@@ -796,8 +803,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana12$long) - 0.05 & x <= max(coords_indiana12$long) + 0.05 &
-                  y >= min(coords_indiana12$lat) - 0.05 & y <= max(coords_indiana12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana12$long) - 0.1 & x <= max(coords_indiana12$long) + 0.1 &
+                  y >= min(coords_indiana12$lat) - 0.1 & y <= max(coords_indiana12$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana12)
@@ -811,8 +818,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana13$long) - 0.05 & x <= max(coords_indiana13$long) + 0.05 &
-                  y >= min(coords_indiana13$lat) - 0.05 & y <= max(coords_indiana13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana13$long) - 0.1 & x <= max(coords_indiana13$long) + 0.1 &
+                  y >= min(coords_indiana13$lat) - 0.1 & y <= max(coords_indiana13$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana13)
@@ -826,8 +833,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana14$long) - 0.05 & x <= max(coords_indiana14$long) + 0.05 &
-                  y >= min(coords_indiana14$lat) - 0.05 & y <= max(coords_indiana14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana14$long) - 0.1 & x <= max(coords_indiana14$long) + 0.1 &
+                  y >= min(coords_indiana14$lat) - 0.1 & y <= max(coords_indiana14$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana14)
@@ -841,8 +848,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana15$long) - 0.05 & x <= max(coords_indiana15$long) + 0.05 &
-                  y >= min(coords_indiana15$lat) - 0.05 & y <= max(coords_indiana15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana15$long) - 0.1 & x <= max(coords_indiana15$long) + 0.1 &
+                  y >= min(coords_indiana15$lat) - 0.1 & y <= max(coords_indiana15$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana15)
@@ -856,8 +863,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana16$long) - 0.05 & x <= max(coords_indiana16$long) + 0.05 &
-                  y >= min(coords_indiana16$lat) - 0.05 & y <= max(coords_indiana16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana16$long) - 0.1 & x <= max(coords_indiana16$long) + 0.1 &
+                  y >= min(coords_indiana16$lat) - 0.1 & y <= max(coords_indiana16$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana16)
@@ -871,8 +878,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana17$long) - 0.05 & x <= max(coords_indiana17$long) + 0.05 &
-                  y >= min(coords_indiana17$lat) - 0.05 & y <= max(coords_indiana17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana17$long) - 0.1 & x <= max(coords_indiana17$long) + 0.1 &
+                  y >= min(coords_indiana17$lat) - 0.1 & y <= max(coords_indiana17$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana17)
@@ -886,8 +893,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana18$long) - 0.05 & x <= max(coords_indiana18$long) + 0.05 &
-                  y >= min(coords_indiana18$lat) - 0.05 & y <= max(coords_indiana18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana18$long) - 0.1 & x <= max(coords_indiana18$long) + 0.1 &
+                  y >= min(coords_indiana18$lat) - 0.1 & y <= max(coords_indiana18$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana18)
@@ -901,8 +908,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana19$long) - 0.05 & x <= max(coords_indiana19$long) + 0.05 &
-                  y >= min(coords_indiana19$lat) - 0.05 & y <= max(coords_indiana19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana19$long) - 0.1 & x <= max(coords_indiana19$long) + 0.1 &
+                  y >= min(coords_indiana19$lat) - 0.1 & y <= max(coords_indiana19$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana19)
@@ -916,8 +923,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_IN <- df_IN |>
-  dplyr::filter(x >= min(coords_indiana20$long) - 0.05 & x <= max(coords_indiana20$long) + 0.05 &
-                  y >= min(coords_indiana20$lat) - 0.05 & y <= max(coords_indiana20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_indiana20$long) - 0.1 & x <= max(coords_indiana20$long) + 0.1 &
+                  y >= min(coords_indiana20$lat) - 0.1 & y <= max(coords_indiana20$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana20)
@@ -932,15 +939,19 @@ colnames(IN_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
 
 # Save IL soil. Confirmed in same order as indiana nad indiana_ecosystem
 IN_soil <- dplyr::select(IN_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(IN_soil, file = 'processed_soil_in.RData')
+save(IN_soil, file = 'data/processed/soils/processed_soil_in.RData')
 
 #### MICHIGAN ####
 rm(list = ls())
 
-load('gssurgo_dominant_030_500m.RData')
+load('data/raw/soils/gssurgo_dominant_030_700m.RData')
 
-load('upmichigan_process.RData')
-load('lowmichigan_process.RData')
+load('data/processed/PLS/upmichigan_process.RData')
+load('data/processed/PLS/lowmichigan_process.RData')
+
+# Remove NAs from soil data
+df_MI <- df_MI |>
+  tidyr::drop_na()
 
 # Format lower michigan data
 lowmichigan <- lowmichigan |>
@@ -1016,84 +1027,84 @@ colnames(coords_michigan1) <- colnames(coords_michigan2) <- colnames(coords_mich
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
 coords_df_MI1 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan1$long) - 0.05 & x <= max(coords_michigan1$long) + 0.05 &
-                  y >= min(coords_michigan1$lat) - 0.05 & y <= max(coords_michigan1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan1$long) - 0.1 & x <= max(coords_michigan1$long) + 0.1 &
+                  y >= min(coords_michigan1$lat) - 0.1 & y <= max(coords_michigan1$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI2 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan2$long) - 0.05 & x <= max(coords_michigan2$long) + 0.05 &
-                  y >= min(coords_michigan2$lat) - 0.05 & y <= max(coords_michigan2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan2$long) - 0.1 & x <= max(coords_michigan2$long) + 0.1 &
+                  y >= min(coords_michigan2$lat) - 0.1 & y <= max(coords_michigan2$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI3 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan3$long) - 0.05 & x <= max(coords_michigan3$long) + 0.05 &
-                  y >= min(coords_michigan3$lat) - 0.05 & y <= max(coords_michigan3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan3$long) - 0.1 & x <= max(coords_michigan3$long) + 0.1 &
+                  y >= min(coords_michigan3$lat) - 0.1 & y <= max(coords_michigan3$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI4 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan4$long) - 0.05 & x <= max(coords_michigan4$long) + 0.05 &
-                  y >= min(coords_michigan4$lat) - 0.05 & y <= max(coords_michigan4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan4$long) - 0.1 & x <= max(coords_michigan4$long) + 0.1 &
+                  y >= min(coords_michigan4$lat) - 0.1 & y <= max(coords_michigan4$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI5 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan5$long) - 0.05 & x <= max(coords_michigan5$long) + 0.05 &
-                  y >= min(coords_michigan5$lat) - 0.05 & y <= max(coords_michigan5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan5$long) - 0.1 & x <= max(coords_michigan5$long) + 0.1 &
+                  y >= min(coords_michigan5$lat) - 0.1 & y <= max(coords_michigan5$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI6 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan6$long) - 0.05 & x <= max(coords_michigan6$long) + 0.05 &
-                  y >= min(coords_michigan6$lat) - 0.05 & y <= max(coords_michigan6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan6$long) - 0.1 & x <= max(coords_michigan6$long) + 0.1 &
+                  y >= min(coords_michigan6$lat) - 0.1 & y <= max(coords_michigan6$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI7 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan7$long) - 0.05 & x <= max(coords_michigan7$long) + 0.05 &
-                  y >= min(coords_michigan7$lat) - 0.05 & y <= max(coords_michigan7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan7$long) - 0.1 & x <= max(coords_michigan7$long) + 0.1 &
+                  y >= min(coords_michigan7$lat) - 0.1 & y <= max(coords_michigan7$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI8 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan8$long) - 0.05 & x <= max(coords_michigan8$long) + 0.05 &
-                  y >= min(coords_michigan8$lat) - 0.05 & y <= max(coords_michigan8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan8$long) - 0.1 & x <= max(coords_michigan8$long) + 0.1 &
+                  y >= min(coords_michigan8$lat) - 0.1 & y <= max(coords_michigan8$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI9 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan9$long) - 0.05 & x <= max(coords_michigan9$long) + 0.05 &
-                  y >= min(coords_michigan9$lat) - 0.05 & y <= max(coords_michigan9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan9$long) - 0.1 & x <= max(coords_michigan9$long) + 0.1 &
+                  y >= min(coords_michigan9$lat) - 0.1 & y <= max(coords_michigan9$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI10 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan10$long) - 0.05 & x <= max(coords_michigan10$long) + 0.05 &
-                  y >= min(coords_michigan10$lat) - 0.05 & y <= max(coords_michigan10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan10$long) - 0.1 & x <= max(coords_michigan10$long) + 0.1 &
+                  y >= min(coords_michigan10$lat) - 0.1 & y <= max(coords_michigan10$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI11 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan11$long) - 0.05 & x <= max(coords_michigan11$long) + 0.05 &
-                  y >= min(coords_michigan11$lat) - 0.05 & y <= max(coords_michigan11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan11$long) - 0.1 & x <= max(coords_michigan11$long) + 0.1 &
+                  y >= min(coords_michigan11$lat) - 0.1 & y <= max(coords_michigan11$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI12 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan12$long) - 0.05 & x <= max(coords_michigan12$long) + 0.05 &
-                  y >= min(coords_michigan12$lat) - 0.05 & y <= max(coords_michigan12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan12$long) - 0.1 & x <= max(coords_michigan12$long) + 0.1 &
+                  y >= min(coords_michigan12$lat) - 0.1 & y <= max(coords_michigan12$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI13 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan13$long) - 0.05 & x <= max(coords_michigan13$long) + 0.05 &
-                  y >= min(coords_michigan13$lat) - 0.05 & y <= max(coords_michigan13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan13$long) - 0.1 & x <= max(coords_michigan13$long) + 0.1 &
+                  y >= min(coords_michigan13$lat) - 0.1 & y <= max(coords_michigan13$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI14 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan14$long) - 0.05 & x <= max(coords_michigan14$long) + 0.05 &
-                  y >= min(coords_michigan14$lat) - 0.05 & y <= max(coords_michigan14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan14$long) - 0.1 & x <= max(coords_michigan14$long) + 0.1 &
+                  y >= min(coords_michigan14$lat) - 0.1 & y <= max(coords_michigan14$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI15 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan15$long) - 0.05 & x <= max(coords_michigan15$long) + 0.05 &
-                  y >= min(coords_michigan15$lat) - 0.05 & y <= max(coords_michigan15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan15$long) - 0.1 & x <= max(coords_michigan15$long) + 0.1 &
+                  y >= min(coords_michigan15$lat) - 0.1 & y <= max(coords_michigan15$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI16 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan16$long) - 0.05 & x <= max(coords_michigan16$long) + 0.05 &
-                  y >= min(coords_michigan16$lat) - 0.05 & y <= max(coords_michigan16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan16$long) - 0.1 & x <= max(coords_michigan16$long) + 0.1 &
+                  y >= min(coords_michigan16$lat) - 0.1 & y <= max(coords_michigan16$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI17 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan17$long) - 0.05 & x <= max(coords_michigan17$long) + 0.05 &
-                  y >= min(coords_michigan17$lat) - 0.05 & y <= max(coords_michigan17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan17$long) - 0.1 & x <= max(coords_michigan17$long) + 0.1 &
+                  y >= min(coords_michigan17$lat) - 0.1 & y <= max(coords_michigan17$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI18 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan18$long) - 0.05 & x <= max(coords_michigan18$long) + 0.05 &
-                  y >= min(coords_michigan18$lat) - 0.05 & y <= max(coords_michigan18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan18$long) - 0.1 & x <= max(coords_michigan18$long) + 0.1 &
+                  y >= min(coords_michigan18$lat) - 0.1 & y <= max(coords_michigan18$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI19 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan19$long) - 0.05 & x <= max(coords_michigan19$long) + 0.05 &
-                  y >= min(coords_michigan19$lat) - 0.05 & y <= max(coords_michigan19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan19$long) - 0.1 & x <= max(coords_michigan19$long) + 0.1 &
+                  y >= min(coords_michigan19$lat) - 0.1 & y <= max(coords_michigan19$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MI20 <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan20$long) - 0.05 & x <= max(coords_michigan20$long) + 0.05 &
-                  y >= min(coords_michigan20$lat) - 0.05 & y <= max(coords_michigan20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan20$long) - 0.1 & x <= max(coords_michigan20$long) + 0.1 &
+                  y >= min(coords_michigan20$lat) - 0.1 & y <= max(coords_michigan20$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes
@@ -1108,8 +1119,8 @@ rm(dists)
 # We'll add to this subsequently
 select_df_MI <- df_MI |>
   # Filter as done above to make sure indexing matches
-  dplyr::filter(x >= min(coords_michigan1$long) - 0.05 & x <= max(coords_michigan1$long) + 0.05 &
-                  y >= min(coords_michigan1$lat) - 0.05 & y <= max(coords_michigan1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan1$long) - 0.1 & x <= max(coords_michigan1$long) + 0.1 &
+                  y >= min(coords_michigan1$lat) - 0.1 & y <= max(coords_michigan1$lat) + 0.1) |>
   # subset by row numbers given by which.min
   dplyr::slice(closest_points)
 
@@ -1127,8 +1138,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan2$long) - 0.05 & x <= max(coords_michigan2$long) + 0.05 &
-                  y >= min(coords_michigan2$lat) - 0.05 & y <= max(coords_michigan2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan2$long) - 0.1 & x <= max(coords_michigan2$long) + 0.1 &
+                  y >= min(coords_michigan2$lat) - 0.1 & y <= max(coords_michigan2$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan2)
@@ -1142,8 +1153,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan3$long) - 0.05 & x <= max(coords_michigan3$long) + 0.05 &
-                  y >= min(coords_michigan3$lat) - 0.05 & y <= max(coords_michigan3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan3$long) - 0.1 & x <= max(coords_michigan3$long) + 0.1 &
+                  y >= min(coords_michigan3$lat) - 0.1 & y <= max(coords_michigan3$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan3)
@@ -1157,8 +1168,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan4$long) - 0.05 & x <= max(coords_michigan4$long) + 0.05 &
-                  y >= min(coords_michigan4$lat) - 0.05 & y <= max(coords_michigan4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan4$long) - 0.1 & x <= max(coords_michigan4$long) + 0.1 &
+                  y >= min(coords_michigan4$lat) - 0.1 & y <= max(coords_michigan4$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan4)
@@ -1172,8 +1183,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan5$long) - 0.05 & x <= max(coords_michigan5$long) + 0.05 &
-                  y >= min(coords_michigan5$lat) - 0.05 & y <= max(coords_michigan5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan5$long) - 0.1 & x <= max(coords_michigan5$long) + 0.1 &
+                  y >= min(coords_michigan5$lat) - 0.1 & y <= max(coords_michigan5$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan5)
@@ -1187,8 +1198,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan6$long) - 0.05 & x <= max(coords_michigan6$long) + 0.05 &
-                  y >= min(coords_michigan6$lat) - 0.05 & y <= max(coords_michigan6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan6$long) - 0.1 & x <= max(coords_michigan6$long) + 0.1 &
+                  y >= min(coords_michigan6$lat) - 0.1 & y <= max(coords_michigan6$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan6)
@@ -1202,8 +1213,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan7$long) - 0.05 & x <= max(coords_michigan7$long) + 0.05 &
-                  y >= min(coords_michigan7$lat) - 0.05 & y <= max(coords_michigan7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan7$long) - 0.1 & x <= max(coords_michigan7$long) + 0.1 &
+                  y >= min(coords_michigan7$lat) - 0.1 & y <= max(coords_michigan7$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan7)
@@ -1217,8 +1228,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan8$long) - 0.05 & x <= max(coords_michigan8$long) + 0.05 &
-                  y >= min(coords_michigan8$lat) - 0.05 & y <= max(coords_michigan8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan8$long) - 0.1 & x <= max(coords_michigan8$long) + 0.1 &
+                  y >= min(coords_michigan8$lat) - 0.1 & y <= max(coords_michigan8$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan8)
@@ -1232,8 +1243,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan9$long) - 0.05 & x <= max(coords_michigan9$long) + 0.05 &
-                  y >= min(coords_michigan9$lat) - 0.05 & y <= max(coords_michigan9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan9$long) - 0.1 & x <= max(coords_michigan9$long) + 0.1 &
+                  y >= min(coords_michigan9$lat) - 0.1 & y <= max(coords_michigan9$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan9)
@@ -1247,8 +1258,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan10$long) - 0.05 & x <= max(coords_michigan10$long) + 0.05 &
-                  y >= min(coords_michigan10$lat) - 0.05 & y <= max(coords_michigan10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan10$long) - 0.1 & x <= max(coords_michigan10$long) + 0.1 &
+                  y >= min(coords_michigan10$lat) - 0.1 & y <= max(coords_michigan10$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan10)
@@ -1262,8 +1273,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan11$long) - 0.05 & x <= max(coords_michigan11$long) + 0.05 &
-                  y >= min(coords_michigan11$lat) - 0.05 & y <= max(coords_michigan11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan11$long) - 0.1 & x <= max(coords_michigan11$long) + 0.1 &
+                  y >= min(coords_michigan11$lat) - 0.1 & y <= max(coords_michigan11$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan11)
@@ -1277,8 +1288,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan12$long) - 0.05 & x <= max(coords_michigan12$long) + 0.05 &
-                  y >= min(coords_michigan12$lat) - 0.05 & y <= max(coords_michigan12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan12$long) - 0.1 & x <= max(coords_michigan12$long) + 0.1 &
+                  y >= min(coords_michigan12$lat) - 0.1 & y <= max(coords_michigan12$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan12)
@@ -1292,8 +1303,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan13$long) - 0.05 & x <= max(coords_michigan13$long) + 0.05 &
-                  y >= min(coords_michigan13$lat) - 0.05 & y <= max(coords_michigan13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan13$long) - 0.1 & x <= max(coords_michigan13$long) + 0.1 &
+                  y >= min(coords_michigan13$lat) - 0.1 & y <= max(coords_michigan13$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan13)
@@ -1307,8 +1318,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan14$long) - 0.05 & x <= max(coords_michigan14$long) + 0.05 &
-                  y >= min(coords_michigan14$lat) - 0.05 & y <= max(coords_michigan14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan14$long) - 0.1 & x <= max(coords_michigan14$long) + 0.1 &
+                  y >= min(coords_michigan14$lat) - 0.1 & y <= max(coords_michigan14$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan14)
@@ -1322,8 +1333,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan15$long) - 0.05 & x <= max(coords_michigan15$long) + 0.05 &
-                  y >= min(coords_michigan15$lat) - 0.05 & y <= max(coords_michigan15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan15$long) - 0.1 & x <= max(coords_michigan15$long) + 0.1 &
+                  y >= min(coords_michigan15$lat) - 0.1 & y <= max(coords_michigan15$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan15)
@@ -1337,8 +1348,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan16$long) - 0.05 & x <= max(coords_michigan16$long) + 0.05 &
-                  y >= min(coords_michigan16$lat) - 0.05 & y <= max(coords_michigan16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan16$long) - 0.1 & x <= max(coords_michigan16$long) + 0.1 &
+                  y >= min(coords_michigan16$lat) - 0.1 & y <= max(coords_michigan16$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan16)
@@ -1352,8 +1363,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan17$long) - 0.05 & x <= max(coords_michigan17$long) + 0.05 &
-                  y >= min(coords_michigan17$lat) - 0.05 & y <= max(coords_michigan17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan17$long) - 0.1 & x <= max(coords_michigan17$long) + 0.1 &
+                  y >= min(coords_michigan17$lat) - 0.1 & y <= max(coords_michigan17$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan17)
@@ -1367,8 +1378,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan18$long) - 0.05 & x <= max(coords_michigan18$long) + 0.05 &
-                  y >= min(coords_michigan18$lat) - 0.05 & y <= max(coords_michigan18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan18$long) - 0.1 & x <= max(coords_michigan18$long) + 0.1 &
+                  y >= min(coords_michigan18$lat) - 0.1 & y <= max(coords_michigan18$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan18)
@@ -1382,8 +1393,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan19$long) - 0.05 & x <= max(coords_michigan19$long) + 0.05 &
-                  y >= min(coords_michigan19$lat) - 0.05 & y <= max(coords_michigan19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan19$long) - 0.1 & x <= max(coords_michigan19$long) + 0.1 &
+                  y >= min(coords_michigan19$lat) - 0.1 & y <= max(coords_michigan19$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan19)
@@ -1397,8 +1408,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MI <- df_MI |>
-  dplyr::filter(x >= min(coords_michigan20$long) - 0.05 & x <= max(coords_michigan20$long) + 0.05 &
-                  y >= min(coords_michigan20$lat) - 0.05 & y <= max(coords_michigan20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_michigan20$long) - 0.1 & x <= max(coords_michigan20$long) + 0.1 &
+                  y >= min(coords_michigan20$lat) - 0.1 & y <= max(coords_michigan20$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan20)
@@ -1413,14 +1424,18 @@ colnames(MI_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
 
 # Save MI soil. Confirmed in same order as michigan and michigan_ecosystem
 MI_soil <- dplyr::select(MI_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(MI_soil, file = 'processed_soil_mi.RData')
+save(MI_soil, file = 'data/processed/soils/processed_soil_mi.RData')
 
 #### MINNESOTA ####
 rm(list = ls())
 
-load('gssurgo_dominant_030_500m.RData')
+load('data/raw/soils/gssurgo_dominant_030_700m.RData')
 
-load('minnesota_process.RData')
+load('data/processed/PLS/minnesota_process.RData')
+
+# Remove NAs in soil data
+df_MN <- df_MN |>
+  tidyr::drop_na()
 
 # Format minnesota data
 minnesota <- minnesota |>
@@ -1509,124 +1524,124 @@ colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_mi
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
 coords_df_MN1 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota1$long) - 0.05 & x <= max(coords_minnesota1$long) + 0.05 &
-                  y >= min(coords_minnesota1$lat) - 0.05 & y <= max(coords_minnesota1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota1$long) - 0.1 & x <= max(coords_minnesota1$long) + 0.1 &
+                  y >= min(coords_minnesota1$lat) - 0.1 & y <= max(coords_minnesota1$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN2 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota2$long) - 0.05 & x <= max(coords_minnesota2$long) + 0.05 &
-                  y >= min(coords_minnesota2$lat) - 0.05 & y <= max(coords_minnesota2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota2$long) - 0.1 & x <= max(coords_minnesota2$long) + 0.1 &
+                  y >= min(coords_minnesota2$lat) - 0.1 & y <= max(coords_minnesota2$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN3 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota3$long) - 0.05 & x <= max(coords_minnesota3$long) + 0.05 &
-                  y >= min(coords_minnesota3$lat) - 0.05 & y <= max(coords_minnesota3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota3$long) - 0.1 & x <= max(coords_minnesota3$long) + 0.1 &
+                  y >= min(coords_minnesota3$lat) - 0.1 & y <= max(coords_minnesota3$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN4 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota4$long) - 0.05 & x <= max(coords_minnesota4$long) + 0.05 &
-                  y >= min(coords_minnesota4$lat) - 0.05 & y <= max(coords_minnesota4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota4$long) - 0.1 & x <= max(coords_minnesota4$long) + 0.1 &
+                  y >= min(coords_minnesota4$lat) - 0.1 & y <= max(coords_minnesota4$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN5 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota5$long) - 0.05 & x <= max(coords_minnesota5$long) + 0.05 &
-                  y >= min(coords_minnesota5$lat) - 0.05 & y <= max(coords_minnesota5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota5$long) - 0.1 & x <= max(coords_minnesota5$long) + 0.1 &
+                  y >= min(coords_minnesota5$lat) - 0.1 & y <= max(coords_minnesota5$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN6 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota6$long) - 0.05 & x <= max(coords_minnesota6$long) + 0.05 &
-                  y >= min(coords_minnesota6$lat) - 0.05 & y <= max(coords_minnesota6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota6$long) - 0.1 & x <= max(coords_minnesota6$long) + 0.1 &
+                  y >= min(coords_minnesota6$lat) - 0.1 & y <= max(coords_minnesota6$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN7 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota7$long) - 0.05 & x <= max(coords_minnesota7$long) + 0.05 &
-                  y >= min(coords_minnesota7$lat) - 0.05 & y <= max(coords_minnesota7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota7$long) - 0.1 & x <= max(coords_minnesota7$long) + 0.1 &
+                  y >= min(coords_minnesota7$lat) - 0.1 & y <= max(coords_minnesota7$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN8 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota8$long) - 0.05 & x <= max(coords_minnesota8$long) + 0.05 &
-                  y >= min(coords_minnesota8$lat) - 0.05 & y <= max(coords_minnesota8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota8$long) - 0.1 & x <= max(coords_minnesota8$long) + 0.1 &
+                  y >= min(coords_minnesota8$lat) - 0.1 & y <= max(coords_minnesota8$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN9 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota9$long) - 0.05 & x <= max(coords_minnesota9$long) + 0.05 &
-                  y >= min(coords_minnesota9$lat) - 0.05 & y <= max(coords_minnesota9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota9$long) - 0.1 & x <= max(coords_minnesota9$long) + 0.1 &
+                  y >= min(coords_minnesota9$lat) - 0.1 & y <= max(coords_minnesota9$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN10 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota10$long) - 0.05 & x <= max(coords_minnesota10$long) + 0.05 &
-                  y >= min(coords_minnesota10$lat) - 0.05 & y <= max(coords_minnesota10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota10$long) - 0.1 & x <= max(coords_minnesota10$long) + 0.1 &
+                  y >= min(coords_minnesota10$lat) - 0.1 & y <= max(coords_minnesota10$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN11 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota11$long) - 0.05 & x <= max(coords_minnesota11$long) + 0.05 &
-                  y >= min(coords_minnesota11$lat) - 0.05 & y <= max(coords_minnesota11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota11$long) - 0.1 & x <= max(coords_minnesota11$long) + 0.1 &
+                  y >= min(coords_minnesota11$lat) - 0.1 & y <= max(coords_minnesota11$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN12 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota12$long) - 0.05 & x <= max(coords_minnesota12$long) + 0.05 &
-                  y >= min(coords_minnesota12$lat) - 0.05 & y <= max(coords_minnesota12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota12$long) - 0.1 & x <= max(coords_minnesota12$long) + 0.1 &
+                  y >= min(coords_minnesota12$lat) - 0.1 & y <= max(coords_minnesota12$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN13 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota13$long) - 0.05 & x <= max(coords_minnesota13$long) + 0.05 &
-                  y >= min(coords_minnesota13$lat) - 0.05 & y <= max(coords_minnesota13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota13$long) - 0.1 & x <= max(coords_minnesota13$long) + 0.1 &
+                  y >= min(coords_minnesota13$lat) - 0.1 & y <= max(coords_minnesota13$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN14 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota14$long) - 0.05 & x <= max(coords_minnesota14$long) + 0.05 &
-                  y >= min(coords_minnesota14$lat) - 0.05 & y <= max(coords_minnesota14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota14$long) - 0.1 & x <= max(coords_minnesota14$long) + 0.1 &
+                  y >= min(coords_minnesota14$lat) - 0.1 & y <= max(coords_minnesota14$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN15 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota15$long) - 0.05 & x <= max(coords_minnesota15$long) + 0.05 &
-                  y >= min(coords_minnesota15$lat) - 0.05 & y <= max(coords_minnesota15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota15$long) - 0.1 & x <= max(coords_minnesota15$long) + 0.1 &
+                  y >= min(coords_minnesota15$lat) - 0.1 & y <= max(coords_minnesota15$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN16 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota16$long) - 0.05 & x <= max(coords_minnesota16$long) + 0.05 &
-                  y >= min(coords_minnesota16$lat) - 0.05 & y <= max(coords_minnesota16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota16$long) - 0.1 & x <= max(coords_minnesota16$long) + 0.1 &
+                  y >= min(coords_minnesota16$lat) - 0.1 & y <= max(coords_minnesota16$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN17 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota17$long) - 0.05 & x <= max(coords_minnesota17$long) + 0.05 &
-                  y >= min(coords_minnesota17$lat) - 0.05 & y <= max(coords_minnesota17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota17$long) - 0.1 & x <= max(coords_minnesota17$long) + 0.1 &
+                  y >= min(coords_minnesota17$lat) - 0.1 & y <= max(coords_minnesota17$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN18 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota18$long) - 0.05 & x <= max(coords_minnesota18$long) + 0.05 &
-                  y >= min(coords_minnesota18$lat) - 0.05 & y <= max(coords_minnesota18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota18$long) - 0.1 & x <= max(coords_minnesota18$long) + 0.1 &
+                  y >= min(coords_minnesota18$lat) - 0.1 & y <= max(coords_minnesota18$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN19 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota19$long) - 0.05 & x <= max(coords_minnesota19$long) + 0.05 &
-                  y >= min(coords_minnesota19$lat) - 0.05 & y <= max(coords_minnesota19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota19$long) - 0.1 & x <= max(coords_minnesota19$long) + 0.1 &
+                  y >= min(coords_minnesota19$lat) - 0.1 & y <= max(coords_minnesota19$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN20 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota20$long) - 0.05 & x <= max(coords_minnesota20$long) + 0.05 &
-                  y >= min(coords_minnesota20$lat) - 0.05 & y <= max(coords_minnesota20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota20$long) - 0.1 & x <= max(coords_minnesota20$long) + 0.1 &
+                  y >= min(coords_minnesota20$lat) - 0.1 & y <= max(coords_minnesota20$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN21 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota21$long) - 0.05 & x <= max(coords_minnesota21$long) + 0.05 &
-                  y >= min(coords_minnesota21$lat) - 0.05 & y <= max(coords_minnesota21$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota21$long) - 0.1 & x <= max(coords_minnesota21$long) + 0.1 &
+                  y >= min(coords_minnesota21$lat) - 0.1 & y <= max(coords_minnesota21$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN22 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota22$long) - 0.05 & x <= max(coords_minnesota22$long) + 0.05 &
-                  y >= min(coords_minnesota22$lat) - 0.05 & y <= max(coords_minnesota22$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota22$long) - 0.1 & x <= max(coords_minnesota22$long) + 0.1 &
+                  y >= min(coords_minnesota22$lat) - 0.1 & y <= max(coords_minnesota22$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN23 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota23$long) - 0.05 & x <= max(coords_minnesota23$long) + 0.05 &
-                  y >= min(coords_minnesota23$lat) - 0.05 & y <= max(coords_minnesota23$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota23$long) - 0.1 & x <= max(coords_minnesota23$long) + 0.1 &
+                  y >= min(coords_minnesota23$lat) - 0.1 & y <= max(coords_minnesota23$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN24 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota24$long) - 0.05 & x <= max(coords_minnesota24$long) + 0.05 &
-                  y >= min(coords_minnesota24$lat) - 0.05 & y <= max(coords_minnesota24$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota24$long) - 0.1 & x <= max(coords_minnesota24$long) + 0.1 &
+                  y >= min(coords_minnesota24$lat) - 0.1 & y <= max(coords_minnesota24$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN25 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota25$long) - 0.05 & x <= max(coords_minnesota25$long) + 0.05 &
-                  y >= min(coords_minnesota25$lat) - 0.05 & y <= max(coords_minnesota25$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota25$long) - 0.1 & x <= max(coords_minnesota25$long) + 0.1 &
+                  y >= min(coords_minnesota25$lat) - 0.1 & y <= max(coords_minnesota25$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN26 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota26$long) - 0.05 & x <= max(coords_minnesota26$long) + 0.05 &
-                  y >= min(coords_minnesota26$lat) - 0.05 & y <= max(coords_minnesota26$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota26$long) - 0.1 & x <= max(coords_minnesota26$long) + 0.1 &
+                  y >= min(coords_minnesota26$lat) - 0.1 & y <= max(coords_minnesota26$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN27 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota27$long) - 0.05 & x <= max(coords_minnesota27$long) + 0.05 &
-                  y >= min(coords_minnesota27$lat) - 0.05 & y <= max(coords_minnesota27$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota27$long) - 0.1 & x <= max(coords_minnesota27$long) + 0.1 &
+                  y >= min(coords_minnesota27$lat) - 0.1 & y <= max(coords_minnesota27$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN28 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota28$long) - 0.05 & x <= max(coords_minnesota28$long) + 0.05 &
-                  y >= min(coords_minnesota28$lat) - 0.05 & y <= max(coords_minnesota28$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota28$long) - 0.1 & x <= max(coords_minnesota28$long) + 0.1 &
+                  y >= min(coords_minnesota28$lat) - 0.1 & y <= max(coords_minnesota28$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN29 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota29$long) - 0.05 & x <= max(coords_minnesota29$long) + 0.05 &
-                  y >= min(coords_minnesota29$lat) - 0.05 & y <= max(coords_minnesota29$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota29$long) - 0.1 & x <= max(coords_minnesota29$long) + 0.1 &
+                  y >= min(coords_minnesota29$lat) - 0.1 & y <= max(coords_minnesota29$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_MN30 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota30$long) - 0.05 & x <= max(coords_minnesota30$long) + 0.05 &
-                  y >= min(coords_minnesota30$lat) - 0.05 & y <= max(coords_minnesota30$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota30$long) - 0.1 & x <= max(coords_minnesota30$long) + 0.1 &
+                  y >= min(coords_minnesota30$lat) - 0.1 & y <= max(coords_minnesota30$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes
@@ -1641,8 +1656,8 @@ rm(dists)
 # We'll add to this subsequently
 select_df_MN <- df_MN |>
   # Filter as done above to make sure indexing matches
-  dplyr::filter(x >= min(coords_minnesota1$long) - 0.05 & x <= max(coords_minnesota1$long) + 0.05 &
-                  y >= min(coords_minnesota1$lat) - 0.05 & y <= max(coords_minnesota1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota1$long) - 0.1 & x <= max(coords_minnesota1$long) + 0.1 &
+                  y >= min(coords_minnesota1$lat) - 0.1 & y <= max(coords_minnesota1$lat) + 0.1) |>
   # subset by row numbers given by which.min
   dplyr::slice(closest_points)
 
@@ -1660,8 +1675,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota2$long) - 0.05 & x <= max(coords_minnesota2$long) + 0.05 &
-                  y >= min(coords_minnesota2$lat) - 0.05 & y <= max(coords_minnesota2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota2$long) - 0.1 & x <= max(coords_minnesota2$long) + 0.1 &
+                  y >= min(coords_minnesota2$lat) - 0.1 & y <= max(coords_minnesota2$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota2)
@@ -1675,8 +1690,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota3$long) - 0.05 & x <= max(coords_minnesota3$long) + 0.05 &
-                  y >= min(coords_minnesota3$lat) - 0.05 & y <= max(coords_minnesota3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota3$long) - 0.1 & x <= max(coords_minnesota3$long) + 0.1 &
+                  y >= min(coords_minnesota3$lat) - 0.1 & y <= max(coords_minnesota3$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota3)
@@ -1690,8 +1705,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota4$long) - 0.05 & x <= max(coords_minnesota4$long) + 0.05 &
-                  y >= min(coords_minnesota4$lat) - 0.05 & y <= max(coords_minnesota4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota4$long) - 0.1 & x <= max(coords_minnesota4$long) + 0.1 &
+                  y >= min(coords_minnesota4$lat) - 0.1 & y <= max(coords_minnesota4$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota4)
@@ -1705,8 +1720,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota5$long) - 0.05 & x <= max(coords_minnesota5$long) + 0.05 &
-                  y >= min(coords_minnesota5$lat) - 0.05 & y <= max(coords_minnesota5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota5$long) - 0.1 & x <= max(coords_minnesota5$long) + 0.1 &
+                  y >= min(coords_minnesota5$lat) - 0.1 & y <= max(coords_minnesota5$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota5)
@@ -1720,8 +1735,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota6$long) - 0.05 & x <= max(coords_minnesota6$long) + 0.05 &
-                  y >= min(coords_minnesota6$lat) - 0.05 & y <= max(coords_minnesota6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota6$long) - 0.1 & x <= max(coords_minnesota6$long) + 0.1 &
+                  y >= min(coords_minnesota6$lat) - 0.1 & y <= max(coords_minnesota6$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota6)
@@ -1735,8 +1750,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota7$long) - 0.05 & x <= max(coords_minnesota7$long) + 0.05 &
-                  y >= min(coords_minnesota7$lat) - 0.05 & y <= max(coords_minnesota7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota7$long) - 0.1 & x <= max(coords_minnesota7$long) + 0.1 &
+                  y >= min(coords_minnesota7$lat) - 0.1 & y <= max(coords_minnesota7$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota7)
@@ -1750,8 +1765,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota8$long) - 0.05 & x <= max(coords_minnesota8$long) + 0.05 &
-                  y >= min(coords_minnesota8$lat) - 0.05 & y <= max(coords_minnesota8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota8$long) - 0.1 & x <= max(coords_minnesota8$long) + 0.1 &
+                  y >= min(coords_minnesota8$lat) - 0.1 & y <= max(coords_minnesota8$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota8)
@@ -1765,8 +1780,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota9$long) - 0.05 & x <= max(coords_minnesota9$long) + 0.05 &
-                  y >= min(coords_minnesota9$lat) - 0.05 & y <= max(coords_minnesota9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota9$long) - 0.1 & x <= max(coords_minnesota9$long) + 0.1 &
+                  y >= min(coords_minnesota9$lat) - 0.1 & y <= max(coords_minnesota9$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota9)
@@ -1780,8 +1795,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota10$long) - 0.05 & x <= max(coords_minnesota10$long) + 0.05 &
-                  y >= min(coords_minnesota10$lat) - 0.05 & y <= max(coords_minnesota10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota10$long) - 0.1 & x <= max(coords_minnesota10$long) + 0.1 &
+                  y >= min(coords_minnesota10$lat) - 0.1 & y <= max(coords_minnesota10$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota10)
@@ -1795,8 +1810,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota11$long) - 0.05 & x <= max(coords_minnesota11$long) + 0.05 &
-                  y >= min(coords_minnesota11$lat) - 0.05 & y <= max(coords_minnesota11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota11$long) - 0.1 & x <= max(coords_minnesota11$long) + 0.1 &
+                  y >= min(coords_minnesota11$lat) - 0.1 & y <= max(coords_minnesota11$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota11)
@@ -1810,8 +1825,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota12$long) - 0.05 & x <= max(coords_minnesota12$long) + 0.05 &
-                  y >= min(coords_minnesota12$lat) - 0.05 & y <= max(coords_minnesota12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota12$long) - 0.1 & x <= max(coords_minnesota12$long) + 0.1 &
+                  y >= min(coords_minnesota12$lat) - 0.1 & y <= max(coords_minnesota12$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota12)
@@ -1825,8 +1840,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota13$long) - 0.05 & x <= max(coords_minnesota13$long) + 0.05 &
-                  y >= min(coords_minnesota13$lat) - 0.05 & y <= max(coords_minnesota13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota13$long) - 0.1 & x <= max(coords_minnesota13$long) + 0.1 &
+                  y >= min(coords_minnesota13$lat) - 0.1 & y <= max(coords_minnesota13$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota13)
@@ -1840,8 +1855,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota14$long) - 0.05 & x <= max(coords_minnesota14$long) + 0.05 &
-                  y >= min(coords_minnesota14$lat) - 0.05 & y <= max(coords_minnesota14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota14$long) - 0.1 & x <= max(coords_minnesota14$long) + 0.1 &
+                  y >= min(coords_minnesota14$lat) - 0.1 & y <= max(coords_minnesota14$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota14)
@@ -1855,8 +1870,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota15$long) - 0.05 & x <= max(coords_minnesota15$long) + 0.05 &
-                  y >= min(coords_minnesota15$lat) - 0.05 & y <= max(coords_minnesota15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota15$long) - 0.1 & x <= max(coords_minnesota15$long) + 0.1 &
+                  y >= min(coords_minnesota15$lat) - 0.1 & y <= max(coords_minnesota15$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota15)
@@ -1870,8 +1885,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota16$long) - 0.05 & x <= max(coords_minnesota16$long) + 0.05 &
-                  y >= min(coords_minnesota16$lat) - 0.05 & y <= max(coords_minnesota16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota16$long) - 0.1 & x <= max(coords_minnesota16$long) + 0.1 &
+                  y >= min(coords_minnesota16$lat) - 0.1 & y <= max(coords_minnesota16$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota16)
@@ -1885,8 +1900,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota17$long) - 0.05 & x <= max(coords_minnesota17$long) + 0.05 &
-                  y >= min(coords_minnesota17$lat) - 0.05 & y <= max(coords_minnesota17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota17$long) - 0.1 & x <= max(coords_minnesota17$long) + 0.1 &
+                  y >= min(coords_minnesota17$lat) - 0.1 & y <= max(coords_minnesota17$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota17)
@@ -1900,8 +1915,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota18$long) - 0.05 & x <= max(coords_minnesota18$long) + 0.05 &
-                  y >= min(coords_minnesota18$lat) - 0.05 & y <= max(coords_minnesota18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota18$long) - 0.1 & x <= max(coords_minnesota18$long) + 0.1 &
+                  y >= min(coords_minnesota18$lat) - 0.1 & y <= max(coords_minnesota18$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota18)
@@ -1915,8 +1930,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota19$long) - 0.05 & x <= max(coords_minnesota19$long) + 0.05 &
-                  y >= min(coords_minnesota19$lat) - 0.05 & y <= max(coords_minnesota19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota19$long) - 0.1 & x <= max(coords_minnesota19$long) + 0.1 &
+                  y >= min(coords_minnesota19$lat) - 0.1 & y <= max(coords_minnesota19$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota19)
@@ -1930,8 +1945,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota20$long) - 0.05 & x <= max(coords_minnesota20$long) + 0.05 &
-                  y >= min(coords_minnesota20$lat) - 0.05 & y <= max(coords_minnesota20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota20$long) - 0.1 & x <= max(coords_minnesota20$long) + 0.1 &
+                  y >= min(coords_minnesota20$lat) - 0.1 & y <= max(coords_minnesota20$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota20)
@@ -1945,8 +1960,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota21$long) - 0.05 & x <= max(coords_minnesota21$long) + 0.05 &
-                  y >= min(coords_minnesota21$lat) - 0.05 & y <= max(coords_minnesota21$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota21$long) - 0.1 & x <= max(coords_minnesota21$long) + 0.1 &
+                  y >= min(coords_minnesota21$lat) - 0.1 & y <= max(coords_minnesota21$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota21)
@@ -1960,8 +1975,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota22$long) - 0.05 & x <= max(coords_minnesota22$long) + 0.05 &
-                  y >= min(coords_minnesota22$lat) - 0.05 & y <= max(coords_minnesota22$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota22$long) - 0.1 & x <= max(coords_minnesota22$long) + 0.1 &
+                  y >= min(coords_minnesota22$lat) - 0.1 & y <= max(coords_minnesota22$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota22)
@@ -1975,8 +1990,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota23$long) - 0.05 & x <= max(coords_minnesota23$long) + 0.05 &
-                  y >= min(coords_minnesota23$lat) - 0.05 & y <= max(coords_minnesota23$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota23$long) - 0.1 & x <= max(coords_minnesota23$long) + 0.1 &
+                  y >= min(coords_minnesota23$lat) - 0.1 & y <= max(coords_minnesota23$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota23)
@@ -1990,8 +2005,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota24$long) - 0.05 & x <= max(coords_minnesota24$long) + 0.05 &
-                  y >= min(coords_minnesota24$lat) - 0.05 & y <= max(coords_minnesota24$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota24$long) - 0.1 & x <= max(coords_minnesota24$long) + 0.1 &
+                  y >= min(coords_minnesota24$lat) - 0.1 & y <= max(coords_minnesota24$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota24)
@@ -2005,8 +2020,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota25$long) - 0.05 & x <= max(coords_minnesota25$long) + 0.05 &
-                  y >= min(coords_minnesota25$lat) - 0.05 & y <= max(coords_minnesota25$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota25$long) - 0.1 & x <= max(coords_minnesota25$long) + 0.1 &
+                  y >= min(coords_minnesota25$lat) - 0.1 & y <= max(coords_minnesota25$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota25)
@@ -2020,8 +2035,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota26$long) - 0.05 & x <= max(coords_minnesota26$long) + 0.05 &
-                  y >= min(coords_minnesota26$lat) - 0.05 & y <= max(coords_minnesota26$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota26$long) - 0.1 & x <= max(coords_minnesota26$long) + 0.1 &
+                  y >= min(coords_minnesota26$lat) - 0.1 & y <= max(coords_minnesota26$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota26)
@@ -2035,8 +2050,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota27$long) - 0.05 & x <= max(coords_minnesota27$long) + 0.05 &
-                  y >= min(coords_minnesota27$lat) - 0.05 & y <= max(coords_minnesota27$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota27$long) - 0.1 & x <= max(coords_minnesota27$long) + 0.1 &
+                  y >= min(coords_minnesota27$lat) - 0.1 & y <= max(coords_minnesota27$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota27)
@@ -2050,8 +2065,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota28$long) - 0.05 & x <= max(coords_minnesota28$long) + 0.05 &
-                  y >= min(coords_minnesota28$lat) - 0.05 & y <= max(coords_minnesota28$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota28$long) - 0.1 & x <= max(coords_minnesota28$long) + 0.1 &
+                  y >= min(coords_minnesota28$lat) - 0.1 & y <= max(coords_minnesota28$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota28)
@@ -2065,8 +2080,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota29$long) - 0.05 & x <= max(coords_minnesota29$long) + 0.05 &
-                  y >= min(coords_minnesota29$lat) - 0.05 & y <= max(coords_minnesota29$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota29$long) - 0.1 & x <= max(coords_minnesota29$long) + 0.1 &
+                  y >= min(coords_minnesota29$lat) - 0.1 & y <= max(coords_minnesota29$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota29)
@@ -2080,8 +2095,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota30$long) - 0.05 & x <= max(coords_minnesota30$long) + 0.05 &
-                  y >= min(coords_minnesota30$lat) - 0.05 & y <= max(coords_minnesota30$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_minnesota30$long) - 0.1 & x <= max(coords_minnesota30$long) + 0.1 &
+                  y >= min(coords_minnesota30$lat) - 0.1 & y <= max(coords_minnesota30$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota30)
@@ -2096,14 +2111,18 @@ colnames(MN_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
 
 # Save MN soil. Confirmed in same order as minnesota and minnesota_ecosystem
 MN_soil <- dplyr::select(MN_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(MN_soil, file = 'processed_soil_mn.RData')
+save(MN_soil, file = 'data/processed/soils/processed_soil_mn.RData')
 
 #### WISCONSIN ####
 rm(list = ls())
 
-load('gssurgo_dominant_030_500m.RData')
+load('data/raw/soils/gssurgo_dominant_030_700m.RData')
 
-load('wisconsin_process.RData')
+load('data/processed/PLS/wisconsin_process.RData')
+
+# Remove NAs from soil data
+df_WI <- df_WI |>
+  tidyr::drop_na()
 
 # Format wisconsin data
 wisconsin <- wisconsin |>
@@ -2190,124 +2209,124 @@ colnames(coords_wisconsin1) <- colnames(coords_wisconsin2) <- colnames(coords_wi
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
 coords_df_WI1 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin1$long) - 0.05 & x <= max(coords_wisconsin1$long) + 0.05 &
-                  y >= min(coords_wisconsin1$lat) - 0.05 & y <= max(coords_wisconsin1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin1$long) - 0.1 & x <= max(coords_wisconsin1$long) + 0.1 &
+                  y >= min(coords_wisconsin1$lat) - 0.1 & y <= max(coords_wisconsin1$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI2 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin2$long) - 0.05 & x <= max(coords_wisconsin2$long) + 0.05 &
-                  y >= min(coords_wisconsin2$lat) - 0.05 & y <= max(coords_wisconsin2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin2$long) - 0.1 & x <= max(coords_wisconsin2$long) + 0.1 &
+                  y >= min(coords_wisconsin2$lat) - 0.1 & y <= max(coords_wisconsin2$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI3 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin3$long) - 0.05 & x <= max(coords_wisconsin3$long) + 0.05 &
-                  y >= min(coords_wisconsin3$lat) - 0.05 & y <= max(coords_wisconsin3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin3$long) - 0.1 & x <= max(coords_wisconsin3$long) + 0.1 &
+                  y >= min(coords_wisconsin3$lat) - 0.1 & y <= max(coords_wisconsin3$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI4 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin4$long) - 0.05 & x <= max(coords_wisconsin4$long) + 0.05 &
-                  y >= min(coords_wisconsin4$lat) - 0.05 & y <= max(coords_wisconsin4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin4$long) - 0.1 & x <= max(coords_wisconsin4$long) + 0.1 &
+                  y >= min(coords_wisconsin4$lat) - 0.1 & y <= max(coords_wisconsin4$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI5 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin5$long) - 0.05 & x <= max(coords_wisconsin5$long) + 0.05 &
-                  y >= min(coords_wisconsin5$lat) - 0.05 & y <= max(coords_wisconsin5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin5$long) - 0.1 & x <= max(coords_wisconsin5$long) + 0.1 &
+                  y >= min(coords_wisconsin5$lat) - 0.1 & y <= max(coords_wisconsin5$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI6 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin6$long) - 0.05 & x <= max(coords_wisconsin6$long) + 0.05 &
-                  y >= min(coords_wisconsin6$lat) - 0.05 & y <= max(coords_wisconsin6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin6$long) - 0.1 & x <= max(coords_wisconsin6$long) + 0.1 &
+                  y >= min(coords_wisconsin6$lat) - 0.1 & y <= max(coords_wisconsin6$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI7 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin7$long) - 0.05 & x <= max(coords_wisconsin7$long) + 0.05 &
-                  y >= min(coords_wisconsin7$lat) - 0.05 & y <= max(coords_wisconsin7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin7$long) - 0.1 & x <= max(coords_wisconsin7$long) + 0.1 &
+                  y >= min(coords_wisconsin7$lat) - 0.1 & y <= max(coords_wisconsin7$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI8 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin8$long) - 0.05 & x <= max(coords_wisconsin8$long) + 0.05 &
-                  y >= min(coords_wisconsin8$lat) - 0.05 & y <= max(coords_wisconsin8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin8$long) - 0.1 & x <= max(coords_wisconsin8$long) + 0.1 &
+                  y >= min(coords_wisconsin8$lat) - 0.1 & y <= max(coords_wisconsin8$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI9 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin9$long) - 0.05 & x <= max(coords_wisconsin9$long) + 0.05 &
-                  y >= min(coords_wisconsin9$lat) - 0.05 & y <= max(coords_wisconsin9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin9$long) - 0.1 & x <= max(coords_wisconsin9$long) + 0.1 &
+                  y >= min(coords_wisconsin9$lat) - 0.1 & y <= max(coords_wisconsin9$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI10 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin10$long) - 0.05 & x <= max(coords_wisconsin10$long) + 0.05 &
-                  y >= min(coords_wisconsin10$lat) - 0.05 & y <= max(coords_wisconsin10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin10$long) - 0.1 & x <= max(coords_wisconsin10$long) + 0.1 &
+                  y >= min(coords_wisconsin10$lat) - 0.1 & y <= max(coords_wisconsin10$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI11 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin11$long) - 0.05 & x <= max(coords_wisconsin11$long) + 0.05 &
-                  y >= min(coords_wisconsin11$lat) - 0.05 & y <= max(coords_wisconsin11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin11$long) - 0.1 & x <= max(coords_wisconsin11$long) + 0.1 &
+                  y >= min(coords_wisconsin11$lat) - 0.1 & y <= max(coords_wisconsin11$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI12 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin12$long) - 0.05 & x <= max(coords_wisconsin12$long) + 0.05 &
-                  y >= min(coords_wisconsin12$lat) - 0.05 & y <= max(coords_wisconsin12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin12$long) - 0.1 & x <= max(coords_wisconsin12$long) + 0.1 &
+                  y >= min(coords_wisconsin12$lat) - 0.1 & y <= max(coords_wisconsin12$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI13 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin13$long) - 0.05 & x <= max(coords_wisconsin13$long) + 0.05 &
-                  y >= min(coords_wisconsin13$lat) - 0.05 & y <= max(coords_wisconsin13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin13$long) - 0.1 & x <= max(coords_wisconsin13$long) + 0.1 &
+                  y >= min(coords_wisconsin13$lat) - 0.1 & y <= max(coords_wisconsin13$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI14 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin14$long) - 0.05 & x <= max(coords_wisconsin14$long) + 0.05 &
-                  y >= min(coords_wisconsin14$lat) - 0.05 & y <= max(coords_wisconsin14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin14$long) - 0.1 & x <= max(coords_wisconsin14$long) + 0.1 &
+                  y >= min(coords_wisconsin14$lat) - 0.1 & y <= max(coords_wisconsin14$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI15 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin15$long) - 0.05 & x <= max(coords_wisconsin15$long) + 0.05 &
-                  y >= min(coords_wisconsin15$lat) - 0.05 & y <= max(coords_wisconsin15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin15$long) - 0.1 & x <= max(coords_wisconsin15$long) + 0.1 &
+                  y >= min(coords_wisconsin15$lat) - 0.1 & y <= max(coords_wisconsin15$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI16 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin16$long) - 0.05 & x <= max(coords_wisconsin16$long) + 0.05 &
-                  y >= min(coords_wisconsin16$lat) - 0.05 & y <= max(coords_wisconsin16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin16$long) - 0.1 & x <= max(coords_wisconsin16$long) + 0.1 &
+                  y >= min(coords_wisconsin16$lat) - 0.1 & y <= max(coords_wisconsin16$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI17 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin17$long) - 0.05 & x <= max(coords_wisconsin17$long) + 0.05 &
-                  y >= min(coords_wisconsin17$lat) - 0.05 & y <= max(coords_wisconsin17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin17$long) - 0.1 & x <= max(coords_wisconsin17$long) + 0.1 &
+                  y >= min(coords_wisconsin17$lat) - 0.1 & y <= max(coords_wisconsin17$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI18 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin18$long) - 0.05 & x <= max(coords_wisconsin18$long) + 0.05 &
-                  y >= min(coords_wisconsin18$lat) - 0.05 & y <= max(coords_wisconsin18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin18$long) - 0.1 & x <= max(coords_wisconsin18$long) + 0.1 &
+                  y >= min(coords_wisconsin18$lat) - 0.1 & y <= max(coords_wisconsin18$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI19 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin19$long) - 0.05 & x <= max(coords_wisconsin19$long) + 0.05 &
-                  y >= min(coords_wisconsin19$lat) - 0.05 & y <= max(coords_wisconsin19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin19$long) - 0.1 & x <= max(coords_wisconsin19$long) + 0.1 &
+                  y >= min(coords_wisconsin19$lat) - 0.1 & y <= max(coords_wisconsin19$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI20 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin20$long) - 0.05 & x <= max(coords_wisconsin20$long) + 0.05 &
-                  y >= min(coords_wisconsin20$lat) - 0.05 & y <= max(coords_wisconsin20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin20$long) - 0.1 & x <= max(coords_wisconsin20$long) + 0.1 &
+                  y >= min(coords_wisconsin20$lat) - 0.1 & y <= max(coords_wisconsin20$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI21 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin21$long) - 0.05 & x <= max(coords_wisconsin21$long) + 0.05 &
-                  y >= min(coords_wisconsin21$lat) - 0.05 & y <= max(coords_wisconsin21$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin21$long) - 0.1 & x <= max(coords_wisconsin21$long) + 0.1 &
+                  y >= min(coords_wisconsin21$lat) - 0.1 & y <= max(coords_wisconsin21$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI22 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin22$long) - 0.05 & x <= max(coords_wisconsin22$long) + 0.05 &
-                  y >= min(coords_wisconsin22$lat) - 0.05 & y <= max(coords_wisconsin22$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin22$long) - 0.1 & x <= max(coords_wisconsin22$long) + 0.1 &
+                  y >= min(coords_wisconsin22$lat) - 0.1 & y <= max(coords_wisconsin22$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI23 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin23$long) - 0.05 & x <= max(coords_wisconsin23$long + 0.05) &
-                  y >= min(coords_wisconsin23$lat) - 0.05 & y <= max(coords_wisconsin23$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin23$long) - 0.1 & x <= max(coords_wisconsin23$long + 0.1) &
+                  y >= min(coords_wisconsin23$lat) - 0.1 & y <= max(coords_wisconsin23$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI24 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin24$long) - 0.05 & x <= max(coords_wisconsin24$long) + 0.05 &
-                  y >= min(coords_wisconsin24$lat) - 0.05 & y <= max(coords_wisconsin24$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin24$long) - 0.1 & x <= max(coords_wisconsin24$long) + 0.1 &
+                  y >= min(coords_wisconsin24$lat) - 0.1 & y <= max(coords_wisconsin24$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI25 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin25$long) - 0.05 & x <= max(coords_wisconsin25$long) + 0.05 &
-                  y >= min(coords_wisconsin25$lat) - 0.05 & y <= max(coords_wisconsin25$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin25$long) - 0.1 & x <= max(coords_wisconsin25$long) + 0.1 &
+                  y >= min(coords_wisconsin25$lat) - 0.1 & y <= max(coords_wisconsin25$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI26 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin26$long) - 0.05 & x <= max(coords_wisconsin26$long) + 0.05 &
-                  y >= min(coords_wisconsin26$lat) - 0.05 & y <= max(coords_wisconsin26$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin26$long) - 0.1 & x <= max(coords_wisconsin26$long) + 0.1 &
+                  y >= min(coords_wisconsin26$lat) - 0.1 & y <= max(coords_wisconsin26$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI27 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin27$long) - 0.05 & x <= max(coords_wisconsin27$long) + 0.05 &
-                  y >= min(coords_wisconsin27$lat) - 0.05 & y <= max(coords_wisconsin27$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin27$long) - 0.1 & x <= max(coords_wisconsin27$long) + 0.1 &
+                  y >= min(coords_wisconsin27$lat) - 0.1 & y <= max(coords_wisconsin27$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI28 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin28$long) - 0.05 & x <= max(coords_wisconsin28$long) + 0.05 &
-                  y >= min(coords_wisconsin28$lat) - 0.05 & y <= max(coords_wisconsin28$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin28$long) - 0.1 & x <= max(coords_wisconsin28$long) + 0.1 &
+                  y >= min(coords_wisconsin28$lat) - 0.1 & y <= max(coords_wisconsin28$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI29 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin29$long) - 0.05 & x <= max(coords_wisconsin29$long) + 0.05 &
-                  y >= min(coords_wisconsin29$lat) - 0.05 & y <= max(coords_wisconsin29$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin29$long) - 0.1 & x <= max(coords_wisconsin29$long) + 0.1 &
+                  y >= min(coords_wisconsin29$lat) - 0.1 & y <= max(coords_wisconsin29$lat) + 0.1) |>
   dplyr::select(y, x)
 coords_df_WI30 <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin30$long) - 0.05 & x <= max(coords_wisconsin30$long) + 0.05 &
-                  y >= min(coords_wisconsin30$lat) - 0.05 & y <= max(coords_wisconsin30$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin30$long) - 0.1 & x <= max(coords_wisconsin30$long) + 0.1 &
+                  y >= min(coords_wisconsin30$lat) - 0.1 & y <= max(coords_wisconsin30$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes
@@ -2322,8 +2341,8 @@ rm(dists)
 # We'll add to this subsequently
 select_df_WI <- df_WI |>
   # Filter as done above to make sure indexing matches
-  dplyr::filter(x >= min(coords_wisconsin1$long) - 0.05 & x <= max(coords_wisconsin1$long) + 0.05 &
-                  y >= min(coords_wisconsin1$lat) - 0.05 & y <= max(coords_wisconsin1$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin1$long) - 0.1 & x <= max(coords_wisconsin1$long) + 0.1 &
+                  y >= min(coords_wisconsin1$lat) - 0.1 & y <= max(coords_wisconsin1$lat) + 0.1) |>
   # subset by row numbers given by which.min
   dplyr::slice(closest_points)
 
@@ -2341,8 +2360,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin2$long) - 0.05 & x <= max(coords_wisconsin2$long) + 0.05 &
-                  y >= min(coords_wisconsin2$lat) - 0.05 & y <= max(coords_wisconsin2$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin2$long) - 0.1 & x <= max(coords_wisconsin2$long) + 0.1 &
+                  y >= min(coords_wisconsin2$lat) - 0.1 & y <= max(coords_wisconsin2$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin2)
@@ -2356,8 +2375,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin3$long) - 0.05 & x <= max(coords_wisconsin3$long) + 0.05 &
-                  y >= min(coords_wisconsin3$lat) - 0.05 & y <= max(coords_wisconsin3$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin3$long) - 0.1 & x <= max(coords_wisconsin3$long) + 0.1 &
+                  y >= min(coords_wisconsin3$lat) - 0.1 & y <= max(coords_wisconsin3$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin3)
@@ -2371,8 +2390,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin4$long) - 0.05 & x <= max(coords_wisconsin4$long) + 0.05 &
-                  y >= min(coords_wisconsin4$lat) - 0.05 & y <= max(coords_wisconsin4$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin4$long) - 0.1 & x <= max(coords_wisconsin4$long) + 0.1 &
+                  y >= min(coords_wisconsin4$lat) - 0.1 & y <= max(coords_wisconsin4$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin4)
@@ -2386,8 +2405,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin5$long) - 0.05 & x <= max(coords_wisconsin5$long) + 0.05 &
-                  y >= min(coords_wisconsin5$lat) - 0.05 & y <= max(coords_wisconsin5$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin5$long) - 0.1 & x <= max(coords_wisconsin5$long) + 0.1 &
+                  y >= min(coords_wisconsin5$lat) - 0.1 & y <= max(coords_wisconsin5$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin5)
@@ -2401,8 +2420,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin6$long) - 0.05 & x <= max(coords_wisconsin6$long) + 0.05 &
-                  y >= min(coords_wisconsin6$lat) - 0.05 & y <= max(coords_wisconsin6$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin6$long) - 0.1 & x <= max(coords_wisconsin6$long) + 0.1 &
+                  y >= min(coords_wisconsin6$lat) - 0.1 & y <= max(coords_wisconsin6$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin6)
@@ -2416,8 +2435,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin7$long) - 0.05 & x <= max(coords_wisconsin7$long) + 0.05 &
-                  y >= min(coords_wisconsin7$lat) - 0.05 & y <= max(coords_wisconsin7$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin7$long) - 0.1 & x <= max(coords_wisconsin7$long) + 0.1 &
+                  y >= min(coords_wisconsin7$lat) - 0.1 & y <= max(coords_wisconsin7$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin7)
@@ -2431,8 +2450,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin8$long) - 0.05 & x <= max(coords_wisconsin8$long) + 0.05 &
-                  y >= min(coords_wisconsin8$lat) - 0.05 & y <= max(coords_wisconsin8$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin8$long) - 0.1 & x <= max(coords_wisconsin8$long) + 0.1 &
+                  y >= min(coords_wisconsin8$lat) - 0.1 & y <= max(coords_wisconsin8$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin8)
@@ -2446,8 +2465,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin9$long) - 0.05 & x <= max(coords_wisconsin9$long) + 0.05 &
-                  y >= min(coords_wisconsin9$lat) - 0.05 & y <= max(coords_wisconsin9$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin9$long) - 0.1 & x <= max(coords_wisconsin9$long) + 0.1 &
+                  y >= min(coords_wisconsin9$lat) - 0.1 & y <= max(coords_wisconsin9$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin9)
@@ -2461,8 +2480,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin10$long) - 0.05 & x <= max(coords_wisconsin10$long) + 0.05 &
-                  y >= min(coords_wisconsin10$lat) - 0.05 & y <= max(coords_wisconsin10$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin10$long) - 0.1 & x <= max(coords_wisconsin10$long) + 0.1 &
+                  y >= min(coords_wisconsin10$lat) - 0.1 & y <= max(coords_wisconsin10$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin10)
@@ -2476,8 +2495,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin11$long) - 0.05 & x <= max(coords_wisconsin11$long) + 0.05 &
-                  y >= min(coords_wisconsin11$lat) - 0.05 & y <= max(coords_wisconsin11$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin11$long) - 0.1 & x <= max(coords_wisconsin11$long) + 0.1 &
+                  y >= min(coords_wisconsin11$lat) - 0.1 & y <= max(coords_wisconsin11$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin11)
@@ -2491,8 +2510,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin12$long) - 0.05 & x <= max(coords_wisconsin12$long) + 0.05 &
-                  y >= min(coords_wisconsin12$lat) - 0.05 & y <= max(coords_wisconsin12$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin12$long) - 0.1 & x <= max(coords_wisconsin12$long) + 0.1 &
+                  y >= min(coords_wisconsin12$lat) - 0.1 & y <= max(coords_wisconsin12$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin12)
@@ -2506,8 +2525,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin13$long) - 0.05 & x <= max(coords_wisconsin13$long) + 0.05 &
-                  y >= min(coords_wisconsin13$lat) - 0.05 & y <= max(coords_wisconsin13$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin13$long) - 0.1 & x <= max(coords_wisconsin13$long) + 0.1 &
+                  y >= min(coords_wisconsin13$lat) - 0.1 & y <= max(coords_wisconsin13$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin13)
@@ -2521,8 +2540,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin14$long) - 0.05 & x <= max(coords_wisconsin14$long) + 0.05 &
-                  y >= min(coords_wisconsin14$lat) - 0.05 & y <= max(coords_wisconsin14$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin14$long) - 0.1 & x <= max(coords_wisconsin14$long) + 0.1 &
+                  y >= min(coords_wisconsin14$lat) - 0.1 & y <= max(coords_wisconsin14$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin14)
@@ -2536,8 +2555,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin15$long) - 0.05 & x <= max(coords_wisconsin15$long) + 0.05 &
-                  y >= min(coords_wisconsin15$lat) - 0.05 & y <= max(coords_wisconsin15$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin15$long) - 0.1 & x <= max(coords_wisconsin15$long) + 0.1 &
+                  y >= min(coords_wisconsin15$lat) - 0.1 & y <= max(coords_wisconsin15$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin15)
@@ -2551,8 +2570,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin16$long) - 0.05 & x <= max(coords_wisconsin16$long) + 0.05 &
-                  y >= min(coords_wisconsin16$lat) - 0.05 & y <= max(coords_wisconsin16$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin16$long) - 0.1 & x <= max(coords_wisconsin16$long) + 0.1 &
+                  y >= min(coords_wisconsin16$lat) - 0.1 & y <= max(coords_wisconsin16$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin16)
@@ -2566,8 +2585,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin17$long) - 0.05 & x <= max(coords_wisconsin17$long) + 0.05 &
-                  y >= min(coords_wisconsin17$lat) - 0.05 & y <= max(coords_wisconsin17$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin17$long) - 0.1 & x <= max(coords_wisconsin17$long) + 0.1 &
+                  y >= min(coords_wisconsin17$lat) - 0.1 & y <= max(coords_wisconsin17$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin17)
@@ -2581,8 +2600,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin18$long) - 0.05 & x <= max(coords_wisconsin18$long) + 0.05 &
-                  y >= min(coords_wisconsin18$lat) - 0.05 & y <= max(coords_wisconsin18$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin18$long) - 0.1 & x <= max(coords_wisconsin18$long) + 0.1 &
+                  y >= min(coords_wisconsin18$lat) - 0.1 & y <= max(coords_wisconsin18$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin18)
@@ -2596,8 +2615,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin19$long) - 0.05 & x <= max(coords_wisconsin19$long) + 0.05 &
-                  y >= min(coords_wisconsin19$lat) - 0.05 & y <= max(coords_wisconsin19$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin19$long) - 0.1 & x <= max(coords_wisconsin19$long) + 0.1 &
+                  y >= min(coords_wisconsin19$lat) - 0.1 & y <= max(coords_wisconsin19$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin19)
@@ -2611,8 +2630,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin20$long) - 0.05 & x <= max(coords_wisconsin20$long) + 0.05 &
-                  y >= min(coords_wisconsin20$lat) - 0.05 & y <= max(coords_wisconsin20$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin20$long) - 0.1 & x <= max(coords_wisconsin20$long) + 0.1 &
+                  y >= min(coords_wisconsin20$lat) - 0.1 & y <= max(coords_wisconsin20$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin20)
@@ -2626,8 +2645,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin21$long) - 0.05 & x <= max(coords_wisconsin21$long) + 0.05 &
-                  y >= min(coords_wisconsin21$lat) - 0.05 & y <= max(coords_wisconsin21$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin21$long) - 0.1 & x <= max(coords_wisconsin21$long) + 0.1 &
+                  y >= min(coords_wisconsin21$lat) - 0.1 & y <= max(coords_wisconsin21$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin21)
@@ -2641,8 +2660,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin22$long) - 0.05 & x <= max(coords_wisconsin22$long) + 0.05 &
-                  y >= min(coords_wisconsin22$lat) - 0.05 & y <= max(coords_wisconsin22$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin22$long) - 0.1 & x <= max(coords_wisconsin22$long) + 0.1 &
+                  y >= min(coords_wisconsin22$lat) - 0.1 & y <= max(coords_wisconsin22$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin22)
@@ -2656,8 +2675,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin23$long) - 0.05 & x <= max(coords_wisconsin23$long) + 0.05 &
-                  y >= min(coords_wisconsin23$lat) - 0.05 & y <= max(coords_wisconsin23$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin23$long) - 0.1 & x <= max(coords_wisconsin23$long) + 0.1 &
+                  y >= min(coords_wisconsin23$lat) - 0.1 & y <= max(coords_wisconsin23$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin23)
@@ -2671,8 +2690,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin24$long) - 0.05 & x <= max(coords_wisconsin24$long) + 0.05 &
-                  y >= min(coords_wisconsin24$lat) - 0.05 & y <= max(coords_wisconsin24$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin24$long) - 0.1 & x <= max(coords_wisconsin24$long) + 0.1 &
+                  y >= min(coords_wisconsin24$lat) - 0.1 & y <= max(coords_wisconsin24$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin24)
@@ -2686,8 +2705,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin25$long) - 0.05 & x <= max(coords_wisconsin25$long) + 0.05 &
-                  y >= min(coords_wisconsin25$lat) - 0.05 & y <= max(coords_wisconsin25$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin25$long) - 0.1 & x <= max(coords_wisconsin25$long) + 0.1 &
+                  y >= min(coords_wisconsin25$lat) - 0.1 & y <= max(coords_wisconsin25$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin25)
@@ -2701,8 +2720,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin26$long) - 0.05 & x <= max(coords_wisconsin26$long) + 0.05 &
-                  y >= min(coords_wisconsin26$lat) - 0.05 & y <= max(coords_wisconsin26$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin26$long) - 0.1 & x <= max(coords_wisconsin26$long) + 0.1 &
+                  y >= min(coords_wisconsin26$lat) - 0.1 & y <= max(coords_wisconsin26$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin26)
@@ -2716,8 +2735,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin27$long) - 0.05 & x <= max(coords_wisconsin27$long) + 0.05 &
-                  y >= min(coords_wisconsin27$lat) - 0.05 & y <= max(coords_wisconsin27$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin27$long) - 0.1 & x <= max(coords_wisconsin27$long) + 0.1 &
+                  y >= min(coords_wisconsin27$lat) - 0.1 & y <= max(coords_wisconsin27$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin27)
@@ -2731,8 +2750,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin28$long) - 0.05 & x <= max(coords_wisconsin28$long) + 0.05 &
-                  y >= min(coords_wisconsin28$lat) - 0.05 & y <= max(coords_wisconsin28$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin28$long) - 0.1 & x <= max(coords_wisconsin28$long) + 0.1 &
+                  y >= min(coords_wisconsin28$lat) - 0.1 & y <= max(coords_wisconsin28$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin28)
@@ -2746,8 +2765,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin29$long) - 0.05 & x <= max(coords_wisconsin29$long) + 0.05 &
-                  y >= min(coords_wisconsin29$lat) - 0.05 & y <= max(coords_wisconsin29$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin29$long) - 0.1 & x <= max(coords_wisconsin29$long) + 0.1 &
+                  y >= min(coords_wisconsin29$lat) - 0.1 & y <= max(coords_wisconsin29$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin29)
@@ -2761,8 +2780,8 @@ closest_points <- apply(dists, 2, which.min)
 rm(dists)
 
 select_df_WI <- df_WI |>
-  dplyr::filter(x >= min(coords_wisconsin30$long) - 0.05 & x <= max(coords_wisconsin30$long) + 0.05 &
-                  y >= min(coords_wisconsin30$lat) - 0.05 & y <= max(coords_wisconsin30$lat) + 0.05) |>
+  dplyr::filter(x >= min(coords_wisconsin30$long) - 0.1 & x <= max(coords_wisconsin30$long) + 0.1 &
+                  y >= min(coords_wisconsin30$lat) - 0.1 & y <= max(coords_wisconsin30$lat) + 0.1) |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin30)
@@ -2777,7 +2796,7 @@ colnames(WI_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
 
 # Save IL soil. Confirmed in same order as illinois and illinois_ecosystem
 WI_soil <- dplyr::select(WI_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(WI_soil, file = 'processed_soil_wi.RData')
+save(WI_soil, file = 'data/processed/soils/processed_soil_wi.RData')
 
 #### CHECKS ####
 
@@ -2785,7 +2804,7 @@ save(WI_soil, file = 'processed_soil_wi.RData')
 
 rm(list = ls())
 
-load('processed_soil_il.RData')
+load('data/processed/soils/processed_soil_il.RData')
 
 IL_soil |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
@@ -2806,7 +2825,7 @@ IL_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('processed_soil_in.RData')
+load('data/processed/soils/processed_soil_in.RData')
 
 IN_soil |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
@@ -2828,7 +2847,7 @@ IN_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('processed_soil_mi.RData')
+load('data/processed/soils/processed_soil_mi.RData')
 
 MI_soil |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
@@ -2850,7 +2869,7 @@ MI_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('processed_soil_mn.RData')
+load('data/processed/soils/processed_soil_mn.RData')
 
 MN_soil |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
@@ -2872,7 +2891,7 @@ MN_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('processed_soil_wi.RData')
+load('data/processed/soils/processed_soil_wi.RData')
 
 WI_soil |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
@@ -2910,7 +2929,8 @@ IL_soil |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = flag)) +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA)
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326')
 
 states <- sf::st_as_sf(maps::map('state', region = 'indiana',
                                  fill = TRUE, plot = FALSE))
@@ -2927,7 +2947,8 @@ IN_soil |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = flag)) +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA)
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326')
 
 states <- sf::st_as_sf(maps::map('state', region = 'michigan',
                                  fill = TRUE, plot = FALSE))
@@ -2944,7 +2965,8 @@ MI_soil |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = flag)) +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA)
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326')
 
 states <- sf::st_as_sf(maps::map('state', region = 'minnesota',
                                  fill = TRUE, plot = FALSE))
@@ -2961,7 +2983,8 @@ MN_soil |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = flag)) +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA)
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326')
 
 states <- sf::st_as_sf(maps::map('state', region = 'wisconsin',
                                  fill = TRUE, plot = FALSE))
@@ -2978,4 +3001,48 @@ WI_soil |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = flag)) +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA)
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326')
+
+# Plot distribution of soil variables
+states <- sf::st_as_sf(maps::map('state', region = c('indiana', 'illinois', 'michigan',
+                                                     'minnesota', 'wisconsin'),
+                                 fill = TRUE, plot = FALSE))
+states <- sf::st_transform(states, crs = 'EPSG:4326')
+
+soils <- rbind(IL_soil, IN_soil, MI_soil, MN_soil, WI_soil)
+
+soils |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = clay), alpha = 0.7, shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme_void()
+
+soils |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = sand), alpha = 0.7, shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme_void()
+
+soils |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = silt), alpha = 0.7, shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme_void()
+
+soils |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = caco3), alpha = 0.7, shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme_void()
+
+soils |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = awc), alpha = 0.7, shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme_void()
