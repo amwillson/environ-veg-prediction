@@ -1,7 +1,9 @@
+## Matching gSSURGO and PLS spatially
+
 rm(list = ls())
 
 #### ILLINOIS ####
-load('data/raw/soils/gssurgo_dominant_030_700m.RData')
+load('data/raw/soils/gssurgo_average_030_700m.RData')
 
 load('data/processed/PLS/illinois_format.RData')
 
@@ -473,7 +475,7 @@ save(IL_soil, file = 'data/processed/soils/processed_soil_il.RData')
 #### INDIANA ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_dominant_030_700m.RData')
+load('data/raw/soils/gssurgo_average_030_700m.RData')
 
 load('data/processed/PLS/indiana_format.RData')
 
@@ -944,7 +946,7 @@ save(IN_soil, file = 'data/processed/soils/processed_soil_in.RData')
 #### MICHIGAN ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_dominant_030_700m.RData')
+load('data/raw/soils/gssurgo_average_030_700m.RData')
 
 load('data/processed/PLS/upmichigan_process.RData')
 load('data/processed/PLS/lowmichigan_process.RData')
@@ -1429,7 +1431,7 @@ save(MI_soil, file = 'data/processed/soils/processed_soil_mi.RData')
 #### MINNESOTA ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_dominant_030_700m.RData')
+load('data/raw/soils/gssurgo_average_030_700m.RData')
 
 load('data/processed/PLS/minnesota_process.RData')
 
@@ -2116,7 +2118,7 @@ save(MN_soil, file = 'data/processed/soils/processed_soil_mn.RData')
 #### WISCONSIN ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_dominant_030_700m.RData')
+load('data/raw/soils/gssurgo_average_030_700m.RData')
 
 load('data/processed/PLS/wisconsin_process.RData')
 
