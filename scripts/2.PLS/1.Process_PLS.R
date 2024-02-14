@@ -41,8 +41,13 @@ indiana <- indiana_raw |>
   dplyr::filter(!is.na(level1)) |>
   # Process species names using translation table to level 3a
   dplyr::left_join(y = translation, by = 'level1') |>
+  # remove level1 taxon name column because we can now focus on the level3a level
   dplyr::select(-level1) |>
+  # rename because level3a is a weird way of saying the taxon-level
   dplyr::rename(species = level3a) |>
+  # rename the taxa
+  # we group some taxa here to be consistent with the ecology of the region
+  # and to simplify the number of taxonomic categories
   dplyr::mutate(species = dplyr::if_else(species == 'No tree', 'no_tree', species),
                 species = dplyr::if_else(species == 'Oak', 'oak', species),
                 species = dplyr::if_else(species == 'Elm', 'elm', species),
@@ -77,14 +82,20 @@ indiana <- indiana_raw |>
                 species = dplyr::if_else(species == 'Bald cypress', 'cypress', species),
                 species = dplyr::if_else(species == 'Alder', 'alder', species),
                 species = dplyr::if_else(species == 'Hemlock', 'hemlock', species)) |>
+  # Remove level3a categories that are not trees
   dplyr::filter(species != 'No data',
                 species != 'Water')
 
 # Convert coordinates
+# make a spatial object
 indiana <- sf::st_as_sf(indiana, coords = c('x', 'y'))
+# add the current projection
 sf::st_crs(indiana) <- 'EPSG:3175'
+# transform the projection
 indiana <- sf::st_transform(indiana, crs = 'EPSG:4326')
+# change back to regular dataframe
 indiana <- sfheaders::sf_to_df(indiana, fill = TRUE)
+# remove unnecessary columns
 indiana <- dplyr::select(indiana, -c(sfg_id, point_id))
 
 # Pivot wider and make biomes
@@ -92,9 +103,12 @@ indiana <- dplyr::select(indiana, -c(sfg_id, point_id))
 # savanna if oak and/or hickory and no other species
 # forest if any other tree
 indiana_ecosystem <- indiana |>
+  # change the name of each tree to make it easier to  type the mutate command
   dplyr::mutate(tree = dplyr::if_else(tree == 'L1_tree1', 'one', tree),
                 tree = dplyr::if_else(tree == 'L1_tree2', 'two', tree)) |>
+  # pivot wider, so each tree 1-2 is a column. Now we can work across rows
   tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
+  # If the row has no trees = prairie, oak and/or hickory = savanna, else forest
   dplyr::mutate(ecosystem = dplyr::if_else(one == 'no_tree' & is.na(two), 'prairie', NA),
                 ecosystem = dplyr::if_else(one %in% c('oak', 'hickory') & two %in% c('oak', 'hickory', NA), 'savanna', ecosystem),
                 ecosystem = dplyr::if_else(is.na(ecosystem), 'forest', ecosystem))
@@ -404,8 +418,9 @@ minnesota <- minnesota_raw |>
                 species = dplyr::if_else(species == 'Sycamore', 'sycamore', species)) |>
   dplyr::filter(species != 'Missing') |>
   # Remove some repeat rows.
-  # There are a bunch of trees supposedly at the exact same place
-  dplyr::slice(-c(12171, 12172, 217472, 217473, 217474, 217475, 217476, 217477))
+  # We know these are repeats because we have labeled the trees 1-4
+  # and there can only be these trees at a given corner
+  dplyr::distinct()
 
 # Convert coordinates
 minnesota <- sf::st_as_sf(minnesota, coords = c('x_alb', 'y_alb'))
@@ -414,18 +429,54 @@ minnesota <- sf::st_transform(minnesota, crs = 'EPSG:4326')
 minnesota <- sfheaders::sf_to_df(minnesota, fill = TRUE)
 minnesota <- dplyr::select(minnesota, -c(sfg_id, point_id))
 
+# Convert to ecosystem type
 minnesota_ecosystem <- minnesota |>
+  # Rename tree numbers
   dplyr::mutate(tree = dplyr::if_else(tree == 'SP1', 'one', tree),
                 tree = dplyr::if_else(tree == 'SP2', 'two', tree),
                 tree = dplyr::if_else(tree == 'SP3', 'three', tree),
                 tree = dplyr::if_else(tree == 'SP4', 'four', tree)) |>
+  # Pivot wider, values_fn allows things to be put in a list
   tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
                      values_fn = list) |>
-  tidyr::unnest(cols = everything) |>
+  # Unnest when things were put in a list
+  # I have no idea why there are duplicates for some locations though
+  tidyr::unnest(cols = everything()) |>
+  # Make ecosystem level based on no tree, oak/hickory, anything else
   dplyr::mutate(ecosystem = dplyr::if_else(one == 'no_tree' & is.na(two) & is.na(three) & is.na(four), 'prairie', NA),
                 ecosystem = dplyr::if_else(one %in% c('oak', 'hickory') & two %in% c('oak', 'hickory', NA) &
                                              three %in% c('oak', 'hickory', NA) & four %in% c('oak', 'hickory', NA), 'savanna', ecosystem),
                 ecosystem = dplyr::if_else(is.na(ecosystem), 'forest', ecosystem))
+
+# Some corners were duplicated, but also contain different taxa.
+# We'll remove the second of each of these columns
+# It's a very small number of points and the differnece between
+# taxa at these corners is relatively minimal
+dupes <- minnesota_ecosystem |>
+  # Find duplicate x y coordiantes
+  janitor::get_dupes(x,y) |>
+  # Make a row uniquely identifying the columns
+  # use all taxa because the rows should have the same
+  # x y coordinates and differ in their taxa
+  dplyr::mutate(ind = paste0(x,y,one,two,three,four)) |>
+  # record row number
+  dplyr::mutate(row = dplyr::row_number()) |>
+  # since there are 2 identical xy coordinate pairs for each
+  # remaining duplicate, we can remove even columns
+  # and keep odd columns
+  dplyr::mutate(del = dplyr::if_else(row %% 2 == 0, 'yes', 'no')) |>
+  dplyr::select(ind, del)
+
+# Now we need to actually remove those rows from
+# the ecosystem dataset
+minnesota_ecosystem <- minnesota_ecosystem |>
+  # make the same indexing column as in the df above
+  dplyr::mutate(ind = paste0(x,y,one,two,three,four)) |>
+  # join the dfs by the indexing column
+  dplyr::left_join(y = dupes, by = 'ind') |>
+  # remove any rows that were flagged as "remove"
+  dplyr::filter(del %in% c('no', NA)) |>
+  dplyr::select(-del, -ind)
 
 # Plot
 states <- sf::st_as_sf(maps::map('state', region = 'minnesota',
@@ -467,7 +518,8 @@ translation <- translation |>
 # Take out repeat columns
 translation <- unique(translation)
 
-# Repeat steps from Indiana
+# Repeat steps from Minnesota
+# This includes filtering out repeat rows
 upmichigan <- upmichigan_raw |>
   dplyr::mutate(state = 'UPMI') |>
   dplyr::select(x_alb, y_alb,
@@ -510,7 +562,8 @@ upmichigan <- upmichigan_raw |>
                 species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
                 species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
                 species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species)) |>
-  dplyr::filter(species != 'Missing')
+  dplyr::filter(species != 'Missing') |>
+  dplyr::distinct()
 
 # Convert coordinates
 upmichigan <- sf::st_as_sf(upmichigan, coords = c('x_alb', 'y_alb'))
@@ -528,6 +581,19 @@ upmichigan_ecosystem <- upmichigan |>
   dplyr::mutate(ecosystem = dplyr::if_else(one == 'no_tree' & is.na(two), 'prairie', NA),
                 ecosystem = dplyr::if_else(one %in% c('oak', 'hickory') & two %in% c('oak', 'hickory', NA), 'savanna', ecosystem),
                 ecosystem = dplyr::if_else(is.na(ecosystem), 'forest', ecosystem))
+
+dupes <- upmichigan_ecosystem |>
+  janitor::get_dupes(x,y) |>
+  dplyr::mutate(ind = paste0(x,y,one,two)) |>
+  dplyr::mutate(row = dplyr::row_number()) |>
+  dplyr::mutate(del = dplyr::if_else(row %% 2 == 0, 'yes', 'no')) |>
+  dplyr::select(ind, del)
+
+upmichigan_ecosystem <- upmichigan_ecosystem |>
+  dplyr::mutate(ind = paste0(x,y,one,two)) |>
+  dplyr::left_join(y = dupes, by = 'ind') |>
+  dplyr::filter(del %in% c('no', NA)) |>
+  dplyr::select(-del,-ind)
 
 # Plot
 states <- sf::st_as_sf(maps::map('state', region = 'michigan',
@@ -619,7 +685,8 @@ lowmichigan <- lowmichigan_raw |>
                 species = dplyr::if_else(species == 'Buckeye', 'buckeye', species),
                 species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
                 species = dplyr::if_else(species == 'Chestnut', 'chestnut', species)) |>
-  dplyr::filter(!is.na(species))
+  dplyr::filter(!is.na(species)) |>
+  dplyr::distinct()
 
 # Convert coordinates
 lowmichigan <- sf::st_as_sf(lowmichigan, coords = c('point_x', 'point_y'))
@@ -784,7 +851,7 @@ taxon |>
   ggplot2::geom_sf(data = states, color = 'black', fill = NA, linewidth = 1) +
   ggplot2::coord_sf(crs = 'EPSG:4326')
 
-pal <- c('#f8da1c', '#94bd46', '#25341e')
+pal <- c('#25341e', '#f8da1c', '#94bd46')
 
 ecosystem |>
   dplyr::mutate(ecosystem = dplyr::if_else(ecosystem == 'forest', 'Forest', ecosystem),
