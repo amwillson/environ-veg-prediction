@@ -26,6 +26,11 @@ translation <- unique(translation)
 # Cypress is both bald cypress and tamarack. Make bald cypress
 translation <- translation[-1462,]
 
+# Indiana PLS data have undergone extensive quality control already
+# There are no duplicate rows and no partial duplicate rows that appear
+# to truly be duplicate, and not just similar trees recorded at different locations
+# Therefore, we skip steps involving removing duplicates
+
 indiana <- indiana_raw |>  
 # Select only necessary rows
   dplyr::select(x, y, # coordinates in meters in epsg:3175
@@ -158,6 +163,12 @@ translation <- translation[-1462,]
 # Make white = 'Unknown tree' because this is more conservative than "Oak'
 translation <- translation[-1562,]
 
+# Like Indiana, Illinois has undergone extensive quality control
+# There are no complete duplicate rows and partial duplicates
+# appear to represent real similarities in the trees recorded
+# at different locations
+# All points are kept
+
 # Repeat steps from Indiana
 illinois <- illinois_raw |>
   dplyr::select(x, y, # coordinates in meters in epsg:3175
@@ -259,7 +270,7 @@ save(illinois, illinois_ecosystem, file = 'data/processed/PLS/illinois_format.RD
 #### WISCONSIN ####
 rm(list = ls())
 
-wisconsin_raw <- readr::read_csv('data/raw/pls/wi_pls_projected_v1.1.csv')
+wisconsin_raw <- readr::read_csv('data/raw/pls/PLS_Wisconsin_trees_Level0_v1.0.csv')
 
 # Load taxon translation table
 translation <- readr::read_csv('data/raw/pls/level0_to_level3a_v1/level0_to_level3a_v1.2.csv')
@@ -273,6 +284,10 @@ translation <- unique(translation)
 
 # Take out HM = 'Hemlock' in favor of HM = 'No tree' (home)
 translation <- translation[-1488,]
+
+# Like Indiana and Illinois, Wisconsin has been through a extensive quality control
+# There are no complete duplicates and the incomplete duplicates
+# appear to be true similarities in the data
 
 # Repeat steps from Indiana
 wisconsin <- wisconsin_raw |>
@@ -294,7 +309,8 @@ wisconsin <- wisconsin_raw |>
                 species = dplyr::if_else(species == 'Fir', 'fir', species),
                 species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
                 species = dplyr::if_else(species == 'Maple', 'maple', species),
-                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
+                species = dplyr::if_else(species == 'No tree' & tree == 'SP1', 'no_tree', species),
+                species = dplyr::if_else(species == 'No tree' & tree %in% c('SP2', 'SP3', 'SP4'), 'NA', species),
                 species = dplyr::if_else(species == 'Basswood', 'basswood', species),
                 species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
                 species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
@@ -317,7 +333,8 @@ wisconsin <- wisconsin_raw |>
                 species = dplyr::if_else(species == 'Sycamore', 'sycamore', species),
                 species = dplyr::if_else(species == 'Dogwood', 'dogwood', species)) |>
   dplyr::filter(species != 'Water',
-                species != 'No data')
+                species != 'No data',
+                species != 'NA')
 
 # Convert coordinates
 wisconsin <- sf::st_as_sf(wisconsin, coords = c('x_alb', 'y_alb'))
@@ -365,7 +382,7 @@ save(wisconsin, wisconsin_ecosystem, file = 'data/processed/PLS/wisconsin_proces
 #### MINNESOTA ####
 rm(list = ls())
 
-minnesota_raw <- readr::read_csv('data/raw/pls/mn_pls_projected_v1.1.csv')
+minnesota_raw <- readr::read_csv('data/raw/pls/PLS_Minnesota_trees_Level0_v1.0.csv')
 
 # Load taxon translation table
 translation <- readr::read_csv('data/raw/pls/level0_to_level3a_v1/level0_to_level3a_v1.2.csv')
@@ -377,8 +394,112 @@ translation <- translation |>
 # Take out repeat columns
 translation <- unique(translation)
 
-# Repeat steps from Indiana
+# Replace "_" with "no tree" in the first species column
+# We know that the corners (southwest corner of the state)
+# that have NA in the first species column are prairie
+# according to this paper: https://doi.org/10.1371/journal.pone.0151935
+minnesota_raw <- minnesota_raw |>
+  dplyr::mutate(SP1 = dplyr::if_else(SP1 == '_', 'no tree', SP1))
+
+# In Minnesota, there are some data problems. There are duplicate
+# and near-duplicate rows that we need to remove.
+# We can see the locations of these duplicates:
+all_duplicates <- minnesota_raw |>
+  janitor::get_dupes()
+
+duplicates_removed <- minnesota_raw |>
+  dplyr::distinct()
+
+duplicate_corners <- duplicates_removed |>
+  janitor::get_dupes(x_alb, y_alb)
+
+
+states <- sf::st_as_sf(maps::map('state', region = 'minnesota',
+                                 fill = TRUE, plot = FALSE))
+states <- sf::st_transform(states, crs = 'EPSG:3175')
+
+# Shows that the rows that are completely the same
+# occur along county lines
+all_duplicates |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = x_alb, y = y_alb), shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::theme_void()
+
+# Shows that rows that are partial duplicates, with
+# different species at the same location are more infrequent
+# and also along county lines
+duplicate_corners |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = x_alb, y = y_alb), shape = '.') +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::theme_void()
+
+# First remove repeat rows
 minnesota <- minnesota_raw |>
+  # Complete repeats
+  # These occur along county lines and occur when
+  # a transcriber included both the east and west
+  # or north and south county boundary
+  # The procedure for other states has been to remove duplicates of
+  # this type during data cleaning
+  dplyr::distinct() # removes 3,511 points
+
+# We are now left with two types of partial duplicates
+# The first type is corners with the same coordinates
+# but different species
+# We completely remove these corners because we don't
+# know which species are "correct"
+
+# Find partial duplicates of type 1
+partial_dupes_sameloc <- minnesota |>
+  janitor::get_dupes(x_alb, y_alb) |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb))
+
+# Remove these by filtering by the coordinate pairs
+minnesota <- minnesota |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb)) |>
+  dplyr::filter(!(coord %in% partial_dupes_sameloc$coord)) # removes 782 rows
+
+# The second type is corners with the same tree information
+# but slightly different coordinates
+# These are likely due to an error in surveyor notes
+# We completely remove these corners because we don't 
+# know which location is "correct"
+
+# Find partial duplicates of type 2
+partial_dupes_samesp <- minnesota |>
+  janitor::get_dupes(SP1, DIAM1, AZ1, DIST1,
+                     SP2, DIAM2, AZ2, DIST2,
+                     SP3, DIAM3, AZ3, DIST3,
+                     SP4, DIAM4, AZ4, DIST4) |>
+  dplyr::filter(AZ1 != '_') |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb))
+
+dupe_count_3s <- partial_dupes_samesp |>
+  # Filter for when there are three "duplicate" corners
+  dplyr::filter(dupe_count == 3) |>
+  # Make groups of three
+  dplyr::mutate(groups = rep(1:(length(dupe_count)/3), each = 3)) |>
+  # Take out the first 2 groups because after 
+  # plotting it is clear that they are not close together
+  dplyr::filter(groups %in% 3:6) |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb))
+
+# All 2-point duplicates appear close together visually
+dupe_count_2s <- partial_dupes_samesp |>
+  dplyr::filter(dupe_count == 2) |>
+  dplyr::mutate(groups = rep(1:(length(dupe_count)/2), each = 2)) |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb))
+
+# Remove these by filtering by the coordinate pairs
+minnesota <- minnesota |>
+  dplyr::filter(!(coord %in% dupe_count_3s$coord)) |>
+  dplyr::filter(!(coord %in% dupe_count_2s$coord)) |>
+  dplyr::select(-coord)
+
+# Now, repeat steps from Indiana
+minnesota <- minnesota |>
   dplyr::mutate(state = 'MN') |>
   dplyr::select(x_alb, y_alb,
                 state,
@@ -388,12 +509,12 @@ minnesota <- minnesota_raw |>
                 SP4) |>
   tidyr::pivot_longer(cols = c(SP1, SP2, SP3, SP4),
                       names_to = 'tree', values_to = 'level1') |>
-  dplyr::filter(!is.na(level1),
-                level1 != '_') |>
+  dplyr::filter(!is.na(level1)) |>
   dplyr::left_join(translation, by = 'level1') |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
   dplyr::mutate(species = dplyr::if_else(species == 'Ash', 'ash', species),
+                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
                 species = dplyr::if_else(species == 'Fir', 'fir', species),
                 species = dplyr::if_else(species == 'Birch', 'birch', species),
                 species = dplyr::if_else(species == 'Pine', 'pine', species),
@@ -416,11 +537,7 @@ minnesota <- minnesota_raw |>
                 species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Buckeye', 'buckeye', species),
                 species = dplyr::if_else(species == 'Sycamore', 'sycamore', species)) |>
-  dplyr::filter(species != 'Missing') |>
-  # Remove some repeat rows.
-  # We know these are repeats because we have labeled the trees 1-4
-  # and there can only be these trees at a given corner
-  dplyr::distinct()
+  dplyr::filter(species != 'Missing')
 
 # Convert coordinates
 minnesota <- sf::st_as_sf(minnesota, coords = c('x_alb', 'y_alb'))
@@ -437,52 +554,14 @@ minnesota_ecosystem <- minnesota |>
                 tree = dplyr::if_else(tree == 'SP3', 'three', tree),
                 tree = dplyr::if_else(tree == 'SP4', 'four', tree)) |>
   # Pivot wider, values_fn allows things to be put in a list
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  # Unnest when things were put in a list
-  # I have no idea why there are duplicates for some locations though
-  tidyr::unnest(cols = everything()) |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
   # Make ecosystem level based on no tree, oak/hickory, anything else
   dplyr::mutate(ecosystem = dplyr::if_else(one == 'no_tree' & is.na(two) & is.na(three) & is.na(four), 'prairie', NA),
                 ecosystem = dplyr::if_else(one %in% c('oak', 'hickory') & two %in% c('oak', 'hickory', NA) &
                                              three %in% c('oak', 'hickory', NA) & four %in% c('oak', 'hickory', NA), 'savanna', ecosystem),
                 ecosystem = dplyr::if_else(is.na(ecosystem), 'forest', ecosystem))
 
-# Some corners were duplicated, but also contain different taxa.
-# We'll remove the second of each of these columns
-# It's a very small number of points and the differnece between
-# taxa at these corners is relatively minimal
-dupes <- minnesota_ecosystem |>
-  # Find duplicate x y coordiantes
-  janitor::get_dupes(x,y) |>
-  # Make a row uniquely identifying the columns
-  # use all taxa because the rows should have the same
-  # x y coordinates and differ in their taxa
-  dplyr::mutate(ind = paste0(x,y,one,two,three,four)) |>
-  # record row number
-  dplyr::mutate(row = dplyr::row_number()) |>
-  # since there are 2 identical xy coordinate pairs for each
-  # remaining duplicate, we can remove even columns
-  # and keep odd columns
-  dplyr::mutate(del = dplyr::if_else(row %% 2 == 0, 'yes', 'no')) |>
-  dplyr::select(ind, del)
-
-# Now we need to actually remove those rows from
-# the ecosystem dataset
-minnesota_ecosystem <- minnesota_ecosystem |>
-  # make the same indexing column as in the df above
-  dplyr::mutate(ind = paste0(x,y,one,two,three,four)) |>
-  # join the dfs by the indexing column
-  dplyr::left_join(y = dupes, by = 'ind') |>
-  # remove any rows that were flagged as "remove"
-  dplyr::filter(del %in% c('no', NA)) |>
-  dplyr::select(-del, -ind)
-
 # Plot
-states <- sf::st_as_sf(maps::map('state', region = 'minnesota',
-                                 fill = TRUE, plot = FALSE))
-states <- sf::st_transform(states, crs = 'EPSG:4326')
-
 minnesota |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = x, y = y, color = species), alpha = 0.7, shape = '.') +
@@ -506,7 +585,7 @@ save(minnesota, minnesota_ecosystem, file = 'data/processed/PLS/minnesota_proces
 #### UPPER MICHIGAN ####
 rm(list = ls())
 
-upmichigan_raw <- readr::read_csv('data/raw/pls/northernmi_pls_projected_v1.3.csv')
+upmichigan_raw <- readr::read_csv('data/raw/pls/PLS_northernMichigan_trees_Level0_v1.0.csv')
 
 # Load taxon translation table
 translation <- readr::read_csv('data/raw/pls/level0_to_level3a_v1/level0_to_level3a_v1.2.csv')
@@ -519,8 +598,32 @@ translation <- translation |>
 translation <- unique(translation)
 
 # Repeat steps from Minnesota
-# This includes filtering out repeat rows
+# This includes filtering out
+# duplicate and partial duplicate rows
 upmichigan <- upmichigan_raw |>
+  dplyr::distinct() # 0 rows removed
+
+partial_dupes_sameloc <- upmichigan |>
+  janitor::get_dupes(x_alb,y_alb) |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb))
+
+upmichigan <- upmichigan |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb)) |>
+  dplyr::filter(!(coord %in% partial_dupes_sameloc$coord))# 158 rows removed
+
+partial_dupes_samesp <- upmichigan |>
+  janitor::get_dupes(SPP1, DBH1, AZIMUTH, DIST1,
+                     SPP2, DBH2, AZIMUTH2, DIST2,
+                     SPP3, DBH3, AZIMUTH3, DIST3,
+                     SPP4, DBH4, AZIMUTH4, DIST4) |>
+  dplyr::filter(!is.na(SPP1)) |>
+  dplyr::mutate(coord = paste0(x_alb,y_alb))
+
+# It appears that the rows same species information at different locations
+# represent true similar observations at multiple corners, so
+# we keep all observations
+
+upmichigan <- upmichigan |>
   dplyr::mutate(state = 'UPMI') |>
   dplyr::select(x_alb, y_alb,
                 state,
@@ -535,6 +638,8 @@ upmichigan <- upmichigan_raw |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
   dplyr::mutate(species = dplyr::if_else(species == 'Birch', 'birch', species),
+                species = dplyr::if_else(species == 'No tree' & tree == 'SP1', 'no_tree', species),
+                species = dplyr::if_else(species == 'No tree' & tree %in% c('SP2', 'SP3', 'SP4'), 'NA', species),
                 species = dplyr::if_else(species == 'Maple', 'maple', species),
                 species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
                 species = dplyr::if_else(species == 'Elm', 'elm', species),
@@ -562,8 +667,8 @@ upmichigan <- upmichigan_raw |>
                 species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
                 species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
                 species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species)) |>
-  dplyr::filter(species != 'Missing') |>
-  dplyr::distinct()
+  dplyr::filter(species != 'Missing',
+                species != 'NA')
 
 # Convert coordinates
 upmichigan <- sf::st_as_sf(upmichigan, coords = c('x_alb', 'y_alb'))
@@ -581,19 +686,6 @@ upmichigan_ecosystem <- upmichigan |>
   dplyr::mutate(ecosystem = dplyr::if_else(one == 'no_tree' & is.na(two), 'prairie', NA),
                 ecosystem = dplyr::if_else(one %in% c('oak', 'hickory') & two %in% c('oak', 'hickory', NA), 'savanna', ecosystem),
                 ecosystem = dplyr::if_else(is.na(ecosystem), 'forest', ecosystem))
-
-dupes <- upmichigan_ecosystem |>
-  janitor::get_dupes(x,y) |>
-  dplyr::mutate(ind = paste0(x,y,one,two)) |>
-  dplyr::mutate(row = dplyr::row_number()) |>
-  dplyr::mutate(del = dplyr::if_else(row %% 2 == 0, 'yes', 'no')) |>
-  dplyr::select(ind, del)
-
-upmichigan_ecosystem <- upmichigan_ecosystem |>
-  dplyr::mutate(ind = paste0(x,y,one,two)) |>
-  dplyr::left_join(y = dupes, by = 'ind') |>
-  dplyr::filter(del %in% c('no', NA)) |>
-  dplyr::select(-del,-ind)
 
 # Plot
 states <- sf::st_as_sf(maps::map('state', region = 'michigan',
@@ -623,7 +715,7 @@ save(upmichigan, upmichigan_ecosystem, file = 'data/processed/PLS/upmichigan_pro
 #### LOWER MICHIGAN ####
 rm(list = ls())
 
-lowmichigan_raw <- readr::read_csv('data/raw/pls/southernmi_projected_v1.6.csv')
+lowmichigan_raw <- readr::read_csv('data/raw/pls/PLS_southernMichigan_trees_Level0_v1.0.csv')
 
 # Load taxon translation table
 translation <- readr::read_csv('data/raw/pls/level0_to_level3a_v1/level0_to_level3a_v1.2.csv')
@@ -638,8 +730,31 @@ translation <- unique(translation)
 # Remove HM = 'No tree' in foavor of HM = 'Hemlock'
 translation <- translation[-1645,]
 
-# Repeat steps from Indiana
+# Check for any duplicates, as in minnesota and upper michigan
 lowmichigan <- lowmichigan_raw |>
+  dplyr::distinct()# 0 rows removed
+
+partial_dupes_sameloc <- lowmichigan |>
+  janitor::get_dupes(point_x, point_y) |>
+  dplyr::mutate(coord = paste0(point_x, point_y))
+
+lowmichigan <- lowmichigan |>
+  dplyr::mutate(coord = paste0(point_x, point_y)) |>
+  dplyr::filter(!(coord %in% partial_dupes_sameloc$coord)) # 212 rows removed
+
+partial_dupes_samesp <- lowmichigan |>
+  janitor::get_dupes(species1, diam1, q1, az1, az1_360, dist1,
+                     species2, diam2, q2, az2, az2_360, dist2,
+                     species3, diam3, q3, az3, az3_360, dist3,
+                     species4, diam4, q4, az4, az4_360, dist4) |>
+  dplyr::mutate(coord = paste0(point_x,point_y))
+
+lowmichigan <- lowmichigan |>
+  dplyr::filter(!(coord %in% partial_dupes_samesp$coord)) |> # 52 rows removed
+  dplyr::select(-coord)
+
+# Repeat steps from Indiana
+lowmichigan <- lowmichigan |>
   dplyr::mutate(state = 'LOMI') |>
   dplyr::select(point_x, point_y,
                 state,
