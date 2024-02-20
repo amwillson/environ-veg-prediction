@@ -1,15 +1,11 @@
-## Matching gSSURGO and PLS spatially
+## Matching gSSURGO floodplain presence with PLS data spatially
 
 rm(list = ls())
 
 #### ILLINOIS ####
-load('data/raw/soils/gssurgo_average_030_700m.RData')
+load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/illinois_format.RData')
-
-# Remove NAs from soil data
-df_IL <- df_IL |>
-  tidyr::drop_na()
 
 # Format illinois data
 illinois <- illinois |>
@@ -171,7 +167,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 # Column bind with PLS data
-IL_soil_pls <- cbind(select_df_IL, illinois1)
+IL_flood_pls <- cbind(select_df_IL, illinois1)
 
 # Remove unnecessary objects to keep memory usage lower
 rm(closest_points, coords_df_IL1, coords_illinois1, select_df_IL, illinois1)
@@ -189,7 +185,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois2)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL2, coords_illinois2, select_df_IL, illinois2)
 
@@ -204,7 +200,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois3)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL3, coords_illinois3, select_df_IL, illinois3)
 
@@ -219,7 +215,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois4)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL4, coords_illinois4, select_df_IL, illinois4)
 
@@ -234,7 +230,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois5)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL5, coords_illinois5, select_df_IL, illinois5)
 
@@ -249,7 +245,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois6)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL6, coords_illinois6, select_df_IL, illinois6)
 
@@ -264,7 +260,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois7)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL7, coords_illinois7, select_df_IL, illinois7)
 
@@ -279,7 +275,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois8)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL8, coords_illinois8, select_df_IL, illinois8)
 
@@ -294,7 +290,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois9)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL9, coords_illinois9, select_df_IL, illinois9)
 
@@ -309,7 +305,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois10)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL10, coords_illinois10, select_df_IL, illinois10)
 
@@ -324,7 +320,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois11)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL11, coords_illinois11, select_df_IL, illinois11)
 
@@ -339,7 +335,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois12)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL12, coords_illinois12, select_df_IL, illinois12)
 
@@ -354,7 +350,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois13)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL13, coords_illinois13, select_df_IL, illinois13)
 
@@ -369,7 +365,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois14)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL14, coords_illinois14, select_df_IL, illinois14)
 
@@ -384,7 +380,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois15)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL15, coords_illinois15, select_df_IL, illinois15)
 
@@ -399,7 +395,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois16)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL16, coords_illinois16, select_df_IL, illinois16)
 
@@ -414,7 +410,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois17)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL17, coords_illinois17, select_df_IL, illinois17)
 
@@ -429,7 +425,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois18)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL18, coords_illinois18, select_df_IL, illinois18)
 
@@ -444,7 +440,7 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois19)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL19, coords_illinois19, select_df_IL, illinois19)
 
@@ -459,29 +455,25 @@ select_df_IL <- df_IL |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IL, illinois20)
-IL_soil_pls <- rbind(IL_soil_pls, temp)
+IL_flood_pls <- rbind(IL_flood_pls, temp)
 
 rm(closest_points, coords_df_IL20, coords_illinois20, select_df_IL, illinois20)
 
 # Update column names
-colnames(IL_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt', 
-                           'caco3', 'awc', 'state', 'pls_x', 'pls_y', 
-                           'L1_tree1', 'L1_tree2', 'L1_tree3', 'L1_tree4', 'uniqueID')
+colnames(IL_flood_pls) <- c('soil_x', 'soil_y', 'geomdesc', 'Floodplain',
+                            'state', 'pls_x', 'pls_y', 
+                            'L1_tree1', 'L1_tree2', 'L1_tree3', 'L1_tree4', 'uniqueID')
 
 # Save IL soil. Confirmed in same order as illinois and illinois_ecosystem
-IL_soil <- dplyr::select(IL_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(IL_soil, file = 'data/processed/soils/processed_soil_il.RData')
+IL_flood <- dplyr::select(IL_flood_pls, soil_x, soil_y, Floodplain, pls_x, pls_y)
+save(IL_flood, file = 'data/processed/soils/processed_flood_il.RData')
 
 #### INDIANA ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_average_030_700m.RData')
+load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/indiana_format.RData')
-
-# Remove NAs from soil data
-df_IN <- df_IN |>
-  tidyr::drop_na()
 
 # Format indiana data
 indiana <- indiana |>
@@ -642,7 +634,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 # Column bind with PLS data
-IN_soil_pls <- cbind(select_df_IN, indiana1)
+IN_flood_pls <- cbind(select_df_IN, indiana1)
 
 # Remove unnecessary objects to keep memory usage lower
 rm(closest_points, coords_df_IN1, coords_indiana1, select_df_IN, indiana1)
@@ -660,7 +652,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana2)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN2, coords_indiana2, select_df_IN, indiana2)
 
@@ -675,7 +667,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana3)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN3, coords_indiana3, select_df_IN, indiana3)
 
@@ -690,7 +682,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana4)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN4, coords_indiana4, select_df_IN, indiana4)
 
@@ -705,7 +697,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana5)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN5, coords_indiana5, select_df_IN, indiana5)
 
@@ -720,7 +712,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana6)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN6, coords_indiana6, select_df_IN, indiana6)
 
@@ -735,7 +727,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana7)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN7, coords_indiana7, select_df_IN, indiana7)
 
@@ -750,7 +742,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana8)
-IN_soils_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN8, coords_indiana8, select_df_IN, indiana8)
 
@@ -765,7 +757,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana9)
-IN_soil_pls <- rbind(IN_soils_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN9, coords_indiana9, select_df_IN, indiana9)
 
@@ -780,7 +772,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana10)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN10, coords_indiana10, select_df_IN, indiana10)
 
@@ -795,7 +787,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana11)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN11, coords_indiana11, select_df_IN, indiana11)
 
@@ -810,7 +802,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana12)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN12, coords_indiana12, select_df_IN, indiana12)
 
@@ -825,7 +817,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana13)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN13, coords_indiana13, select_df_IN, indiana13)
 
@@ -840,7 +832,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana14)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN14, coords_indiana14, select_df_IN, indiana14)
 
@@ -855,7 +847,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana15)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN15, coords_indiana15, select_df_IN, indiana15)
 
@@ -870,7 +862,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana16)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN16, coords_indiana16, select_df_IN, indiana16)
 
@@ -885,7 +877,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana17)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN17, coords_indiana17, select_df_IN, indiana17)
 
@@ -900,7 +892,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana18)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN18, coords_indiana18, select_df_IN, indiana18)
 
@@ -915,7 +907,7 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana19)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN19, coords_indiana19, select_df_IN, indiana19)
 
@@ -930,30 +922,25 @@ select_df_IN <- df_IN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_IN, indiana20)
-IN_soil_pls <- rbind(IN_soil_pls, temp)
+IN_flood_pls <- rbind(IN_flood_pls, temp)
 
 rm(closest_points, coords_df_IN20, coords_indiana20, select_df_IN, indiana20)
 
 # Update column names
-colnames(IN_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
-                           'caco3', 'awc', 'state', 'pls_x', 'pls_y',
+colnames(IN_flood_pls) <- c('soil_x', 'soil_y', 'geomdesc', 'Floodplain',
+                            'state', 'pls_x', 'pls_y',
                            'L1_tree1', 'L1_tree2', 'uniqueID')
-
-# Save IL soil. Confirmed in same order as indiana nad indiana_ecosystem
-IN_soil <- dplyr::select(IN_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(IN_soil, file = 'data/processed/soils/processed_soil_in.RData')
+# Save IN floodplain Confirmed in same order as indiana nad indiana_ecosystem
+IN_flood <- dplyr::select(IN_flood_pls, soil_x, soil_y, Floodplain, pls_x, pls_y)
+save(IN_flood, file = 'data/processed/soils/processed_flood_in.RData')
 
 #### MICHIGAN ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_average_030_700m.RData')
+load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/upmichigan_process.RData')
 load('data/processed/PLS/lowmichigan_process.RData')
-
-# Remove NAs from soil data
-df_MI <- df_MI |>
-  tidyr::drop_na()
 
 # Format lower michigan data
 lowmichigan <- lowmichigan |>
@@ -989,7 +976,7 @@ michigan16 <- michigan[89145:95087,]
 michigan17 <- michigan[95088:101030,]
 michigan18 <- michigan[101031:106973,]
 michigan19 <- michigan[106974:112916,]
-michigan20 <- michigan[112917:120134,]
+michigan20 <- michigan[112917:120554,]
 
 # Select coordinates
 coords_michigan1 <- dplyr::select(michigan1, y, x)
@@ -1123,7 +1110,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 # Column bind with PLS data
-MI_soil_pls <- cbind(select_df_MI, michigan1)
+MI_flood_pls <- cbind(select_df_MI, michigan1)
 
 # Remove unnecessary objects to keep memory usage lower
 rm(closest_points, coords_df_MI1, coords_michigan1, select_df_MI, michigan1)
@@ -1141,7 +1128,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan2)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI2, coords_michigan2, select_df_MI, michigan2)
 
@@ -1156,7 +1143,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan3)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI3, coords_michigan3, select_df_MI, michigan3)
 
@@ -1171,7 +1158,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan4)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI4, coords_michigan4, select_df_MI, michigan4)
 
@@ -1186,7 +1173,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan5)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI5, coords_michigan5, select_df_MI, michigan5)
 
@@ -1201,7 +1188,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan6)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI6, coords_michigan6, select_df_MI, michigan6)
 
@@ -1216,7 +1203,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan7)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI7, coords_michigan7, select_df_MI, michigan7)
 
@@ -1231,7 +1218,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan8)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI8, coords_michigan8, select_df_MI, michigan8)
 
@@ -1246,7 +1233,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan9)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI9, coords_michigan9, select_df_MI, michigan9)
 
@@ -1261,7 +1248,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan10)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI10, coords_michigan10, select_df_MI, michigan10)
 
@@ -1276,7 +1263,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan11)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI11, coords_michigan11, select_df_MI, michigan11)
 
@@ -1291,7 +1278,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan12)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI12, coords_michigan12, select_df_MI, michigan12)
 
@@ -1306,7 +1293,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan13)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI13, coords_michigan13, select_df_MI, michigan13)
 
@@ -1321,7 +1308,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan14)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI14, coords_michigan14, select_df_MI, michigan14)
 
@@ -1336,7 +1323,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan15)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI15, coords_michigan15, select_df_MI, michigan15)
 
@@ -1351,7 +1338,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan16)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI16, coords_michigan16, select_df_MI, michigan16)
 
@@ -1366,7 +1353,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan17)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI17, coords_michigan17, select_df_MI, michigan17)
 
@@ -1381,7 +1368,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan18)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI18, coords_michigan18, select_df_MI, michigan18)
 
@@ -1396,7 +1383,7 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan19)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI19, coords_michigan19, select_df_MI, michigan19)
 
@@ -1411,76 +1398,64 @@ select_df_MI <- df_MI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MI, michigan20)
-MI_soil_pls <- rbind(MI_soil_pls, temp)
+MI_flood_pls <- rbind(MI_flood_pls, temp)
 
 rm(closest_points, coords_df_MI20, coords_michigan20, select_df_MI, michigan20)
 
 # Update column names
-colnames(MI_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
-                           'caco3', 'awc', 'state', 'pls_x', 'pls_y',
+colnames(MI_flood_pls) <- c('soil_x', 'soil_y', 'geomdesc', 'Floodplain',
+                            'state', 'pls_x', 'pls_y',
                            'L1_tree1', 'L1_tree2')
 
-# Save MI soil. Confirmed in same order as michigan and michigan_ecosystem
-MI_soil <- dplyr::select(MI_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(MI_soil, file = 'data/processed/soils/processed_soil_mi.RData')
+# Save MI floodplain. Confirmed in same order as michigan and michigan_ecosystem
+MI_flood <- dplyr::select(MI_flood_pls, soil_x, soil_y, Floodplain, pls_x, pls_y)
+save(MI_flood, file = 'data/processed/soils/processed_flood_mi.RData')
 
 #### MINNESOTA ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_average_030_700m.RData')
+load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/minnesota_process.RData')
 
-# Remove NAs in soil data
-df_MN <- df_MN |>
-  tidyr::drop_na()
-
 # Format minnesota data
 minnesota <- minnesota |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
+                     values_fn = list) |>
+  tidyr::unnest(cols = everything()) |>
   dplyr::mutate(uniqueID = paste0(y,'_',x))
 
-# Divide pls minnesota into 40 sections
-minnesota1 <- minnesota[1:6155,]
-minnesota2 <- minnesota[6156:12311,]
-minnesota3 <- minnesota[12312:18467,]
-minnesota4 <- minnesota[18468:24623,]
-minnesota5 <- minnesota[24624:30779,]
-minnesota6 <- minnesota[30780:36935,]
-minnesota7 <- minnesota[36936:43091,]
-minnesota8 <- minnesota[43092:49247,]
-minnesota9 <- minnesota[49248:55403,]
-minnesota10 <- minnesota[55404:61559,]
-minnesota11 <- minnesota[61560:67715,]
-minnesota12 <- minnesota[67716:73871,]
-minnesota13 <- minnesota[73872:80027,]
-minnesota14 <- minnesota[80028:86183,]
-minnesota15 <- minnesota[86184:92339,]
-minnesota16 <- minnesota[92340:98495,]
-minnesota17 <- minnesota[98496:104651,]
-minnesota18 <- minnesota[104652:110807,]
-minnesota19 <- minnesota[110808:116963,]
-minnesota20 <- minnesota[116964:123119,]
-minnesota21 <- minnesota[123120:129275,]
-minnesota22 <- minnesota[129276:135431,]
-minnesota23 <- minnesota[135432:141587,]
-minnesota24 <- minnesota[141588:147743,]
-minnesota25 <- minnesota[147744:153899,]
-minnesota26 <- minnesota[153900:160055,]
-minnesota27 <- minnesota[160056:166211,]
-minnesota28 <- minnesota[166212:172367,]
-minnesota29 <- minnesota[172368:178523,]
-minnesota30 <- minnesota[178524:184679,]
-minnesota31 <- minnesota[184680:190835,]
-minnesota32 <- minnesota[190836:196991,]
-minnesota33 <- minnesota[196992:203147,]
-minnesota34 <- minnesota[203148:209303,]
-minnesota35 <- minnesota[209304:215459,]
-minnesota36 <- minnesota[215460:221615,]
-minnesota37 <- minnesota[221616:227771,]
-minnesota38 <- minnesota[227772:233927,]
-minnesota39 <- minnesota[233928:240083,]
-minnesota40 <- minnesota[240084:246189,]
+# Divide pls minnesota into 30 sections
+minnesota1 <- minnesota[1:4797,]
+minnesota2 <- minnesota[4798:9595,]
+minnesota3 <- minnesota[9596:14392,]
+minnesota4 <- minnesota[14393:19190,]
+minnesota5 <- minnesota[19191:23988,]
+minnesota6 <- minnesota[23989:28786,]
+minnesota7 <- minnesota[28787:33584,]
+minnesota8 <- minnesota[33585:38382,]
+minnesota9 <- minnesota[38383:43180,]
+minnesota10 <- minnesota[43181:47978,]
+minnesota11 <- minnesota[47979:52776,]
+minnesota12 <- minnesota[52777:57574,]
+minnesota13 <- minnesota[57575:62372,]
+minnesota14 <- minnesota[62373:67170,]
+minnesota15 <- minnesota[67171:71968,]
+minnesota16 <- minnesota[71969:76766,]
+minnesota17 <- minnesota[76767:81564,]
+minnesota18 <- minnesota[81565:86362,]
+minnesota19 <- minnesota[86363:91160,]
+minnesota20 <- minnesota[91161:95958,]
+minnesota21 <- minnesota[95959:100756,]
+minnesota22 <- minnesota[100757:105554,]
+minnesota23 <- minnesota[105555:110352,]
+minnesota24 <- minnesota[110353:115150,]
+minnesota25 <- minnesota[115151:119948,]
+minnesota26 <- minnesota[119949:124746,]
+minnesota27 <- minnesota[124747:129544,]
+minnesota28 <- minnesota[129545:134342,]
+minnesota29 <- minnesota[134343:139140,]
+minnesota30 <- minnesota[139141:143932,]
 
 # Select coordinates
 coords_minnesota1 <- dplyr::select(minnesota1, y, x)
@@ -1513,16 +1488,6 @@ coords_minnesota27 <- dplyr::select(minnesota27, y, x)
 coords_minnesota28 <- dplyr::select(minnesota28, y, x)
 coords_minnesota29 <- dplyr::select(minnesota29, y, x)
 coords_minnesota30 <- dplyr::select(minnesota30, y, x)
-coords_minnesota31 <- dplyr::select(minnesota31, y, x)
-coords_minnesota32 <- dplyr::select(minnesota32, y, x)
-coords_minnesota33 <- dplyr::select(minnesota33, y, x)
-coords_minnesota34 <- dplyr::select(minnesota34, y, x)
-coords_minnesota35 <- dplyr::select(minnesota35, y, x)
-coords_minnesota36 <- dplyr::select(minnesota36, y, x)
-coords_minnesota37 <- dplyr::select(minnesota37, y, x)
-coords_minnesota38 <- dplyr::select(minnesota38, y, x)
-coords_minnesota39 <- dplyr::select(minnesota39, y, x)
-coords_minnesota40 <- dplyr::select(minnesota40, y, x)
 
 # Add column names
 colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_minnesota3) <-
@@ -1535,10 +1500,7 @@ colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_mi
   colnames(coords_minnesota22) <- colnames(coords_minnesota23) <- colnames(coords_minnesota24) <-
   colnames(coords_minnesota25) <- colnames(coords_minnesota26) <- colnames(coords_minnesota27) <-
   colnames(coords_minnesota28) <- colnames(coords_minnesota29) <- colnames(coords_minnesota30) <-
-  colnames(coords_minnesota31) <- colnames(coords_minnesota32) <- colnames(coords_minnesota33) <-
-  colnames(coords_minnesota34) <- colnames(coords_minnesota35) <- colnames(coords_minnesota36) <-
-  colnames(coords_minnesota37) <- colnames(coords_minnesota38) <- colnames(coords_minnesota39) <-
-  colnames(coords_minnesota40) <- c('lat', 'long')
+  c('lat', 'long')
 
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
@@ -1662,46 +1624,6 @@ coords_df_MN30 <- df_MN |>
   dplyr::filter(x >= min(coords_minnesota30$long) - 0.1 & x <= max(coords_minnesota30$long) + 0.1 &
                   y >= min(coords_minnesota30$lat) - 0.1 & y <= max(coords_minnesota30$lat) + 0.1) |>
   dplyr::select(y, x)
-coords_df_MN31 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota31$long) - 0.1 & x <= max(coords_minnesota31$long) + 0.1 &
-                  y >= min(coords_minnesota31$lat) - 0.1 & y <= max(coords_minnesota31$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN32 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota32$long) - 0.1 & x <= max(coords_minnesota32$long) + 0.1 &
-                  y >= min(coords_minnesota32$lat) - 0.1 & y <= max(coords_minnesota32$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN33 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota33$long) - 0.1 & x <= max(coords_minnesota33$long) + 0.1 &
-                  y >= min(coords_minnesota33$lat) - 0.1 & y <= max(coords_minnesota33$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN34 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota34$long) - 0.1 & x <= max(coords_minnesota34$long) + 0.1 &
-                  y >= min(coords_minnesota34$lat) - 0.1 & y <= max(coords_minnesota34$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN35 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota35$long) - 0.1 & x <= max(coords_minnesota35$long) + 0.1 &
-                  y >= min(coords_minnesota35$lat) - 0.1 & y <= max(coords_minnesota35$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN36 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota36$long) - 0.1 & x <= max(coords_minnesota36$long) + 0.1 &
-                  y >= min(coords_minnesota36$lat) - 0.1 & y <= max(coords_minnesota36$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN37 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota37$long) - 0.1 & x <= max(coords_minnesota37$long) + 0.1 &
-                  y >= min(coords_minnesota37$lat) - 0.1 & y <= max(coords_minnesota37$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN38 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota38$long) - 0.1 & x <= max(coords_minnesota38$long) + 0.1 &
-                  y >= min(coords_minnesota38$lat) - 0.1 & y <= max(coords_minnesota38$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN39 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota39$long) - 0.1 & x <= max(coords_minnesota39$long) + 0.1 &
-                  y >= min(coords_minnesota39$lat) - 0.1 & y <= max(coords_minnesota39$lat) + 0.1) |>
-  dplyr::select(y, x)
-coords_df_MN40 <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota40$long) - 0.1 & x <= max(coords_minnesota40$long) + 0.1 &
-                  y >= min(coords_minnesota40$lat) - 0.1 & y <= max(coords_minnesota40$lat) + 0.1) |>
-  dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes
 dists <- fields::rdist(coords_df_MN1, coords_minnesota1)
@@ -1721,7 +1643,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 # Column bind with PLS data
-MN_soil_pls <- cbind(select_df_MN, minnesota1)
+MN_flood_pls <- cbind(select_df_MN, minnesota1)
 
 # Remove unnecessary objects to keep memory usage lower
 rm(closest_points, coords_df_MN1, coords_minnesota1, select_df_MN, minnesota1)
@@ -1739,7 +1661,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota2)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN2, coords_minnesota2, select_df_MN, minnesota2)
 
@@ -1754,7 +1676,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota3)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN3, coords_minnesota3, select_df_MN, minnesota3)
 
@@ -1769,7 +1691,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota4)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN4, coords_minnesota4, select_df_MN, minnesota4)
 
@@ -1784,7 +1706,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota5)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN5, coords_minnesota5, select_df_MN, minnesota5)
 
@@ -1799,7 +1721,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota6)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN6, coords_minnesota6, select_df_MN, minnesota6)
 
@@ -1814,7 +1736,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota7)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN7, coords_minnesota7, select_df_MN, minnesota7)
 
@@ -1829,7 +1751,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota8)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN8, coords_minnesota8, select_df_MN, minnesota8)
 
@@ -1844,7 +1766,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota9)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN9, coords_minnesota9, select_df_MN, minnesota9)
 
@@ -1859,7 +1781,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota10)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN10, coords_minnesota10, select_df_MN, minnesota10)
 
@@ -1874,7 +1796,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota11)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN11, coords_minnesota11, select_df_MN, minnesota11)
 
@@ -1889,7 +1811,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota12)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN12, coords_minnesota12, select_df_MN, minnesota12)
 
@@ -1904,7 +1826,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota13)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN13, coords_minnesota13, select_df_MN, minnesota13)
 
@@ -1919,7 +1841,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota14)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN14, coords_minnesota14, select_df_MN, minnesota14)
 
@@ -1934,7 +1856,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota15)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN15, coords_minnesota15, select_df_MN, minnesota15)
 
@@ -1949,7 +1871,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota16)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN16, coords_minnesota16, select_df_MN, minnesota16)
 
@@ -1964,7 +1886,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota17)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN17, coords_minnesota17, select_df_MN, minnesota17)
 
@@ -1979,7 +1901,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota18)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN18, coords_minnesota18, select_df_MN, minnesota18)
 
@@ -1994,7 +1916,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota19)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN19, coords_minnesota19, select_df_MN, minnesota19)
 
@@ -2009,7 +1931,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota20)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN20, coords_minnesota20, select_df_MN, minnesota20)
 
@@ -2024,7 +1946,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota21)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN21, coords_minnesota21, select_df_MN, minnesota21)
 
@@ -2039,7 +1961,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota22)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN22, coords_minnesota22, select_df_MN, minnesota22)
 
@@ -2054,7 +1976,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota23)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN23, coords_minnesota23, select_df_MN, minnesota23)
 
@@ -2069,7 +1991,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota24)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN24, coords_minnesota24, select_df_MN, minnesota24)
 
@@ -2084,7 +2006,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota25)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN25, coords_minnesota25, select_df_MN, minnesota25)
 
@@ -2099,7 +2021,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota26)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN26, coords_minnesota26, select_df_MN, minnesota26)
 
@@ -2114,7 +2036,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota27)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN27, coords_minnesota27, select_df_MN, minnesota27)
 
@@ -2129,7 +2051,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota28)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN28, coords_minnesota28, select_df_MN, minnesota28)
 
@@ -2144,7 +2066,7 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota29)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN29, coords_minnesota29, select_df_MN, minnesota29)
 
@@ -2159,179 +2081,25 @@ select_df_MN <- df_MN |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_MN, minnesota30)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN30, coords_minnesota30, select_df_MN, minnesota30)
 
-# Subset 31
-dists <- fields::rdist(coords_df_MN31, coords_minnesota31)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota31$long) - 0.1 & x <= max(coords_minnesota31$long) + 0.1 &
-                  y >= min(coords_minnesota31$lat) - 0.1 & y <= max(coords_minnesota31$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota31)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN31, coords_minnesota31, select_df_MN, minnesota31)
-
-# Subset 32
-dists <- fields::rdist(coords_df_MN32, coords_minnesota32)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota32$long) - 0.1 & x <= max(coords_minnesota32$long) + 0.1 &
-                  y >= min(coords_minnesota32$lat) - 0.1 & y <= max(coords_minnesota32$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota32)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN32, coords_minnesota32, select_df_MN, minnesota32)
-
-# Subset 33
-dists <- fields::rdist(coords_df_MN33, coords_minnesota33)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota33$long) - 0.1 & x <= max(coords_minnesota33$long) + 0.1 &
-                  y >= min(coords_minnesota33$lat) - 0.1 & y <= max(coords_minnesota33$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota33)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN33, coords_minnesota33, select_df_MN, minnesota33)
-
-# Subset 34
-dists <- fields::rdist(coords_df_MN34, coords_minnesota34)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota34$long) - 0.1 & x <= max(coords_minnesota34$long) + 0.1 &
-                  y >= min(coords_minnesota34$lat) - 0.1 & y <= max(coords_minnesota34$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota34)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN34, coords_minnesota34, select_df_MN, minnesota34)
-
-# Subset 35
-dists <- fields::rdist(coords_df_MN35, coords_minnesota35)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota35$long) - 0.1 & x <= max(coords_minnesota35$long) + 0.1 &
-                  y >= min(coords_minnesota35$lat) - 0.1 & y <= max(coords_minnesota35$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota35)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN35, coords_minnesota35, select_df_MN, minnesota35)
-
-# Subset 36
-dists <- fields::rdist(coords_df_MN36, coords_minnesota36)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota36$long) - 0.1 & x <= max(coords_minnesota36$long) + 0.1 &
-                  y >= min(coords_minnesota36$lat) - 0.1 & y <= max(coords_minnesota36$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota36)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN36, coords_minnesota36, select_df_MN, minnesota36)
-
-# Subset 37
-dists <- fields::rdist(coords_df_MN37, coords_minnesota37)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota37$long) - 0.1 & x <= max(coords_minnesota37$long) + 0.1 &
-                  y >= min(coords_minnesota37$lat) - 0.1 & y <= max(coords_minnesota37$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota37)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN37, coords_minnesota37, select_df_MN, minnesota37)
-
-# Subset 38
-dists <- fields::rdist(coords_df_MN38, coords_minnesota38)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota38$long) - 0.1 & x <= max(coords_minnesota38$long) + 0.1 &
-                  y >= min(coords_minnesota38$lat) - 0.1 & y <= max(coords_minnesota38$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota38)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN38, coords_minnesota38, select_df_MN, minnesota38)
-
-# Subset 39
-dists <- fields::rdist(coords_df_MN39, coords_minnesota39)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota39$long) - 0.1 & x <= max(coords_minnesota39$long) + 0.1 &
-                  y >= min(coords_minnesota39$lat) - 0.1 & y <= max(coords_minnesota39$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota39)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN39, coords_minnesota39, select_df_MN, minnesota39)
-
-# Subset 40
-dists <- fields::rdist(coords_df_MN40, coords_minnesota40)
-closest_points <- apply(dists, 2, which.min)
-rm(dists)
-
-select_df_MN <- df_MN |>
-  dplyr::filter(x >= min(coords_minnesota40$long) - 0.1 & x <= max(coords_minnesota40$long) + 0.1 &
-                  y >= min(coords_minnesota40$lat) - 0.1 & y <= max(coords_minnesota40$lat) + 0.1) |>
-  dplyr::slice(closest_points)
-
-temp <- cbind(select_df_MN, minnesota40)
-MN_soil_pls <- rbind(MN_soil_pls, temp)
-
-rm(closest_points, coords_df_MN40, coords_minnesota40, select_df_MN, minnesota40)
-
 # Update column names
-colnames(MN_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt',
-                           'caco3', 'awc', 'state', 'pls_x', 'pls_y',
+colnames(MN_flood_pls) <- c('soil_x', 'soil_y', 'geomdesc', 'Floodplain',
+                            'state', 'pls_x', 'pls_y',
                            'L1_tree1', 'L1_tree2', 'L1_tree3', 'L1_tree4', 'uniqueID')
 
-# Save MN soil. Confirmed in same order as minnesota and minnesota_ecosystem
-MN_soil <- dplyr::select(MN_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(MN_soil, file = 'data/processed/soils/processed_soil_mn.RData')
+# Save MN floodplain. Confirmed in same order as minnesota and minnesota_ecosystem
+MN_flood <- dplyr::select(MN_flood_pls, soil_x, soil_y, Floodplain, pls_x, pls_y)
+save(MN_flood, file = 'data/processed/soils/processed_flood_mn.RData')
 
 #### WISCONSIN ####
 rm(list = ls())
 
-load('data/raw/soils/gssurgo_average_030_700m.RData')
+load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/wisconsin_process.RData')
-
-# Remove NAs from soil data
-df_WI <- df_WI |>
-  tidyr::drop_na()
 
 # Format wisconsin data
 wisconsin <- wisconsin |>
@@ -2368,7 +2136,7 @@ wisconsin26 <- wisconsin[138875:144429,]
 wisconsin27 <- wisconsin[144430:149984,]
 wisconsin28 <- wisconsin[149985:155539,]
 wisconsin29 <- wisconsin[155540:161094,]
-wisconsin30 <- wisconsin[161095:166617,]
+wisconsin30 <- wisconsin[161095:166636,]
 
 # Select coordinates
 coords_wisconsin1 <- dplyr::select(wisconsin1, y, x)
@@ -2556,7 +2324,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 # Column bind with PLS data
-WI_soil_pls <- cbind(select_df_WI, wisconsin1)
+WI_flood_pls <- cbind(select_df_WI, wisconsin1)
 
 # Remove unnecessary objects to keep memory usage lower
 rm(closest_points, coords_df_WI1, coords_wisconsin1, select_df_WI, wisconsin1)
@@ -2574,7 +2342,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin2)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI2, coords_wisconsin2, select_df_WI, wisconsin2)
 
@@ -2589,7 +2357,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin3)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI3, coords_wisconsin3, select_df_WI, wisconsin3)
 
@@ -2604,7 +2372,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin4)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI4, coords_wisconsin4, select_df_WI, wisconsin4)
 
@@ -2619,7 +2387,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin5)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI5, coords_wisconsin5, select_df_WI, wisconsin5)
 
@@ -2634,7 +2402,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin6)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI6, coords_wisconsin6, select_df_WI, wisconsin6)
 
@@ -2649,7 +2417,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin7)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI7, coords_wisconsin7, select_df_WI, wisconsin7)
 
@@ -2664,7 +2432,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin8)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI8, coords_wisconsin8, select_df_WI, wisconsin8)
 
@@ -2679,7 +2447,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin9)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI9, coords_wisconsin9, select_df_WI, wisconsin9)
 
@@ -2694,7 +2462,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin10)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI10, coords_wisconsin10, select_df_WI, wisconsin10)
 
@@ -2709,7 +2477,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin11)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI11, coords_wisconsin11, select_df_WI, wisconsin11)
 
@@ -2724,7 +2492,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin12)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI12, coords_wisconsin12, select_df_WI, wisconsin12)
 
@@ -2739,7 +2507,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin13)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI13, coords_wisconsin13, select_df_WI, wisconsin13)
 
@@ -2754,7 +2522,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin14)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI14, coords_wisconsin14, select_df_WI, wisconsin14)
 
@@ -2769,7 +2537,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin15)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI15, coords_wisconsin15, select_df_WI, wisconsin15)
 
@@ -2784,7 +2552,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin16)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI16, coords_wisconsin16, select_df_WI, wisconsin16)
 
@@ -2799,7 +2567,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin17)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI17, coords_wisconsin17, select_df_WI, wisconsin17)
 
@@ -2814,7 +2582,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin18)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI18, coords_wisconsin18, select_df_WI, wisconsin18)
 
@@ -2829,7 +2597,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin19)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI19, coords_wisconsin19, select_df_WI, wisconsin19)
 
@@ -2844,7 +2612,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin20)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI20, coords_wisconsin20, select_df_WI, wisconsin20)
 
@@ -2859,7 +2627,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin21)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI21, coords_wisconsin21, select_df_WI, wisconsin21)
 
@@ -2874,7 +2642,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin22)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI22, coords_wisconsin22, select_df_WI, wisconsin22)
 
@@ -2889,7 +2657,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin23)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI23, coords_wisconsin23, select_df_WI, wisconsin23)
 
@@ -2904,7 +2672,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin24)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI24, coords_wisconsin24, select_df_WI, wisconsin24)
 
@@ -2919,7 +2687,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin25)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI25, coords_wisconsin25, select_df_WI, wisconsin25)
 
@@ -2934,7 +2702,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin26)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI26, coords_wisconsin26, select_df_WI, wisconsin26)
 
@@ -2949,7 +2717,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin27)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI27, coords_wisconsin27, select_df_WI, wisconsin27)
 
@@ -2964,7 +2732,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin28)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI28, coords_wisconsin28, select_df_WI, wisconsin28)
 
@@ -2979,7 +2747,7 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin29)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI29, coords_wisconsin29, select_df_WI, wisconsin29)
 
@@ -2994,18 +2762,18 @@ select_df_WI <- df_WI |>
   dplyr::slice(closest_points)
 
 temp <- cbind(select_df_WI, wisconsin30)
-WI_soil_pls <- rbind(WI_soil_pls, temp)
+WI_flood_pls <- rbind(WI_flood_pls, temp)
 
 rm(closest_points, coords_df_WI30, coords_wisconsin30, select_df_WI, wisconsin30)
 
 # Update column names
-colnames(WI_soil_pls) <- c('soil_x', 'soil_y', 'clay', 'sand', 'silt', 
-                           'caco3', 'awc', 'state', 'pls_x', 'pls_y', 
+colnames(WI_flood_pls) <- c('soil_x', 'soil_y', 'geomdesc', 'Floodplain',
+                            'state', 'pls_x', 'pls_y', 
                            'L1_tree1', 'L1_tree2', 'L1_tree3', 'L1_tree4', 'uniqueID')
 
-# Save IL soil. Confirmed in same order as illinois and illinois_ecosystem
-WI_soil <- dplyr::select(WI_soil_pls, soil_x, soil_y, clay, sand, silt, caco3, awc, pls_x, pls_y)
-save(WI_soil, file = 'data/processed/soils/processed_soil_wi.RData')
+# Save WI floodplain. Confirmed in same order as wisconsin and wisconsin_ecosystem
+WI_flood <- dplyr::select(WI_flood_pls, soil_x, soil_y, Floodplain, pls_x, pls_y)
+save(WI_flood, file = 'data/processed/soils/processed_flood_wi.RData')
 
 #### CHECKS ####
 
@@ -3013,18 +2781,18 @@ save(WI_soil, file = 'data/processed/soils/processed_soil_wi.RData')
 
 rm(list = ls())
 
-load('data/processed/soils/processed_soil_il.RData')
+load('data/processed/soils/processed_flood_il.RData')
 
-IL_soil |>
+IL_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
-IL_soil |>
+IL_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_y, y = soil_y)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-IL_soil |>
+IL_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y)) |>
   dplyr::summarize(mean_deviance_x = mean(deviance_x),
@@ -3034,19 +2802,19 @@ IL_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('data/processed/soils/processed_soil_in.RData')
+load('data/processed/soils/processed_flood_in.RData')
 
-IN_soil |>
+IN_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-IN_soil |>
+IN_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_y, y = soil_y)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-IN_soil |>
+IN_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y)) |>
   dplyr::summarize(mean_deviance_x = mean(deviance_x),
@@ -3056,19 +2824,19 @@ IN_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('data/processed/soils/processed_soil_mi.RData')
+load('data/processed/soils/processed_flood_mi.RData')
 
-MI_soil |>
+MI_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-MI_soil |>
+MI_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_y, y = soil_y)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-MI_soil |>
+MI_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y)) |>
   dplyr::summarize(mean_deviance_x = mean(deviance_x),
@@ -3078,19 +2846,19 @@ MI_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('data/processed/soils/processed_soil_mn.RData')
+load('data/processed/soils/processed_flood_mn.RData')
 
-MN_soil |>
+MN_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-MN_soil |>
+MN_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_y, y = soil_y)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-MN_soil |>
+MN_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y)) |>
   dplyr::summarize(mean_deviance_x = mean(deviance_x),
@@ -3100,19 +2868,19 @@ MN_soil |>
                    med_deviance_x = median(deviance_x),
                    med_deviance_y = median(deviance_y))
 
-load('data/processed/soils/processed_soil_wi.RData')
+load('data/processed/soils/processed_flood_wi.RData')
 
-WI_soil |>
+WI_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_x, y = soil_x)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-WI_soil |>
+WI_flood |>
   ggplot2::ggplot(ggplot2::aes(x = pls_y, y = soil_y)) +
   ggplot2::geom_point(shape = 21) +
   ggplot2::geom_abline()
 
-WI_soil |>
+WI_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y)) |>
   dplyr::summarize(mean_deviance_x = mean(deviance_x),
@@ -3127,7 +2895,7 @@ states <- sf::st_as_sf(maps::map('state', region = 'illinois',
                                  fill = TRUE, plot = FALSE))
 states <- sf::st_transform(states, crs = 'EPSG:4326')
 
-IL_soil |>
+IL_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y),
                 flag = 'none',
@@ -3137,8 +2905,7 @@ IL_soil |>
                                         deviance_y > 0.02, 'both', flag)) |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = 'pls')) +
-  ggplot2::geom_point(ggplot2::aes(x = soil_x, y = soil_y, color = 'soil')) +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = flag)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::coord_sf(crs = 'EPSG:4326')
 
@@ -3146,7 +2913,7 @@ states <- sf::st_as_sf(maps::map('state', region = 'indiana',
                                  fill = TRUE, plot = FALSE))
 states <- sf::st_transform(states, crs = 'EPSG:4326')
 
-IN_soil |>
+IN_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y),
                 flag = 'none',
@@ -3156,8 +2923,7 @@ IN_soil |>
                                         deviance_y > 0.02, 'both', flag)) |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = 'pls'), alpha = 0.5) +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = 'soil'), alpha = 0.1) +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = flag)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::coord_sf(crs = 'EPSG:4326')
 
@@ -3165,7 +2931,7 @@ states <- sf::st_as_sf(maps::map('state', region = 'michigan',
                                  fill = TRUE, plot = FALSE))
 states <- sf::st_transform(states, crs = 'EPSG:4326')
 
-MI_soil |>
+MI_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y),
                 flag = 'none',
@@ -3175,8 +2941,7 @@ MI_soil |>
                                         deviance_y > 0.02, 'both', flag)) |>
   dplyr::filter(flag != 'none') |>
   ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = 'pls')) +
-  ggplot2::geom_point(ggplot2::aes(x = soil_x, y = soil_y, color = 'soil')) +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, pls_y, color = flag)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::coord_sf(crs = 'EPSG:4326')
 
@@ -3184,7 +2949,7 @@ states <- sf::st_as_sf(maps::map('state', region = 'minnesota',
                                  fill = TRUE, plot = FALSE))
 states <- sf::st_transform(states, crs = 'EPSG:4326')
 
-MN_soil |>
+MN_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y),
                 flag = 'none',
@@ -3202,7 +2967,7 @@ states <- sf::st_as_sf(maps::map('state', region = 'wisconsin',
                                  fill = TRUE, plot = FALSE))
 states <- sf::st_transform(states, crs = 'EPSG:4326')
 
-WI_soil |>
+WI_flood |>
   dplyr::mutate(deviance_x = abs(pls_x - soil_x),
                 deviance_y = abs(pls_y - soil_y),
                 flag = 'none',
@@ -3222,39 +2987,13 @@ states <- sf::st_as_sf(maps::map('state', region = c('indiana', 'illinois', 'mic
                                  fill = TRUE, plot = FALSE))
 states <- sf::st_transform(states, crs = 'EPSG:4326')
 
-soils <- rbind(IL_soil, IN_soil, MI_soil, MN_soil, WI_soil)
+flood <- rbind(IL_flood, IN_flood, MI_flood, MN_flood, WI_flood)
 
-soils |>
+flood |>
+  dplyr::filter(Floodplain == 'Yes') |>
   ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = clay), alpha = 0.7, shape = '.') +
+  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y), alpha = 0.7, shape = '.') +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::coord_sf(crs = 'EPSG:4326') +
   ggplot2::theme_void()
 
-soils |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = sand), alpha = 0.7, shape = '.') +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::coord_sf(crs = 'EPSG:4326') +
-  ggplot2::theme_void()
-
-soils |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = silt), alpha = 0.7, shape = '.') +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::coord_sf(crs = 'EPSG:4326') +
-  ggplot2::theme_void()
-
-soils |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = caco3), alpha = 0.7, shape = '.') +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::coord_sf(crs = 'EPSG:4326') +
-  ggplot2::theme_void()
-
-soils |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = pls_x, y = pls_y, color = awc), alpha = 0.7, shape = '.') +
-  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::coord_sf(crs = 'EPSG:4326') +
-  ggplot2::theme_void()
