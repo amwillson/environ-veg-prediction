@@ -1167,17 +1167,13 @@ mi_topo <- dplyr::filter(mi_topo, elevation >= 0)
 
 # Format lower michigan data
 lowmichigan <- lowmichigan |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything()) |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
   dplyr::rename(SPP1 = species1,
                 SPP2 = species2)
 
 # Format upper michigan data
 upmichigan <- upmichigan |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything())
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species')
 
 michigan <- rbind(lowmichigan, upmichigan)
 michigan_ecosystem <- rbind(lowmichigan_ecosystem,
@@ -1214,7 +1210,7 @@ michigan27 <- michigan[102977:106995,]
 michigan28 <- michigan[106996:111014,]
 michigan29 <- michigan[111015:115733,]
 michigan30 <- michigan[115734:118052,]
-michigan31 <- michigan[118053:120554,]
+michigan31 <- michigan[118053:120134,]
 
 # Select coordinates
 coords_michigan1 <- dplyr::select(michigan1, y, x)
@@ -1885,52 +1881,70 @@ mn_topo <- dplyr::filter(mn_topo, elevation >= 0)
 
 # Format minnesota data
 minnesota <- minnesota |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything()) |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
   dplyr::mutate(uniqueID = paste0(y,'_',x))
 
-# Divide pls minnesota into 40 sections
-minnesota1 <- minnesota[1:3598,]
-minnesota2 <- minnesota[3599:7197,]
-minnesota3 <- minnesota[7198:10796,]
-minnesota4 <- minnesota[10797:14395,]
-minnesota5 <- minnesota[14396:17994,]
-minnesota6 <- minnesota[17995:21593,]
-minnesota7 <- minnesota[21594:25592,]
-minnesota8 <- minnesota[25593:29791,]
-minnesota9 <- minnesota[29792:32390,]
-minnesota10 <- minnesota[32391:35989,]
-minnesota11 <- minnesota[35990:39588,]
-minnesota12 <- minnesota[39589:43187,]
-minnesota13 <- minnesota[43188:46786,]
-minnesota14 <- minnesota[46787:50385,]
-minnesota15 <- minnesota[50386:53984,]
-minnesota16 <- minnesota[53985:57583,]
-minnesota17 <- minnesota[57584:61182,]
-minnesota18 <- minnesota[61183:64781,]
-minnesota19 <- minnesota[64782:68380,]
-minnesota20 <- minnesota[68381:71979,]
-minnesota21 <- minnesota[71980:75578,]
-minnesota22 <- minnesota[75579:79177,]
-minnesota23 <- minnesota[79178:82776,]
-minnesota24 <- minnesota[82777:86375,]
-minnesota25 <- minnesota[86376:90474,]
-minnesota26 <- minnesota[90475:93573,]
-minnesota27 <- minnesota[93574:97372,]
-minnesota28 <- minnesota[97373:100771,]
-minnesota29 <- minnesota[100772:104670,]
-minnesota30 <- minnesota[104671:107969,]
-minnesota31 <- minnesota[107970:111568,]
-minnesota32 <- minnesota[111569:115167,]
-minnesota33 <- minnesota[115168:118366,]
-minnesota34 <- minnesota[118367:122365,]
-minnesota35 <- minnesota[122366:125964,]
-minnesota36 <- minnesota[125965:129563,]
-minnesota37 <- minnesota[129564:133162,]
-minnesota38 <- minnesota[133163:136761,]
-minnesota39 <- minnesota[136762:140360,]
-minnesota40 <- minnesota[140361:143932,]
+# Divide pls minnesota into 60 sections
+minnesota1 <- minnesota[1:4103,]
+minnesota2 <- minnesota[4104:8207,]
+minnesota3 <- minnesota[8208:12311,]
+minnesota4 <- minnesota[12312:16415,]
+minnesota5 <- minnesota[16416:20519,]
+minnesota6 <- minnesota[20520:24623,]
+minnesota7 <- minnesota[24624:28727,]
+minnesota8 <- minnesota[28728:32831,]
+minnesota9 <- minnesota[32832:36935,]
+minnesota10 <- minnesota[36936:41039,]
+minnesota11 <- minnesota[41040:45143,]
+minnesota12 <- minnesota[45144:50247,]
+minnesota13 <- minnesota[50248:52351,]
+minnesota14 <- minnesota[52352:57455,]
+minnesota15 <- minnesota[57456:61559,]
+minnesota16 <- minnesota[61560:65663,]
+minnesota17 <- minnesota[65664:69767,]
+minnesota18 <- minnesota[69768:74871,]
+minnesota19 <- minnesota[74872:77975,]
+minnesota20 <- minnesota[77976:82079,]
+minnesota21 <- minnesota[82080:86183,]
+minnesota22 <- minnesota[86184:90287,]
+minnesota23 <- minnesota[90288:94391,]
+minnesota24 <- minnesota[94392:98495,]
+minnesota25 <- minnesota[98496:102599,]
+minnesota26 <- minnesota[102600:106703,]
+minnesota27 <- minnesota[106704:110307,]
+minnesota28 <- minnesota[110308:113911,]
+minnesota29 <- minnesota[113912:118015,]
+minnesota30 <- minnesota[118016:122119,]
+minnesota31 <- minnesota[122120:127223,]
+minnesota32 <- minnesota[127224:132327,]
+minnesota33 <- minnesota[132328:135431,]
+minnesota34 <- minnesota[135432:139535,]
+minnesota35 <- minnesota[139536:143639,]
+minnesota36 <- minnesota[143640:147743,]
+minnesota37 <- minnesota[147744:151847,]
+minnesota38 <- minnesota[151848:155951,]
+minnesota39 <- minnesota[155952:160055,]
+minnesota40 <- minnesota[160056:164159,]
+minnesota41 <- minnesota[164160:168263,]
+minnesota42 <- minnesota[168264:172367,]
+minnesota43 <- minnesota[172368:176471,]
+minnesota44 <- minnesota[176472:180575,]
+minnesota45 <- minnesota[180576:184679,]
+minnesota46 <- minnesota[184680:188783,]
+minnesota47 <- minnesota[188784:192887,]
+minnesota48 <- minnesota[192888:196991,]
+minnesota49 <- minnesota[196992:201095,]
+minnesota50 <- minnesota[201096:205199,]
+minnesota51 <- minnesota[205200:209303,]
+minnesota52 <- minnesota[209304:213407,]
+minnesota53 <- minnesota[213408:217511,]
+minnesota54 <- minnesota[217512:221615,]
+minnesota55 <- minnesota[221616:225719,]
+minnesota56 <- minnesota[225720:229823,]
+minnesota57 <- minnesota[229824:233927,]
+minnesota58 <- minnesota[233928:238031,]
+minnesota59 <- minnesota[238032:242135,]
+minnesota60 <- minnesota[242136:246189,]
 
 # Select coordinates
 coords_minnesota1 <- dplyr::select(minnesota1, y, x)
@@ -1973,6 +1987,26 @@ coords_minnesota37 <- dplyr::select(minnesota37, y, x)
 coords_minnesota38 <- dplyr::select(minnesota38, y, x)
 coords_minnesota39 <- dplyr::select(minnesota39, y, x)
 coords_minnesota40 <- dplyr::select(minnesota40, y, x)
+coords_minnesota41 <- dplyr::select(minnesota41, y, x)
+coords_minnesota42 <- dplyr::select(minnesota42, y, x)
+coords_minnesota43 <- dplyr::select(minnesota43, y, x)
+coords_minnesota44 <- dplyr::select(minnesota44, y, x)
+coords_minnesota45 <- dplyr::select(minnesota45, y, x)
+coords_minnesota46 <- dplyr::select(minnesota46, y, x)
+coords_minnesota47 <- dplyr::select(minnesota47, y, x)
+coords_minnesota48 <- dplyr::select(minnesota48, y, x)
+coords_minnesota49 <- dplyr::select(minnesota49, y, x)
+coords_minnesota50 <- dplyr::select(minnesota50, y, x)
+coords_minnesota51 <- dplyr::select(minnesota51, y, x)
+coords_minnesota52 <- dplyr::select(minnesota52, y, x)
+coords_minnesota53 <- dplyr::select(minnesota53, y, x)
+coords_minnesota54 <- dplyr::select(minnesota54, y, x)
+coords_minnesota55 <- dplyr::select(minnesota55, y, x)
+coords_minnesota56 <- dplyr::select(minnesota56, y, x)
+coords_minnesota57 <- dplyr::select(minnesota57, y, x)
+coords_minnesota58 <- dplyr::select(minnesota58, y, x)
+coords_minnesota59 <- dplyr::select(minnesota59, y, x)
+coords_minnesota60 <- dplyr::select(minnesota60, y, x)
 
 # Add column names
 colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_minnesota3) <-
@@ -1988,7 +2022,14 @@ colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_mi
   colnames(coords_minnesota31) <- colnames(coords_minnesota32) <- colnames(coords_minnesota33) <-
   colnames(coords_minnesota34) <- colnames(coords_minnesota35) <- colnames(coords_minnesota36) <-
   colnames(coords_minnesota37) <- colnames(coords_minnesota38) <- colnames(coords_minnesota39) <-
-  colnames(coords_minnesota40) <- c('lat', 'long')
+  colnames(coords_minnesota40) <- colnames(coords_minnesota41) <- colnames(coords_minnesota42) <-
+  colnames(coords_minnesota43) <- colnames(coords_minnesota44) <- colnames(coords_minnesota45) <-
+  colnames(coords_minnesota46) <- colnames(coords_minnesota47) <- colnames(coords_minnesota48) <-
+  colnames(coords_minnesota49) <- colnames(coords_minnesota50) <- colnames(coords_minnesota51) <-
+  colnames(coords_minnesota52) <- colnames(coords_minnesota53) <- colnames(coords_minnesota54) <-
+  colnames(coords_minnesota55) <- colnames(coords_minnesota56) <- colnames(coords_minnesota57) <-
+  colnames(coords_minnesota58) <- colnames(coords_minnesota59) <- colnames(coords_minnesota60) <-
+  c('lat', 'long')
 
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
@@ -2151,6 +2192,86 @@ coords_df_MN39 <- mn_topo |>
 coords_df_MN40 <- mn_topo |>
   dplyr::filter(x >= min(coords_minnesota40$long) - 0.1 & x <= max(coords_minnesota40$long) + 0.1 &
                   y >= min(coords_minnesota40$lat) - 0.1 & y <= max(coords_minnesota40$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN41 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota41$long) - 0.1 & x <= max(coords_minnesota41$long) + 0.1 &
+                  y >= min(coords_minnesota41$lat) - 0.1 & y <= max(coords_minnesota41$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN42 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota42$long) - 0.1 & x <= max(coords_minnesota42$long) + 0.1 &
+                  y >= min(coords_minnesota42$lat) - 0.1 & y <= max(coords_minnesota42$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN43 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota43$long) - 0.1 & x <= max(coords_minnesota43$long) + 0.1 &
+                  y >= min(coords_minnesota43$lat) - 0.1 & y <= max(coords_minnesota43$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN44 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota44$long) - 0.1 & x <= max(coords_minnesota44$long) + 0.1 &
+                  y >= min(coords_minnesota44$lat) - 0.1 & y <= max(coords_minnesota44$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN45 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota45$long) - 0.1 & x <= max(coords_minnesota45$long) + 0.1 &
+                  y >= min(coords_minnesota45$lat) - 0.1 & y <= max(coords_minnesota45$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN46 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota46$long) - 0.1 & x <= max(coords_minnesota46$long) + 0.1 &
+                  y >= min(coords_minnesota46$lat) - 0.1 & y <= max(coords_minnesota46$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN47 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota47$long) - 0.1 & x <= max(coords_minnesota47$long) + 0.1 &
+                  y >= min(coords_minnesota47$lat) - 0.1 & y <= max(coords_minnesota47$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN48 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota48$long) - 0.1 & x <= max(coords_minnesota48$long) + 0.1 &
+                  y >= min(coords_minnesota48$lat) - 0.1 & y <= max(coords_minnesota48$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN49 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota49$long) - 0.1 & x <= max(coords_minnesota49$long) + 0.1 &
+                  y >= min(coords_minnesota49$lat) - 0.1 & y <= max(coords_minnesota49$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN50 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota50$long) - 0.1 & x <= max(coords_minnesota50$long) + 0.1 &
+                  y >= min(coords_minnesota50$lat) - 0.1 & y <= max(coords_minnesota50$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN51 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota51$long) - 0.1 & x <= max(coords_minnesota51$long) + 0.1 &
+                  y >= min(coords_minnesota51$lat) - 0.1 & y <= max(coords_minnesota51$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN52 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota52$long) - 0.1 & x <= max(coords_minnesota52$long) + 0.1 &
+                  y >= min(coords_minnesota52$lat) - 0.1 & y <= max(coords_minnesota52$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN53 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota53$long) - 0.1 & x <= max(coords_minnesota53$long) + 0.1 &
+                  y >= min(coords_minnesota53$lat) - 0.1 & y <= max(coords_minnesota53$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN54 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota54$long) - 0.1 & x <= max(coords_minnesota54$long) + 0.1 &
+                  y >= min(coords_minnesota54$lat) - 0.1 & y <= max(coords_minnesota54$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN55 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota55$long) - 0.1 & x <= max(coords_minnesota55$long) + 0.1 &
+                  y >= min(coords_minnesota55$lat) - 0.1 & y <= max(coords_minnesota55$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN56 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota56$long) - 0.1 & x <= max(coords_minnesota56$long) + 0.1 &
+                  y >= min(coords_minnesota56$lat) - 0.1 & y <= max(coords_minnesota56$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN57 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota57$long) - 0.1 & x <= max(coords_minnesota57$long) + 0.1 &
+                  y >= min(coords_minnesota57$lat) - 0.1 & y <= max(coords_minnesota57$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN58 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota58$long) - 0.1 & x <= max(coords_minnesota58$long) + 0.1 &
+                  y >= min(coords_minnesota58$lat) - 0.1 & y <= max(coords_minnesota58$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN59 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota59$long) - 0.1 & x <= max(coords_minnesota59$long) + 0.1 &
+                  y >= min(coords_minnesota59$lat) - 0.1 & y <= max(coords_minnesota59$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN60 <- mn_topo |>
+  dplyr::filter(x >= min(coords_minnesota60$long) - 0.1 & x <= max(coords_minnesota60$long) + 0.1 &
+                  y >= min(coords_minnesota60$lat) - 0.1 & y <= max(coords_minnesota60$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes

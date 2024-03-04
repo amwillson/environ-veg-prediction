@@ -7,6 +7,9 @@ load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/illinois_format.RData')
 
+# Remove "error" rows in floodplain data
+df_IL <- df_IL[!grepl(pattern = 'Error', x = df_IL$geomdesc, ignore.case = TRUE),]
+
 # Format illinois data
 illinois <- illinois |>
   tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
@@ -475,6 +478,9 @@ load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/indiana_format.RData')
 
+# Remove "error" rows in floodplain data
+df_IN <- df_IN[!grepl(pattern = 'Error', x = df_IN$geomdesc, ignore.case = TRUE),]
+
 # Format indiana data
 indiana <- indiana |>
   tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
@@ -942,6 +948,9 @@ load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 load('data/processed/PLS/upmichigan_process.RData')
 load('data/processed/PLS/lowmichigan_process.RData')
 
+# Remove "error" rows in floodplain data
+df_MI <- df_MI[!grepl(pattern = 'Error', x = df_MI$geomdesc, ignore.case = TRUE),]
+
 # Format lower michigan data
 lowmichigan <- lowmichigan |>
   tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
@@ -976,7 +985,7 @@ michigan16 <- michigan[89145:95087,]
 michigan17 <- michigan[95088:101030,]
 michigan18 <- michigan[101031:106973,]
 michigan19 <- michigan[106974:112916,]
-michigan20 <- michigan[112917:120554,]
+michigan20 <- michigan[112917:120134,]
 
 # Select coordinates
 coords_michigan1 <- dplyr::select(michigan1, y, x)
@@ -1418,44 +1427,55 @@ load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/minnesota_process.RData')
 
+# Remove "error" rows in floodplain data
+df_MN <- df_MN[!grepl(pattern = 'Error', x = df_MN$geomdesc, ignore.case = TRUE),]
+
 # Format minnesota data
 minnesota <- minnesota |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything()) |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
   dplyr::mutate(uniqueID = paste0(y,'_',x))
 
-# Divide pls minnesota into 30 sections
-minnesota1 <- minnesota[1:4797,]
-minnesota2 <- minnesota[4798:9595,]
-minnesota3 <- minnesota[9596:14392,]
-minnesota4 <- minnesota[14393:19190,]
-minnesota5 <- minnesota[19191:23988,]
-minnesota6 <- minnesota[23989:28786,]
-minnesota7 <- minnesota[28787:33584,]
-minnesota8 <- minnesota[33585:38382,]
-minnesota9 <- minnesota[38383:43180,]
-minnesota10 <- minnesota[43181:47978,]
-minnesota11 <- minnesota[47979:52776,]
-minnesota12 <- minnesota[52777:57574,]
-minnesota13 <- minnesota[57575:62372,]
-minnesota14 <- minnesota[62373:67170,]
-minnesota15 <- minnesota[67171:71968,]
-minnesota16 <- minnesota[71969:76766,]
-minnesota17 <- minnesota[76767:81564,]
-minnesota18 <- minnesota[81565:86362,]
-minnesota19 <- minnesota[86363:91160,]
-minnesota20 <- minnesota[91161:95958,]
-minnesota21 <- minnesota[95959:100756,]
-minnesota22 <- minnesota[100757:105554,]
-minnesota23 <- minnesota[105555:110352,]
-minnesota24 <- minnesota[110353:115150,]
-minnesota25 <- minnesota[115151:119948,]
-minnesota26 <- minnesota[119949:124746,]
-minnesota27 <- minnesota[124747:129544,]
-minnesota28 <- minnesota[129545:134342,]
-minnesota29 <- minnesota[134343:139140,]
-minnesota30 <- minnesota[139141:143932,]
+# Divide pls minnesota into 40 sections
+minnesota1 <- minnesota[1:6155,]
+minnesota2 <- minnesota[6156:12311,]
+minnesota3 <- minnesota[12312:18467,]
+minnesota4 <- minnesota[18468:24623,]
+minnesota5 <- minnesota[24624:30779,]
+minnesota6 <- minnesota[30780:36935,]
+minnesota7 <- minnesota[36936:43091,]
+minnesota8 <- minnesota[43092:49247,]
+minnesota9 <- minnesota[49248:55403,]
+minnesota10 <- minnesota[55404:61559,]
+minnesota11 <- minnesota[61560:67715,]
+minnesota12 <- minnesota[67716:73871,]
+minnesota13 <- minnesota[73872:80027,]
+minnesota14 <- minnesota[80028:86183,]
+minnesota15 <- minnesota[86184:92339,]
+minnesota16 <- minnesota[92340:98495,]
+minnesota17 <- minnesota[98496:104651,]
+minnesota18 <- minnesota[104652:110807,]
+minnesota19 <- minnesota[110808:116963,]
+minnesota20 <- minnesota[116964:123119,]
+minnesota21 <- minnesota[123120:129275,]
+minnesota22 <- minnesota[129276:135431,]
+minnesota23 <- minnesota[135432:141587,]
+minnesota24 <- minnesota[141588:147743,]
+minnesota25 <- minnesota[147744:153899,]
+minnesota26 <- minnesota[153900:160055,]
+minnesota27 <- minnesota[160056:166211,]
+minnesota28 <- minnesota[166212:172367,]
+minnesota29 <- minnesota[172368:178523,]
+minnesota30 <- minnesota[178524:184679,]
+minnesota31 <- minnesota[184680:190835,]
+minnesota32 <- minnesota[190836:196991,]
+minnesota33 <- minnesota[196992:203147,]
+minnesota34 <- minnesota[203148:209303,]
+minnesota35 <- minnesota[209304:215459,]
+minnesota36 <- minnesota[215460:221615,]
+minnesota37 <- minnesota[221616:227771,]
+minnesota38 <- minnesota[227772:233927,]
+minnesota39 <- minnesota[233928:240083,]
+minnesota40 <- minnesota[240084:246189,]
 
 # Select coordinates
 coords_minnesota1 <- dplyr::select(minnesota1, y, x)
@@ -1488,6 +1508,16 @@ coords_minnesota27 <- dplyr::select(minnesota27, y, x)
 coords_minnesota28 <- dplyr::select(minnesota28, y, x)
 coords_minnesota29 <- dplyr::select(minnesota29, y, x)
 coords_minnesota30 <- dplyr::select(minnesota30, y, x)
+coords_minnesota31 <- dplyr::select(minnesota31, y, x)
+coords_minnesota32 <- dplyr::select(minnesota32, y, x)
+coords_minnesota33 <- dplyr::select(minnesota33, y, x)
+coords_minnesota34 <- dplyr::select(minnesota34, y, x)
+coords_minnesota35 <- dplyr::select(minnesota35, y, x)
+coords_minnesota36 <- dplyr::select(minnesota36, y, x)
+coords_minnesota37 <- dplyr::select(minnesota37, y, x)
+coords_minnesota38 <- dplyr::select(minnesota38, y, x)
+coords_minnesota39 <- dplyr::select(minnesota39, y, x)
+coords_minnesota40 <- dplyr::select(minnesota40, y, x)
 
 # Add column names
 colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_minnesota3) <-
@@ -1500,7 +1530,10 @@ colnames(coords_minnesota1) <- colnames(coords_minnesota2) <- colnames(coords_mi
   colnames(coords_minnesota22) <- colnames(coords_minnesota23) <- colnames(coords_minnesota24) <-
   colnames(coords_minnesota25) <- colnames(coords_minnesota26) <- colnames(coords_minnesota27) <-
   colnames(coords_minnesota28) <- colnames(coords_minnesota29) <- colnames(coords_minnesota30) <-
-  c('lat', 'long')
+  colnames(coords_minnesota31) <- colnames(coords_minnesota32) <- colnames(coords_minnesota33) <-
+  colnames(coords_minnesota34) <- colnames(coords_minnesota35) <- colnames(coords_minnesota36) <-
+  colnames(coords_minnesota37) <- colnames(coords_minnesota38) <- colnames(coords_minnesota39) <-
+  colnames(coords_minnesota40) <- c('lat', 'long')
 
 # Subset the soil data to the lat/long extent of each pls subsection
 # Then extract only the lat/long columns
@@ -1623,6 +1656,46 @@ coords_df_MN29 <- df_MN |>
 coords_df_MN30 <- df_MN |>
   dplyr::filter(x >= min(coords_minnesota30$long) - 0.1 & x <= max(coords_minnesota30$long) + 0.1 &
                   y >= min(coords_minnesota30$lat) - 0.1 & y <= max(coords_minnesota30$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN31 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota31$long) - 0.1 & x <= max(coords_minnesota31$long) + 0.1 &
+                  y >= min(coords_minnesota31$lat) - 0.1 & y <= max(coords_minnesota31$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN32 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota32$long) - 0.1 & x <= max(coords_minnesota32$long) + 0.1 &
+                  y >= min(coords_minnesota32$lat) - 0.1 & y <= max(coords_minnesota32$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN33 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota33$long) - 0.1 & x <= max(coords_minnesota33$long) + 0.1 &
+                  y >= min(coords_minnesota33$lat) - 0.1 & y <= max(coords_minnesota33$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN34 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota34$long) - 0.1 & x <= max(coords_minnesota34$long) + 0.1 &
+                  y >= min(coords_minnesota34$lat) - 0.1 & y <= max(coords_minnesota34$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN35 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota35$long) - 0.1 & x <= max(coords_minnesota35$long) + 0.1 &
+                  y >= min(coords_minnesota35$lat) - 0.1 & y <= max(coords_minnesota35$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN36 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota36$long) - 0.1 & x <= max(coords_minnesota36$long) + 0.1 &
+                  y >= min(coords_minnesota36$lat) - 0.1 & y <= max(coords_minnesota36$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN37 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota37$long) - 0.1 & x <= max(coords_minnesota37$long) + 0.1 &
+                  y >= min(coords_minnesota37$lat) - 0.1 & y <= max(coords_minnesota37$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN38 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota38$long) - 0.1 & x <= max(coords_minnesota38$long) + 0.1 &
+                  y >= min(coords_minnesota38$lat) - 0.1 & y <= max(coords_minnesota38$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN39 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota39$long) - 0.1 & x <= max(coords_minnesota39$long) + 0.1 &
+                  y >= min(coords_minnesota39$lat) - 0.1 & y <= max(coords_minnesota39$lat) + 0.1) |>
+  dplyr::select(y, x)
+coords_df_MN40 <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota40$long) - 0.1 & x <= max(coords_minnesota40$long) + 0.1 &
+                  y >= min(coords_minnesota40$lat) - 0.1 & y <= max(coords_minnesota40$lat) + 0.1) |>
   dplyr::select(y, x)
 
 # Find the distance between each pair of points in the pls (1) and soil (2) dataframes
@@ -2085,6 +2158,156 @@ MN_flood_pls <- rbind(MN_flood_pls, temp)
 
 rm(closest_points, coords_df_MN30, coords_minnesota30, select_df_MN, minnesota30)
 
+# Subset 31
+dists <- fields::rdist(coords_df_MN31, coords_minnesota31)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota31$long) - 0.1 & x <= max(coords_minnesota31$long) + 0.1 &
+                  y >= min(coords_minnesota31$lat) - 0.1 & y <= max(coords_minnesota31$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota31)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN31, coords_minnesota31, select_df_MN, minnesota31)
+
+# Subset 32
+dists <- fields::rdist(coords_df_MN32, coords_minnesota32)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota32$long) - 0.1 & x <= max(coords_minnesota32$long) + 0.1 &
+                  y >= min(coords_minnesota32$lat) - 0.1 & y <= max(coords_minnesota32$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota32)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN32, coords_minnesota32, select_df_MN, minnesota32)
+
+# Subset 33
+dists <- fields::rdist(coords_df_MN33, coords_minnesota33)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota33$long) - 0.1 & x <= max(coords_minnesota33$long) + 0.1 &
+                  y >= min(coords_minnesota33$lat) - 0.1 & y <= max(coords_minnesota33$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota33)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN33, coords_minnesota33, select_df_MN, minnesota33)
+
+# Subset 34
+dists <- fields::rdist(coords_df_MN34, coords_minnesota34)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota34$long) - 0.1 & x <= max(coords_minnesota34$long) + 0.1 &
+                  y >= min(coords_minnesota34$lat) - 0.1 & y <= max(coords_minnesota34$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota34)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN34, coords_minnesota34, select_df_MN, minnesota34)
+
+# Subset 35
+dists <- fields::rdist(coords_df_MN35, coords_minnesota35)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota35$long) - 0.1 & x <= max(coords_minnesota35$long) + 0.1 &
+                  y >= min(coords_minnesota35$lat) - 0.1 & y <= max(coords_minnesota35$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota35)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN35, coords_minnesota35, select_df_MN, minnesota35)
+
+# Subset 36
+dists <- fields::rdist(coords_df_MN36, coords_minnesota36)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota36$long) - 0.1 & x <= max(coords_minnesota36$long) + 0.1 &
+                  y >= min(coords_minnesota36$lat) - 0.1 & y <= max(coords_minnesota36$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota36)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN36, coords_minnesota36, select_df_MN, minnesota36)
+
+# Subset 37
+dists <- fields::rdist(coords_df_MN37, coords_minnesota37)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota37$long) - 0.1 & x <= max(coords_minnesota37$long) + 0.1 &
+                  y >= min(coords_minnesota37$lat) - 0.1 & y <= max(coords_minnesota37$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota37)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN37, coords_minnesota37, select_df_MN, minnesota37)
+
+# Subset 38
+dists <- fields::rdist(coords_df_MN38, coords_minnesota38)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota38$long) - 0.1 & x <= max(coords_minnesota38$long) + 0.1 &
+                  y >= min(coords_minnesota38$lat) - 0.1 & y <= max(coords_minnesota38$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota38)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN38, coords_minnesota38, select_df_MN, minnesota38)
+
+# Subset 39
+dists <- fields::rdist(coords_df_MN39, coords_minnesota39)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota39$long) - 0.1 & x <= max(coords_minnesota39$long) + 0.1 &
+                  y >= min(coords_minnesota39$lat) - 0.1 & y <= max(coords_minnesota39$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota39)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN39, coords_minnesota39, select_df_MN, minnesota39)
+
+# Subset 40
+dists <- fields::rdist(coords_df_MN40, coords_minnesota40)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN |>
+  dplyr::filter(x >= min(coords_minnesota40$long) - 0.1 & x <= max(coords_minnesota40$long) + 0.1 &
+                  y >= min(coords_minnesota40$lat) - 0.1 & y <= max(coords_minnesota40$lat) + 0.1) |>
+  dplyr::slice(closest_points)
+
+temp <- cbind(select_df_MN, minnesota40)
+MN_flood_pls <- rbind(MN_flood_pls, temp)
+
+rm(closest_points, coords_df_MN40, coords_minnesota40, select_df_MN, minnesota40)
+
 # Update column names
 colnames(MN_flood_pls) <- c('soil_x', 'soil_y', 'geomdesc', 'Floodplain',
                             'state', 'pls_x', 'pls_y',
@@ -2100,6 +2323,9 @@ rm(list = ls())
 load('data/raw/soils/gssurgo_floodplain_030_700m.RData')
 
 load('data/processed/PLS/wisconsin_process.RData')
+
+# Remove "error" rows in floodplain data
+df_WI <- df_WI[!grepl(pattern = 'Error', x = df_WI$geomdesc, ignore.case = TRUE),]
 
 # Format wisconsin data
 wisconsin <- wisconsin |>
@@ -2136,7 +2362,7 @@ wisconsin26 <- wisconsin[138875:144429,]
 wisconsin27 <- wisconsin[144430:149984,]
 wisconsin28 <- wisconsin[149985:155539,]
 wisconsin29 <- wisconsin[155540:161094,]
-wisconsin30 <- wisconsin[161095:166636,]
+wisconsin30 <- wisconsin[161095:166617,]
 
 # Select coordinates
 coords_wisconsin1 <- dplyr::select(wisconsin1, y, x)

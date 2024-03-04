@@ -204,20 +204,15 @@ df_MI <- clim_sum
 
 # Format lower michigan data
 lowmichigan <- lowmichigan |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything()) |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
   dplyr::rename(SPP1 = species1,
                 SPP2 = species2)
 
 # Format upper michigan data
 upmichigan <- upmichigan |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything())
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species')
 
 michigan <- rbind(lowmichigan, upmichigan)
-
 michigan_ecosystem <- rbind(lowmichigan_ecosystem,
                             upmichigan_ecosystem)
 
@@ -225,7 +220,7 @@ michigan_ecosystem <- rbind(lowmichigan_ecosystem,
 michigan1 <- michigan[1:30138,]
 michigan2 <- michigan[30139:60277,]
 michigan3 <- michigan[60278:90416,]
-michigan4 <- michigan[90417:120554,]
+michigan4 <- michigan[90417:120134,]
 
 # Select coordinates
 coords_michigan1 <- dplyr::select(michigan1, y, x)
@@ -313,9 +308,7 @@ df_MN <- clim_sum
 
 # Format minnesota data
 minnesota <- minnesota |>
-  tidyr::pivot_wider(names_from = 'tree', values_from = 'species',
-                     values_fn = list) |>
-  tidyr::unnest(cols = everything()) |>
+  tidyr::pivot_wider(names_from = 'tree', values_from = 'species') |>
   dplyr::mutate(uniqueID = paste0(y,'_',x))
 
 # Divide PLS minnesota into 5 sections
@@ -324,6 +317,10 @@ minnesota2 <- minnesota[28787:57573,]
 minnesota3 <- minnesota[57574:86360,]
 minnesota4 <- minnesota[86361:115147,]
 minnesota5 <- minnesota[115148:143932,]
+minnesota6 <- minnesota[143933:172719,]
+minnesota7 <- minnesota[172720:201506,]
+minnesota8 <- minnesota[201507:230293,]
+minnesota9 <- minnesota[230294:246189,]
 
 # Select coordinates
 coords_minnesota1 <- dplyr::select(minnesota1, y, x)
@@ -331,11 +328,17 @@ coords_minnesota2 <- dplyr::select(minnesota2, y, x)
 coords_minnesota3 <- dplyr::select(minnesota3, y, x)
 coords_minnesota4 <- dplyr::select(minnesota4, y, x)
 coords_minnesota5 <- dplyr::select(minnesota5, y, x)
+coords_minnesota6 <- dplyr::select(minnesota6, y, x)
+coords_minnesota7 <- dplyr::select(minnesota7, y, x)
+coords_minnesota8 <- dplyr::select(minnesota8, y, x)
+coords_minnesota9 <- dplyr::select(minnesota9, y, x)
 
 # Add column names
 colnames(coords_minnesota1) <- colnames(coords_minnesota2) <-
   colnames(coords_minnesota3) <- colnames(coords_minnesota4) <-
-  colnames(coords_minnesota5) <- c('lat', 'long')
+  colnames(coords_minnesota5) <- colnames(coords_minnesota6) <-
+  colnames(coords_minnesota7) <- colnames(coords_minnesota8) <-
+  colnames(coords_minnesota9) <- c('lat', 'long')
 
 # Then extract only the lat/long columns from climate data
 coords_df_MN <- dplyr::select(df_MN, y, x)
@@ -397,6 +400,46 @@ select_df_MN <- df_MN[closest_points,]
 temp <- cbind(select_df_MN, minnesota5)
 MN_clim_pls <- rbind(MN_clim_pls, temp)
 
+# Subset 6
+dists <- fields::rdist(coords_df_MN, coords_minnesota6)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN[closest_points,]
+
+temp <- cbind(select_df_MN, minnesota6)
+MN_clim_pls <- rbind(MN_clim_pls, temp)
+
+# Subset 7
+dists <- fields::rdist(coords_df_MN, coords_minnesota7)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN[closest_points,]
+
+temp <- cbind(select_df_MN, minnesota7)
+MN_clim_pls <- rbind(MN_clim_pls, temp)
+
+# Subset 8
+dists <- fields::rdist(coords_df_MN, coords_minnesota8)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN[closest_points,]
+
+temp <- cbind(select_df_MN, minnesota8)
+MN_clim_pls <- rbind(MN_clim_pls, temp)
+
+# Subset 9
+dists <- fields::rdist(coords_df_MN, coords_minnesota9)
+closest_points <- apply(dists, 2, which.min)
+rm(dists)
+
+select_df_MN <- df_MN[closest_points,]
+
+temp <- cbind(select_df_MN, minnesota9)
+MN_clim_pls <- rbind(MN_clim_pls, temp)
+
 # Update column names
 colnames(MN_clim_pls) <- c('prism_x', 'prism_y', 'ppt_mean',
                            'ppt_sd', 'tmean_mean', 'tmean_sd',
@@ -431,7 +474,7 @@ wisconsin2 <- wisconsin[27773:55545,]
 wisconsin3 <- wisconsin[55546:83318,]
 wisconsin4 <- wisconsin[83319:111091,]
 wisconsin5 <- wisconsin[111092:138864,]
-wisconsin6 <- wisconsin[138865:166636,]
+wisconsin6 <- wisconsin[138865:166617,]
 
 # Select coordinates
 coords_wisconsin1 <- dplyr::select(wisconsin1, y, x)
