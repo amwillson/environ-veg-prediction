@@ -920,7 +920,9 @@ taxon |>
   ggplot2::guides(color = ggplot2::guide_legend(override.aes = list(shape = 16, size = 7))) +
   ggplot2::theme_void() +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA, linewidth = 1) +
-  ggplot2::coord_sf(crs = 'EPSG:4326')
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme(legend.text = ggplot2::element_text(size = 14),
+                legend.title = ggplot2::element_text(size = 16))
 
 # Faceted by taxon
 taxon |>
@@ -979,7 +981,9 @@ ecosystem |>
   ggplot2::theme_void() +
   ggplot2::scale_color_manual(values = pal) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA, linewidth = 1) +
-  ggplot2::coord_sf(crs = 'EPSG:4326')
+  ggplot2::coord_sf(crs = 'EPSG:4326') +
+  ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
+                 legend.text = ggplot2::element_text(size = 14))
 
 # Separate biomes by facet
 ecosystem |>
