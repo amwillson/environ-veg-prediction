@@ -2635,23 +2635,33 @@ save_point_grid <- rbind(save_point_grid, test_df)
 
 rm(dists, ecosystem70, ecosystem70_xy, test, test_df, test_slice)
 
+point_grid_match <- save_point_grid |>
+  dplyr::select(x, y, grid_x, grid_y, id) |>
+  dplyr::mutate(ecosystem_id = dplyr::row_number()) |>
+  dplyr::rename(point_x = x,
+                point_y = y,
+                grid_id = id)
+
+save(save_point_grid, point_grid_match, file = 'data/processed/PLS/matching_intermediate.RData')
+
 # Check to make sure our points make sense
 
-save_point_grid |>
+point_grid_match |>
   ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = x, y = grid_x)) +
+  ggplot2::geom_point(ggplot2::aes(x = point_x, y = grid_x)) +
   ggplot2::geom_abline()
 
-save_point_grid |>
+point_grid_match |>
   ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = y, y = grid_y)) +
+  ggplot2::geom_point(ggplot2::aes(x = point_y, y = grid_y)) +
   ggplot2::geom_abline()
 
 # Add corresponding grid cell ID to total ecosystem dataframe
-ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = ecosystem, by = c('x', 'y'))
 
 # Reproject taxon dataframe
 taxon <- sf::st_as_sf(taxon, coords = c('x', 'y'),
@@ -2661,27 +2671,27 @@ taxon <- sfheaders::sf_to_df(taxon, fill = TRUE)
 taxon <- dplyr::select(taxon, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to total taxon dataframe
-taxon <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = taxon, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+taxon_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = taxon, by = c('x', 'y'))
 
-# Reproject and save
-ecosystem <- sf::st_as_sf(ecosystem, coords = c('x', 'y'),
-                          crs = 'EPSG:3175')
-ecosystem <- sf::st_transform(ecosystem, crs = 'EPSG:4326')
-ecosystem <- sfheaders::sf_to_df(ecosystem, fill = TRUE)
-ecosystem <- dplyr::select(ecosystem, -sfg_id, -point_id)
+# We run into a problem where the coordinates get off by like 0.000000001 degree
+# after doing all the reprojections. Just replace the coordinates
+ecosystem_matched$x <- ecosystem$x
+ecosystem_matched$y <- ecosystem$y
 
-taxon <- sf::st_as_sf(taxon, coords = c('x', 'y'),
-                      crs = 'EPSG:3175')
-taxon <- sf::st_transform(taxon, crs = 'EPSG:4326')
-taxon <- sfheaders::sf_to_df(taxon, fill = TRUE)
-taxon <- dplyr::select(taxon, -sfg_id, -point_id)
+taxon_matched$x <- taxon$x
+taxon_matched$y <- taxon$y
 
-save(ecosystem, taxon, file = 'data/processed/PLS/total_matched.RData')
+save(ecosystem_matched, taxon_matched, file = 'data/processed/PLS/total_matched.RData')
 
 ## Individual states
+
+rm(list = ls())
+
+load('data/processed/PLS/matching_intermediate.RData')
 
 # Illinois
 load('data/processed/PLS/illinois_format.RData')
@@ -2700,30 +2710,34 @@ illinois_ecosystem <- sfheaders::sf_to_df(illinois_ecosystem, fill = TRUE)
 illinois_ecosystem <- dplyr::select(illinois_ecosystem, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to each dataframe
-illinois <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = illinois, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+illinois_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = illinois, by = c('x', 'y'))
 
-illinois_ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = illinois_ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+illinois_ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = illinois_ecosystem, by = c('x', 'y'))
 
-# Reproject again and save
-illinois <- sf::st_as_sf(illinois, coords = c('x', 'y'),
-                         crs = 'EPSG:3175')
-illinois <- sf::st_transform(illinois, crs = 'EPSG:4326')
-illinois <- sfheaders::sf_to_df(illinois, fill = TRUE)
-illinois <- dplyr::select(illinois, -sfg_id, -point_id)
+# Replace coords
+identical(illinois$x, illinois_matched$x)
+identical(illinois$y, illinois_matched$y)
+identical(illinois_ecosystem$x, illinois_ecosystem_matched$x)
+identical(illinois_ecosystem$y, illinois_ecosystem_matched$y)
 
-illinois_ecosystem <- sf::st_as_sf(illinois_ecosystem, coords = c('x', 'y'),
-                                   crs = 'EPSG:3175')
-illinois_ecosystem <- sf::st_transform(illinois_ecosystem, crs = 'EPSG:4326')
-illinois_ecosystem <- sfheaders::sf_to_df(illinois_ecosystem, fill = TRUE)
-illinois_ecosystem <- dplyr::select(illinois_ecosystem, -sfg_id, -point_id)
+# Load PLS dataset so we can replace the coordinates instead of
+# re-projecting again
+load('data/processed/PLS/illinois_format.RData')
+illinois_matched$x <- illinois$x
+illinois_matched$y <- illinois$y
 
-save(illinois, illinois_ecosystem, file = 'data/processed/PLS/illinois_matched.RData')
+illinois_ecosystem_matched$x <- illinois_ecosystem$x
+illinois_ecosystem_matched$y <- illinois_ecosystem$y
+
+save(illinois_matched, illinois_ecosystem_matched, file = 'data/processed/PLS/illinois_matched.RData')
 
 # Indiana
 load('data/processed/PLS/indiana_format.RData')
@@ -2742,30 +2756,34 @@ indiana_ecosystem <- sfheaders::sf_to_df(indiana_ecosystem, fill = TRUE)
 indiana_ecosystem <- dplyr::select(indiana_ecosystem, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to each dataframe
-indiana <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = indiana, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+indiana_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = indiana, by = c('x', 'y'))
 
-indiana_ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = indiana_ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+indiana_ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = indiana_ecosystem, by = c('x', 'y'))
 
-# Reproject again and save
-indiana <- sf::st_as_sf(indiana, coords = c('x', 'y'),
-                        crs = 'EPSG:3175')
-indiana <- sf::st_transform(indiana, crs = 'EPSG:4326')
-indiana <- sfheaders::sf_to_df(indiana, fill = TRUE)
-indiana <- dplyr::select(indiana, -sfg_id, -point_id)
+# Replace coords
+identical(indiana$x, indiana_matched$x)
+identical(indiana$y, indiana_matched$y)
+identical(indiana_ecosystem$x, indiana_ecosystem_matched$x)
+identical(indiana_ecosystem$y, indiana_ecosystem_matched$y)
 
-indiana_ecosystem <- sf::st_as_sf(indiana_ecosystem, coords = c('x', 'y'),
-                                  crs = 'EPSG:3175')
-indiana_ecosystem <- sf::st_transform(indiana_ecosystem, crs = 'EPSG:4326')
-indiana_ecosystem <- sfheaders::sf_to_df(indiana_ecosystem, fill = TRUE)
-indiana_ecosystem <- dplyr::select(indiana_ecosystem, -sfg_id, -point_id)
+# Load PLS dataset so we can replace the coordinates instead of
+# re-projecting again
+load('data/processed/PLS/indiana_format.RData')
+indiana_matched$x <- indiana$x
+indiana_matched$y <- indiana$y
 
-save(indiana, indiana_ecosystem, file = 'data/processed/PLS/indiana_matched.RData')
+indiana_ecosystem_matched$x <- indiana_ecosystem$x
+indiana_ecosystem_matched$y <- indiana_ecosystem$y
+
+save(indiana_matched, indiana_ecosystem_matched, file = 'data/processed/PLS/indiana_matched.RData')
 
 # Michigan
 load('data/processed/PLS/lowmichigan_process.RData')
@@ -2784,35 +2802,38 @@ lowmichigan_ecosystem <- sfheaders::sf_to_df(lowmichigan_ecosystem, fill = TRUE)
 lowmichigan_ecosystem <- dplyr::select(lowmichigan_ecosystem, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to each dataframe
-lowmichigan <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = lowmichigan, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+lowmichigan_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = lowmichigan, by = c('x', 'y'))
 
-lowmichigan_ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = lowmichigan_ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+lowmichigan_ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = lowmichigan_ecosystem, by = c('x', 'y'))
 
-# Reproject again and save
-lowmichigan <- sf::st_as_sf(lowmichigan, coords = c('x', 'y'),
-                            crs = 'EPSG:3175')
-lowmichigan <- sf::st_transform(lowmichigan, crs = 'EPSG:4326')
-lowmichigan <- sfheaders::sf_to_df(lowmichigan, fill = TRUE)
-lowmichigan <- dplyr::select(lowmichigan, -sfg_id, -point_id)
+# Replace coords
+identical(lowmichigan$x, lowmichigan_matched$x)
+identical(lowmichigan$y, lowmichigan_matched$y)
+identical(lowmichigan_ecosystem$x, lowmichigan_ecosystem_matched$x)
+identical(lowmichigan_ecosystem$y, lowmichigan_ecosystem_matched$y)
 
-lowmichigan_ecosystem <- sf::st_as_sf(lowmichigan_ecosystem, coords = c('x', 'y'),
-                                      crs = 'EPSG:3175')
-lowmichigan_ecosystem <- sf::st_transform(lowmichigan_ecosystem, crs = 'EPSG:4326')
-lowmichigan_ecosystem <- sfheaders::sf_to_df(lowmichigan_ecosystem, fill = TRUE)
-lowmichigan_ecosystem <- dplyr::select(lowmichigan_ecosystem, -sfg_id, -point_id)
+# Load PLS dataset so we can replace the coordinates instead of
+# re-projecting again
+load('data/processed/PLS/lowmichigan_process.RData')
+lowmichigan_matched$x <- lowmichigan$x
+lowmichigan_matched$y <- lowmichigan$y
 
-save(lowmichigan, lowmichigan_ecosystem, file = 'data/processed/PLS/lowmichigan_matched.RData')
+lowmichigan_ecosystem_matched$x <- lowmichigan_ecosystem$x
+lowmichigan_ecosystem_matched$y <- lowmichigan_ecosystem$y
 
-# Reproject
+save(lowmichigan_matched, lowmichigan_ecosystem_matched, file = 'data/processed/PLS/lowmichigan_matched.RData')
 
 load('data/processed/PLS/upmichigan_process.RData')
 
+# Reproject
 upmichigan <- sf::st_as_sf(upmichigan, coords = c('x', 'y'),
                            crs = 'EPSG:4326')
 upmichigan <- sf::st_transform(upmichigan, crs = 'EPSG:3175')
@@ -2826,30 +2847,34 @@ upmichigan_ecosystem <- sfheaders::sf_to_df(upmichigan_ecosystem, fill = TRUE)
 upmichigan_ecosystem <- dplyr::select(upmichigan_ecosystem, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to each dataframe
-upmichigan <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = upmichigan, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+upmichigan_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = upmichigan, by = c('x', 'y'))
 
-upmichigan_ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = upmichigan_ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+upmichigan_ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = upmichigan_ecosystem, by = c('x', 'y'))
 
-# Reproject again and save
-upmichigan <- sf::st_as_sf(upmichigan, coords = c('x', 'y'),
-                           crs = 'EPSG:3175')
-upmichigan <- sf::st_transform(upmichigan, crs = 'EPSG:4326')
-upmichigan <- sfheaders::sf_to_df(upmichigan, fill = TRUE)
-upmichigan <- dplyr::select(upmichigan, -sfg_id, -point_id)
+# Replace coords
+identical(upmichigan$x, upmichigan_matched$x)
+identical(upmichigan$y, upmichigan_matched$y)
+identical(upmichigan_ecosystem$x, upmichigan_ecosystem_matched$x)
+identical(upmichigan_ecosystem$y, upmichigan_ecosystem_matched$y)
 
-upmichigan_ecosystem <- sf::st_as_sf(upmichigan_ecosystem, coords = c('x', 'y'),
-                                     crs = 'EPSG:3175')
-upmichigan_ecosystem <- sf::st_transform(upmichigan_ecosystem, crs = 'EPSG:4326')
-upmichigan_ecosystem <- sfheaders::sf_to_df(upmichigan_ecosystem, fill = TRUE)
-upmichigan_ecosystem <- dplyr::select(upmichigan_ecosystem, -sfg_id, -point_id)
+# Load PLS dataset so we can replace the coordinates instead of
+# re-projecting again
+load('data/processed/PLS/upmichigan_process.RData')
+upmichigan_matched$x <- upmichigan$x
+upmichigan_matched$y <- upmichigan$y
 
-save(upmichigan, upmichigan_ecosystem, file = 'data/processed/PLS/upmichigan_matched.RData')
+upmichigan_ecosystem_matched$x <- upmichigan_ecosystem$x
+upmichigan_ecosystem_matched$y <- upmichigan_ecosystem$y
+
+save(upmichigan_matched, upmichigan_ecosystem_matched, file = 'data/processed/PLS/upmichigan_matched.RData')
 
 # Minnesota
 load('data/processed/PLS/minnesota_process.RData')
@@ -2868,30 +2893,34 @@ minnesota_ecosystem <- sfheaders::sf_to_df(minnesota_ecosystem, fill = TRUE)
 minnesota_ecosystem <- dplyr::select(minnesota_ecosystem, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to each dataframe
-minnesota <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = minnesota, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+minnesota_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = minnesota, by = c('x', 'y'))
 
-minnesota_ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = minnesota_ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+minnesota_ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = minnesota_ecosystem, by = c('x', 'y'))
 
-# Reproject again and save
-minnesota <- sf::st_as_sf(minnesota, coords = c('x', 'y'),
-                          crs = 'EPSG:3175')
-minnesota <- sf::st_transform(minnesota, crs = 'EPSG:4326')
-minnesota <- sfheaders::sf_to_df(minnesota, fill = TRUE)
-minnesota <- dplyr::select(minnesota, -sfg_id, -point_id)
+# Replace coords
+identical(minnesota$x, minnesota_matched$x)
+identical(minnesota$y, minnesota_matched$y)
+identical(minnesota_ecosystem$x, minnesota_ecosystem_matched$x)
+identical(minnesota_ecosystem$y, minnesota_ecosystem_matched$y)
 
-minnesota_ecosystem <- sf::st_as_sf(minnesota_ecosystem, coords = c('x', 'y'),
-                                    crs = 'EPSG:3175')
-minnesota_ecosystem <- sf::st_transform(minnesota_ecosystem, crs = 'EPSG:4326')
-minnesota_ecosystem <- sfheaders::sf_to_df(minnesota_ecosystem, fill = TRUE)
-minnesota_ecosystem <- dplyr::select(minnesota_ecosystem, -sfg_id, -point_id)
+# Load PLS dataset so we can replace the coordinates instead of
+# re-projecting again
+load('data/processed/PLS/minnesota_process.RData')
+minnesota_matched$x <- minnesota$x
+minnesota_matched$y <- minnesota$y
 
-save(minnesota, minnesota_ecosystem, file = 'data/processed/PLS/minnesota_matched.RData')
+minnesota_ecosystem_matched$x <- minnesota_ecosystem$x
+minnesota_ecosystem_matched$y <- minnesota_ecosystem$y
+
+save(minnesota_matched, minnesota_ecosystem_matched, file = 'data/processed/PLS/minnesota_matched.RData')
 
 # Wisconsin
 load('data/processed/PLS/wisconsin_process.RData')
@@ -2910,27 +2939,31 @@ wisconsin_ecosystem <- sfheaders::sf_to_df(wisconsin_ecosystem, fill = TRUE)
 wisconsin_ecosystem <- dplyr::select(wisconsin_ecosystem, -sfg_id, -point_id)
 
 # Add corresponding grid cell ID to each dataframe
-wisconsin <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = wisconsin, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+wisconsin_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = wisconsin, by = c('x', 'y'))
 
-wisconsin_ecosystem <- save_point_grid |>
-  dplyr::select(x, y, id) |>
-  dplyr::right_join(y = wisconsin_ecosystem, by = c('x', 'y')) |>
-  dplyr::rename(grid_ID = id)
+wisconsin_ecosystem_matched <- point_grid_match |>
+  dplyr::select(point_x, point_y, grid_id, ecosystem_id) |>
+  dplyr::rename(x = point_x,
+                y = point_y) |>
+  dplyr::right_join(y = wisconsin_ecosystem, by = c('x', 'y'))
 
-# Reproject again and save
-wisconsin <- sf::st_as_sf(wisconsin, coords = c('x', 'y'),
-                          crs = 'EPSG:3175')
-wisconsin <- sf::st_transform(wisconsin, crs = 'EPSG:4326')
-wisconsin <- sfheaders::sf_to_df(wisconsin, fill = TRUE)
-wisconsin <- dplyr::select(wisconsin, -sfg_id, -point_id)
+# Replace coords
+identical(wisconsin$x, wisconsin_matched$x)
+identical(wisconsin$y, wisconsin_matched$y)
+identical(wisconsin_ecosystem$x, wisconsin_ecosystem_matched$x)
+identical(wisconsin_ecosystem$y, wisconsin_ecosystem_matched$y)
 
-wisconsin_ecosystem <- sf::st_as_sf(wisconsin_ecosystem, coords = c('x', 'y'),
-                                    crs = 'EPSG:3175')
-wisconsin_ecosystem <- sf::st_transform(wisconsin_ecosystem, crs = 'EPSG:4326')
-wisconsin_ecosystem <- sfheaders::sf_to_df(wisconsin_ecosystem, fill = TRUE)
-wisconsin_ecosystem <- dplyr::select(wisconsin_ecosystem, -sfg_id, -point_id)
+# Load PLS dataset so we can replace the coordinates instead of
+# re-projecting again
+load('data/processed/PLS/wisconsin_process.RData')
+wisconsin_matched$x <- wisconsin$x
+wisconsin_matched$y <- wisconsin$y
 
-save(wisconsin, wisconsin_ecosystem, file = 'data/processed/PLS/wisconsin_matched.RData')
+wisconsin_ecosystem_matched$x <- wisconsin_ecosystem$x
+wisconsin_ecosystem_matched$y <- wisconsin_ecosystem$y
+
+save(wisconsin_matched, wisconsin_ecosystem_matched, file = 'data/processed/PLS/wisconsin_matched.RData')
