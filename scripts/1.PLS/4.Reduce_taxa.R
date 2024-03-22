@@ -381,3 +381,16 @@ freq2 |>
 
 # Save
 save(wisconsin_matched, wisconsin_ecosystem_matched, file = 'data/processed/PLS/wisconsin_matched.RData')
+
+## Now do the same for gridded data
+
+load('data/processed/PLS/8km.RData')
+
+comp_dens2 <- comp_dens |>
+  dplyr::mutate(other_hardwood2 = other_hardwood + cherry + dogwood + gum + walnut) |>
+  dplyr::select(-other_hardwood, -cherry, -dogwood, -gum, -walnut) |>
+  dplyr::rename(other_hardwood = other_hardwood2)
+comp_dens <- comp_dens2
+
+# Save
+save(comp_dens, file = 'data/processed/PLS/8km.RData')
