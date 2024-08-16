@@ -53,43 +53,43 @@ indiana <- indiana_raw |>
   # rename the taxa
   # we group some taxa here to be consistent with the ecology of the region
   # and to simplify the number of taxonomic categories
-  dplyr::mutate(species = dplyr::if_else(species == 'No tree', 'no_tree', species),
-                species = dplyr::if_else(species == 'Oak', 'oak', species),
-                species = dplyr::if_else(species == 'Elm', 'elm', species),
-                species = dplyr::if_else(species == 'Beech', 'beech', species),
-                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
-                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+  dplyr::mutate(species = dplyr::if_else(species == 'Alder', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Ash', 'ash', species),
-                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Maple', 'maple', species),
-                species = dplyr::if_else(species == 'Sweet gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Black gum/sweet gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Sycamore', 'sycamore', species),
-                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
-                species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
-                species = dplyr::if_else(species == 'Birch', 'birch', species),
                 species = dplyr::if_else(species == 'Basswood', 'basswood', species),
-                species = dplyr::if_else(species == 'Mulberry', 'mulberry', species),
-                species = dplyr::if_else(species == 'Locust', 'locust', species),
-                species = dplyr::if_else(species == 'Pine', 'pine', species),
-                species = dplyr::if_else(species == 'Unknown tree', 'unknown_tree', species),
+                species = dplyr::if_else(species == 'Beech', 'beech', species),
+                species = dplyr::if_else(species == 'Birch', 'birch', species),
                 species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Buckeye', 'buckeye', species),
-                species = dplyr::if_else(species == 'Willow', 'willow', species),
-                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
-                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
-                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
-                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
+                species = dplyr::if_else(species == 'Black gum/sweet gum', 'blackgum_sweetgum', species),
+                species = dplyr::if_else(species == 'Buckeye', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
-                species = dplyr::if_else(species == 'Chestnut', 'chestnut', species),
+                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Chestnut', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
+                species = dplyr::if_else(species == 'Elm', 'elm', species),
+                species = dplyr::if_else(species == 'Hackberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
+                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
+                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
+                species = dplyr::if_else(species == 'Locust', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Maple', 'maple', species),
+                species = dplyr::if_else(species == 'Mulberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
+                species = dplyr::if_else(species == 'Oak', 'oak', species),
+                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Pine', 'pine', species),
+                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Sweet gum', 'blackgum_sweetgum', species),
+                species = dplyr::if_else(species == 'Sycamore', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
                 species = dplyr::if_else(species == 'Tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Bald cypress', 'cypress', species),
-                species = dplyr::if_else(species == 'Alder', 'alder', species),
-                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species)) |>
+                species = dplyr::if_else(species == 'Unknown tree', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
+                species = dplyr::if_else(species == 'Willow', 'other_hardwood', species)) |>
   # Remove level3a categories that are not trees
   dplyr::filter(species != 'No data',
-                species != 'Water')
+                species != 'Water',
+                species != 'Bald cypress')
 
 # Convert coordinates
 # make a spatial object
@@ -144,6 +144,7 @@ indiana_ecosystem |>
 save(indiana, indiana_ecosystem, file = 'data/processed/PLS/indiana_format.RData')
 
 #### ILLINOIS ####
+
 rm(list = ls())
 
 illinois_raw <- readr::read_csv('data/raw/pls/ndilpls_v2.1.csv')
@@ -186,39 +187,39 @@ illinois <- illinois_raw |>
   dplyr::left_join(y = translation, by = 'level1') |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
-  dplyr::mutate(species = dplyr::if_else(species == 'Oak', 'oak', species),
-                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
-                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
-                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
-                species = dplyr::if_else(species == 'Elm', 'elm', species),
-                species = dplyr::if_else(species == 'Ash', 'ash', species),
-                species = dplyr::if_else(species == 'Black gum/sweet gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
-                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Maple', 'maple', species),
-                species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
-                species = dplyr::if_else(species == 'Mulberry', 'mulberry', species),
-                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
-                species = dplyr::if_else(species == 'Locust', 'locust', species),
-                species = dplyr::if_else(species == 'Unknown tree', 'unknown_tree', species),
-                species = dplyr::if_else(species == 'Bald cypress', 'cypress', species),
-                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
-                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+  dplyr::mutate(species = dplyr::if_else(species == 'Ash', 'ash', species),
                 species = dplyr::if_else(species == 'Basswood', 'basswood', species),
-                species = dplyr::if_else(species == 'Sycamore', 'sycamore', species),
-                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
                 species = dplyr::if_else(species == 'Beech', 'beech', species),
-                species = dplyr::if_else(species == 'Willow', 'willow', species),
-                species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
                 species = dplyr::if_else(species == 'Birch', 'birch', species),
+                species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
+                species = dplyr::if_else(species == 'Black gum/sweet gum', 'blackgum_sweetgum', species),
+                species = dplyr::if_else(species == 'Buckeye', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
+                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
+                species = dplyr::if_else(species == 'Elm', 'elm', species),
+                species = dplyr::if_else(species == 'Hackberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
+                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
+                species = dplyr::if_else(species == 'Locust', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Maple', 'maple', species),
+                species = dplyr::if_else(species == 'Mulberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
+                species = dplyr::if_else(species == 'Oak', 'oak', species),
+                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Pine', 'pine', species),
+                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
                 species = dplyr::if_else(species == 'Sweet gum', 'blackgum_sweetgum', species),
+                species = dplyr::if_else(species == 'Sycamore', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
-                species = dplyr::if_else(species == 'Buckeye', 'buckeye', species),
                 species = dplyr::if_else(species == 'Tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species)) |>
+                species = dplyr::if_else(species == 'Unknown tree', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
+                species = dplyr::if_else(species == 'Willow', 'other_hardwood', species)) |>
   dplyr::filter(species != 'Water',
-                species != 'No data')
+                species != 'No data',
+                species != 'Bald cypress')
 
 # Convert coordinates
 illinois <- sf::st_as_sf(illinois, coords = c('x', 'y'))
@@ -268,6 +269,7 @@ illinois_ecosystem |>
 save(illinois, illinois_ecosystem, file = 'data/processed/PLS/illinois_format.RData')
 
 #### WISCONSIN ####
+
 rm(list = ls())
 
 wisconsin_raw <- readr::read_csv('data/raw/pls/PLS_Wisconsin_trees_Level0_v1.0.csv')
@@ -304,34 +306,33 @@ wisconsin <- wisconsin_raw |>
   dplyr::left_join(translation, by = 'level1') |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
-  dplyr::mutate(species = dplyr::if_else(species == 'Spruce', 'spruce', species),
-                species = dplyr::if_else(species == 'Birch', 'birch', species),
-                species = dplyr::if_else(species == 'Fir', 'fir', species),
-                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
-                species = dplyr::if_else(species == 'Maple', 'maple', species),
-                species = dplyr::if_else(species == 'No tree' & tree == 'SP1', 'no_tree', species),
-                species = dplyr::if_else(species == 'No tree' & tree %in% c('SP2', 'SP3', 'SP4'), 'NA', species),
+  dplyr::mutate(species = dplyr::if_else(species == 'Alder', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Ash', 'ash', species),
                 species = dplyr::if_else(species == 'Basswood', 'basswood', species),
+                species = dplyr::if_else(species == 'Beech', 'beech', species),
+                species = dplyr::if_else(species == 'Birch', 'birch', species),
                 species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
+                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
+                species = dplyr::if_else(species == 'Elm', 'elm', species),
+                species = dplyr::if_else(species == 'Fir', 'fir', species),
+                species = dplyr::if_else(species == 'Hackberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
+                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
                 species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
+                species = dplyr::if_else(species == 'Maple', 'maple', species),
+                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
                 species = dplyr::if_else(species == 'Oak', 'oak', species),
+                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Pine', 'pine', species),
                 species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Ash', 'ash', species),
+                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
+                species = dplyr::if_else(species == 'Sycamore', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
-                species = dplyr::if_else(species == 'Elm', 'elm', species),
-                species = dplyr::if_else(species == 'Beech', 'beech', species),
-                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
-                species = dplyr::if_else(species == 'Willow', 'willow', species),
-                species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
-                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
-                species = dplyr::if_else(species == 'Alder', 'alder', species),
-                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
-                species = dplyr::if_else(species == 'Unknown tree', 'unknown_tree', species),
-                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
                 species = dplyr::if_else(species == 'Tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Sycamore', 'sycamore', species),
-                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species)) |>
+                species = dplyr::if_else(species == 'Unknown tree', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
+                species = dplyr::if_else(species == 'Willow', 'other_hardwood', species)) |>
   dplyr::filter(species != 'Water',
                 species != 'No data',
                 species != 'NA')
@@ -380,6 +381,7 @@ wisconsin_ecosystem |>
 save(wisconsin, wisconsin_ecosystem, file = 'data/processed/PLS/wisconsin_process.RData')
 
 #### MINNESOTA ####
+
 rm(list = ls())
 
 minnesota_raw <- readr::read_csv('data/raw/pls/PLS_Minnesota_trees_Level0_v1.0.csv')
@@ -412,7 +414,6 @@ duplicates_removed <- minnesota_raw |>
 
 duplicate_corners <- duplicates_removed |>
   janitor::get_dupes(x_alb, y_alb)
-
 
 states <- sf::st_as_sf(maps::map('state', region = 'minnesota',
                                  fill = TRUE, plot = FALSE))
@@ -513,31 +514,32 @@ minnesota <- minnesota |>
   dplyr::left_join(translation, by = 'level1') |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
-  dplyr::mutate(species = dplyr::if_else(species == 'Ash', 'ash', species),
-                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
-                species = dplyr::if_else(species == 'Fir', 'fir', species),
-                species = dplyr::if_else(species == 'Birch', 'birch', species),
-                species = dplyr::if_else(species == 'Pine', 'pine', species),
-                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
-                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Maple', 'maple', species),
+  dplyr::mutate(species = dplyr::if_else(species == 'Alder', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Ash', 'ash', species),
                 species = dplyr::if_else(species == 'Basswood', 'basswood', species),
-                species = dplyr::if_else(species == 'Elm', 'elm', species),
-                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
-                species = dplyr::if_else(species == 'Oak', 'oak', species),
-                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
-                species = dplyr::if_else(species == 'Willow', 'willow', species),
-                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
-                species = dplyr::if_else(species == 'Alder', 'alder', species),
-                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
-                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
-                species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
-                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
                 species = dplyr::if_else(species == 'Beech', 'beech', species),
+                species = dplyr::if_else(species == 'Birch', 'birch', species),
+                species = dplyr::if_else(species == 'Buckeye', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
+                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Elm', 'elm', species),
+                species = dplyr::if_else(species == 'Fir', 'fir', species),
+                species = dplyr::if_else(species == 'Hackberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
+                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
+                species = dplyr::if_else(species == 'Maple', 'maple', species),
+                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
+                species = dplyr::if_else(species == 'Oak', 'oak', species),
                 species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
-                species = dplyr::if_else(species == 'Buckeye', 'buckeye', species),
-                species = dplyr::if_else(species == 'Sycamore', 'sycamore', species)) |>
-  dplyr::filter(species != 'Missing')
+                species = dplyr::if_else(species == 'Pine', 'pine', species),
+                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
+                species = dplyr::if_else(species == 'Sycamore', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
+                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
+                species = dplyr::if_else(species == 'Willow', 'other_hardwood', species)) |>
+  dplyr::filter(species != 'Missing',
+                !is.na(species))
 
 # Convert coordinates
 minnesota <- sf::st_as_sf(minnesota, coords = c('x_alb', 'y_alb'))
@@ -583,6 +585,7 @@ minnesota_ecosystem |>
 save(minnesota, minnesota_ecosystem, file = 'data/processed/PLS/minnesota_process.RData')
 
 #### UPPER MICHIGAN ####
+
 rm(list = ls())
 
 upmichigan_raw <- readr::read_csv('data/raw/pls/PLS_northernMichigan_trees_Level0_v1.0.csv')
@@ -637,36 +640,34 @@ upmichigan <- upmichigan |>
   dplyr::left_join(translation, by = 'level1') |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
-  dplyr::mutate(species = dplyr::if_else(species == 'Birch', 'birch', species),
-                species = dplyr::if_else(species == 'No tree' & tree == 'SP1', 'no_tree', species),
-                species = dplyr::if_else(species == 'No tree' & tree %in% c('SP2', 'SP3', 'SP4'), 'NA', species),
-                species = dplyr::if_else(species == 'Maple', 'maple', species),
-                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
-                species = dplyr::if_else(species == 'Elm', 'elm', species),
-                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
-                species = dplyr::if_else(species == 'Fir', 'fir', species),
-                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Pine', 'pine', species),
-                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
-                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
-                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
-                species = dplyr::if_else(species == 'Oak', 'oak', species),
-                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
-                species = dplyr::if_else(species == 'Basswood', 'basswood', species),
+  dplyr::mutate(species = dplyr::if_else(species == 'Alder', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Ash', 'ash', species),
-                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
-                species = dplyr::if_else(species == 'Unknown tree', 'unknown_tree', species),
-                species = dplyr::if_else(species == 'Willow', 'willow', species),
+                species = dplyr::if_else(species == 'Basswood', 'basswood', species),
                 species = dplyr::if_else(species == 'Beech', 'beech', species),
-                species = dplyr::if_else(species == 'Alder', 'alder', species),
-                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
-                species = dplyr::if_else(species == 'Sycamore', 'sycamore', species),
-                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
-                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
-                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
+                species = dplyr::if_else(species == 'Birch', 'birch', species),
                 species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
-                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species)) |>
+                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
+                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
+                species = dplyr::if_else(species == 'Elm', 'elm', species),
+                species = dplyr::if_else(species == 'Fir', 'fir', species),
+                species = dplyr::if_else(species == 'Hackberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
+                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
+                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
+                species = dplyr::if_else(species == 'Maple', 'maple', species),
+                species = dplyr::if_else(species == 'No tree', 'no_tree', species),
+                species = dplyr::if_else(species == 'Oak', 'oak', species),
+                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Pine', 'pine', species),
+                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
+                species = dplyr::if_else(species == 'Sycamore', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
+                species = dplyr::if_else(species == 'Unknown tree', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
+                species = dplyr::if_else(species == 'Willow', 'other_hardwood', species)) |>
   dplyr::filter(species != 'Missing',
                 species != 'NA')
 
@@ -713,6 +714,7 @@ upmichigan_ecosystem |>
 save(upmichigan, upmichigan_ecosystem, file = 'data/processed/PLS/upmichigan_process.RData')
 
 #### LOWER MICHIGAN ####
+
 rm(list = ls())
 
 lowmichigan_raw <- readr::read_csv('data/raw/pls/PLS_southernMichigan_trees_Level0_v1.0.csv')
@@ -768,40 +770,39 @@ lowmichigan <- lowmichigan |>
   dplyr::left_join(translation, by = 'level1') |>
   dplyr::select(-level1) |>
   dplyr::rename(species = level3a) |>
-  dplyr::mutate(species = dplyr::if_else(species == 'Basswood', 'basswood', species),
-                species = dplyr::if_else(species == 'Beech', 'beech', species),
-                species = dplyr::if_else(species == 'Elm', 'elm', species),
-                species = dplyr::if_else(species == 'Maple', 'maple', species),
+  dplyr::mutate(species = dplyr::if_else(species == 'Alder', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Ash', 'ash', species),
-                species = dplyr::if_else(species == 'Oak', 'oak', species),
-                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Basswood', 'basswood', species),
+                species = dplyr::if_else(species == 'Beech', 'beech', species),
                 species = dplyr::if_else(species == 'Birch', 'birch', species),
-                species = dplyr::if_else(species == 'Sycamore', 'sycamore', species),
-                species = dplyr::if_else(species == 'Tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
-                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
-                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
-                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
-                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Unknown tree', 'unknown_tree', species),
-                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
-                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
-                species = dplyr::if_else(species == 'Pine', 'pine', species),
-                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
-                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
-                species = dplyr::if_else(species == 'Willow', 'willow', species),
-                species = dplyr::if_else(species == 'Black gum/sweet gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Alder', 'alder', species),
-                species = dplyr::if_else(species == 'Hackberry', 'hackberry', species),
-                species = dplyr::if_else(species == 'Mulberry', 'mulberry', species),
-                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
                 species = dplyr::if_else(species == 'Black gum', 'blackgum_sweetgum', species),
-                species = dplyr::if_else(species == 'Fir', 'fir', species),
-                species = dplyr::if_else(species == 'Buckeye', 'buckeye', species),
+                species = dplyr::if_else(species == 'Black gum/sweet gum', 'blackgum_sweetgum', species),
+                species = dplyr::if_else(species == 'Buckeye', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Cedar/juniper', 'cedar_juniper', species),
+                species = dplyr::if_else(species == 'Cherry', 'cherry', species),
+                species = dplyr::if_else(species == 'Chestnut', 'other_hardwood', species),
                 species = dplyr::if_else(species == 'Dogwood', 'dogwood', species),
-                species = dplyr::if_else(species == 'Chestnut', 'chestnut', species)) |>
-  dplyr::filter(!is.na(species)) |>
-  dplyr::distinct()
+                species = dplyr::if_else(species == 'Elm', 'elm', species),
+                species = dplyr::if_else(species == 'Fir', 'fir', species),
+                species = dplyr::if_else(species == 'Hackberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Hemlock', 'hemlock', species),
+                species = dplyr::if_else(species == 'Hickory', 'hickory', species),
+                species = dplyr::if_else(species == 'Ironwood', 'ironwood', species),
+                species = dplyr::if_else(species == 'Maple', 'maple', species),
+                species = dplyr::if_else(species == 'Mulberry', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Oak', 'oak', species),
+                species = dplyr::if_else(species == 'Other hardwood', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Pine', 'pine', species),
+                species = dplyr::if_else(species == 'Poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Poplar/tulip poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Spruce', 'spruce', species),
+                species = dplyr::if_else(species == 'Sycamore', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Tamarack', 'tamarack', species),
+                species = dplyr::if_else(species == 'Tulip poplar', 'poplar_tulippoplar', species),
+                species = dplyr::if_else(species == 'Unknown tree', 'other_hardwood', species),
+                species = dplyr::if_else(species == 'Walnut', 'walnut', species),
+                species = dplyr::if_else(species == 'Willow', 'other_hardwood', species)) |>
+  dplyr::filter(!is.na(species))
 
 # Convert coordinates
 lowmichigan <- sf::st_as_sf(lowmichigan, coords = c('point_x', 'point_y'))
@@ -846,6 +847,7 @@ lowmichigan_ecosystem |>
 save(lowmichigan, lowmichigan_ecosystem, file = 'data/processed/PLS/lowmichigan_process.RData')
 
 #### AGGREGATE ####
+
 rm(list = ls())
 
 load('data/processed/PLS/illinois_format.RData')
