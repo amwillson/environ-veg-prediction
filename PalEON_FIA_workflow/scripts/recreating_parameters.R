@@ -13,6 +13,8 @@
 ## 7. Average plots in each grid cell
 ## 8. Process PalEON output
 ## 9. Compare with previous PalEON products
+## 10. Remove coordinate outliers
+## 11. Compare gridded parameters with and without removing outliers
 
 rm(list = ls())
 
@@ -503,3 +505,145 @@ both_fractional_composition_agg |>
                                    color = taxon)) +
   ggplot2::geom_abline() +
   ggplot2::theme_minimal()
+
+#### 10. Remove coordinate outliers ####
+
+## As seen in section 3, a small number of plots have swapped/fuzzed
+## plot coordinates that are very far away from the grid centroid.
+## Let's remove any plots with coordinates >25 km away from the grid
+## centroids and see how much of an impact this has on our parameter estimates
+## Here, I redo all the steps in sections 4-7 after removing these plots
+
+# Remove plots > 25 km away from grid centroid
+# Removes 37 plots/>10,000
+grid_TOTAL_FIA_outliers <- grid_TOTAL_FIA_sub |>
+  dplyr::mutate(diff_x = abs(grid_x - point_x),
+                diff_y = abs(grid_y - point_y)) |>
+  dplyr::filter(diff_x <= 25000 & diff_y <= 25000)
+
+# Assign PalEON taxon classifications
+grid_TOTAL_FIA_outliers <- paleon_taxa |>
+  dplyr::select(spcd, PalEON) |>
+  dplyr::right_join(y = grid_TOTAL_FIA_outliers, by = 'spcd') |>
+  dplyr::rename(taxon = PalEON)
+
+# Calculate density per plot
+stem_density_outliers <- grid_TOTAL_FIA_outliers |>
+  # Count number of trees
+  dplyr::count(statecd, # in the same state
+               cell, # in the same grid cell
+               grid_x, grid_y, # that have the same coordiantes
+               plt_cn, # in the same plot
+               taxon, # that are the same PalEON taxon
+               spcd, # that are the same species
+               tpa_unadj) |> # with the same tree per acre conversion
+  # Calculate density = number of trees * tree per acre conversion * acre to hectare conversion
+  dplyr::mutate(ind_density = n * tpa_unadj * (1/0.404686)) |>
+  # Group by same variables to retain them
+  # (except tpa and ind. species because we need to sum over)
+  dplyr::group_by(statecd, cell, grid_x, grid_y,
+                  plt_cn, taxon) |>
+  # Sum density of trees of the same species and plot
+  # across conversion factors
+  dplyr::summarize(density = sum(ind_density))
+
+# Total stem density
+total_stem_density_outliers <- stem_density_outliers |>
+  dplyr::group_by(plt_cn) |>
+  dplyr::summarize(total_density = sum(density))
+
+# Add to taxon-level dataframe
+stem_density_outliers <- stem_density_outliers |>
+  dplyr::left_join(y = total_stem_density_outliers,
+                   by = 'plt_cn')
+
+# Average stem density plots in each grid cell
+stem_density_agg_outliers <- stem_density_outliers |>
+  # Group by
+  dplyr::group_by(statecd, # state
+                  cell, # grid cell
+                  grid_x, grid_y, # coordinates
+                  taxon) |> # taxon
+  dplyr::summarize(stem_density = mean(density))
+
+# Total stem density per grid cell
+total_stem_density_agg_outliers <- stem_density_agg_outliers |>
+  dplyr::group_by(cell) |>
+  dplyr::summarize(total_stem_density = sum(stem_density))
+
+stem_density_agg_outliers <- stem_density_agg_outliers |>
+  dplyr::left_join(y = total_stem_density_agg_outliers,
+                   by = 'cell')
+
+# Fractional cmoposition at grid level
+fractional_composition_agg_outliers <- stem_density_agg_outliers |>
+  dplyr::mutate(fcomp = stem_density / total_stem_density)
+
+#### 11. Effect of removing outliers ####
+
+## Compare the outputs with and without the outlier plots like in section 9
+
+# Join stem density with and without outliers
+# "outlier_" denotes that outliers have been REMOVED
+both_stem_density_agg <- stem_density_agg |>
+  dplyr::full_join(y = stem_density_agg_outliers,
+                   by = c('statecd', 'cell',
+                          'grid_x', 'grid_y',
+                          'taxon')) |>
+  dplyr::rename(stem_density = stem_density.x,
+                outlier_stem_density = stem_density.y,
+                total_stem_density = total_stem_density.x,
+                outlier_total_stem_density = total_stem_density.y)
+
+# How close are they?
+both_stem_density_agg |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = stem_density,
+                                   y = outlier_stem_density,
+                                   color = taxon),
+                      alpha = 0.1) +
+  ggplot2::geom_abline() +
+  ggplot2::theme_minimal()
+
+both_stem_density_agg |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = total_stem_density,
+                                   y = outlier_total_stem_density),
+                      alpha = 0.1) +
+  ggplot2::geom_abline() +
+  ggplot2::theme_minimal()
+
+test <- both_stem_density_agg |>
+  dplyr::mutate(diff = abs(total_stem_density - outlier_total_stem_density)) |>
+  dplyr::filter(diff > 10)
+nrow(test)
+# Out of thousands, there are only 63 plots with tree density more than 10 stems/ha off
+# This seems totally reasonable
+
+# Fractional composition
+both_fractional_composition_agg <- fractional_composition_agg |>
+  dplyr::full_join(y = fractional_composition_agg_outliers,
+                   by = c('statecd', 'cell',
+                          'grid_x', 'grid_y',
+                          'taxon')) |>
+  dplyr::rename(fcomp = fcomp.x,
+                outlier_fcomp = fcomp.y)
+
+both_fractional_composition_agg |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = fcomp,
+                                   y = outlier_fcomp,
+                                   color = taxon)) +
+  ggplot2::geom_abline() +
+  ggplot2::theme_minimal()
+
+# Safe to remove these plots because they have minimal effect
+
+# Need to identify which plots are the ones we removed
+all_plots <- unique(grid_TOTAL_FIA_sub$plt_cn)
+keep_plots <- unique(grid_TOTAL_FIA_outliers$plt_cn)
+
+removed_plots <- all_plots[which(!(all_plots %in% keep_plots))]
+
+# Save
+save(removed_plots, file = 'data/intermediate/removed_fia_plots.RData')
