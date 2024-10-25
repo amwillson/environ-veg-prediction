@@ -141,8 +141,7 @@ TOTAL_FIA <- TOTAL_FIA |>
                 STATUSCD == 1) |> #, # 1 = live tree
   dplyr::select(-PLOT_STATUS_CD, -SAMP_METHOD_CD, -QA_STATUS,
                 -COND_STATUS_CD, -STATUSCD) |>
-  dplyr::mutate(DIA = DIA * 2.54) |>
-  dplyr::filter(DIA >= 20.32)
+  dplyr::mutate(DIA = DIA * 2.54)
 
 #### Save ####
 
