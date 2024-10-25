@@ -520,3 +520,28 @@ modis_filter |>
 # Save
 modis_h12v04 <- modis_filter
 save(modis_h12v04, file = 'data/intermediate/dataframes/modis_h12v04.RData')
+
+#### Combine ####
+
+rm(list = ls())
+
+# Load all dataframes
+load('data/intermediate/dataframes/modis_h10v04.RData')
+load('data/intermediate/dataframes/modis_h10v05.RData')
+load('data/intermediate/dataframes/modis_h11v04.RData')
+load('data/intermediate/dataframes/modis_h11v05.RData')
+load('data/intermediate/dataframes/modis_h12v04.RData')
+
+# Combine
+modis <- rbind(modis_h10v04, modis_h10v05,
+               modis_h11v04, modis_h11v05,
+               modis_h12v04)
+
+# Check if there are any dupcliates
+modis2 <- modis |>
+  dplyr::distinct()
+
+nrow(modis) == nrow(modis2)
+
+# Save
+save(modis, file = 'data/intermediate/modis_format.RData')
