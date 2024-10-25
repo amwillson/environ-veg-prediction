@@ -1,0 +1,629 @@
+---
+title: "Total density random forest"
+author: "Alyssa Willson"
+date: "2024-10-18"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+# Summary
+
+Here, I am fitting random forest models to historical PLSS gridded total stem density. I first load in and process the data, then I do some initial hyperparameter tuning to determine what values of the random forest hyperparameters I should move forward with, and then I fit some models using all the covariates. I then do some variable selection using variable importance scores and fit new random forests with a subset of covariates. Finally, I make predictions of out-of-sample validation data in the historical period. This is different from the out-of-bag data, which is are random bootstrap samples of the in-sample data used for recursive validation during model fitting. The randomForestSRC package is used for all analsyes here.
+
+# Data set-up
+
+Here, I load in the data and then select only the columns that are relevant. There are additional columns of relative abundance that are removed because these will be the response variables for the multivariate random forest analysis conducted separately. Additionally, I removed the temperatuer and seasonality covariates that were calculated as standard deviation because they are redundant to the coefficient of variation ones. The CV variables are more correlated with mean temperature and total precipitation, but this is not a major concern with random forests (where correlated predictors can be used since only a random subsample of covariates are used in each node) and for the purpose of prediction (we aren't making inference on parameters).
+
+```{r data-loading}
+# Load PLS data
+load('data/processed/PLS/xydata_in.RData')
+
+# Select relevant columns
+rf_data <- pls_in |>
+  dplyr::select(total_density, # response variable
+                clay, sand, silt, caco3, awc, flood, # edaphic variables
+                ppt_sum, tmean_mean, ppt_cv, 
+                tmean_sd, tmin, tmax, vpdmax) |> # climatic variables
+  dplyr::distinct()
+```
+
+# Hyperparameter tuning
+
+An important initial step for random forests is tuning hyperparameters related to how the trees and forest are constructed. Two that are particularly important and recommended that you tune are mtry and nodesize. The mtry hyperparameter determines how many covariates are randomly chosen to grow each tree. The nodesize hyperparameter is how many observations are in the terminal node of each tree.
+
+```{r hyperparam-tuning}
+# Tune mtry and nodesize
+tune_rf <- randomForestSRC::tune(formula = total_density ~ ., # formula
+                                 data = rf_data, # data
+                                 nodesizeTry = 1:10, # node sizes to try. default is typically 5
+                                 ntreeTry = 500) # number of trees to grow. Takes ~2.5 minutes with 500 trees
+
+# Optimal hyperparameter combination
+opt_hyper <- tune_rf$optimal
+```
+
+According to the analysis above, the optimal combination is with nodesize = `r opt_hyper[1]` and mtry = `r opt_hyper[2]`. The nodesize parameter seems reasonable, corresponding to the maximum depth. The mtry parameter, however, suggest that we should be selecting almost all of the covariates for each tree, which would lead to very correlated trees, which we don't want. Next, I take a look at the error in all parameter combinations chosen to see if we are really doing a lot better with this exact optimal set of hyperparameters.
+
+```{r hyperparam-results}
+# Format error rate for all combinations
+tune_hyper <- as.data.frame(tune_rf$results)
+
+# Plot error rate for all combinations
+tune_hyper |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = nodesize, y = mtry, fill = err)) +
+  ggplot2::theme_minimal()
+
+# Plot error rate for all mtry options with nodesize = 1
+tune_hyper |>
+  dplyr::filter(nodesize == 1) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = mtry, y = err),
+                    stat = 'identity') +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = tune_rf$optimal[2], color = 'optimal')) +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = round(sqrt(ncol(rf_data)-1)), color = 'default')) +
+  ggplot2::scale_color_discrete(name = '') +
+  ggplot2::theme_minimal()
+```
+
+It seems like the nodesize parameter does make a pretty big difference for our error rate, but within the nodesize = `r opt_hyper[1]` model choices, mtry doesn't make as big of a difference. Given that we really don't want to select too many covariates, I will go with mtry = 5 for now.
+
+# Random Forest 1
+
+Now that we have tuned our hyperparameters, we will fit our first random forest with the total density response variable.
+
+```{r fit-rf1}
+# Run random forest with all covariates
+density_rf_allcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
+                                              data = rf_data, # data
+                                              ntree = 1000, # higher number of trees because this is production quality
+                                              mtry = 5, # semi-optimal mtry to balance between correlation of learners and optimal value
+                                              nodesize = 1, # optimal nodesize
+                                              importance = TRUE, # calculate variable importance
+                                              forest = TRUE)  # save forest variables
+
+# Save
+save(density_rf_allcovar,
+     file = 'out/total_density/rf/density_rf_allcovar.RData')
+```
+
+Let's look at the variance explained of this random forest.
+
+```{r r2-rf1}
+# Error rate
+err_rate <- density_rf_allcovar$err.rate
+err_rate <- err_rate[length(err_rate)]
+
+# R2
+per_var <- 1 - err_rate / var(rf_data$total_density)
+```
+
+This model has an R\textsuperscript{2} = `r per_var`. Now, let's take a look at the variable importance rankings from this random forest.
+
+# Variable importance
+
+Here, we're looking at the importance of each covariate for predicting out-of-bag total density. We want to see if there are parameters that are contributing no new information or are contributing very little new information to run a reduced new model with only a subset of the total covariates. We are using the `subsample` function to additionally calculate confidence intervals surrounding the importance of each covariate.
+
+```{r var-importance}
+# Calculate variable importance with confidence intervals
+var_imp <- randomForestSRC::subsample(obj = density_rf_allcovar,
+                                      B = 100)
+
+# Save importance with confidence
+imp_CI <- randomForestSRC::extract.subsample(var_imp)$var.jk.sel.Z
+
+# Plot importance
+imp_CI |>
+  tibble::rownames_to_column(var = 'var') |>
+  dplyr::mutate(var = dplyr::if_else(var == 'clay', 'Soil % clay', var),
+                var = dplyr::if_else(var == 'sand', 'Soil % sand', var),
+                var = dplyr::if_else(var == 'silt', 'Soil % silt', var),
+                var = dplyr::if_else(var == 'caco3', 'Soil calcium carbonate\nconcentration', var),
+                var = dplyr::if_else(var == 'awc', 'Available water\ncontent', var),
+                var = dplyr::if_else(var == 'flood', '% grid cell in\nfloodplain', var),
+                var = dplyr::if_else(var == 'ppt_mean', 'Total annual\nprecipitation', var),
+                var = dplyr::if_else(var == 'tmean_mean', 'Mean annual\ntemperature', var),
+                var = dplyr::if_else(var == 'ppt_cv', 'Precipitation\nseasonality (CV)', var),
+                var = dplyr::if_else(var == 'tmean_sd', 'Temperature\nseasonality (SD)', var),
+                var = dplyr::if_else(var == 'tmin', 'Minimum annual\ntemperature', var),
+                var = dplyr::if_else(var == 'tmax', 'Maximum annual\ntemperature', var),
+                var = dplyr::if_else(var == 'vpdmax', 'Maximum annual vapor\npressure deficit', var)) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = reorder(var, mean), y = mean)) +
+  ggplot2::geom_errorbar(ggplot2::aes(x = reorder(var, mean), 
+                                      ymin = lower, ymax = upper)) +
+  ggplot2::xlab('') + ggplot2::ylab('Relative importance') +
+  ggplot2::coord_flip() +
+  ggplot2::theme_minimal()
+```
+
+From this analysis, we could say that all the covariates contribute unique information because each one has confidence intervals not overlapping 0. Although some variables contribute little new information, even the least important variables are contributing new information. This also would suggest that the climate variables, which are highly correlated with each other, are also all contributing unique information. This is particularly evidenced by the fact that all the climate covariates are more important than almost all the soil covariates.
+
+# Variable selection
+
+Instead of just looking at variable importance, we can do variable selection using minimal depth. I chose to use minimal depth because we don't have that many covariates relative to the number of sample we have, so using variable hunting is unnecessary (where variable hunting is the other major type of variable selection that is used with random forests).
+
+```{r var-selection}
+var_select <- randomForestSRC::var.select(object = density_rf_allcovar, # random forest object
+                                          method = 'md', # minimum depth
+                                          ntree = 500,  # number of trees
+                                          conservative = 'high') # conservative threshold
+```
+
+According to this, again, all of our covariates are at least slightly important. With this variable selection method, we do see that soil texture (soil % clay) is contributing more unique information than what we could infer from variable importance alone. Let's plot the minimal depth of each variable.
+
+```{r var-imp-selection-fig}
+var_depth <- var_select$varselect
+
+var_depth |>
+  tibble::rownames_to_column(var = 'var') |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = reorder(var, -depth), y = depth, color = 'minimal\ndepth')) +
+  ggplot2::geom_point(ggplot2::aes(x = reorder(var, -depth), y = log(vimp), color = 'importance')) +
+  ggplot2::scale_color_discrete(name = '') +
+  ggplot2::xlab('') + ggplot2::ylab('Minimal depth / log(Importance)') +
+  ggplot2::coord_flip() +
+  ggplot2::theme_minimal()
+```
+
+This reinforces my interpretation that everything is at least moderately important. The most important variables appear to be precipitation seasonality, soil % clay, maximum temperature, and total annual precipitation. Let's run a random forest with only these variables and see if our prediction accuracy greatly improves (Random Forest 3, below).
+
+# Covariate effects plots
+
+To evaluate the effect of each variable on the response, we can use partial plots. These show the relationship between a covariate and the predicted conditional mean, indicating the relationship the model fit between a given covariate and the response. 
+
+```{r partial-effects-plots}
+# We need to run each variable separately only because we get errors about figure
+# margins if we run them all together
+
+# Soil % clay
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'clay', 
+                               partial = TRUE)
+
+# Soil % sand
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'sand',
+                               partial = TRUE)
+
+# Soil % silt
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'silt',
+                               partial = TRUE)
+
+# Soil calcium carbonate concentration
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'caco3',
+                               partial = TRUE)
+
+# Available water content
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'awc',
+                               partial = TRUE)
+
+# % of grid cell in floodplain
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'flood',
+                               partial = TRUE)
+
+# Total annual precipitation
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'ppt_sum',
+                               partial = TRUE)
+
+# Mean annual temperature
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'tmean_mean',
+                               partial = TRUE)
+
+# Precipitation seasonality (CV)
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'ppt_cv',
+                               partial = TRUE)
+
+# Temperature seasonality (CV)
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'tmean_sd',
+                               partial = TRUE)
+
+# Minimum annual temperature
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'tmin',
+                               partial = TRUE)
+
+# Maximum annual temperature
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'tmax',
+                               partial = TRUE)
+
+# Maximum annual vapor pressure deficit
+randomForestSRC::plot.variable(x = density_rf_allcovar,
+                               xvar.names = 'vpdmax',
+                               partial = TRUE)
+```
+
+# Random Forest 2
+
+The second random forest we will try is one with only the climate covariates. When we do this, we will re-run a quick hyperparameter tuning because mtry is likely to be different. If it is the same, we will stick with the default of sqrt(n covariates) to ensure that our learners aren't too correlated.
+
+```{r tune-rf2}
+# Climate only dataset
+rf_data_clim <- dplyr::select(rf_data,
+                              total_density, ppt_sum:vpdmax)
+
+# Tune mtry and nodesize
+tune_rf_clim <- randomForestSRC::tune(formula = total_density ~ ., # formula
+                                      data = rf_data_clim, # data
+                                      nodesizeTry = 1:10, # node sizes to try. default is typically 5
+                                      ntreeTry = 500) # number of trees to grow
+
+# Optimal hyperparameter combination
+opt_hyper <- tune_rf_clim$optimal
+```
+
+Similar to our first random forest, we get an optimal configuration with nodesize = `r opt_hyper[1]` and mtry = `r opt_hyper[2]`. Here, mtry is essentially the same as before, including 6/8 total covariates. Again, let's plot the error for all combinations.
+
+```{r plot-tune-rf2}
+# Format error rate for all combinations
+tune_hyper <- as.data.frame(tune_rf_clim$results)
+
+# Plot error rate for all combinations
+tune_hyper |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = nodesize, y = mtry, fill = err)) +
+  ggplot2::theme_minimal()
+
+# Plot error rate for all mtry options with nodesize = 1
+tune_hyper |>
+  dplyr::filter(nodesize == 1) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = mtry, y = err),
+                    stat = 'identity') +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = tune_rf_clim$optimal[2], color = 'optimal')) +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = round(sqrt(ncol(rf_data_clim)-1)), color = 'default')) +
+  ggplot2::scale_color_discrete(name = '') +
+  ggplot2::theme_minimal()
+```
+
+Given that there is such a minimal change between mtry = 4 and mtry = 6, let's go with the lower mtry to reduce correlation among learners.
+
+```{r fit-rf2}
+# Run random forest with all covariates
+density_rf_climcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
+                                               data = rf_data_clim, # data
+                                               ntree = 1000, # higher number of trees because this is production quality
+                                              mtry = 4, # semi-optimal mtry to balance between correlation of learners and optimal value
+                                              nodesize = 1, # optimal nodesize
+                                              importance = TRUE, # calculate variable importance
+                                              forest = TRUE)  # save forest variables
+
+# Save
+save(density_rf_climcovar,
+     file = 'out/total_density/rf/density_rf_climcovar.RData')
+```
+
+Let's look at variance explained for this random forest with only climate covariates.
+
+```{r var-explained-rf2}
+# Error rate
+err_rate <- density_rf_climcovar$err.rate
+err_rate <- err_rate[length(err_rate)]
+
+# R2
+per_var_clim <- 1 - err_rate / var(rf_data_clim$total_density)
+```
+
+The climate-only random forest has an R\textsuperscript{2} of `r per_var_clim`. This is actually a marginally higher R\textsuperscript{2} than the other model. This makes me think that we should be trying different combinations of variables to maybe do some variable reduction. 
+
+# Random Forest 3
+
+This is a reduced random forest with only four covariates: precipitation seasonality, total annual precipitation, maximum temperature and soil % clay. These are the four most important variables identified via variable selection with Random Forest 1. These variables also roughly coincide with the variables I used to describe vegetation-environment relationships over the last 2,000 years in the same region, and that model fit reasonable well, so we have precedent for using these variables to predict vegetation patterns in this region.
+
+First, we run a quick hyperparameter tuning procedure.
+
+```{r tune-rf3}
+# Reduced dataset
+rf_data_red <- dplyr::select(rf_data,
+                             total_density, ppt_cv,
+                             ppt_sum, tmax, clay)
+
+# Tune mtry and nodesize
+tune_rf_red <- randomForestSRC::tune(formula = total_density ~ ., # formula
+                                     data = rf_data_red, # data
+                                     nodesizeTry = 1:10, # node sizes to try. default is typically 5
+                                      ntreeTry = 500) # number of trees to grow
+
+# Optimal hyperparameter combination
+opt_hyper <- tune_rf_red$optimal
+```
+
+The results are very consistent with hyperparameter tuning above, with the optimal combination being nodesize = `r opt_hyper[1]` and mtry = `r opt_hyper[2]`. Again, we can look at error rates across all combinations tried.
+
+```{r plot-tune-rf3}
+# Format error rate for all combinations
+tune_hyper <- as.data.frame(tune_rf_red$results)
+
+# Plot error rate for all combinations
+tune_hyper |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = nodesize, y = mtry, fill = err)) +
+  ggplot2::theme_minimal()
+
+# Plot error rate for all mtry options with nodesize = 1
+tune_hyper |>
+  dplyr::filter(nodesize == 1) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = mtry, y = err),
+                    stat = 'identity') +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = tune_rf_red$optimal[2], color = 'optimal')) +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = round(sqrt(ncol(rf_data_red)-1)), color = 'default')) +
+  ggplot2::scale_color_discrete(name = '') +
+  ggplot2::theme_minimal()
+```
+
+Because the difference between the optimal (mtry = 4) and the default (mtry = 2) is so minimal, we will use the default mtry parameterization.
+
+```{r fit-rf3}
+# Run random forest with all covariates
+density_rf_redcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
+                                              data = rf_data_red, # data
+                                              ntree = 1000, # higher number of trees because this is production quality
+                                              mtry = 2, # semi-optimal mtry to balance between correlation of learners and optimal value
+                                              nodesize = 1, # optimal nodesize
+                                              importance = TRUE, # calculate variable importance
+                                              forest = TRUE)  # save forest variables
+
+# Save
+save(density_rf_redcovar,
+     file = 'out/total_density/rf/density_rf_redcovar.RData')
+```
+Finally, we can look at the variance explained with this reduced model.
+
+```{r var-explained-rf3}
+# Error rate
+err_rate <- density_rf_redcovar$err.rate
+err_rate <- err_rate[length(err_rate)]
+
+# R2
+per_var_red <- 1 - err_rate / var(rf_data_red$total_density)
+```
+
+With our reduced model, we get a slightly lower R\textsuperscript{2} of `r per_var_red`, compared to R\textsuperscript{2} = `r per_var` for the full model and `r per_var_clim` for the climate-only model. This reassures us that the other covariates are contributing relevant information, but since the model is only slightly worse, it may be a good compromise for comparing between the historical and modern periods since it is less likely to be overfit.
+
+# Random Forest 4
+
+The final random forest we want to fit is one that includes coordinates to account for spatial autocorrelation. I'm including all the covariates from my Random Forest 1. First, do hyperparameter tuning.
+
+```{r tune-rf4}
+# Take only necessary columns
+rf_data_xy <- dplyr::select(pls_in,
+                            x, y, colnames(rf_data))
+
+# Tune mtry and nodesize
+tune_rf_red <- randomForestSRC::tune(formula = total_density ~ ., # formula
+                                     data = rf_data_xy, # data
+                                     nodesizeTry = 1:10, # node sizes to try. default is typically 5
+                                      ntreeTry = 500) # number of trees to grow
+
+# Optimal hyperparameter combination
+opt_hyper <- tune_rf_red$optimal
+```
+
+The results are very consistent with hyperparameter tuning above, with the optimal combination being nodesize = `r opt_hyper[1]` and mtry = `r opt_hyper[2]`. This means that all variables should be included. Again, we can look at error rates across all combinations tried.
+
+```{r plot-tune-rf4}
+# Format error rate for all combinations
+tune_hyper <- as.data.frame(tune_rf_red$results)
+
+# Plot error rate for all combinations
+tune_hyper |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = nodesize, y = mtry, fill = err)) +
+  ggplot2::theme_minimal()
+
+# Plot error rate for all mtry options with nodesize = 1
+tune_hyper |>
+  dplyr::filter(nodesize == 1) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = mtry, y = err),
+                    stat = 'identity') +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = tune_rf_red$optimal[2], color = 'optimal')) +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = round(sqrt(ncol(rf_data_xy)-1)), color = 'default')) +
+  ggplot2::scale_color_discrete(name = '') +
+  ggplot2::theme_minimal()
+```
+
+More covariates is strongly favored in this model, but we don't want to use too many. Since there is a fairly small differences between mtry options, let's again pick 5.
+
+```{r fit-rf4}
+# Run random forest with all covariates
+density_rf_xycovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
+                                              data = rf_data_xy, # data
+                                              ntree = 1000, # higher number of trees because this is production quality
+                                              mtry = 5, # semi-optimal mtry to balance between correlation of learners and optimal value
+                                              nodesize = 1, # optimal nodesize
+                                              importance = TRUE, # calculate variable importance
+                                              forest = TRUE)  # save forest variables
+
+# Save
+save(density_rf_xycovar,
+     file = 'out/total_density/rf/density_rf_xycovar.RData')
+
+```
+
+And for the final time, let's look at the error rate, which we expect to be very low.
+
+```{r var-explained-rf4}
+# Error rate
+err_rate <- density_rf_xycovar$err.rate
+err_rate <- err_rate[length(err_rate)]
+
+# R2
+per_var_xy <- 1 - err_rate / var(rf_data_xy$total_density)
+```
+
+The R\textsuperscript{2} for this model is `r per_var_xy`. This is only marginally better than for the models with only environmental covariates. This might suggest that the environmental conditions explain trends in total density sufficiently that spatial autocorrelation is not too much of a worry. Since we expect the structure of spatial autocorrelation to change through time, we will exclude space from our covariate list because it is likely to make out-of-sample prediction worse.
+
+# Out-of-sample prediction
+
+Now that we have tuned and fit our random forest models, we can predict out-of-sample historical data. First, let's load our out-of-sample data.
+
+```{r load-oos}
+# Load out-of-sample data
+load('data/processed/PLS/xydata_out.RData')
+```
+
+Now, we will make out-of-sample predictions using the first random forest and save those predictions for later analysis.
+
+```{r pred-rf1}
+# Make predictions
+pred_rf1 <- randomForestSRC::predict.rfsrc(object = density_rf_allcovar,
+                                           newdata = pls_oos)
+
+# Extract predictions
+pred_out_rf1 <- pred_rf1$predicted
+
+# Bind predictions and out-of-sample data for analysis
+pred_historical_rf1 <- cbind(pls_oos, pred_out_rf1)
+
+# Remove vector
+rm(pred_out_rf1)
+
+# Save
+save(pred_historical_rf1,
+     file = 'out/total_density/rf/predicted_historical_density_rf1.RData')
+```
+
+Now, we can repeat this for each of the other three fitted random forests we have. It is unlikely we will use the one with coordinates, but I'm including the prediction just in case.
+
+```{r pred-rf2}
+# Make predictions
+pred_rf2 <- randomForestSRC::predict.rfsrc(object = density_rf_climcovar,
+                                           newdata = pls_oos)
+
+# Extract predictions
+pred_out_rf2 <- pred_rf2$predicted
+
+# Bind predictions and out-of-sample data for analysis
+pred_historical_rf2 <- cbind(pls_oos, pred_out_rf2)
+
+# Remove vector(pred_out_rf2)
+rm(pred_out_rf2)
+
+# Save
+save(pred_historical_rf2,
+     file = 'out/total_density/rf/predicted_historical_density_rf2.RData')
+```
+
+```{r pred-rf3}
+# Make predictions
+pred_rf3 <- randomForestSRC::predict.rfsrc(object = density_rf_redcovar,
+                                           newdata = pls_oos)
+
+# Extract predictions
+pred_out_rf3 <- pred_rf3$predicted
+
+# Bind predictions and out-of-sample data for analysis
+pred_historical_rf3 <- cbind(pls_oos, pred_out_rf3)
+
+# Remove vector
+rm(pred_out_rf3)
+
+# Save
+save(pred_historical_rf3,
+     file = 'out/total_density/rf/predicted_historical_density_rf3.RData')
+```
+
+```{r pred-rf4}
+# Make predictions
+pred_rf4 <- randomForestSRC::predict.rfsrc(object = density_rf_xycovar,
+                                           newdata = pls_oos)
+
+# Extract predictions
+pred_out_rf4 <- pred_rf4$predicted
+
+# Bind predictions and out-of-sample data for analysis
+pred_historical_rf4 <- cbind(pls_oos, pred_out_rf4)
+
+# Remove vector
+rm(pred_out_rf4)
+
+# Save
+save(pred_historical_rf4,
+     file = 'out/total_density/rf/predicted_historical_density_rf4.RData')
+```
+
+Because it would be a shame to wait, let's do some quick analyses of our historical predictions!!
+
+```{r pred-accuracy}
+# Plot observation vs prediction for each random forest
+pred_historical_rf1 |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = total_density, y = pred_out_rf1)) +
+  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = pred_out_rf1),
+                       se = FALSE, method = 'lm') +
+  ggplot2::geom_abline() +
+  ggplot2::ggtitle('Prediction accuracy with all environmental covariates') +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+pred_historical_rf2 |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = total_density, y = pred_out_rf2)) +
+  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = pred_out_rf2),
+                       se = FALSE, method = 'lm') +
+  ggplot2::geom_abline() +
+  ggplot2::ggtitle('Prediction accuracy with only climate covariates') +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+pred_historical_rf3 |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = total_density, y = pred_out_rf3)) +
+  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = pred_out_rf3),
+                       se = FALSE, method = 'lm') +
+  ggplot2::geom_abline() +
+  ggplot2::ggtitle('Prediction accuracy with only four covariates') +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+pred_historical_rf4 |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = total_density, y = pred_out_rf4)) +
+  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = pred_out_rf4),
+                       se = FALSE, method = 'lm') +
+  ggplot2::geom_abline() +
+  ggplot2::ggtitle('Prediction accuracy with all covariates and coordinates') +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+# Correlation coefficients
+r_rf1 <- cor(x = pred_historical_rf1$total_density, 
+             y = pred_historical_rf1$pred_out_rf1)
+
+r_rf2 <- cor(x = pred_historical_rf2$total_density,
+             y = pred_historical_rf2$pred_out_rf2)
+
+r_rf3 <- cor(x = pred_historical_rf3$total_density,
+             y = pred_historical_rf3$pred_out_rf3)
+
+r_rf4 <- cor(x = pred_historical_rf4$total_density,
+             y = pred_historical_rf4$pred_out_rf4)
+
+corrs <- c(r_rf1, r_rf2, r_rf3, r_rf4)
+
+methods <- c('Climate + soil', 'Climate only', 
+             'Top four', 'Climate + soil + coordinates')
+
+corrs <- as.data.frame(cbind(methods, corrs))
+
+tibble::tibble(corrs)
+```
