@@ -468,7 +468,7 @@ per_var_xy <- 1 - err_rate / var(rf_data_xy$total_density)
 
 The R\textsuperscript{2} for this model is `r per_var_xy`. This is only marginally better than for the models with only environmental covariates. This might suggest that the environmental conditions explain trends in total density sufficiently that spatial autocorrelation is not too much of a worry. Since we expect the structure of spatial autocorrelation to change through time, we will exclude space from our covariate list because it is likely to make out-of-sample prediction worse.
 
-# Out-of-sample prediction
+# Out-of-sample historical prediction
 
 Now that we have tuned and fit our random forest models, we can predict out-of-sample historical data. First, let's load our out-of-sample data.
 
@@ -626,4 +626,20 @@ methods <- c('Climate + soil', 'Climate only',
 corrs <- as.data.frame(cbind(methods, corrs))
 
 tibble::tibble(corrs)
+```
+
+# Out-of-sample modern predictions
+
+Since the entire geographical domain is out-of-sample in the modern era, we are predicting every grid cell. Then, we can compare grid cells that were withheld in both time periods, as well as the overall prediction accuracy of the modern period.
+
+```{r load-oos-modern}
+# Load out-of-sample modern data
+load('data/processed/FIA/xydata.RData')
+
+# Put columns in the same order 
+```
+
+```{r pred-rf1}
+# Make predictions
+pred_modern_rf1 <- randomForestSRC::predict.rfsrc(object = density_rf_)
 ```
