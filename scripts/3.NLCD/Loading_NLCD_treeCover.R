@@ -4,37 +4,24 @@
 rm(list = ls())
 
 # Load data from tiff
-trees <- stars::read_stars('/Volumes/FileBackup/SDM_bigdata/nlcd_tcc_CONUS_2021_v2021-4/nlcd_tcc_conus_2021_v2021-4.tif')
-plot(trees)
+trees <- terra::rast('/Volumes/FileBackup/SDM_bigdata/nlcd_tcc_CONUS_2021_v2021-4/nlcd_tcc_conus_2021_v2021-4.tif')
+#trees <- stars::read_stars('/Volumes/FileBackup/SDM_bigdata/nlcd_tcc_CONUS_2021_v2021-4/nlcd_tcc_conus_2021_v2021-4.tif')
+#plot(trees)
 
-states <- sf::st_as_sf(maps::map('state',
-                                 region = c('illinois', 'indiana',
-                                            'michigan', 'minnesota',
-                                            'wisconsin'),
+states <- sf::st_as_sf(maps::map('state', region = c('illinois', 'indiana',
+                                                     'michigan', 'minnesota',
+                                                     'wisconsin'),
                                  plot = FALSE, fill = TRUE))
+
 states <- sf::st_transform(states, crs = sf::st_crs(trees))
 
-states2 <- sfheaders::sf_to_df(states, fill = TRUE)
+states2 <- terra::rast(states)
 
-range(states2$x)
-range(states2$y)
+trees2 <- terra::crop(x = trees,
+                      y = states2)
 
-library(stars)
-library(dplyr)
+terra::plot(trees2)
+trees3 <- terra::aggregate(trees2, factor = 10)
 
-trees2 <- trees %>% filter(x >= -90859.82, x <= 1095521.03,
-                           y >= 1572383, y <= 2930559)
-trees2
-plot(trees2)
+trees_aggregated <- terra::as.data.frame(trees3)
 
-# Load PLS data
-load('data/processed/PLS/xydata.RData')
-
-# Make into spatial object
-pls_spat <- sf::st_as_sf(xydata, coords = c('x', 'y'), crs = 'EPSG:3175')
-pls_spat <- stars::st_as_stars(pls_spat)
-pls_spat <- sf::st_transform(pls_spat, crs = sf::st_crs(trees2))
-
-# Aggregate NLCD to PLS grid
-trees3 <- stars::st_warp(src = trees2,
-                         dest = pls_spat)
