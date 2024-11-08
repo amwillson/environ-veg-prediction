@@ -1,11 +1,23 @@
 ## Formatting PLS gridded data products
 ## These are previous PalEON data products publicly archived
 
-## Total and taxon-specific stem density: https://doi.org/10.6073/pasta/1b2632d48fc79b370740a7c20a70b4b0
-## Fractional composition: https://doi.org/10.6073/pasta/8544e091b64db26fdbbbafd0699fa4f9
-
 ## 1. Total stem density
 ## 2. Fractional composition
+## 3. Combine
+## 4. Save
+
+## Input: data/raw/gridded_density/PLS_Density_Point_Level2_v1.0.nc
+## Estimated stem density from PLS period from DOI:
+## https://doi.org/10.6073/pasta/1b2632d48fc79b370740a7c20a70b4b0
+
+## Input: data/raw/gridded-composition/SetTreeComp_Level2_v1.0.nc
+## Estimated fractional composition/relative abundance from PLS period from DOI:
+## https://doi.org/10.6073/pasta/8544e091b64db26fdbbbafd0699fa4f9
+
+## Output: data/processed/PLS/gridded_fcomp_density.RData
+## Total stem density and relative abundances for each taxon
+## in each 8 x 8 km grid cell (rows) for the PLS period in one dataframe
+## Used in 1.2.Collate_data.R
 
 rm(list = ls())
 

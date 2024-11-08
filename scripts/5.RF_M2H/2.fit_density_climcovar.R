@@ -1,6 +1,6 @@
-## STEP 4-2
+## STEP 5-2
 
-## Univariate random forest fit to HISTORICAL
+## Univariate random forest fit to MODERN
 ## TOTAL STEM DENSITY and CLIMATE covariates only
 
 ## 1. Load data
@@ -11,15 +11,20 @@ rm(list = ls())
 
 #### 1. Load data ####
 
-# Load PLS data
-load('data/processed/PLS/xydata_in.RData')
+# Load FIA data
+load('data/processed/FIA/xydata_in.RData')
 
 # Select relevant columns
-rf_data <- pls_in |>
+rf_data <- fia_in |>
+  dplyr::ungroup() |>
+  dplyr::rename(total_density = total_stem_density) |>
   dplyr::select(total_density, # response variable
                 ppt_sum, tmean_mean, ppt_cv,
-                tmean_sd, tmin, tmax, vpdmax) |> # climatic covariates
+                tmean_sd, tmin, tmax, vpdmax) |> # climatic variables
   dplyr::distinct()
+
+# Convert to regular dataframe
+rf_data <- as.data.frame(rf_data)
 
 #### 2. Hyperparameter tuning ####
 
@@ -57,12 +62,12 @@ tune_hyper |>
 
 ## Use nodesize = 1, mtry = 3
 ## mtry is not optimal but there is little change
-## in error rate between mtry = 3 and mtry = 7
+## in error rate between mtry = 3 and mtry = 5
 
 #### 3. Fit random forest ####
 
 # Fit random forest
-density_rf_H_climcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
+density_rf_M_climcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
                                                  data = rf_data, # data
                                                  ntree = 1000, # higher number of trees becaues this is production quality
                                                  mtry = 3, # from above decision
@@ -71,5 +76,5 @@ density_rf_H_climcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # 
                                                  forest = TRUE) # save forest variables
 
 # Save
-save(density_rf_H_climcovar,
-     file = '/Volumes/FileBackup/SDM_bigdata/out/rf/H/density/climcovar.RData')
+save(density_rf_M_climcovar,
+     file = '/Volumes/FileBackup/SDM_bigdata/out/rf/M/density/climcovar.RData')

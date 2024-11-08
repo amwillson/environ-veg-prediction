@@ -1,6 +1,6 @@
-## STEP 4-7
+## STEP 5-7
 
-## Plot out-of-sample predictions from HISTORICAL
+## Plot out-of-sample predictions from MODERN
 ## model predicting HISTORICAL and MODERN
 ## TOTAL STEM DENSITY
 
@@ -23,13 +23,13 @@ rm(list = ls())
 #### 1. Load historical predictions ####
 
 # Load historical predictions from model 1
-load('out/rf/H/density/predicted_historical_rf1.RData')
+load('out/rf/M/density/predicted_historical_rf1.RData')
 # Load historical predictions from model 2
-load('out/rf/H/density/predicted_historical_rf2.RData')
+load('out/rf/M/density/predicted_historical_rf2.RData')
 # Load historical predictions from model 3
-load('out/rf/H/density/predicted_historical_rf3.RData')
+load('out/rf/M/density/predicted_historical_rf3.RData')
 # Load historical predictions from model 4
-load('out/rf/H/density/predicted_historical_rf4.RData')
+load('out/rf/M/density/predicted_historical_rf4.RData')
 
 #### 2. Process historical predictions ####
 
@@ -94,7 +94,7 @@ pred_historical |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2h_pred_space_allcovar.png',
+                filename = 'figures/rf/M/density/pred/m2h_pred_space_allcovar.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot predictions over space with all four models
@@ -129,7 +129,7 @@ pred_historical |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2h_pred_space_facets.png',
+                filename = 'figures/rf/M/density/pred/m2h_pred_space_facets.png',
                 height = 20, width = 20, units = 'cm')
 
 #### 4. Plot historical predicted versus observed ####
@@ -154,7 +154,7 @@ pred_historical |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2h_predvobs_allcovar.png',
+                filename = 'figures/rf/M/density/pred/m2h_predvobs_allcovar.png',
                 height = 10, width = 10, units = 'cm')
 
 # All four models
@@ -194,7 +194,7 @@ pred_historical |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2h_predvobs_facets.png',
+                filename = 'figures/rf/M/density/pred/m2h_predvobs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
 # Plot observed - predicted over space
@@ -211,7 +211,7 @@ pred_historical |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2h_pred-obs_allcovar.png',
+                filename = 'figures/rf/M/density/pred/m2h_pred-obs_allcovar.png',
                 width = 10, height = 10, units = 'cm')
 
 # All four models
@@ -243,7 +243,7 @@ pred_historical |>
                  strip.text = ggplot2::element_text(size = 12))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2h_pred-obs_facets.png',
+                filename = 'figures/rf/M/density/pred/m2h_pred-obs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
 #### 5. Calculate historical r ####
@@ -274,13 +274,13 @@ historical_cors
 #### 6. Load modern predictions ####
 
 # Load modern predictions from model 1
-load('out/rf/H/density/predicted_modern_rf1.RData')
+load('out/rf/M/density/predicted_modern_rf1.RData')
 # Load modern predictions from model 2
-load('out/rf/H/density/predicted_modern_rf2.RData')
+load('out/rf/M/density/predicted_modern_rf2.RData')
 # Load modern predictions from model 3
-load('out/rf/H/density/predicted_modern_rf3.RData')
+load('out/rf/M/density/predicted_modern_rf3.RData')
 # Load modern predictions from model 4
-load('out/rf/H/density/predicted_modern_rf4.RData')
+load('out/rf/M/density/predicted_modern_rf4.RData')
 
 #### 7. Process modern predictions ####
 
@@ -337,7 +337,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred_space_allcovar.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred_space_allcovar.png',
                 height = 10, width = 10, units = 'cm')
 
 # Plot predictions over space with all models
@@ -372,7 +372,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred_space_facets.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred_space_facets.png',
                 height = 20, width = 20, units = 'cm')
 
 #### 9. Plot modern predicted vs observed ####
@@ -397,31 +397,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_predvobs_allcovar.png',
-                height = 10, width = 10, units = 'cm')
-
-# Cut-off at total stem density < 750 to match PLS better
-pred_modern |>
-  dplyr::filter(total_density < 750) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = total_density, y = pred_out_rf1)) +
-  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = pred_out_rf1,
-                                    color = 'Best fit'),
-                       method = 'lm', se = FALSE) +
-  ggplot2::geom_abline(ggplot2::aes(intercept = 0, slope = 1,
-                                    color = '1:1'),
-                       linetype = 'dashed', linewidth = 1) +
-  ggplot2::scale_color_discrete(name = '') +
-  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
-  tune::coord_obs_pred() +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 10))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_predvobs_allcovar_cutoff.png',
+                filename = 'figures/rf/M/density/pred/m2m_predvobs_allcovar.png',
                 height = 10, width = 10, units = 'cm')
 
 # All four models
@@ -461,48 +437,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_predvobs_facets.png',
-                width = 20, height = 20, units = 'cm')
-
-# With cutoff as above
-pred_modern |>
-  tidyr::pivot_longer(cols = pred_out_rf1:pred_out_rf4,
-                      names_to = 'fit',
-                      values_to = 'predicted') |>
-  dplyr::mutate(fit = dplyr::if_else(fit == 'pred_out_rf1',
-                                     'Climate + soil',
-                                     fit),
-                fit = dplyr::if_else(fit == 'pred_out_rf2',
-                                     'Climate only',
-                                     fit),
-                fit = dplyr::if_else(fit == 'pred_out_rf3',
-                                     'Four covariates',
-                                     fit),
-                fit = dplyr::if_else(fit == 'pred_out_rf4',
-                                     'Climate + soil +\ncoordinates',
-                                     fit)) |>
-  dplyr::filter(total_density < 750) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = total_density, y = predicted)) +
-  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = predicted,
-                                    color = 'Best fit'),
-                       method = 'lm', se = FALSE) +
-  ggplot2::geom_abline(ggplot2::aes(intercept = 0, slope = 1,
-                                    color = '1:1'),
-                       linetype = 'dashed', linewidth = 1) +
-  ggplot2::facet_wrap(~fit) +
-  ggplot2::scale_color_discrete(name = '') +
-  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
-  tune::coord_obs_pred() +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_predvobs_facets_cutoff.png',
+                filename = 'figures/rf/M/density/pred/m2m_predvobs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
 # Plot observed - predicted over space
@@ -519,7 +454,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred-obs_allcovar.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred-obs_allcovar.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot with color legend log transformation
@@ -538,7 +473,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred-obs_allcovar_log.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred-obs_allcovar_log.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot with color legend sqrt transformation
@@ -557,7 +492,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred-obs_allcovar_sqrt.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred-obs_allcovar_sqrt.png',
                 width = 10, height = 10, units = 'cm')
 
 # All four models - untransformed
@@ -590,7 +525,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred-obs_facets.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred-obs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
 # Facets with log transformation
@@ -626,7 +561,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred-obs_facets_log.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred-obs_facets_log.png',
                 height = 20, width = 20, units = 'cm')
 
 # Facets with sqrt transformation
@@ -662,7 +597,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_pred-obs_facets_sqrt.png',
+                filename = 'figures/rf/M/density/pred/m2m_pred-obs_facets_sqrt.png',
                 height = 20, width = 20, units = 'cm')
 
 #### 10. Calculate modern r ####
@@ -689,26 +624,6 @@ modern_cors <- dplyr::select(modern_cors,
                              model, modern_cors)
 
 modern_cors
-
-# Correlations with 750 cutoff
-corr1 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf1)
-corr2 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf2)
-corr3 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf3)
-corr4 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf4)
-
-# Combine
-modern_cors_cutoff <- c(corr1, corr2, corr3, corr4)
-
-# Format
-modern_cors_cutoff <- as.data.frame(modern_cors_cutoff)
-modern_cors_cutoff$model <- modern_cors$model
-modern_cors_cutoff <- dplyr::select(modern_cors_cutoff,
-                                    model, modern_cors_cutoff)
-modern_cors_cutoff
 
 #### 11. Compare predictions in space ####
 
@@ -753,7 +668,7 @@ preds |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_pred_allcovar.png',
+                filename = 'figures/rf/M/density/pred/comp_pred_allcovar.png',
                 height = 10, width = 10, units = 'cm')
 
 # Plot difference in prediction in space with all models
@@ -791,7 +706,7 @@ preds |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_pred_facet.png',
+                filename = 'figures/rf/M/density/pred/comp_pred_facet.png',
                 height = 20, width = 20, units = 'cm')
 
 #### 12. Compare differences in space ####
@@ -832,7 +747,7 @@ preds |>
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_pred-obs_allcovar.png',
+                filename = 'figures/rf/M/density/pred/comp_pred-obs_allcovar.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot change with direction:
@@ -855,7 +770,7 @@ preds |>
                  plot.subtitle = ggplot2::element_text(size = 10, hjust = 0.5))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_pred-obs_allcovar2.png',
+                filename = 'figures/rf/M/density/pred/comp_pred-obs_allcovar2.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot change with direction and whether density was over or underpredicted in each period
@@ -881,7 +796,7 @@ preds |>
                  plot.subtitle = ggplot2::element_text(size = 10, hjust = 0.5))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_pred-obs_allcovar3.png',
+                filename = 'figures/rf/M/density/pred/comp_pred-obs_allcovar3.png',
                 height = 20, width = 20, units = 'cm')
 
 # Where was historic vs modern prediction worse?
@@ -899,7 +814,7 @@ preds |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_which_better_accuracy.png',
+                filename = 'figures/rf/M/density/pred/comp_which_better_accuracy.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot difference in accuracy where historic is worse
@@ -922,7 +837,7 @@ preds |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_change_modern_better.png',
+                filename = 'figures/rf/M/density/pred/comp_change_modern_better.png',
                 width = 10, height = 10, units = 'cm')
 
 # Plot difference in accuracy where modern is worse
@@ -945,7 +860,7 @@ preds |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/comp_change_historic_better.png',
+                filename = 'figures/rf/M/density/pred/comp_change_historic_better.png',
                 width = 10, height = 10, units = 'cm')
 
 #### 13. Compare r ####
@@ -977,35 +892,5 @@ both_cors |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/pred_corr_comparison.png',
-                height = 8, width = 16, units = 'cm')
-
-# Repeat with cutoff in modern
-both_cors <- cbind(historical_cors, modern_cors_cutoff$modern_cors_cutoff)
-colnames(both_cors) <- c('model', 'Historical', 'Modern')
-
-# Plot comparison of correlation coefficient
-both_cors |>
-  tidyr::pivot_longer(cols = Historical:Modern,
-                      names_to = 'period',
-                      values_to = 'correlation') |>
-  dplyr::mutate(model = dplyr::if_else(model == 'Climate + soil + coordinates',
-                                       'Climate + soil +\ncoordinates',
-                                       model)) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_bar(ggplot2::aes(x = model, y = correlation,
-                                 fill = period),
-                    stat = 'identity', 
-                    position = ggplot2::position_dodge(width = 1)) +
-  ggplot2::xlab('') + ggplot2::ylab('Correlation coefficient') +
-  ggplot2::scale_fill_discrete(name = 'Prediction period') +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 legend.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 8))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/pred_corr_comparison_cutoff.png',
+                filename = 'figures/rf/M/density/pred/pred_corr_comparison.png',
                 height = 8, width = 16, units = 'cm')

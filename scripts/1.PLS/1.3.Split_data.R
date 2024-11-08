@@ -1,10 +1,42 @@
 ## Subsetting in-sample and out-of-sample data in PLS
 ## Out-of-sample grid cells should have corresponding grid cells in FIA
 
+## 1. Load data
+## 2. Combine grids
+## 3. Define sample sizes
+## 4. Select out-of-sample
+## 5. Save
+
+## Input: data/processed/PLS/xydata.RData
+## PLS combined dataset with vegetation, climate, and soil data
+## This is the dataframe we are splitting between in-sample and oos
+
+## Input: data/processed/FIA/gridded_all_plots.RData
+## FIA vegetation dataset
+## Contains the grid cells that are available in the modern (FIA) period
+## Used to select corresponding grid cells in both time periods
+
+## Output: data/processed/PLS/xydata_in.RData
+## PLS-era vegetation, climate, and soil data for only in-sample grid cells
+## Used in 4.1.fit_density_allcovar.R, 4.2.fit_density_climcovar.R,
+## 4.3.fit_density_redcovar.R, 4.4.fit_density_xycovar.R,
+## 4.8.fit_abundance_allcovar.R, 4.9.fit_abundance_climcovar.R,
+## 4.10.fit_abundance_redcovar.R, 4.11.fit_abundance_xycovar.R
+
+## Output: data/processed/PLS/xydata_out.RData
+## PLS-era vegetation, climate, and soil data for only out-of-sample grid cells
+## Used in 4.5.density_historical_predictions.R,
+## 4.6.density_modern_predictions.R, 4.12.abundance_historical_predictions.R,
+## 4.13.abundance_modern_predictions.R, 5.5.density_historical_predictions.R,
+## 5.6.density_modern_predictions.R, 5.12.abundance_historical_predictions.R,
+## 5.13.abundance_modern_predictions.R
+
 rm(list = ls())
 
 # Set seed
 set.seed(1)
+
+#### 1. Load data ####
 
 # Load collated PLS data
 load('data/processed/PLS/xydata.RData')
@@ -22,6 +54,8 @@ fia_coords <- stem_density_agg2 |>
   dplyr::ungroup() |>
   dplyr::select(x, y) |>
   dplyr::distinct()
+
+#### 2. Combine grids ####
 
 # PLS and FIA densities
 pls_density <- xydata |>
@@ -43,6 +77,8 @@ nrow(fia_density) == nrow(fia_coords) # should be TRUE
 pls_fia <- pls_density |>
   dplyr::full_join(y = fia_density,
                    by = c('x', 'y'))
+
+#### 3. Define sample sizes ####
 
 # Number of grid cells in both datasets
 n_pls_fia <- length(which(!is.na(pls_fia$pls_density) & !is.na(pls_fia$fia_density)))
@@ -145,6 +181,8 @@ na_f <- nrow(pls_fia_forest)
 # we will need to pull more from the PLS dataset only
 extra_p <- nn_p - na_p
 
+#### 4. Select out-of-sample ####
+
 # Prairie cells that match between PLS and FIA
 pls_fia_prairie <- pls_fia_prairie |>
   dplyr::mutate(oos = TRUE) |>
@@ -225,6 +263,8 @@ pls_in <- pls_in_oos |>
 pls_oos <- pls_in_oos |>
   dplyr::filter(oos == TRUE) |>
   dplyr::select(-oos)
+
+#### 5. Save ####
 
 # Save
 save(pls_in,

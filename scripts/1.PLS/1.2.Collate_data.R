@@ -1,4 +1,27 @@
-## Processing climate, soil and vegetation data
+## Combining climate, soil and vegetation data
+## Individual dataframes aggregated to the 8 x 8 km grid
+## are simply combined for running the models
+## All variables are plotted
+
+## 1. Vegetation
+## 2. Soil
+## 3. Climate
+
+## Input: data/processed/PLS/gridded_fcomp_density.RData
+## PLS-era total stem density and fractional composition in each grid cell
+
+## Input: data/raw/soils/gridded_soil.RData
+## Gridded soil variables from gSSURGO
+## Created in separate repository: amwillson/historic-modern-environment
+
+## Input: data/raw/climate/gridded_climate.RData
+## Gridded climate variables from PRISM
+## Created in separate repository: amwillson/historic-modern-environment
+
+## Output: data/processed/PLS/xydata.RData
+## Gridded soil, climate, and vegetation variables
+## on 8 x 8 km grid where each row is a grid cell
+## Used in 1.3.Split_data.R
 
 rm(list = ls())
 

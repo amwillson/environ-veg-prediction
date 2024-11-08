@@ -1,6 +1,6 @@
-## STEP 4-1
+## STEP 5-1
 
-## Univariate random forest fit to HISTORICAL 
+## Univariate random forest fit to MODERN
 ## TOTAL STEM DENSITY and CLIMATE and SOIL covariates
 
 ## 1. Load data
@@ -13,23 +13,28 @@ rm(list = ls())
 
 #### 1. Load data ####
 
-# Load PLS data
-load('data/processed/PLS/xydata_in.RData')
+# Load FIA data
+load('data/processed/FIA/xydata_in.RData')
 
 # Select relevant columns
-rf_data <- pls_in |>
+rf_data <- fia_in |>
+  dplyr::ungroup() |>
+  dplyr::rename(total_density = total_stem_density) |>
   dplyr::select(total_density, # response variable
                 clay, sand, silt, caco3, awc, flood, # edaphic variables
                 ppt_sum, tmean_mean, ppt_cv,
                 tmean_sd, tmin, tmax, vpdmax) |> # climatic variables
   dplyr::distinct()
 
+# Convert to regular dataframe
+rf_data <- as.data.frame(rf_data)
+
 #### 2. Hyperparameter tuning ####
 
 # Tune mtry and nodesize
 tune_rf <- randomForestSRC::tune(formula = total_density ~ ., # formula
                                  data = rf_data, # data
-                                 nodesizeTry = 1:10, # node sizes to try, default is typically 5
+                                 nodesizeTry = 1:10, # node sizes to try
                                  ntreeTry = 500) # number of trees to grow
 
 # Optimal hyperparameter combination
@@ -58,23 +63,22 @@ tune_hyper |>
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::theme_minimal()
 
-## Use nodesize = 1, mtry = 5 to balance between
-## optimal mtry and reducing correlation between learners
+## Use nodesize = 1, mtry = 6
 
 #### 3. Fit random forest ####
 
 # Fit random forest
-density_rf_H_allcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
-                                              data = rf_data, # data
-                                              ntree = 1000, # higher number of trees because this is production quality
-                                              mtry = 5, # from above decision
-                                              nodesize = 1, # from above decision
-                                              importance = TRUE, # calculate variable importance
-                                              forest = TRUE) # save forest variables
+density_rf_M_allcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
+                                                data = rf_data, # data
+                                                ntree = 1000, # higher number of trees because this is production quality
+                                                mtry = 6, # from above decision
+                                                nodesize = 1, # from above decision
+                                                importance = TRUE, # calculate variable importance
+                                                forest = TRUE) # save forest variables
 
 # Save
-save(density_rf_H_allcovar,
-     file = '/Volumes/FileBackup/SDM_bigdata/out/rf/H/density/allcovar.RData')
+save(density_rf_M_allcovar,
+     file = '/Volumes/FileBackup/SDM_bigdata/out/rf/M/density/allcovar.RData')
 
 #### 4. Variable importance ####
 
@@ -84,7 +88,7 @@ save(density_rf_H_allcovar,
 ## a reduced model ran later
 
 # Calculate variable importance with confidence intervals
-var_imp <- randomForestSRC::subsample(obj = density_rf_H_allcovar,
+var_imp <- randomForestSRC::subsample(obj = density_rf_M_allcovar,
                                       B = 100)
 
 # Save importance with confidence intervals
@@ -115,10 +119,10 @@ imp_CI |>
   ggplot2::theme_minimal()
 
 ## Most important: precipitation seasonality,
-## maximum annual temperature, temperature seasonality
+## maximum annual temperature, soil % clay
 
 # Find minimum depth of each variable across trees
-var_select <- randomForestSRC::var.select(object = density_rf_H_allcovar, # random forest object
+var_select <- randomForestSRC::var.select(object = density_rf_M_allcovar, # random forest object
                                           method = 'md', # minimum depth
                                           ntree = 500, # number of trees
                                           conservative = 'high') # conservative threshold
@@ -160,18 +164,14 @@ var_depth |>
   ggplot2::theme_minimal()
 
 ## For reduced covariate random forest: choose precipitation seasonality,
-## maximum annual temperature, total annual precipitaiton
-## + soil % clay, which has low minimum depth,
-## suggesting that it provides extra information not captured by
-## climate variables
-## Dropping temperature seasonality because of strong
-## correlations with other covariates
+## maximum annual temperature, temperature seasonality,
+## + soil % clay
 
-#### 5. Parital effects plots ####
+#### 5. Partial effects plots ####
 
 ## Soil % clay
 # Partial effect
-clay_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+clay_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                xvar.names = 'clay',
                                                partial = TRUE)
 
@@ -187,17 +187,17 @@ ggplot2::ggplot() +
                                     ymax = clay_data$yhat + clay_data$yhat.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % clay') + ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_clay.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_clay.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Soil % sand
-sand_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+sand_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                xvar.names = 'sand',
                                                partial = TRUE)
 
@@ -211,17 +211,17 @@ ggplot2::ggplot() +
                                     ymax = sand_data$yhat + sand_data$yhat.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % sand') + ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_sand.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_sand.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Soil % silt
-silt_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+silt_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                xvar.names = 'silt',
                                                partial = TRUE)
 
@@ -235,17 +235,17 @@ ggplot2::ggplot() +
                                     ymax = silt_data$yhat + silt_data$yhat.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % silt') + ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_silt.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_silt.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Calcium carbonate concentration
-caco3_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+caco3_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                 xvar.names = 'caco3',
                                                 partial = TRUE)
 
@@ -260,17 +260,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil calcium carbonate concentration (%)') + 
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_caco3.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_caco3.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Available water content
-awc_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+awc_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                               xvar.names = 'awc',
                                               partial = TRUE)
 
@@ -285,17 +285,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil available water content (cm/cm)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_awc.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_awc.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## % of grid cell in floodplain
-flood_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+flood_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                 xvar.names = 'flood',
                                                 partial = TRUE)
 
@@ -310,17 +310,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Fraction of grid cell in a floodplain') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_flood.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_flood.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Total annual precipitation
-ppt_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+ppt_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                               xvar.names = 'ppt_sum',
                                               partial = TRUE)
 
@@ -335,17 +335,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Total annual precipitation (mm/year)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_ppt_sum.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_ppt_sum.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Mean annual temperature
-tmean_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+tmean_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                 xvar.names = 'tmean_mean',
                                                 partial = TRUE)
 
@@ -360,17 +360,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Mean annual temperature (°C)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_tmean_mean.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_tmean_mean.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Precipitation seasonality
-ppt_cv_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+ppt_cv_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                  xvar.names = 'ppt_cv',
                                                  partial = TRUE)
 
@@ -385,17 +385,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Precipitation seasonality (coefficient of variation)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_ppt_cv.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_ppt_cv.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Temperature seasonality
-tmean_sd_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+tmean_sd_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                    xvar.names = 'tmean_sd',
                                                    partial = TRUE)
 
@@ -410,17 +410,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Temperature seasonality (standard deviation (°C))') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_tmean_sd.png',
+                filename = 'figures/rf/M/density/fit/all_covar_tmean_sd.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Minimum annual temperature
-tmin_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+tmin_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                xvar.names = 'tmin',
                                                partial = TRUE)
 
@@ -435,17 +435,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Minimum annual temperature (°C)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_tmin.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_tmin.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Maximum annual temperature
-tmax_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+tmax_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                                xvar.names = 'tmax',
                                                partial = TRUE)
 
@@ -460,17 +460,17 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual temperature (°C)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_tmax.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_tmax.png',
                 height = 8, width = 9.5, units = 'cm')
 
 ## Maximum VPD
-vpd_partial <- randomForestSRC::plot.variable(x = density_rf_H_allcovar,
+vpd_partial <- randomForestSRC::plot.variable(x = density_rf_M_allcovar,
                                               xvar.names = 'vpdmax',
                                               partial = TRUE)
 
@@ -485,12 +485,11 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual vapor pressure deficit (hPa)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(93, 218)) +
+  ggplot2::ylim(c(274, 369)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/fit/all_covar_partial_vpdmax.png',
+                filename = 'figures/rf/M/density/fit/all_covar_partial_vpdmax.png',
                 height = 8, width = 9.5, units = 'cm')
-
