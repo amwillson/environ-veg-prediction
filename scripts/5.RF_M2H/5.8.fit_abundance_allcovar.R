@@ -1,13 +1,27 @@
-## STEP 5-8
+#### STEP 5-8
 
 ## Multivariate random forest fit to MODERN
 ## RELATIVE ABUNDANCE and CLIMATE and SOIL covariates
+
+## NOTE that the random forest model is saved to an external hard
+## drive. The object isn't THAT big, so it can be saved locally,
+## but I elected to save it externally. The directory should be
+## saved according to your file structure
 
 ## 1. Load data
 ## 2. Hyperparameter tuning
 ## 3. Fit random forest
 ## 4. Variable importance
 ## 5. Partial effects plots
+
+## Input: data/processed/FIA/xydata_in.RData
+## Dataframe of in-sample grid cells with modern (FIA) era
+## vegetation, soil, and climate data
+
+## Output: /Volumes/FileBackup/SDM_bigdata/out/rf/M/abundance/allcovar.RData
+## Fitted random forest object saved to external hard drive
+## Used in 5.12.abundance_historical_predictions.R,
+## 5.13.abundance_modern_predictions.R
 
 rm(list = ls())
 

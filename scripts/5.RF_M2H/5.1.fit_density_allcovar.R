@@ -1,13 +1,29 @@
-## STEP 5-1
+#### STEP 5-1
 
 ## Univariate random forest fit to MODERN
 ## TOTAL STEM DENSITY and CLIMATE and SOIL covariates
+
+## NOTE that the random forest model is saved to an external hard
+## drive. The object isn't THAT big, so it can be saved locally,
+## but I elected to save it externally. The directory should be
+## saved according to your file structure
 
 ## 1. Load data
 ## 2. Hyperparameter tuning
 ## 3. Fit random forest
 ## 4. Variable importance
 ## 5. Partial effects plots
+
+## Input: data/processed/FIA/xydata_in.RData
+## Dataframe of in-sample grid cells with modern (FIA) era
+## vegetation, soil, and climate data
+
+## Output: /Volumes/FileBackup/SDM_bigdata/out/rf/M/density/allcovar.RData
+## Fitted random forest object saved to external hard drive
+## Used in 5.5.density_historical_predictions.R,
+## 5.6.density_modern_predictions.R
+
+## Figures of partial effects plots also saved to figures/ directory
 
 rm(list = ls())
 
