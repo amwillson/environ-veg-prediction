@@ -1,4 +1,4 @@
-## STEP 4-7
+#### STEP 4-7
 
 ## Plot out-of-sample predictions from HISTORICAL
 ## model predicting HISTORICAL and MODERN
@@ -17,6 +17,51 @@
 ## 11. Compare predictions in space
 ## 12. Compare differences in space
 ## 13. Compare r
+
+## Input: out/rf/H/density/predicted_historical_rf1.RData
+## Dataframe with observed historical out-of-sample vegetation, soil, 
+## and climate data as well as predicted historical total
+## stem density from main model with soil and climate covariates
+
+## Input: out/rf/H/density/predicted_historical_rf2.RData
+## Dataframe with observed historical out-of-sample vegetation, soil,
+## and climate data as well as predicted historical total
+## stem density from alternate model with only climate covariates
+
+## Input: out/rf/H/density/predicted_historical_rf3.RData
+## Dataframe with observed historical out-of-sample vegetation, soil,
+## and climate data as well as predicted historical total
+## stem density from alternate model with the reduced set
+## of covariates
+
+## Input: out/rf/H/density/predicted_historical_rf4.RData
+## Dataframe with observed historical out-of-sample vegetation, soil,
+## and climate data as well as predicted historical total
+## stem density from alternate model with soil and climate covariates
+## as well as latitude and longitude of the grid cell
+
+## Input: out/rf/H/density/predicted_modern_rf1.RData
+## Dataframe with observed modern out-of-sample vegetation, soil,
+## and climate data as well as predicted modern total
+## stem density from main model with soil and climate covariates
+
+## Input: out/rf/H/density/predicted_modern_rf2.RData
+## Dataframe with observed modern out-of-sample vegetation, soil,
+## and climate data as well as predicted modern total stem
+## density from alterate model with only climate covariates
+
+## Input: out/rf/H/density/predicted_modern_rf3.RData
+## Dataframe with observed modern out-of-sample vegetation, soil,
+## and climate data as well as predicted modern total stem
+## density from alternate model with the reduced set of covariates
+
+## Input: out/rf/H/density/predicted_modern_rf4.RData
+## Dataframe with observed modern out-of-sample vegetation, soil,
+## and climate data as well as predicted modern total stem density
+## from alternate model with soil and climate covariates as well
+## as latitude and longitude of the grid cell
+
+## Output: none except figures saved in figure/ directory
 
 rm(list = ls())
 

@@ -1,12 +1,75 @@
-## STEP 4-13
+#### STEP 4-13
 
 ## Predict MODERN RELATIVE ABUNDANCE
 ## from HISTORICAL fitted random forests
+
+## NOTE that models were saved on an external hard drive in
+## steps 4-8 through 4-11. They must be loaded from the external
+## hard drive or wherever you saved the models here. Change
+## the file paths accordingly
 
 ## 1. Load models
 ## 2. Load data
 ## 3. Predict
 ## 4. Check sum-to-one
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/allcovar.RData
+## Fitted random forest using all climate and soil covariates
+## Used to make predictions from the main model with climate and soil
+## covariates
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/climcovar.RData
+## Fitted random forest using only climate covariates
+## Used to make predictions from the alternate model with only climate
+## covariates
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/redcovar.RData
+## Fitted random forest using only the reduced set of covariates
+## Used to make predictions from the alternate model with a reduced set
+## of covariates
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/xycovar.RData
+## Fitted random forest using all the soil and climate covariates plus
+## the latitude and longtiude of the grid cell
+## Used to make predictions from the alternate model including grid
+## cell coordinates and environmental covariates
+
+## Input: data/processed/FIA/xydata_out.RData
+## Dataframe containing the out-of-sample modern (FIA)
+## vegetation, soil, and climate data
+## The covariates are used to make predictions of the out-of-sample
+## modern vegetation data
+
+## Input: data/processed/PLS/xydata_out.RData
+## Datafram econtaining the out-of-sample historical (PLS)
+## vegetation, soil, and climate data
+## Used to make sure the FIA columns are in the same order
+## I'm pretty sure this isn't necessary though
+
+## Output: out/rf/H/abundance/predicted_modern_rf1.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted modern relative abundances from the out-of-sample 
+## grid cells using the main model with climate and soil covariates
+## Used in 4.14.abundance_figures.R
+
+## Output: out/rf/H/abundance/predicted_modern_rf2.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted modern relative abundances from the out-of-sample 
+## grid cells using the alternate model with only climate covariates
+## Used in 4.14.abundance_figures.R
+
+## Output: out/rf/H/abundance/predicted_modern_rf3.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted modern relative abundances from the out-of-sample 
+## grid cells using the alternate model with only the reduced set of covariates
+## Used in 4.14.abundance_figures.R
+
+## Output: out/rf/H/abundance/predicted_modern_rf4.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted modern relative abundances from the out-of-sample 
+## grid cells using the alternate model with the soil and climate 
+## covariates as well as the latitude and the longitude of the grid cell
+## Used in 4.14.abundance_figures.R
 
 rm(list = ls())
 

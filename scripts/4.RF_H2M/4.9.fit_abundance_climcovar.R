@@ -1,11 +1,25 @@
-## STEP 4-9
+#### STEP 4-9
 
 ## Multivariate random forest fit to HISTORICAL
 ## RELATIVE ABUNDANCE and CLIMATE coviarates only
 
+## NOTE that the random forest model is saved to an external hard
+## drive. The object isn't THAT big, so it can be saved locally,
+## but I elected to save it externally. The directory should be
+## saved according to your file structure
+
 ## 1. Load data
 ## 2. Hyperparameter tuning
 ## 3. Fit random forest
+
+## Input: data/processed/PLS/xydata_in.RData
+## Dataframe of in-sample grid cells with historical (PLS) era
+## vegetation, soil, and climate data
+
+## Output: /Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/climcovar.RData
+## Fitted random forest object saved to external hard drive
+## Used in 4.12.abundance_historical_predictions.R,
+## 4.13.abundance_modern_predictions.R
 
 rm(list = ls())
 
