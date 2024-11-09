@@ -1,3 +1,5 @@
+#### STEP 2-2
+
 ## Processing FIA data to produce gridded estimates of
 ## total stem density and fractional composition
 ## Done two ways:
@@ -21,6 +23,33 @@
 ## 13. Plot plot-level variables
 ## 14. Plot grid-level variables
 ## 15. Save
+
+## Input: data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData
+## Contains all the tree and plot information necessary
+## for calculating grid-level total stem density and relative
+## abundance
+
+## Input: PalEON_FIA_workflow/data/conversions/fia_paleongrid_albers.csv
+## Contains the standard PalEON 8 x 8 km grid that I aggregate
+## FIA plots to
+
+## Input: PalEON_FIA_workflow/data/conversions/FIA_conversion_v03.csv
+## Contains the FIA species code-to-PLS taxon conversions
+## previously used by the PalEON team
+
+## Output: data/processed/FIA/gridded_only_known_plots.RData
+## Contains gridded FIA total stem density and relative
+## abundance for only the plots that we know which grid cell
+## they are in from unswapped/unfuzzed coordinates
+## This is NOT currently used because I favored using all the data
+## even if their exact locations are more uncertain
+
+## Output: data/processed/FIA/gridded_all_plots.RData
+## Contains gridded FIA total stem density and relative
+## abundance for all plots, with the uncertain plots
+## assigned to a grid cell based on swapped & fuzzed
+## coordinates
+## Used in 2.3.Collate_modern_data.R
 
 rm(list = ls())
 

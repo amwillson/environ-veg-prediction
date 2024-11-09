@@ -4,13 +4,44 @@
 ## I follow the in-sample OOS splits from the PLS data
 ## since we want the same OOS samples
 
+## 1. Load data
+## 2. Split data
+## 3. Save
+
+## Input: data/processed/FIA/xydata.RData
+## Formatted dataframe with FIA vegetation data, soil, and modern
+## climate data for all grid cells
+
+## Input: data/processed/PLS/xydata_out.RData
+## Out-of-sample grid cells from historical period
+## Used to match up out-of-sample grid cells between time periods
+
+## Output: data/processed/FIA/xydata_in.RData
+## In-sample grid cells of the modern period vegetation,
+## soil, and climate data
+## Used in 5.1.fit_density_allcovar.R, 5.2.fit_density_climcovar.R,
+## 5.3.fit_density_redcovar.R, 5.4.fit_density_xycovar.R,
+## 5.8.fit_abundance_allcovar.R, 5.9.fit_abundance_climcovar.R,
+## 5.10.fit_abundance_redcovar.R, 5.11.fit_abundance_xycovar.R
+
+## Output: data/processed/FIA/xydata_out.RData
+## Out-of-sample grid cells of the modern period vegetation,
+## soil, and climate data
+## Used in 4.6.density_modern_predictions.R,
+## 4.13.abundance_modern_predictions.R, 5.6.density_modern_predictions.R,
+## 5.13.abundance_modern_predictions.R
+
 rm(list = ls())
+
+#### 1. Load data ####
 
 # Load FIA data
 load('data/processed/FIA/xydata.RData')
 
 # Load PLS OOS data
 load('data/processed/PLS/xydata_out.RData')
+
+#### 2. Split data ####
 
 # Take grid cells from PLS
 pls_oos_cells <- pls_oos |>
@@ -32,6 +63,8 @@ fia_in <- xydata_modern_oos |>
 fia_oos <- xydata_modern_oos |>
   dplyr::filter(dataset == 'oos') |>
   dplyr::select(-pls_oos, -dataset)
+
+#### 3. Save ####
 
 # Save
 save(fia_in,

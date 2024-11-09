@@ -1,3 +1,5 @@
+#### STEP 1-3
+
 ## Subsetting in-sample and out-of-sample data in PLS
 ## Out-of-sample grid cells should have corresponding grid cells in FIA
 

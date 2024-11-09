@@ -1,8 +1,14 @@
+#### STEP 2-1
+
 ## Joining FIA data
 ## Downloaded COND, PLOT, SUBPLOT, TREE tables
+## Download data: 08 August 2024
 ## Join all tables using relation IDs
 
 ## User manual: data/raw/FIA_08082024/manual.pdf
+## This is the manual I followed for how to join
+## supplemented with information from FIA/USFS employees
+## on order and variables to pay attention to
 
 ## 1. Load data
 ## 2. Format PLOT tables
@@ -13,9 +19,52 @@
 ## 7. Filter data
 ## 8. Save output
 
+## Input: data/raw/FIA_08082024/IL_COND.csv
+##        data/raw/FIA_08082024/IN_COND.csv
+##        data/raw/FIA_08082024/MI_COND.csv
+##        data/raw/FIA_08082024/MN_COND.csv
+##        data/raw/FIA_08082024/WI_COND.csv
+## Condition tables for each state in our study domain
+## Contains information on the conditions present on each plot
+## Used to filter for the forested condition
+
+## Input: data/raw/FIA_08082024/IL_PLOT.csv
+##        data/raw/FIA_08082024/IN_PLOT.csv
+##        data/raw/FIA_08082024/MI_PLOT.csv
+##        data/raw/FIA_08082024/MN_PLOT.csv
+##        data/raw/FIA_08082024/WI_PLOT.csv
+## Plot tables for each state in our study domain
+## Contains information about the whole plot
+## Used for coordinates and to filter sampled plots
+
+## Input: data/raw/FIA_08082024/IL_SUBPLOT.csv
+##        data/raw/FIA_08082024/IN_SUBPLOT.csv
+##        data/raw/FIA_08082024/MI_SUBPLOT.csv
+##        data/raw/FIA_08082024/MN_SUBPLOT.csv
+##        data/raw/FIA_08082024/WI_SUBPLOT.csv
+## Subplot tables for each state in our study domain
+## Contains which subplot each tree is on
+## Used to filter for only the main subplots that can be
+## used to calculate stand-level variables
+
+## Input: data/raw/FIA_08082024/IL_TREE.csv
+##        data/raw/FIA_08082024/IN_TREE.csv
+##        data/raw/FIA_08082024/MI_TREE.csv
+##        data/raw/FIA_08082024/MN_TREE.csv
+##        data/raw/FIA_08082024/WI_TREE.csv
+## Tree tables for each state in our study domain
+## Contains information on each tree in the plots/subplots
+## Used to find total stem density and relative abundance from
+## TPA_UNADJ and species identity
+
+## Output: data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData
+## Contains all tree-level data from which total stem density
+## and relative abundance are calculated
+## Used in 2.2.Estimate_density_composition.R
+
 rm(list = ls())
 
-#### Load data ####
+#### 1. Load data ####
 
 # Condition tables
 IL_COND <- readr::read_csv('data/raw/FIA_08082024/IL_COND.csv')
@@ -45,7 +94,7 @@ MI_TREE <- readr::read_csv('data/raw/FIA_08082024/MI_TREE.csv')
 MN_TREE <- readr::read_csv('data/raw/FIA_08082024/MN_TREE.csv')
 WI_TREE <- readr::read_csv('data/raw/FIA_08082024/WI_TREE.csv')
 
-#### PLOT tables ####
+#### 2. Format PLOT tables ####
 
 # Combine
 PLOT <- rbind(IL_PLOT, IN_PLOT, MI_PLOT, MN_PLOT, WI_PLOT)
@@ -63,7 +112,7 @@ PLOT2 <- PLOT |>
                 SAMP_METHOD_CD) |> # filter for 1 = field visited
   dplyr::rename(PLT_CN = CN)
 
-#### COND tables ####
+#### 3. Format COND tables ####
 
 # Combine
 COND <- rbind(IL_COND, IN_COND, MI_COND, MN_COND, WI_COND)
@@ -79,7 +128,7 @@ COND2 <- COND |>
                 BALIVE) |> # live basal area
   dplyr::rename(COND_CN = CN)
 
-#### SUBPLOT tables ####
+#### 4. Format SUBPLOT tables ####
 
 # Combine
 SUBPLOT <- rbind(IL_SUBPLOT, IN_SUBPLOT, MI_SUBPLOT, MN_SUBPLOT, WI_SUBPLOT)
@@ -92,7 +141,7 @@ SUBPLOT2 <- SUBPLOT |>
                 SUBPCOND, MICRCOND, MACRCOND) |> # foreign key (subplot to condition)
   dplyr::rename(SUBP_CN = CN)
 
-#### TREE tables ####
+#### 5. Format TREE tables ####
 
 # Combine
 TREE <- rbind(IL_TREE, IN_TREE, MI_TREE, MN_TREE, WI_TREE)
@@ -110,7 +159,7 @@ TREE2 <- TREE |>
                 TPA_UNADJ) |> # number of trees per acre the tree represents based on sampling design
   dplyr::rename(TREE_CN = CN)
 
-#### Combine tables ####
+#### 6. Combine tables ####
 
 # Assign PLOT to each TREE
 TREE_PLOT <- TREE2 |>
@@ -130,7 +179,7 @@ TOTAL_FIA <- TREE_PLOT_COND |>
                    by = c('PLT_CN', 'SUBP', # unique key
                           'STATECD', 'INVYR', 'UNITCD', 'COUNTYCD', 'PLOT'))
 
-#### Filter ####
+#### 7. Filter data ####
 
 TOTAL_FIA <- TOTAL_FIA |>
   dplyr::filter(PLOT_STATUS_CD %in% c(1, NA), # 1 = sampled and old plots (= NA)
@@ -143,6 +192,6 @@ TOTAL_FIA <- TOTAL_FIA |>
                 -COND_STATUS_CD, -STATUSCD) |>
   dplyr::mutate(DIA = DIA * 2.54)
 
-#### Save ####
+#### 8. Save ####
 
 save(TOTAL_FIA, file = 'data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData')

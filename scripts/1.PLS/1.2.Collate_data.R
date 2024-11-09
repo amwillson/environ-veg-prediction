@@ -1,3 +1,5 @@
+#### STEP 1-2
+
 ## Combining climate, soil and vegetation data
 ## Individual dataframes aggregated to the 8 x 8 km grid
 ## are simply combined for running the models

@@ -1,4 +1,27 @@
+#### STEP 2-3
+
 ## Collate modern data
+## Combining vegetation, climate, and soil data froom PLS period
+
+## 1. Vegetation
+## 2. Soil
+## 3. Climate
+
+## Input: data/processed/FIA/gridded_all_plots.RData
+## Gridded FIA-derived total stem density and relative abundance
+
+## Input: data/raw/soils/gridded_soil.RData
+## Gridded soil variables from gSSURGO
+## Created in separate repository: amwillson/historic-modern-environment
+
+## Input: data/raw/climate/gridded_climate_modern.Rdata
+## Gridded climate variables from PRISM
+## Created in separate repository: amwillson/historic-modern-environment
+
+## Output: data/processed/FIA/xydata.RData
+## Dataframe with vegetation, soil, and climate data
+## for each grid cell (rows)
+## Used in 2.4.Split_data.R
 
 rm(list = ls())
 
