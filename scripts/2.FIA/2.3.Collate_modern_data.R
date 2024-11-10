@@ -1,7 +1,7 @@
 #### STEP 2-3
 
 ## Collate modern data
-## Combining vegetation, climate, and soil data froom PLS period
+## Combining vegetation, climate, and soil data from PLS period
 
 ## 1. Vegetation
 ## 2. Soil

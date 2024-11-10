@@ -23,13 +23,19 @@
 ## 5.3.fit_density_redcovar.R, 5.4.fit_density_xycovar.R,
 ## 5.8.fit_abundance_allcovar.R, 5.9.fit_abundance_climcovar.R,
 ## 5.10.fit_abundance_redcovar.R, 5.11.fit_abundance_xycovar.R
+## 7.1.fit_density_allcovar.R, 7.2.fit_density_climcovar.R,
+## 7.3.fit_density_redcovar.R, 7.4.fit_density_xycovar.R.,
+## 7.8.fit_abundance_allcovar.R, 7.9.fit_abundance_climcovar.R,
+## 7.10.fit_abundance_redcovar.R, 7.11.fit_abundance_xycovar.R
 
 ## Output: data/processed/FIA/xydata_out.RData
 ## Out-of-sample grid cells of the modern period vegetation,
 ## soil, and climate data
 ## Used in 4.6.density_modern_predictions.R,
 ## 4.13.abundance_modern_predictions.R, 5.6.density_modern_predictions.R,
-## 5.13.abundance_modern_predictions.R
+## 5.13.abundance_modern_predictions.R, 6.6.density_modern_predictions.R,
+## 6.13.abundance_modern_predictions.R, 7.6.density_modern_predictions.R,
+## 7.13.abundance_modern_predictions.R
 
 rm(list = ls())
 
