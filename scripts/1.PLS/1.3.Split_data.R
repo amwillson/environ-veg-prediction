@@ -23,7 +23,11 @@
 ## Used in 4.1.fit_density_allcovar.R, 4.2.fit_density_climcovar.R,
 ## 4.3.fit_density_redcovar.R, 4.4.fit_density_xycovar.R,
 ## 4.8.fit_abundance_allcovar.R, 4.9.fit_abundance_climcovar.R,
-## 4.10.fit_abundance_redcovar.R, 4.11.fit_abundance_xycovar.R
+## 4.10.fit_abundance_redcovar.R, 4.11.fit_abundance_xycovar.R,
+## 6.1.fit_density_allcovar.R, 6.2.fit_density_climcovar.R,
+## 6.3.fit_density_redcovar.R, 6.4.fit_density_xycovar.R,
+## 6.8.fit_abundance_allcovar.R, 6.9.fit_abundance_climcovar.R,
+## 6.10.fit_abundance_redcovar.R, 6.11.fit_abundance_xycovar.R
 
 ## Output: data/processed/PLS/xydata_out.RData
 ## PLS-era vegetation, climate, and soil data for only out-of-sample grid cells
@@ -31,7 +35,11 @@
 ## 4.6.density_modern_predictions.R, 4.12.abundance_historical_predictions.R,
 ## 4.13.abundance_modern_predictions.R, 5.5.density_historical_predictions.R,
 ## 5.6.density_modern_predictions.R, 5.12.abundance_historical_predictions.R,
-## 5.13.abundance_modern_predictions.R
+## 5.13.abundance_modern_predictions.R, 6.5.density_historical_predictions.R,
+## 6.6.density_modern_predictions.R, 6.12.abundance_historical_predictions.R,
+## 6.13.abundance_modern_predictions.R, 7.5.density_historical_predictions.R,
+## 7.6.density_modern_predictions.R, 7.12.abundance_historical_predictions.R,
+## 7.13.abundance_modern_predictions.R
 
 rm(list = ls())
 

@@ -29,11 +29,11 @@
 ## for calculating grid-level total stem density and relative
 ## abundance
 
-## Input: PalEON_FIA_workflow/data/conversions/fia_paleongrid_albers.csv
+## Input: data/conversions/fia_paleongrid_albers.csv
 ## Contains the standard PalEON 8 x 8 km grid that I aggregate
 ## FIA plots to
 
-## Input: PalEON_FIA_workflow/data/conversions/FIA_conversion_v03.csv
+## Input: data/conversions/FIA_conversion_v03.csv
 ## Contains the FIA species code-to-PLS taxon conversions
 ## previously used by the PalEON team
 
@@ -124,7 +124,7 @@ TOTAL_FIA_plot <- TOTAL_FIA |>
 #### 5. Assign known plots grid cells ####
 
 # Load PalEON coordinates & grid mapping
-paleon_coords <- readr::read_csv('PalEON_FIA_workflow/data/conversions/fia_paleongrid_albers.csv')
+paleon_coords <- readr::read_csv('data/conversions/fia_paleongrid_albers.csv')
 
 # Match FIA plots to PalEON grid cells
 matched_plots <- TOTAL_FIA_plot |>
@@ -266,7 +266,7 @@ TOTAL_FIA_matched <- dplyr::filter(TOTAL_FIA_matched, !is.na(cell))
 #### 8. Assign PalEON taxon classifications ####
 
 # Read in PalEON taxon assignments
-paleon_taxa <- readr::read_csv('PalEON_FIA_workflow/data/conversions/FIA_conversion_v03.csv')
+paleon_taxa <- readr::read_csv('data/conversions/FIA_conversion_v03.csv')
 
 # For some reason there are two elm rows. Remove one
 paleon_taxa <- paleon_taxa[-243,]
