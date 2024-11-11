@@ -98,6 +98,10 @@ All packages can be installed using the install_packages.R script. When possible
     - xydata_out.RData: only out-of-sample grid cells containing vegetation, climate and soil data in a dataframe
     - xydata.RData: all grid cells (both in-sample and out-of-sample) containing vegetation, climate, and soil data in a dataframe
 
+### SDM_bigdata/nlcd_tcc_CONUS_2021_v2021-4: NLCD data for producing map of modern tree stem density
+
+Contains files in .tif format of modern tree stem density from NLCD and USFS FIA
+
 ## figures
 
 Figures saved from 4.7.density_figures.R, 4.14.abundance_figures.R, 5.7.density_figures.R, 5.14.abundance_figures.R, 6.7.density_figures.R, and 6.14.abundance_figures.R. Figures may additionally be added for processed data products but have not been added yet.
@@ -216,6 +220,54 @@ Predictions from random forests and GAMs
             - predicted_modern_rf3.RData: predictions of modern total stem density from the model fit to the reduced number of covariates
             - predicted_modern_rf4.RData: predictions of modern relative abundance from the model fit to soil and climate covariates and the latitude and longitude of the grid cell
 
+### SDM_bigdata/out: contains fitted models that are too large to store long-term on laptop hard drive
+- gam: contains fitted GAM models
+    - H: contains GAMs fit to historical period
+        - density: contains GAMs fit to historical total stem density
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+        - abundance: contains GAMs fit to historical relative abundances
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+    - M: contains GAMs fit to modern period
+        - density: contains GAMs fit to modern total stem density
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+        - abundance: contains GAMs fit to modern relative abundances
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+- rf: contains fitted random forest models
+    - H: contains random forests fit to historical period
+        - abundance: contains random forests fit to historical relative abundances
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+        - density: contains random forests fit to modern total stem density
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+    - M: contains random forests fit to modern period
+        - abundance: contains random forests fit to modern relative abundances
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+        - density: contains random forests fit to modern total stem density
+            - allcovar.RData: model fit with climate and soil covariates
+            - climcovar.RData: model fit with only climate covariates
+            - redcovar.RData: model fit with only the reduced set of covariates
+            - xycovar.RData: model fit with the climate and soil covariates plus coordinates of the grid cells
+            
 ## scripts
 
 Code for processing data, fitting models, making out-of-sample predictions, and plotting results. The code is broken into seven sections. The first section (**1.PLS**) organizes and formats vegetation, climate, and soil data for the historical time period. The second section (**2.FIA**) organizes and formats vegetation, climate, and soil data for the modern time period. The third section (**3.NLCD**) produces maps of modern vegetation cover for the Upper Midwest region. The fourth section (**4.RF_H2M**) fits random forests to historical total stem density and tree taxon relative abundances, and then predicts out-of-sample historical and modern total stem density and relative abundances. The fifth section (**5.RF_M2H**) fits random forests to modern total stem density and tree taxon relative abundances, and again predicts out-of-sample historical and modern total stem density and relative abundances. The sixth section (**6.GAM_H2M**) fits generalized additive models (GAMs) to historical total stem density and tree taxon relative abundances, and predicts out-of-sample historical and modern total stem density and relative abundances. Finally, the seventh section (**7.GAM_M2H**) fits GAMs to modern total stem density and tree taxon relative abundances, and again predicts out-of-sample historical and modern total stem density and relative abundances. This directory additionally includes one helper file (**install_packages.R**) for installing required packages, including versions.
