@@ -1,11 +1,13 @@
 # Install packages required through full analysis
 # Installing specific versions except where it threw an error
 
-if(!require(remotes)) install.package('remotes')
+if(!require(remotes)) install.packages('remotes')
 library(remotes)
 
 remotes::install_version(package = 'cowplot',
                          version = '1.1.3')
+remotes::install_version(package = 'dplyr',
+                         version = '1.1.4')
 install.packages('fields') # version 16.2
 remotes::install_version(package = 'ggplot2',
                          version = '3.5.1')

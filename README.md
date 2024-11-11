@@ -13,6 +13,7 @@ This repository was built in the R environment using R version 4.4.2.
 # Package versions
 
 * `cowplot` v. 1.1.3
+* `dplyr` v. 1.1.4
 * `fields` v. 16.2
 * `ggplot2` v. 3.5.1
 * `maps` v. 3.4.2
