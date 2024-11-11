@@ -230,7 +230,6 @@ save(density_gam_H_allcovar,
 # Get partial effects plots
 partials <- mgcv::plot.gam(density_gam_H_allcovar)
 
-
 # Extract data
 clay_data <- partials[[1]]
 sand_data <- partials[[2]]

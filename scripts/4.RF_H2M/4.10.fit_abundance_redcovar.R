@@ -3,7 +3,7 @@
 ## Multivariate random forest fit to HISTORICAL
 ## RELATIVE ABUNDANCE and REDUCED covariates
 
-## Reduced covariates refers to using a subset of al the covariates 
+## Reduced covariates refers to using a subset of all the covariates 
 ## based on importance and minimum depth analysis performed in step 4-8:
 ## maximum annual temperature,
 ## precipitation seasonality,
