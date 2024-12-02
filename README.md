@@ -21,9 +21,12 @@ This repository was built in the R environment using R version 4.4.2.
 * `dplyr` v. 1.1.4
 * `fields` v. 16.2
 * `ggplot2` v. 3.5.1
+* `gjam` v. 2.6.2
+* `gratia` v. 0.9.2
 * `maps` v. 3.4.2
 * `MASS` v. 7.3.61
 * `mgcv` v. 1.9.1
+* `mvgam` v. 1.1.3
 * `ncdf4` v. 1.23
 * `randomForestSRC` v. 3.3.1
 * `readr` v. 2.1.5
@@ -601,13 +604,155 @@ Code for processing data, fitting models, making out-of-sample predictions, and 
 
 ### 6.GAM_GLM_H2M
 
-**PLACEHOLDER**
-
-
+- **6.1.fit_density_allcovar.R**: Univariate GAM fit to historical total stem density and climate and soil covariates
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar.RData: Fitted GAM object saved to external hard drive. Used in 6.5.density_historical_predictions.R, 6.6.density_modern_predictions.R
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar_4k.RData: Fitted GAM object with lower maximum basis dimensionality to reduce overfitting. Saved to external hard drive. Used in 6.5.density_historical_predictions.R, 6.6.density_modern_predictions.R
+- **6.2.fit_density_climcovar.R**: Univariate GAM fit to historical total stem density and climate covariates only
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid celsl with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar.RData: Fitted GAM object saved to external hard drive. Used in 6.5.density_historical_predictions.R, 6.6.density_modern_predictions.R
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar_4k.RData: Fitted GAM object with lower maximum basis dimensionality to reduce overfitting. Saved to external hard drive. Used in 6.5.density_historical_predictions.R, 6.6.density_modern_predictions.R
+- **6.3.fit_density_redcovar.R**: Univariate GAM fit to historical total stem density and reduced covariates. Reduced covariates referes to using a subset of all the covariates that are relatively uncorrelated. All minimally correlated combinations were tried and the best model according to leave-one-out cross validation was chosen and saved.
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData: Fitted GAM object saved to external hard drive. Used in 6.5.density_historical_predictions.R, 6.6.density_modern_predictions.R
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar_4k.RData: Fitted GAM object with lower maximum basis dimensionality to reduce overfitting. Saved to external hard drive. Used in 6.5.density_historical_predictions.R, 6.6.density_modern_predictions.R
+- **6.4.fit_density_xycovar.R**: Univariate GAM fit to historical total stem density and climate and soil covariates plus coordinates. Note that this script does not include all of the steps of the other scripts because the initial model fit here fails to converge. This suggested to me that this model is not really appropriate so I did not continue with this model.
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/xycovar.RData: Fitted GAM object saved to external hard drive. This is never used because the model could not converge.
+- **6.5.density_historical_predictions.R**: Predict historical total stem density from historical fitted GAMs
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar.RData: Fitted GAM using all climate and soil covariates. Used to make predictions from the main model with climate and soil covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar.RData: Fitted GAM using only climate covariates. Used to make predictions from the alternate model with only climate covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData: Fitted GAM using only the reduced set of covariates. Used to make predictions from the alternate model with a reduced set of covariates.
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar_4k.RData: Fitted GAM using all climate and soil covariates fit with lower maximum basis dimensionality. Used to make predictions from the main model with climate and soil covariates but reducing overfitting
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar_4k.RData: Fitted GAM using only climate covariates fit with lower maximum basis dimensionality. Used to make predictions from the alternate model with only climate covariates but reducing overfitting
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar_4k.RData: Fitted GAM using only the reduced set of covariates fit with lower maximum basis dimensionality. Used to make predictions from the alternate model with a reduced set of covariates but reducing overfitting
+        - data/processed/PLS/xydata_out.RData: Dataframe containing the out-of-sample historical (PLS) vegetation, soil, and climate data. The covariates are used to make predictions of the out-of-sample historical vegetation data
+    - Outputs: 
+        - out/gam/H/density/predicted_historical_gam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the main model with climate and soil covariates. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_historical_gam2.RData: Dataframe of observed vegetation, soil, and cliamte data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only climate covariates. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_historical_gam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_historical_gam1_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the main model with climate and soil covariates with lower maximum basis dimensionality. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_historical_gam2_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only climate covariates with lower maximum basis dimensionality. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_historical_gam3_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates with lower maximum basis dimensionality. Used in 6.7.density_figures.R
+- **6.6.density_modern_predictions.R**: Predict modern total stem density from historical fitted GAMs
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar.RData: Fitted GAM using all climate and soil covariates. Used to make predictions from the main model with climate and soil covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar.RData: Fitted GAM using only climate covariates. Used to make predictions from the alternate model with only climate covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData: Fitted GAM using only the reduced set of covariates. Used to make predictions from the alternate model with a reduced set of covariates.
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar_4k.RData: Fitted GAM using all climate and soil covariates fit with lower maximum basis dimensionality. Used to make predictions from the main model with climate and soil covariates but reducing overfitting
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar_4k.RData: Fitted GAM using only climate covariates fit with lower maximum basis dimensionality. Used to make predictions from the alternate model with only climate covariates but reducing overfitting
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar_4k.RData: Fitted GAM using only the reduced set of covariates fit with lower maximum basis dimensionality. Used to make predictions from the alternate model with a reduced set of covariates but reducing overfitting
+        - data/processed/FIA/xydata_out.RData: Dataframe containing the out-of-sample modern (FIA) vegetation, soil, and climate data. The covariates are used to make predictions of the out-of-sample modern vegetation data
+        - data/processed/PLS/xydata_out.RData: Dataframe containing the out-of-sample historical (PLS) vegetation, soil, and climate data. Used to make sure the FIA columns are in the same order. I'm pretty sure this isn't necessary though.
+    - Outputs:
+        - out/gam/H/density/predicted_modern_gam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the main model with climate and soil covariates. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_modern_gam2.RData: Dataframe of observed vegetation, soil, and cliamte data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only climate covariates. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_modern_gam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_modern_gam1_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted  modern total stem density from the out-of-sample grid cells using the main model with climate and soil covariates with lower maximum basis dimensionality. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_modern_gam2_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only climate covariates with lower maximum basis dimensionality. Used in 6.7.density_figures.R
+        - out/gam/H/density/predicted_modern_gam3_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates with lower maximum basis dimensionality. Used in 6.7.density_figures.R 
+- **6.7.density_figures.R**: Plot out-of-sample predictions from historical model predicting historical and modern total stem density
+    - Inputs:
+        - out/gam/H/density/predicted_historical_gam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the main model with climate and soil covariates.
+        - out/gam/H/density/predicted_historical_gam2.RData: Dataframe of observed vegetation, soil, and cliamte data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only climate covariates.
+        - out/gam/H/density/predicted_historical_gam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates.
+        - out/gam/H/density/predicted_historical_gam1_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the main model with climate and soil covariates with lower maximum basis dimensionality.
+        - out/gam/H/density/predicted_historical_gam2_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only climate covariates with lower maximum basis dimensionality.
+        - out/gam/H/density/predicted_historical_gam3_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates with lower maximum basis dimensionality.
+        - out/gam/H/density/predicted_modern_gam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the main model with climate and soil covariates.
+        - out/gam/H/density/predicted_modern_gam2.RData: Dataframe of observed vegetation, soil, and cliamte data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only climate covariates.
+        - out/gam/H/density/predicted_modern_gam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates.
+        - out/gam/H/density/predicted_modern_gam1_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted  modern total stem density from the out-of-sample grid cells using the main model with climate and soil covariates with lower maximum basis dimensionality.
+        - out/gam/H/density/predicted_modern_gam2_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only climate covariates with lower maximum basis dimensionality.
+        - out/gam/H/density/predicted_modern_gam3_4k.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern total stem density from the out-of-sample grid cells using the alternate model with only the reduced set of covariates with lower maximum basis dimensionality.
+    - Outputs: none
+- **6.8.fit_abundance_allcovar.R**: Multivariate GLM fit to historical relative abundance and climate and soil covariates. Here, we use GJAM (generalized joint attribute modeling) to fit linear relationships between environmental covariates and taxon relative abundances, while accounting for the covariance between relative abundances. This is effectively a GLM SDM, but allowing for the multivariate response variable.
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/allcovar.RData: Fitted GJAM object saved to external hard drive. Used in 6.12.abundance_historical_predictions.R, 6.13.abundance_modern_predictions.R
+- **6.9.fit_abundance_climcovar.R**: Multivariate GLM fit to historical relative abundance and climate covariates. Here, we use GJAM (generalized joint attribute modeling) to fit linear relationships between environmental covariates and taxon relative abundances, while accounting for the covariance between relative abundances. This is effectively a GLM SDM, but allowing for the multivariate response variable.
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/climcovar.RData: Fitted GJAM object saved to external hard drive. Used in 6.12.abundance_historical_predictions.R, 6.13.abundance_modern_predictions.R
+- **6.10.fit_abundance_redcovar.R**: Multivariate GLM fit to historical relative abundance and reduced covariates. Here, we use GJAM (genearlized joint attribute modeling) to fit linear relationships between environmental covariates and taxon relative abundances, while accounting for the covariance between relative abundances. This is effectively a GLM SDM, but allowing for the multivariate response variable. Reduced covariates refers to using a subset of all the covariates based on joint sensitivity of response variables to each covariate analyzed in step 6-8: maximum annual temperature, temperature seasonality, and soil % clay.
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/redcovar.RData: Fitted GJAM object saved to external hard drive. Used in 6.12.abundance_historical_predictions.R, 6.13.abundance_modern_predictions.R
+- **6.11.fit_abundance_xycovar.R**: Multivariate GLM fit to historical relative abundance and climate and soil covariates plus coordinates. Here, we use GJAM (generalized joint attribute modeling) to fit linear relationships between environmental covariates and taxon relative abundances, while accounting for the covariance between relative abundances. This is effectively a GLM SDM, but allowing for the multivariate response variable.
+    - Inputs:
+        - data/processed/PLS/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/xycovar.RData: Fitted GJAM object saved to external hard drive. Used in 6.12.abundance_historical_predictions.R, 6.13.abundance_modern_predictions.R
+- **6.12.abundance_historical_predictions.R**: Predict historical relative abundance from historical fitted GLMs
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/allcovar.RData: Fitted GJAM using all climate and soil covariates. Used to make predictions from the main model with climate and soil covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/climcovar.RData: Fitted GJAM using only climate covariates. Used to make predictions from the alternate model with only climate covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/redcovar.RData: Fitted GJAM using only the reduced set of covariates. Used to make predictions from the alternate model with a reduced set of covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/xycovar.RData: Fitted GJAM using all the soil and climate covariates plus the latitude and longitude of the grid cell. Used to make predictions from the alternate model including grid cell coordinates and environmental covariates
+        - data/processed/PLS/xydata_out.RData: Dataframe containing the out-of-sample historical (PLS) vegetation, soil, and climate data. The covariates are used to make predictions of the out-of-sample historical vegetation data
+    - Outputs:
+        - out/gjam/H/abundance/predicted_historical_gjam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the main model with climate and soil covariates. Used in 6.14.abundance_figures
+        - out/gjam/H/abundance/predicted_historical_gjam2.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the alternate model with only climate covariates. Used in 6.14.abundance_figures.R
+        - out/gjam/H/abundance/predicted_historical_gjam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the alternate model with only the reduced set of covariates. Used in 6.14.abundance_figures.R
+        - out/gjam/H/abundance/predicted_historical_gjam4.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the alternate model with the soil and climate covariates as well as the latitude and longitude of the grid cell. Used in 6.14.abundance_figures.R
+- **6.13.abundance_modern_predictions.R**: Predict modern relative abundance from historical fitted GLMs
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/allcovar.RData: Fitted GJAM using all climate and soil covariates. Used to make predictions from the main model with climate and soil covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/climcovar.RData: Fitted GJAM using only climate covariates. Used to make predictions from the alternate model with only climate covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/redcovar.RData: Fitted GJAM using only the reduced set of covariates. Used to make predictions from the alternate model with a reduced set of covariates
+        - /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/xycovar.RData: Fitted GJAM using all the soil and climate covariates plus the latitude and longitude of the grid cell. Used to make predictions from the alternate model including grid cell coordinates and environmental covariates
+        - data/processed/FIA/xydata_out.RData: Dataframe containing the out-of-sample modern (FIA) vegetation, soil, and climate data. The covariates are used to make predictions of the out-of-sample modern vegetation data
+        - data/processed/PLS/xydata_out.RData: Dataframe containing the out-of-sample historical (PLS) vegetation, soil, and climate data. Used to make sure the FIA columns are in the same order. I'm pretty sure this isn't necessary though
+    - Outputs:
+        - out/gjam/H/abundance/predicted_modern_gjam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the main model with climate and soil covariates. Used in 6.14.abundance_figures
+        - out/gjam/H/abundance/predicted_modern_gjam2.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the alternate model with only climate covariates. Used in 6.14.abundance_figures.R
+        - out/gjam/H/abundance/predicted_modern_gjam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the alternate model with only the reduced set of covariates. Used in 6.14.abundance_figures.R
+        - out/gjam/H/abundance/predicted_modern_gjam4.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the alternate model with the soil and climate covariates as well as the latitude and longitude of the grid cell. Used in 6.14.abundance_figures.R
+- **6.14.abundance_figures.R**: Plot out-of-sample predictions from historical model predicting historical and modern relative abundance.
+    - Inputs:
+        - out/gjam/H/abundance/predicted_historical_gjam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the main model with climate and soil covariates.
+        - out/gjam/H/abundance/predicted_historical_gjam2.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the alternate model with only climate covariates. 
+        - out/gjam/H/abundance/predicted_historical_gjam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the alternate model with only the reduced set of covariates. 
+        - out/gjam/H/abundance/predicted_historical_gjam4.RData: Dataframe of observed vegetation, soil, and climate data and predicted historical relative abundances from the out-of-sample grid cells using the alternate model with the soil and climate covariates as well as the latitude and longitude of the grid cell. 
+        - out/gjam/H/abundance/predicted_modern_gjam1.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the main model with climate and soil covariates. 
+        - out/gjam/H/abundance/predicted_modern_gjam2.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the alternate model with only climate covariates. 
+        - out/gjam/H/abundance/predicted_modern_gjam3.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the alternate model with only the reduced set of covariates. 
+        - out/gjam/H/abundance/predicted_modern_gjam4.RData: Dataframe of observed vegetation, soil, and climate data and predicted modern relative abundances from the out-of-sample grid cells using the alternate model with the soil and climate covariates as well as the latitude and longitude of the grid cell.
+    - Outputs: none
+        
 ### 7.GAM_M2H -- COME BACK
 
-**PLACEHOLDER**
-
+- **7.1.fit_density_allcovar.R**: Univariate GAM fit to modern total stem density and climate and soil covariates
+    - Inputs:
+        - data/processed/FIA/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/allcovar.RData: Fitted GAM object saved to external hard drive. Used in 7.5.density_historical_predictions.R, 7.6.density_modern_predictions.R
+       - /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/allcovar_4k.RData: Fitted GAM object with lower maximum basis dimensionality to reduce overfitting. Saved to external hard drive. Used in 7.5.density_historical_predictions.R, 7.6.density_modern_predictions.R
+- **7.2.fit_density_climcovar.R**: Univariate GAM fit to modern total stem density and climate covariates
+    - Inputs:
+        - data/processed/FIA/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/climcovar.RData: Fitted GAM object saved to external hard drive. Used in 7.5.density_historical_predictions.R, 7.6.density_modern_predictions.R
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/climcovar_4k.RData: Fitted GAM object with lower maximum basis dimensionality to reduce overfitting. Saved to external hard drive. Used in 7.5.density_historical_predictions.R, 7.6.density_modern_predictions.R
+- **7.3.fit_density_redcovar.R**: Univariate GAM fit to modern total stem density and reduced covariates. Reduced covariates refers to using a subset of all the covariates that are relatively uncorrelated. All minimally correlated covariate combinations were tried and the best model according to leave-one-out cross validation was chosen and saved
+    - Inputs:
+        - data/processed/FIA/xydata_in.RData: Dataframe of in-sample grid cells with historical (PLS) era vegetation, soil, and climate data
+    - Outputs:
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar.RData: Fitted GAM object saved to external hard drive. Used in 7.5.density_historical_predictions.R, 7.6.density_modern_predictions.R
+        - /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar_4k.RData: Fitted GAM object with lower maximium basis dimensionality to reduce overfitting. Saved to external hard drive. Used in 7.5.density_historical_predictions.R, 7.6.density_modern_predictions.R
+        
 ### Other code
 
 - install_packages.R: helper file for installing packages, with package versions noted
