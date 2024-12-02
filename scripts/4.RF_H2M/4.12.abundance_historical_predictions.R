@@ -83,7 +83,7 @@ load('/Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/xycovar.RData')
 # Load out-of-sample data
 load('data/processed/PLS/xydata_out.RData')
 
-# Select relevant columns
+# Rename columns
 pls_oos <- pls_oos |>
   dplyr::rename(oh = `Other hardwood`, # rename so no special characters
                 gum = `Black gum/sweet gum`,

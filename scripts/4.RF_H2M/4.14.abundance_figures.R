@@ -14,7 +14,7 @@
 ## 8. Plot modern predictions
 ## 9. Plot modern predicted vs observed
 ## 10. Calculate modern r
-## 11. Compre predictions in space
+## 11. Compare predictions in space
 ## 12. Compare differences in space
 ## 13. Compare r
 

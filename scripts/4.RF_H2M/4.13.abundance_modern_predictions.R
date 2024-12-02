@@ -41,7 +41,7 @@
 ## modern vegetation data
 
 ## Input: data/processed/PLS/xydata_out.RData
-## Datafram econtaining the out-of-sample historical (PLS)
+## Dataframe containing the out-of-sample historical (PLS)
 ## vegetation, soil, and climate data
 ## Used to make sure the FIA columns are in the same order
 ## I'm pretty sure this isn't necessary though
