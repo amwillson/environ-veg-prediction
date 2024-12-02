@@ -3,12 +3,39 @@
 ## Univariate GAM fit to HISTORICAL
 ## TOTAL STEM DENSITY and REDUCED covariates
 
+## Reduced covariates refers to using a subset of all the covariates 
+## that are relatively uncorrelated. All minimally correlated covariate
+## combinations were tried and the best model according to leave-one-out
+## cross validation was chosen and saved
+
+## NOTE that the GAM is saved to an external hard
+## drive. The object isn't THAT big, so it can be saved locally,
+## but I elected to save it externally. The directory should be
+## saved according to your file structure
+
 ## 1. Load data
 ## 2. Fit GAMs
 ## 3. Save final model
 ## 4. Fit GAMs -- lower basis dimension
 ## 5. Save final model with lower basis dimension
 ## 6. Partial effects plots
+
+## Input: data/processed/PLS/xydata_in.RData
+## Dataframe of in-sample grid cells with historical (PLS) era
+## vegetation, soil, and climate data
+
+## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData
+## Fitted GAM object saved to external hard drive
+## Used in 6.5.density_historical_predictions.R,
+## 6.6.density_modern_predictions.R
+
+## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar_4k.RData
+## Fitted GAM object with lower maximum basis dimensionality
+## to reduce overfitting. Saved to external hard drive
+## Used in 6.5.density_historical_predictions.R,
+## 6.6.density_modern_predictions.R
+
+## Figures of partial effects plots also saved to figures/ directory
 
 rm(list = ls())
 

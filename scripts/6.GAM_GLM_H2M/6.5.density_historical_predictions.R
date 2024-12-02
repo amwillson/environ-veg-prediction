@@ -3,12 +3,95 @@
 ## Predict HISTORICAL TOTAL STEM DENSITY
 ## from HISTORICAL fitted GAMs
 
-## Note that we are not making predictions from the model with
+## NOTE that models were saved on an external hard drive in
+## steps 6-1 through 6-3. They must be loaded from the external
+## hard drive or wherever you saved the models here. Change
+## the file paths accordingly
+
+## NOTE that we are not making predictions from the model with
 ## coordinates because it does not converge
 
 ## 1. Load models
 ## 2. Load data
 ## 3. Predict
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar.RData
+## Fitted GAM using all climate and soil covariates
+## Used to make predictions from the main model with climate and soil
+## covariates
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar.RData
+## Fitted GAM using only climate covariates
+## Used to make predictions from the alternate model with only climate
+## covariates
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData
+## Fitted GAM using only the reduced set of covariates
+## Used to make predictions from the alternate model with a reduced set
+## of covariates
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/allcovar_4k.RData
+## Fitted GAM using all climate and soil covariates fit with lower maximum
+## basis dimensionality
+## Used to make predictions from the main model with climate and soil
+## covariates but reducing overfitting
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar_4k.RData
+## Fitted GAM using only climate covariates fit with lower maximum
+## basis dimensionality
+## Used to make predictions from the alternate model with only climate
+## covariates but reducing overfitting
+
+## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar_4k.RData
+## Fitted GAM using only the reduced set of covariates fit with lower
+## maximum basis dimensionality
+## Used to make predictions from the alternate model with a reduced set
+## of covariates but reducing overfitting
+
+## Input: data/processed/PLS/xydata_out.RData
+## Dataframe containing the out-of-sample historical (PLS)
+## vegetation, soil, and climate data
+## The covariates are used to make predictions of the out-of-sample
+## historical vegetation data
+
+## Output: out/gam/H/density/predicted_historical_gam1.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted historical total stem density from the out-of-sample 
+## grid cells using the main model with climate and soil covariates
+## Used in 6.7.density_figures.R
+
+## Output: out/gam/H/density/predicted_historical_gam2.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted historical total stem density from the out-of-sample 
+## grid cells using the alternate model with only climate covariates
+## Used in 6.7.density_figures.R
+
+## Output: out/gam/H/density/predicted_historical_gam3.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted historical total stem density from the out-of-sample 
+## grid cells using the alternate model with only the reduced set of covariates
+## Used in 6.7.density_figures.R
+
+## Output: out/gam/H/density/predicted_historical_gam1_4k.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted historical total stem density from the out-of-sample
+## grid cells using the main model with climate and soil covariates
+## with lower maximum basis dimensionality
+## Used in 6.7.density_figures.R
+
+## Output: out/gam/H/density/predicted_historical_gam2_4k.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted historical total stem density from the out-of-sample
+## grid cells using the alternate model with only climate covariates
+## with lower maximum basis dimensionality
+## Used in 6.7.density_figures.R
+
+## Output: out/gam/H/density/predicted_historical_gam3_4k.RData
+## Dataframe of observed vegetation, soil, and climate data and
+## predicted historical total stem density from the out-of-sample
+## grid cells using the alternate model with only the reduced set of covariates
+## with lower maximum basis dimensionality
+## Used in 6.7.density_figures.R
 
 rm(list = ls())
 

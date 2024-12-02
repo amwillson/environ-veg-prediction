@@ -12,6 +12,14 @@
 ## 1. Load data
 ## 2. Fit GAM
 
+## Input: data/processed/PLS/xydata_in.RData
+## Dataframe of in-sample grid cells with historical (PLS) era
+## vegetation, soil, and climate data
+
+## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/xycovar.RData
+## Fitted GAM object saved to external hard drive
+## This is never used because the model could not converge
+
 rm(list = ls())
 
 #### 1. Load data ####
@@ -26,6 +34,8 @@ gam_data <- pls_in |>
                 ppt_sum, tmean_mean, ppt_cv,
                 tmean_sd, tmin, tmax, vpdmax, # climatic variables
                 x, y) |> # coordinates
+  dplyr::rename(x_coord = x,
+                y_coord = y) |>
   dplyr::distinct()
 
 #### 2. Fit GAM ####
@@ -47,10 +57,10 @@ density_gam_H_xycovar <- mvgam::mvgam(formula = total_density ~
                                         s(tmin) +
                                         s(tmax) +
                                         s(vpdmax) +
-                                        s(x) +
-                                        s(y),
+                                        s(x_coord) +
+                                        s(y_coord),
                                       data = gam_data,
-                                      burnin = 1500,
+                                      burnin = 1000,
                                       samples = 1000,
                                       family = mvgam::lognormal()) # Takes about 
 
