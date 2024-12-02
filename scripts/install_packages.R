@@ -11,11 +11,17 @@ remotes::install_version(package = 'dplyr',
 install.packages('fields') # version 16.2
 remotes::install_version(package = 'ggplot2',
                          version = '3.5.1')
+remotes::install_version(package = 'gjam',
+                         version = '2.6.2')
+remotes::install_version(package = 'gratia',
+                         version = '0.9.2')
 remotes::install_version(package = 'maps',
                          version = '3.4.2')
 remotes::install_version(package = 'MASS',
                          version = '7.3.61')
 install.packages('mgcv') # version 1.9.1
+remotes::install_version(package = 'mvgam',
+                         version = '1.1.3')
 install.packages('ncdf4') # version 1.23
 remotes::install_version(package = 'randomForestSRC',
                          version = '3.3.1')
