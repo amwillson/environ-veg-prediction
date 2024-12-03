@@ -21,7 +21,7 @@
 ## 6. Partial effects plots
 
 ## Input: data/processed/FIA/xydata_in.RData
-## Dataframe of in-sample grid cells with historical (PLS) era
+## Dataframe of in-sample grid cells with modern (FIA) era
 ## vegetation, soil, and climate data
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar.RData
