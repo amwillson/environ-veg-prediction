@@ -10,7 +10,7 @@
 ## This is effectively a GLM SDM, but allowing for the multivariate
 ## response variable
 
-## NOTE that the random forest model is saved to an external hard
+## NOTE that the GJAM is saved to an external hard
 ## drive. The object isn't THAT big, so it can be saved locally,
 ## but I elected to save it externally. The directory should be
 ## saved according to your file structure

@@ -4031,7 +4031,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_ash.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_ash.png',
                 height = 10, width = 10, units = 'cm')
 
 # Basswood
@@ -4053,7 +4053,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_basswood.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_basswood.png',
                 height = 10, width = 10, units = 'cm')
 
 # Beech
@@ -4075,7 +4075,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_beech.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_beech.png',
                 height = 10, width = 10, units = 'cm')
 
 # Birch
@@ -4097,7 +4097,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_birch.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_birch.png',
                 height = 10, width = 10, units = 'cm')
 
 # Cherry
@@ -4119,7 +4119,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_cherry.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_cherry.png',
                 height = 10, width = 10, units = 'cm')
 
 # Dogwood
@@ -4141,7 +4141,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_dogwood.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_dogwood.png',
                 height = 10, width = 10, units = 'cm')
 
 # Elm
@@ -4163,7 +4163,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_elm.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_elm.png',
                 height = 10, width = 10, units = 'cm')
 
 # Fir
@@ -4185,7 +4185,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_fir.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_fir.png',
                 height = 10, width = 10, units = 'cm')
 
 # Hemlock
@@ -4207,7 +4207,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_hemlock.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_hemlock.png',
                 height = 10, width = 10, units = 'cm')
 
 # Hickory
@@ -4229,7 +4229,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_hickory.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_hickory.png',
                 height = 10, width = 10, units = 'cm')
 
 # Ironwood
@@ -4251,7 +4251,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_ironwood.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_ironwood.png',
                 height = 10, width = 10, units = 'cm')
 
 # Maple
@@ -4273,7 +4273,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_maple.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_maple.png',
                 height = 10, width = 10, units = 'cm')
 
 # Oak
@@ -4295,7 +4295,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_oak.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_oak.png',
                 height = 10, width = 10, units = 'cm')
 
 # Pine
@@ -4317,7 +4317,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_pine.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_pine.png',
                 height = 10, width = 10, units = 'cm')
 
 # Spruce
@@ -4339,7 +4339,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_spruce.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_spruce.png',
                 height = 10, width = 10, units = 'cm')
 
 # Tamarack
@@ -4361,7 +4361,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_tamarack.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_tamarack.png',
                 height = 10, width = 10, units = 'cm')
 
 # Walnut
@@ -4383,7 +4383,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_walnut.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_walnut.png',
                 height = 10, width = 10, units = 'cm')
 
 # Other hardwood
@@ -4405,7 +4405,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_oh.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_oh.png',
                 height = 10, width = 10, units = 'cm')
 
 # Black gum/sweet gum
@@ -4427,7 +4427,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_gum.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_gum.png',
                 height = 10, width = 10, units = 'cm')
 
 # Cedar/juniper
@@ -4449,7 +4449,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_cedar.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_cedar.png',
                 height = 10, width = 10, units = 'cm')
 
 # Poplar/tulip poplar
@@ -4471,7 +4471,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gjam/H/abundance/h2m_pred_space_allcovar_poplar.png',
+                filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_allcovar_poplar.png',
                 height = 10, width = 10, units = 'cm')
 
 ## Plot predictions over space with all models
