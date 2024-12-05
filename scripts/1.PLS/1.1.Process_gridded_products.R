@@ -215,6 +215,9 @@ density_fcomp_df <- total_density_df |>
                    by = c('x', 'y'))
 
 # Limit fcomp to domain of total density
+## There are extra states in the fcomp data product. This keeps only the
+## states in the UMW plus islands: minnesota, wisconsin,
+## michigan, illinois, indiana
 density_fcomp_df <- density_fcomp_df |>
   dplyr::mutate(Ash = dplyr::if_else(is.na(total_density), NA, Ash),
                 Basswood = dplyr::if_else(is.na(total_density), NA, Basswood),
@@ -255,7 +258,7 @@ density_fcomp_df |>
 # Filter out all the NAs
 density_fcomp_df <- tidyr::drop_na(density_fcomp_df)
 
-# Plot total density
+# Plot total density again to make sure nothing changed from dropping NAs
 density_fcomp_df |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
