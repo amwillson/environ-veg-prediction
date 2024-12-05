@@ -6,13 +6,22 @@ Descriptions of input data are helpful and clear. Data paths work with data that
 
 Total stem density plot seems logical. There are some points outside the state boundaries but they seem to correspond to islands that may not be included in the sf state boundaries. I will keep an eye on these later. 
 
+AW: Yes, the grid cells outside of state boundaries are large islands (e.g., Isle Royale).
+
 All of the species in the tree composition data are accounted for either by extracting their values or by intentionally excluding them. 
 
 Plot of relative abundance seems like a reasonable check of data processing. The data also seems to have been processed successfully. Points conform to shape outlines, fractional compositions adhere to 0-1 range, broad-scale abundance patterns are reasonable and consistent with plots in the original publication for this input data (Paciorek et al., 2016). If these plots are going to be used in publication I would recommend a different color scale however since it is hard to see low levels of fractional composition in this one and there are many areas of low fractional composition. 
 
+AW: That's fair. This is just a plot to check what the  data look like and I don't anticipate using a figure with this color palette.
+
 Is the goal of limiting the fcomp domain to the total density domain (line ~217) to just get the data from the upper midwest? The comment is a little unclear about why you are doing this. 
 
+AW: Yes. I aedded comments to explain this
+
 Is the reason you plot total density in 242 and 259 to make sure nothing changed when you dropped the NAs? Otherwise, why are you plotting the exact same thing twice?
+
+AW: Yes. In the first plot, there are NAs still but they're clear in color. So you see the full domain. Then I plot it again after dropping NAs to maek sure that the grid still looks the same and the dimension of the grid
+cells hasn't changed.
 
 Species-specific relative abundance plots are in the correct spatial domain now (so that is probably what was being done ~217). Data is still within the correct boundaries both spatially and 0-1. Patterns of taxon abundance remain consistent with Paciorek et al., 2016 and earlier plots. 
 
@@ -21,6 +30,8 @@ Saving the processed data was completed successfully, the folder structure makes
 ## 1.2 Collate data
 
 The file description is clear and helpful. Most of the input data descriptions are clear and useful. My only comment would be that it may be helpful for gridded_fcomp_density to add which script it was created in similarly to how the other inputs have the repo name and the output has where it will be used. 
+
+AW: Added that it was created in the previous step
 
 The initial plots remain the same as in the previous script. 
 
@@ -36,19 +47,31 @@ My only comment on this script is that the saved data could have a more descript
 
 I have the same comments here for the initial descriptions that I did for the last script. The overall script description is helpful and informative and the input and output data descriptions are clear but it may be helpful to add where processed input data is processed and saved. 
 
+AW: Added
+
 The checks in sections 2 and 3 of this script are appropriate for checking that the data processing is progressing as expected and are all coming back as passing that check. It may be beneficial to explain what is being checked in the comments surrounding the check. 
+
+AW: Added
 
 I am not sure this is necessary but you could add another explicit check after lines 103 and 105 to make sure that the number of grid cells in pls and fia data match the number of unique coordinates in either data set. However, they do match the number of rows in fia_coords and pls_coords so you should be good. 
 
+AW: Thanks for the suggestion! Added
+
 In the plot in line 116 I am intruiged by the fact that all of the FIA-only plots are on the borders of the region. Do you know why we don't have PLS data from those border areas?
+
+AW: I think these grid cells just weren't counted in the original PalEON domain but their centroids are technically within our bounds so I included them here.
 
 Partitioning of data into training and testing data is working correctly, follows the methods in the paper, and seems reasonable. The plots of the partitioning also seem suitably randomized though it may be interesting to see in/out subset by ecosystem type to verify that sampling approach. 
 
 You could add an additional test after line 276 to verify that the in sample and out of sample row numbers equal the full pls row number. I checked and the row counts do match. 
 
+AW: Thanks for the suggestion! Added
+
 I still do no think xydata is a particularly descriptive file name but otherwise the saving was successful and the folder structure makes sense. 
 
 I am not going to look at the deprecated folder but I would be happy to come back to it later if you think that would be helpful. 
+
+AW: No, I'm just scared to delete anything yet! I actually didn't realize this was still on Github though so thanks for pointing it out. It should be removed now.
 
 # 2 FIA
 
@@ -60,7 +83,11 @@ All data loaded correctly and there were no errors in the sections or joining.
 
 Filtering and joining seems reasonable but I will acknowledge that I do not have a great understanding of the FIA sampling design across years and plots.
 
+AW: I'll just add that I extensively checked my filtering and joining methods with people who know more about FIA data: Kelly Heilman, her FIA colleagues, and Mike Dietze all provided advice on this section.
+
 Saving worked successfully, file names are descriptive, and folder structure seems reasonable. I am a little confused about the distinction between the intermediate and processed data folders. I read the descriptions in the readme but the xydata, and gridded_fcomp_density also seem to be intermediate outputs from data processing steps so why are they in processed rather than intermediate? Is combined_COND_PLOT_TREE_SPECIES the only file that will be in this folder? If so, does it need its own folder?
+
+AW: That's a good point. I updated all the scripts in sections 1 and 2, as well as the README, so that only the final versions of the data are in the processed directory. Thanks for thinking about this because I don't know what I was thinking.
 
 ## 2.2 Estimate Density Composition
 
@@ -68,9 +95,15 @@ File and input/output descriptions look good.
 
 The loop to assign IDs works and the descriptions are good but the number of print statements may be somewhat excessive. 
 
+AW: No problem. I commented it out.
+
 The assignment of matched coordinates makes sense to me but I am a little confused by why a site would have vs. would not have coordinates. Are the no_matched plots the ones with swapped/fuzzed data?
 
+AW: Yes. I added a comment to explain this.
+
 There are no comments at all between lines 389-471. Most of this is plotting but it would still be nice to have some explanation of what you are plotting and why as well as what you are taking away from these plots. 
+
+AW: Sorry about that. I added comments throughout the section
 
 Density plots for swapped/fuzzed vs non-swapped seem like a good way to check for broad-scale patterns in densities of each group which is well-complemented by the more numerical plots later on in the script.
 
@@ -80,6 +113,8 @@ Saving of data worked, folder structure is sensible, and file names are informat
 
 File headings are still helpful and clear. I have the same comment as above about adding where it was created to the gridded_all_plots data. 
 
+AW: Added
+
 Plots still look good. 
 
 This one was fairly straightforward so I don't have a ton of comments. 
@@ -87,5 +122,7 @@ This one was fairly straightforward so I don't have a ton of comments.
 ## 2.4 Split data
 
 My only comment on this script is that if you wanted to you could add checks to make sure the amount of rows are the same like you did in 1.3 but otherwise it looks good. 
+
+AW: Thanks! Added.
 
 Again, this one is pretty straightforward so I don't have a ton of comments. 
