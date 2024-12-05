@@ -57,7 +57,7 @@
 ## Used to find total stem density and relative abundance from
 ## TPA_UNADJ and species identity
 
-## Output: data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData
+## Output: data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData
 ## Contains all tree-level data from which total stem density
 ## and relative abundance are calculated
 ## Used in 2.2.Estimate_density_composition.R
@@ -194,4 +194,4 @@ TOTAL_FIA <- TOTAL_FIA |>
 
 #### 8. Save ####
 
-save(TOTAL_FIA, file = 'data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData')
+save(TOTAL_FIA, file = 'data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData')

@@ -352,10 +352,10 @@ Code for processing data, fitting models, making out-of-sample predictions, and 
         - data/raw/FIA_08082024/MN_TREE.csv: Tree table for Minnesota. Contains information on each tree in the plots/subplots. Used to find total stem density and relative abundance using TPA_UNADJ and species identity
         - data/raw/FIA_08082024/WI_TREE.csv: Tree table for Wisconsin. Contains information on each tree in the plots/subplots. Used to find total stem density and relative abundance using TPA_UNADJ and species identity
     - Outputs:
-        - data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData: Contains all tree-level data from which total stem density and relative abundance are calculated. Used in 2.2.Estimate_density_composition.R
+        - data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData: Contains all tree-level data from which total stem density and relative abundance are calculated. Used in 2.2.Estimate_density_composition.R
 - **2.2.Estimate_density_composition.R**: Processing FIA data to produce gridded estimates of total stem density and fractional composition. This was done two ways: (1) with only the plots that I know the location of from previous PalEON work (so I kno wwhich grid cell each plot falls within), and (2) with all plots, estimating the grid cell they fall in where I don't know the exact coordinates.
     - Inputs:
-        - data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData: Contains all the tree and plot information necessary for calculating grid-level total stem density and relative abundance
+        - data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData: Contains all the tree and plot information necessary for calculating grid-level total stem density and relative abundance
         - data/conversions/fia_plaeongrid_albers.csv: Contains the standard PalEON 8 x 8 km grid that I aggregate FIA plots to
         - data/conversions/FIA_conversion_v03.csv: Contains the FIA species code-to-PLS taxon conversions previously used by the PalEON team
     - Outputs:

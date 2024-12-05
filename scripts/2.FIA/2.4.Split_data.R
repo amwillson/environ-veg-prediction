@@ -70,6 +70,9 @@ fia_oos <- xydata_modern_oos |>
   dplyr::filter(dataset == 'oos') |>
   dplyr::select(-pls_oos, -dataset)
 
+# Check that the number of rows in fia_in and fia_oos = the number of total rows
+nrow(fia_in) + nrow(fia_oos) == nrow(xydata_modern) # should be TRUE
+
 #### 3. Save ####
 
 # Save

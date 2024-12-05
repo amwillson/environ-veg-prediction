@@ -9,6 +9,7 @@
 
 ## Input: data/intermediate/FIA/gridded_all_plots.RData
 ## Gridded FIA-derived total stem density and relative abundance
+## Created in step 2-2
 
 ## Input: data/raw/soils/gridded_soil.RData
 ## Gridded soil variables from gSSURGO

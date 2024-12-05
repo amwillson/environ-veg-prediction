@@ -24,7 +24,7 @@
 ## 14. Plot grid-level variables
 ## 15. Save
 
-## Input: data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData
+## Input: data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData
 ## Contains all the tree and plot information necessary
 ## for calculating grid-level total stem density and relative
 ## abundance
@@ -56,7 +56,7 @@ rm(list = ls())
 #### 1. Load joined FIA data ####
 
 # Load data
-load('data/intermediate/combined_COND_PLOT_TREE_SPECIES.RData')
+load('data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData')
 
 #### 2. Remove all stems < 20.32 cm DBH ####
 
@@ -112,7 +112,7 @@ for(i in 1:nrow(curr_prev_plot)){
     }
   }
   # Progress
-  print(i/nrow(curr_prev_plot))
+  #print(i/nrow(curr_prev_plot))
 }
 
 # Join plot ID to the FIA dataset
@@ -144,6 +144,8 @@ TOTAL_FIA_matched <- TOTAL_FIA_plot |>
                    by = 'PLOT_ID')
 
 ## Which plots have and haven't  been assigned a grid cell?
+## These are grid cells that don't have unswapped/unfuzzed coordinates from
+## the PalEON data product
 
 # Take every plot that has been matched
 yes_matched <- TOTAL_FIA_matched |>
@@ -386,14 +388,20 @@ get_density <- function(x, y, ...) {
   return(dens$z[ii])
 }
 
+# Add unique inventory years and plot IDs to stem density dataframe
+# Need this in order to look at changes over time
 stem_density_year <- stem_density |>
   dplyr::left_join(y = year_id,
                    by = 'PLT_CN')
 
+# Estimate point density for color on figure
 stem_density_year$point_density <- get_density(x = stem_density_year$MEASYEAR,
                                                y = stem_density_year$density,
                                                n = 100)
-  
+
+# Plot stem density over time to make sure there
+# are no meaningful changes over time
+# Flat smooths (blue) indicate no change over time
 stem_density_year |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = MEASYEAR, y = density,
@@ -408,14 +416,17 @@ stem_density_year |>
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = 'none')
 
+# Add time and plot id to the second stem density dataframe
 stem_density_year2 <- stem_density2 |>
   dplyr::left_join(y = year_id,
                    by = 'PLT_CN')
 
+# Get point density for plotting
 stem_density_year2$point_density <- get_density(x = stem_density_year2$MEASYEAR,
                                                 y = stem_density_year2$density,
                                                 n = 100)
 
+# Check whether stem density changes over time in second dataframe
 stem_density_year2 |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = MEASYEAR, y = density,
@@ -430,14 +441,19 @@ stem_density_year2 |>
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = 'none')
 
+# Remove taxon-specific columns
+# Since the taxon columns are in long format, this allows us to have
+# one row per plot for looking at total density
 stem_density_year <- stem_density_year |>
   dplyr::select(STATECD, CYCLE, cell, x, y, PLOT_ID, PLT_CN, total_density, MEASYEAR) |>
   dplyr::distinct()
 
+# Point density again
 stem_density_year$point_density <- get_density(x = stem_density_year$MEASYEAR,
                                                y = stem_density_year$total_density,
                                                n = 100)
 
+# Plot total density over time to make sure there are no patterns
 stem_density_year |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = MEASYEAR, y = total_density,
@@ -450,14 +466,18 @@ stem_density_year |>
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = 'none')
 
+# Repeat getting total stem density from the second dataframe
 stem_density_year2 <- stem_density_year2 |>
   dplyr::select(STATECD, CYCLE, cell, x, y, PLOT_ID, PLT_CN, total_density, MEASYEAR) |>
   dplyr::distinct()
 
+# Get point density for plotting
 stem_density_year2$point_density <- get_density(x = stem_density_year2$MEASYEAR,
                                                 y = stem_density_year2$total_density,
                                                 n = 100)
 
+# Plot total stem density over time to make sure there are no pattern
+# over time again with dataframe 2
 stem_density_year2 |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = MEASYEAR, y = total_density,
