@@ -104,7 +104,7 @@ PLOT2 <- PLOT |>
   dplyr::select(CN, # primary key
                 PREV_PLT_CN, # previous inventory's plot record
                 INVYR, STATECD, UNITCD, COUNTYCD, PLOT, # unique key
-                CYCLE, SUBCYCLE, # inventory cycle and subcycle number, retained in preivous PalEON analyses
+                CYCLE, SUBCYCLE, # inventory cycle and subcycle number, retained in previous PalEON analyses
                 PLOT_STATUS_CD, # sampling status of plot, filter 1 = sampled
                 MEASYEAR, # measurement year
                 LAT, LON, # NAD 83

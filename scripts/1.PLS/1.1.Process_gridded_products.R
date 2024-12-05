@@ -173,7 +173,7 @@ fcomp_mean[,,19] <- fcomp_gum_mean
 fcomp_mean[,,20] <- fcomp_cedar_mean
 fcomp_mean[,,21] <- fcomp_poplar_mean
 
-# Add dimensino names
+# Add dimension names
 dimnames(fcomp_mean)[[1]] <- dimnames(fcomp_ash_mean)[[1]]
 dimnames(fcomp_mean)[[2]] <- dimnames(fcomp_ash_mean)[[2]]
 dimnames(fcomp_mean)[[3]] <- c('Ash', 'Basswood', 'Beech', 'Birch',
