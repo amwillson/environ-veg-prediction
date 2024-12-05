@@ -12,11 +12,13 @@
 ## Input: data/processed/PLS/xydata.RData
 ## PLS combined dataset with vegetation, climate, and soil data
 ## This is the dataframe we are splitting between in-sample and oos
+## Created in step 1-2
 
 ## Input: data/processed/FIA/gridded_all_plots.RData
 ## FIA vegetation dataset
 ## Contains the grid cells that are available in the modern (FIA) period
 ## Used to select corresponding grid cells in both time periods
+## Created in step 2-2
 
 ## Output: data/processed/PLS/xydata_in.RData
 ## PLS-era vegetation, climate, and soil data for only in-sample grid cells
