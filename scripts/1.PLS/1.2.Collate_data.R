@@ -11,6 +11,7 @@
 
 ## Input: data/processed/PLS/gridded_fcomp_density.RData
 ## PLS-era total stem density and fractional composition in each grid cell
+## Created in step 1-1
 
 ## Input: data/raw/soils/gridded_soil.RData
 ## Gridded soil variables from gSSURGO
