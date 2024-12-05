@@ -8,7 +8,7 @@
 ## 2. Split data
 ## 3. Save
 
-## Input: data/processed/FIA/xydata.RData
+## Input: data/intermediate/FIA/xydata.RData
 ## Formatted dataframe with FIA vegetation data, soil, and modern
 ## climate data for all grid cells
 
@@ -42,7 +42,7 @@ rm(list = ls())
 #### 1. Load data ####
 
 # Load FIA data
-load('data/processed/FIA/xydata.RData')
+load('data/intermediate/FIA/xydata.RData')
 
 # Load PLS OOS data
 load('data/processed/PLS/xydata_out.RData')

@@ -9,7 +9,7 @@
 ## 2. Soil
 ## 3. Climate
 
-## Input: data/processed/PLS/gridded_fcomp_density.RData
+## Input: data/intermediate/PLS/gridded_fcomp_density.RData
 ## PLS-era total stem density and fractional composition in each grid cell
 ## Created in step 1-1
 
@@ -21,7 +21,7 @@
 ## Gridded climate variables from PRISM
 ## Created in separate repository: amwillson/historic-modern-environment
 
-## Output: data/processed/PLS/xydata.RData
+## Output: data/intermediate/PLS/xydata.RData
 ## Gridded soil, climate, and vegetation variables
 ## on 8 x 8 km grid where each row is a grid cell
 ## Used in 1.3.Split_data.R
@@ -31,7 +31,7 @@ rm(list = ls())
 #### 1. Vegetation ####
 
 # Load data
-load('data/processed/PLS/gridded_fcomp_density.RData')
+load('data/intermediate/PLS/gridded_fcomp_density.RData')
 
 # State outlines
 states <- sf::st_as_sf(maps::map(database = 'state',
@@ -275,4 +275,4 @@ xydata |>
 
 # Save
 save(xydata,
-     file = 'data/processed/PLS/xydata.RData')
+     file = 'data/intermediate/PLS/xydata.RData')

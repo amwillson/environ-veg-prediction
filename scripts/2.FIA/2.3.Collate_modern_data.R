@@ -7,7 +7,7 @@
 ## 2. Soil
 ## 3. Climate
 
-## Input: data/processed/FIA/gridded_all_plots.RData
+## Input: data/intermediate/FIA/gridded_all_plots.RData
 ## Gridded FIA-derived total stem density and relative abundance
 
 ## Input: data/raw/soils/gridded_soil.RData
@@ -18,7 +18,7 @@
 ## Gridded climate variables from PRISM
 ## Created in separate repository: amwillson/historic-modern-environment
 
-## Output: data/processed/FIA/xydata.RData
+## Output: data/intermediate/FIA/xydata.RData
 ## Dataframe with vegetation, soil, and climate data
 ## for each grid cell (rows)
 ## Used in 2.4.Split_data.R
@@ -28,7 +28,7 @@ rm(list = ls())
 #### 1. Vegetation ####
 
 # Load data
-load('data/processed/FIA/gridded_all_plots.RData')
+load('data/intermediate/FIA/gridded_all_plots.RData')
 
 # Take only necessary columns from stem density
 fia_density <- stem_density_agg2 |>
@@ -310,4 +310,4 @@ xydata_modern |>
 
 # Save
 save(xydata_modern,
-     file = 'data/processed/FIA/xydata.RData')
+     file = 'data/intermediate/FIA/xydata.RData')

@@ -37,14 +37,14 @@
 ## Contains the FIA species code-to-PLS taxon conversions
 ## previously used by the PalEON team
 
-## Output: data/processed/FIA/gridded_only_known_plots.RData
+## Output: data/intermediate/FIA/gridded_only_known_plots.RData
 ## Contains gridded FIA total stem density and relative
 ## abundance for only the plots that we know which grid cell
 ## they are in from unswapped/unfuzzed coordinates
 ## This is NOT currently used because I favored using all the data
 ## even if their exact locations are more uncertain
 
-## Output: data/processed/FIA/gridded_all_plots.RData
+## Output: data/intermediate/FIA/gridded_all_plots.RData
 ## Contains gridded FIA total stem density and relative
 ## abundance for all plots, with the uncertain plots
 ## assigned to a grid cell based on swapped & fuzzed
@@ -893,7 +893,7 @@ fractional_composition_agg_comp |>
 #### 15. Save ####
 
 save(stem_density_agg, fractional_composition_agg,
-     file = 'data/processed/FIA/gridded_only_known_plots.RData')
+     file = 'data/intermediate/FIA/gridded_only_known_plots.RData')
 
 save(stem_density_agg2, fractional_composition_agg2,
-     file = 'data/processed/FIA/gridded_all_plots.RData')
+     file = 'data/intermediate/FIA/gridded_all_plots.RData')

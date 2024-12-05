@@ -16,7 +16,7 @@
 ## Estimated fractional composition/relative abundance from PLS period from DOI:
 ## https://doi.org/10.6073/pasta/8544e091b64db26fdbbbafd0699fa4f9
 
-## Output: data/processed/PLS/gridded_fcomp_density.RData
+## Output: data/intermediate/PLS/gridded_fcomp_density.RData
 ## Total stem density and relative abundances for each taxon
 ## in each 8 x 8 km grid cell (rows) for the PLS period in one dataframe
 ## Used in 1.2.Collate_data.R
@@ -292,4 +292,4 @@ density_fcomp_df |>
 #### 4. Save ####
 
 save(density_fcomp_df,
-     file = 'data/processed/PLS/gridded_fcomp_density.RData')
+     file = 'data/intermediate/PLS/gridded_fcomp_density.RData')

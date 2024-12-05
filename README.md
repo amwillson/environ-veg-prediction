@@ -90,21 +90,23 @@ All packages can be installed using the install_packages.R script. When possible
 
 ### intermediate: intermediate outputs from data processing steps
 
-- combined_COND_PLOT_TREE_SPECIES.RData: dataframe with all the data from the COND, PLOT, SUBPLOT, and TREE tables that is needed for estimation of total stem density and relative abundance for all five states: Illinois, Indiana, Michigan, Minnesota, Wisconsin
+- FIA: intermediate data products from the FIA dataset
+    - combined_COND_PLOT_TREE_SPECIES.RData: dataframe with all the data from the COND, PLOT, SUBPLOT, and TREE tables that is needed for estimation of total stem density and relative abundance for all five states: Illinois, Indiana, Michigan, Minnesota, Wisconsin
+    - gridded_all_plots.RData: gridded total stem density and relative abundance for all FIA plots, despite some having only swapped/fuzzed coordinates associated. This is what is currently used
+    - gridded_only_known_plots.RData: gridded total stem density and relative abundance for only plots with known (unswapped/unfuzzed) coordinates. This is not currently used
+    - xydata.RData: all grid cells (both in-sample and out-of-sample) containing vegetation, climate and soil data in a dataframe
+- PLS: intermediate data products from the PLS datasets
+    - gridded_fcomp_density.RData: gridded total stem density and relative abundance for all PLS grid cell. This is the same as the data products in the data/raw/ directory, but in a more R-friendly format and stored in a dataframe
+    - xydata.RData: all grid cells (both in-sample and out-of-sample) containing vegetation, climate, and soil data in a dataframe
 
 ### processed: processed data for analysis
 
 - FIA: processed FIA and related modern data products
-    - gridded_all_plots.RData: gridded total stem density and relative abundance for all FIA plots, despite some having only swapped/fuzzed coordinates associated. This is what is currently used
-    - gridded_only_known_plots.RData: gridded total stem density and relative abundance for only plots with known (unswapped/unfuzzed) coordinates. This is not currently used
     - xydata_in.RData: only in-sample grid cells containing vegetation, climate, and soil data in a dataframe
     - xydata_out.RData: only out-of-sample grid cells containing vegetation, climate, and soil data in a dataframe
-    - xydata.RData: all grid cells (both in-sample and out-of-sample) containing vegetation, climate and soil data in a dataframe
 - PLS: processed PLS and related historical data productd
-    - gridded_fcomp_density.RData: gridded total stem density and relative abundance for all PLS grid cell. This is the same as the data products in the data/raw/ directory, but in a more R-friendly format and stored in a dataframe
     - xydata_in.RData: only in-sample grid cells containing vegetation, climate and soil data in a dataframe
     - xydata_out.RData: only out-of-sample grid cells containing vegetation, climate and soil data in a dataframe
-    - xydata.RData: all grid cells (both in-sample and out-of-sample) containing vegetation, climate, and soil data in a dataframe
 
 ### SDM_bigdata/nlcd_tcc_CONUS_2021_v2021-4: NLCD data for producing map of modern tree stem density
 
@@ -243,6 +245,7 @@ Predictions from random forests, GAMs, and GJAMs.
             - predicted_modern_gjam ``4.RData: predictions of modern relative abundance from the model fit to soil and climate covariates and the latitude and longitude of the grid cell
 
 ### SDM_bigdata/out: contains fitted models that are too large to store long-term on laptop hard drive
+
 - gam: contains fitted GAM models
     - H: contains GAMs fit to historical period
         - density: contains GAMs fit to historical total stem density
@@ -308,17 +311,17 @@ Code for processing data, fitting models, making out-of-sample predictions, and 
         - data/raw/gridded_density/PLS_Density_Point_Level2_v1.0.nc: estimated stem density from PLS period from DOI https://doi.org/10.6073/pasta/1b2632d48fc79b370740a7c20a70b4b0
         - data/raw/gridded-composition/SetTreeComp_Level2_v1.0.nc: estimated fractional composition/relative abundance from PLS period from DOI https://doi.org/10.6073/pasta/8544e091b64db26fdbbbafd0699fa4f9
     - Outputs:
-        - data/processed/PLS/gridded_fcomp_density.RData: Total stem density and relative abundances for each taxon in each 8 x 8 km grid cell (rows) for the PLS period in one dataframe. Used in 1.2.Collate_data.R
+        - data/intermediate/PLS/gridded_fcomp_density.RData: Total stem density and relative abundances for each taxon in each 8 x 8 km grid cell (rows) for the PLS period in one dataframe. Used in 1.2.Collate_data.R
 - **1.2.Collate_data.R**: Combining climate, soil, and vegetation data. Individual dataframes aggregated to the 8 x 8 km grid are simply combined for running the models. All variables are plotted
     - Inputs:
-        - data/processed/PLS/gridded_fcomp_density.RData: PLS-era total stem density and fractional composition in each grid cell
+        - data/intermediate/PLS/gridded_fcomp_density.RData: PLS-era total stem density and fractional composition in each grid cell
         - data/raw/soils/gridded_soil.RData: Gridded soil variables from gSSURGO. Created in separate repository: https://github.com/amwillson/historic-modern-environment/
         - data/raw/climate/gridded_climate.RData: Gridded climate variables from PRISM. Created in separate repository: https://github.com/amwillson/historic-modern-environment/
     - Outputs:
-        - data/processed/PLS/xydata.RData: Gridded soil, climate, and vegetation variables on 8 x 8 km grid where each row is a grid cell. Used in 1.3.Split_data.R
+        - data/intermediate/PLS/xydata.RData: Gridded soil, climate, and vegetation variables on 8 x 8 km grid where each row is a grid cell. Used in 1.3.Split_data.R
 - **1.3.Split_data.R**: Subsetting in-sample and out-of-sample data in PLS. Out-of-sample grid cells should have corresponding grid cells in FIA, meaning that I had to check which grid cells are available in each time period.
     - Inputs:
-        - data/processed/PLS/xydata.RData: PLS combined dataset with vegetation, climate, and soil data. This is the dataframe we are splitting between in-sample and oos 
+        - data/intermediate/PLS/xydata.RData: PLS combined dataset with vegetation, climate, and soil data. This is the dataframe we are splitting between in-sample and oos 
         - data/processed/FIA/gridded_all_plots.RData: FIA vegetation datase. Contains the grid cells that are available in the modern (FIA) period. Used to select corresponding grid cells in both time periods
     - Outputs:
         - data/processed/PLS/xydata_in.RData: PLS-era vegetation, climate, and soil data for only in-sample grid cells. Used in 4.1.fit_density_allcovar.R, 4.2.fit_density_climcovar.R, 4.3.fit_density_redcovar.R, 4.4.fit_density_xycovar.R, 4.8.fit_abundance_allcovar.R, 4.9.fit_abundance_climcovar.R, 4.10.fit_abundance_redcovar.R, 4.11.fit_abundance_xycovar.R, 6.1.fit_density_allcovar.R, 6.2.fit_density_climcovar.R, 6.3.fit_density_redcovar.R, 6.4.fit_density_xycovar.R, 6.8.fit_abundance_allcovar.R, 6.9.fit_abundance_climcovar.R, 6.10.fit_abundance_redcovar.R., 6.11.fit_abundance_xycovar.R
@@ -356,17 +359,17 @@ Code for processing data, fitting models, making out-of-sample predictions, and 
         - data/conversions/fia_plaeongrid_albers.csv: Contains the standard PalEON 8 x 8 km grid that I aggregate FIA plots to
         - data/conversions/FIA_conversion_v03.csv: Contains the FIA species code-to-PLS taxon conversions previously used by the PalEON team
     - Outputs:
-        - data/processed/FIA/gridded_only_known_plots.RData: Contains gridded FIA total stem density and relative abundance for only the plots that we know which grid cell they are in from unswapped/unfuzzed coordinates. This is NOT currently used because I favored using all the data even if their exact locations are more uncertain
-        - data/processed/FIA/gridded_all_plots.RData: Contains gridded FIA total stem density and relative abundance for all plots, with the uncertain plots assigned to a grid cell based on swapped & fuzzed coordinates. Used in 2.3.Collate_modern_data.R
+        - data/intermediate/FIA/gridded_only_known_plots.RData: Contains gridded FIA total stem density and relative abundance for only the plots that we know which grid cell they are in from unswapped/unfuzzed coordinates. This is NOT currently used because I favored using all the data even if their exact locations are more uncertain
+        - data/intermediate/FIA/gridded_all_plots.RData: Contains gridded FIA total stem density and relative abundance for all plots, with the uncertain plots assigned to a grid cell based on swapped & fuzzed coordinates. Used in 2.3.Collate_modern_data.R
 - **2.3.Collate_modern_data.R**: Collate modern data. Combining vegetation, climate, and soil data from PLS period.
     - Inputs:
-        - data/processed/FIA/gridded_all_plots.RData: Gridded FIA-derived total stem density and relative abundance
+        - data/intermediate/FIA/gridded_all_plots.RData: Gridded FIA-derived total stem density and relative abundance
         - data/raw/climate/gridded_climate_modern.RData: Gridded climate variables from PRISM. Created in a separate repository: https://github.com/amwillson/historic-modern-environment/
     - Outputs:
-        - data/processed/FIA/xydata.RData: Dataframe with vegetation, soil, and climate data for each grid cell (rows). Used in 2.4.Split_data.R
+        - data/intermediate/FIA/xydata.RData: Dataframe with vegetation, soil, and climate data for each grid cell (rows). Used in 2.4.Split_data.R
 - **2.4.Split_data.R**: Splitting FIA data into in-sample and OOS data. I follow the in-sample/OOS splits from the PLS data since I want the same OOS samples.
     - Inputs:
-        - data/processed/FIA/xydata.RData: Formatted dataframe with FIA vegetation data, soil, and climate data for all grid cells.
+        - data/intermediate/FIA/xydata.RData: Formatted dataframe with FIA vegetation data, soil, and climate data for all grid cells.
         - data/processed/PLS/xydata_out.RData: Out-of-sample grid cells from historical period. Used to match up out-of-sample grid cells between time periods
     - Outputs:
         - data/processed/FIA/xydata_in.RData: In-sample grid cells of the modern period vegetation, soil, and climate data. Used in 5.1.fit_density_allcovar.R, 5.2.fit_density_climcovar.R, 5.3.fit_density_redcovar.R, 5.4.fit_density_xycovar.R, 5.8.fit_abundance_allcovar.R, 5.9.fit_abundance_climcovar.R, 5.10.fit_abundance_redcovar.R, 5.11.fit_abundance_xycovar.R, 7.1.fit_density_allcovar.R, 7.2.fit_density_climcovar.R, 7.3.fit_density_redcovar.R, 7.4.fit_density_xycovar.R, 7.8.fit_abundance_allcovar.R, 7.9.fit_abundance_climcovar.R, 7.10.fit_abundance_redcovar.R, 7.11.fit_abundance_xycovar.R

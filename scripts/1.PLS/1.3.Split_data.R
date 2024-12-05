@@ -9,12 +9,12 @@
 ## 4. Select out-of-sample
 ## 5. Save
 
-## Input: data/processed/PLS/xydata.RData
+## Input: data/intermediate/PLS/xydata.RData
 ## PLS combined dataset with vegetation, climate, and soil data
 ## This is the dataframe we are splitting between in-sample and oos
 ## Created in step 1-2
 
-## Input: data/processed/FIA/gridded_all_plots.RData
+## Input: data/intermediate/FIA/gridded_all_plots.RData
 ## FIA vegetation dataset
 ## Contains the grid cells that are available in the modern (FIA) period
 ## Used to select corresponding grid cells in both time periods
@@ -51,11 +51,11 @@ set.seed(1)
 #### 1. Load data ####
 
 # Load collated PLS data
-load('data/processed/PLS/xydata.RData')
+load('data/intermediate/PLS/xydata.RData')
 
 # Load FIA gridded data
 # (no environmental variables but that doesn't matter)
-load('data/processed/FIA/gridded_all_plots.RData')
+load('data/intermediate/FIA/gridded_all_plots.RData')
 
 # Coordinate pairs
 pls_coords <- xydata |>
@@ -75,6 +75,8 @@ pls_density <- xydata |>
   dplyr::distinct() |>
   dplyr::rename(pls_density = total_density)
 
+# Check that each row corresponds to one grid cell & each grid cell
+# has a unique set of coordinates
 nrow(pls_density) == nrow(pls_coords) # should BE TRUE
 
 fia_density <- stem_density_agg2 |>
@@ -83,6 +85,8 @@ fia_density <- stem_density_agg2 |>
   dplyr::distinct() |>
   dplyr::rename(fia_density = total_stem_density)
 
+# Check that each row corresponds to one grid cell & each grid cell
+# has a unique set of coordinates
 nrow(fia_density) == nrow(fia_coords) # should be TRUE
 
 # Combine PLS and FIA to find overlap in grid cells
@@ -99,12 +103,19 @@ n_pls_only <- length(which(!is.na(pls_fia$pls_density) & is.na(pls_fia$fia_densi
 # Number of grid cells in FIA only
 n_fia_only <- length(which(is.na(pls_fia$pls_density) & !is.na(pls_fia$fia_density)))
 
+# The number of grid cells in FIA only, PLS only, and both datasets
+# should equal the number of rows in the dataset containing both data sources
 n_fia_only + n_pls_only + n_pls_fia == nrow(pls_fia) # should be TRUE
 
 # Number of grid cells in PLS
 n_pls <- n_pls_fia + n_pls_only
 # Number of grid cells in FIA
 n_fia <- n_pls_fia + n_fia_only
+
+# Check that n_pls = number of unique sets of coordinates in PLS
+n_pls == nrow(pls_coords) # should be TRUE
+# Check that n_fia = number of unique sets of coordinates in FIA
+n_fia == nrow(fia_coords) # should be TRUE
 
 # Outline of states
 states <- sf::st_as_sf(maps::map(database = 'state',
@@ -115,6 +126,9 @@ states <- sf::st_as_sf(maps::map(database = 'state',
 states <- sf::st_transform(states, crs = 'EPSG:3175')
 
 # Plot spatial distribution of each dataset
+# Provides understanding of overlap and lack of overlap between datasets
+# Lack of FIA plots where there is a lot of agriculture
+# Lack of PLS plots along political boundaries
 pls_fia |>
   dplyr::mutate(dataset = dplyr::if_else(!is.na(pls_density) & !is.na(fia_density), 'both', NA),
                 dataset = dplyr::if_else(!is.na(pls_density) & is.na(fia_density), 'PLS', dataset),
@@ -275,6 +289,9 @@ pls_in <- pls_in_oos |>
 pls_oos <- pls_in_oos |>
   dplyr::filter(oos == TRUE) |>
   dplyr::select(-oos)
+
+# Check that all rows are either in pls_in or pls_out
+nrow(pls_in) + nrow(pls_oos) == nrow(pls_coords)
 
 #### 5. Save ####
 
