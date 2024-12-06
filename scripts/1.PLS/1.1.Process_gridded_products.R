@@ -72,6 +72,30 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/data/historical_total_stem_density.png',
                 height = 10, width = 10, units = 'cm')
 
+# Plot ecosystem classification according to total stem density
+total_density_df |>
+  dplyr::mutate(Ecosystem = dplyr::if_else(total_density < 0.5, 'Prairie', NA),
+                Ecosystem = dplyr::if_else(total_density >= 0.5 & total_density <= 47, 'Savanna', Ecosystem),
+                Ecosystem = dplyr::if_else(total_density > 47, 'Forest', Ecosystem)) |>
+  tidyr::drop_na() |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Ecosystem)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_viridis_d(option = 'D',
+                                direction = -1,
+                                limits = c('Prairie', 'Forest', 'Savanna')) +
+  ggplot2::ggtitle('Historical ecosystem state') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/historical_ecosystem.png',
+                height = 10, width = 10, units = 'cm')
+
 #### 2. Fractional composition ####
 
 # Load fractional composition 

@@ -354,10 +354,10 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_allcovar.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 # Since the rest of these are not possible, let's see the main trend
 pred_historical |>
-  dplyr::filter(estimate_gam1 <= 1000) |>
+  dplyr::filter(estimate_gam1 <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam1)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam1,
@@ -402,9 +402,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_allcovar_4k.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_historical_4k |>
-  dplyr::filter(estimate_gam1_4k <= 1000) |>
+  dplyr::filter(estimate_gam1_4k <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam1_4k)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam1_4k,
@@ -449,9 +449,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_redcovar.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_historical |>
-  dplyr::filter(estimate_gam3 <= 1000) |>
+  dplyr::filter(estimate_gam3 <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam3)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam3,
@@ -496,9 +496,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_redcovar_4k.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_historical_4k |>
-  dplyr::filter(estimate_gam3_4k <= 1000) |>
+  dplyr::filter(estimate_gam3_4k <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam3_4k)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam3_4k,
@@ -559,7 +559,7 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_historical |>
   tidyr::pivot_longer(cols = c(estimate_gam1,
                                estimate_gam2,
@@ -575,7 +575,7 @@ pred_historical |>
                 fit = dplyr::if_else(fit == 'estimate_gam3',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
-  dplyr::filter(predicted <= 1000) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = predicted)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = predicted,
@@ -638,7 +638,7 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_facets_4k.png',
                 width = 20, height = 20, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_historical_4k |>
   tidyr::pivot_longer(cols = c(estimate_gam1_4k,
                                estimate_gam2_4k,
@@ -654,7 +654,7 @@ pred_historical_4k |>
                 fit = dplyr::if_else(fit == 'estimate_gam3_4k',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
-  dplyr::filter(predicted <= 1000) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = predicted)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = predicted,
@@ -1112,9 +1112,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_allcovar.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_modern |>
-  dplyr::filter(estimate_gam1 <= 1000) |>
+  dplyr::filter(estimate_gam1 <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam1)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam1,
@@ -1159,9 +1159,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_allcovar_4k.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_modern_4k |>
-  dplyr::filter(estimate_gam1_4k <= 1000) |>
+  dplyr::filter(estimate_gam1_4k <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam1_4k)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam1_4k,
@@ -1206,9 +1206,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_redcovar.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_modern |>
-  dplyr::filter(estimate_gam3 <= 1000) |>
+  dplyr::filter(estimate_gam3 <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam3)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam3,
@@ -1253,9 +1253,9 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_redcovar_4k.png',
                 height = 10, width = 10, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_modern_4k |>
-  dplyr::filter(estimate_gam3_4k <= 1000) |>
+  dplyr::filter(estimate_gam3_4k <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = estimate_gam3_4k)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = estimate_gam3_4k,
@@ -1316,7 +1316,7 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_modern |>
   tidyr::pivot_longer(cols = c(estimate_gam1,
                                estimate_gam2,
@@ -1332,7 +1332,7 @@ pred_modern |>
                 fit = dplyr::if_else(fit == 'estimate_gam3',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
-  dplyr::filter(predicted <= 1000) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = predicted)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = predicted,
@@ -1395,7 +1395,7 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_facets_4k.png',
                 width = 20, height = 20, units = 'cm')
 
-# Cutoff at 1000 stems/ha
+# Cutoff at 750 stems/ha
 pred_modern_4k |>
   tidyr::pivot_longer(cols = c(estimate_gam1_4k,
                                estimate_gam2_4k,
@@ -1411,7 +1411,7 @@ pred_modern_4k |>
                 fit = dplyr::if_else(fit == 'estimate_gam3_4k',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
-  dplyr::filter(predicted <= 1000) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = total_density, y = predicted)) +
   ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = predicted,

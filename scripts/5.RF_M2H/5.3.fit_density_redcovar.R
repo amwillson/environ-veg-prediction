@@ -83,8 +83,6 @@ tune_hyper |>
   ggplot2::theme_minimal()
 
 ## Use nodesize = 1, mtry = 2
-## Not optimal but reduces correlation
-## between learners
 
 #### 3. Fit random forest ####
 

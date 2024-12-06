@@ -75,8 +75,6 @@ tune_hyper |>
   ggplot2::theme_minimal()
 
 ## Use nodesize = 1, mtry = 3
-## mtry is not optimal but there is little change
-## in error rate between mtry = 3 and mtry = 5
 
 #### 3. Fit random forest ####
 

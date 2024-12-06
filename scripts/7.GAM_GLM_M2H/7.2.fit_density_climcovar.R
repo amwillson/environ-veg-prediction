@@ -141,7 +141,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Total annual precipitation (mm/year)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -160,7 +160,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Mean annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -179,7 +179,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Precipitation seasonality (CV)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -198,7 +198,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Temperature seasonality (SD (°C))') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -217,7 +217,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Minimum annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -236,7 +236,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -255,7 +255,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual vapor pressure deficit (hPa)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-2.1, 0.82)) +
+  ggplot2::ylim(c(-1.98, 0.84)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))

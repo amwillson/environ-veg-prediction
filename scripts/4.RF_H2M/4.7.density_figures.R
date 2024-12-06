@@ -133,8 +133,10 @@ pred_historical |>
   ggplot2::scale_fill_distiller(name = 'Total stem\ndensity',
                                 palette = 'Greens',
                                 direction = 1) +
+  ggplot2::ggtitle('Predicted historical total stem density') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8))
 
 # Save
@@ -191,11 +193,15 @@ pred_historical |>
                        linetype = 'dashed', linewidth = 1) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions of historical total stem density') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 10))
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
+                 axis.text = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10),
+                 panel.grid = ggplot2::element_blank(),
+                 panel.border = ggplot2::element_rect(color = 'black', fill = NA, linewidth = 1))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
@@ -250,8 +256,10 @@ pred_historical |>
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff1)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Difference between observed and predicted\nhistorical total stem density') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8))
 
 # Save
@@ -376,8 +384,10 @@ pred_modern |>
   ggplot2::scale_fill_distiller(name = 'Total stem\ndensity',
                                 palette = 'Greens',
                                 direction = 1) +
+  ggplot2::ggtitle('Predicted modern total stem density') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8))
 
 # Save
@@ -434,39 +444,19 @@ pred_modern |>
                        linetype = 'dashed', linewidth = 1) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions of modern total stem density') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 10))
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
+                 axis.text = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10),
+                 panel.grid = ggplot2::element_blank(),
+                 panel.border = ggplot2::element_rect(color = 'black', fill = NA, linewidth = 1))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/h2m_predvobs_allcovar.png',
-                height = 10, width = 10, units = 'cm')
-
-# Cut-off at total stem density < 750 to match PLS better
-pred_modern |>
-  dplyr::filter(total_density < 750) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = total_density, y = pred_out_rf1)) +
-  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = pred_out_rf1,
-                                    color = 'Best fit'),
-                       method = 'lm', se = FALSE) +
-  ggplot2::geom_abline(ggplot2::aes(intercept = 0, slope = 1,
-                                    color = '1:1'),
-                       linetype = 'dashed', linewidth = 1) +
-  ggplot2::scale_color_discrete(name = '') +
-  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
-  tune::coord_obs_pred() +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 10))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_predvobs_allcovar_cutoff.png',
                 height = 10, width = 10, units = 'cm')
 
 # All four models
@@ -509,47 +499,6 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/h2m_predvobs_facets.png',
                 width = 20, height = 20, units = 'cm')
 
-# With cutoff as above
-pred_modern |>
-  tidyr::pivot_longer(cols = pred_out_rf1:pred_out_rf4,
-                      names_to = 'fit',
-                      values_to = 'predicted') |>
-  dplyr::mutate(fit = dplyr::if_else(fit == 'pred_out_rf1',
-                                     'Climate + soil',
-                                     fit),
-                fit = dplyr::if_else(fit == 'pred_out_rf2',
-                                     'Climate only',
-                                     fit),
-                fit = dplyr::if_else(fit == 'pred_out_rf3',
-                                     'Four covariates',
-                                     fit),
-                fit = dplyr::if_else(fit == 'pred_out_rf4',
-                                     'Climate + soil +\ncoordinates',
-                                     fit)) |>
-  dplyr::filter(total_density < 750) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = total_density, y = predicted)) +
-  ggplot2::geom_smooth(ggplot2::aes(x = total_density, y = predicted,
-                                    color = 'Best fit'),
-                       method = 'lm', se = FALSE) +
-  ggplot2::geom_abline(ggplot2::aes(intercept = 0, slope = 1,
-                                    color = '1:1'),
-                       linetype = 'dashed', linewidth = 1) +
-  ggplot2::facet_wrap(~fit) +
-  ggplot2::scale_color_discrete(name = '') +
-  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
-  tune::coord_obs_pred() +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/h2m_predvobs_facets_cutoff.png',
-                width = 20, height = 20, units = 'cm')
-
 # Plot observed - predicted over space
 # Shows spatial distribution of model error
 pred_modern |>
@@ -558,8 +507,10 @@ pred_modern |>
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff1)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Difference between observed and predicted\nmodern total stem density') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8))
 
 # Save
@@ -596,8 +547,10 @@ pred_modern |>
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff1_trans)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_gradient2(name = 'sqrt(Observed-\nPredicted)') +
+  ggplot2::ggtitle('Difference between observed and predicted\nmodern total stem density') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8))
 
 # Save
@@ -734,26 +687,6 @@ modern_cors <- dplyr::select(modern_cors,
                              model, modern_cors)
 
 modern_cors
-
-# Correlations with 750 cutoff
-corr1 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf1)
-corr2 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf2)
-corr3 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf3)
-corr4 <- cor(x = dplyr::filter(pred_modern, total_density < 750)$total_density,
-             y = dplyr::filter(pred_modern, total_density < 750)$pred_out_rf4)
-
-# Combine
-modern_cors_cutoff <- c(corr1, corr2, corr3, corr4)
-
-# Format
-modern_cors_cutoff <- as.data.frame(modern_cors_cutoff)
-modern_cors_cutoff$model <- modern_cors$model
-modern_cors_cutoff <- dplyr::select(modern_cors_cutoff,
-                                    model, modern_cors_cutoff)
-modern_cors_cutoff
 
 #### 11. Compare predictions in space ####
 
@@ -958,7 +891,7 @@ preds |>
   ggplot2::scale_fill_distiller(name = 'stems/ha',
                                 palette = 'Reds',
                                 direction = 1,
-                                limits = c(0, 1000)) +
+                                limits = c(0, 750)) +
   ggplot2::ggtitle('Change in prediction accuracy where\nmodern prediction is better') +
   ggplot2::theme_void() +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
@@ -981,7 +914,7 @@ preds |>
   ggplot2::scale_fill_distiller(name = 'stems/ha',
                                 palette = 'Reds',
                                 direction = 1,
-                                limits = c(0, 1000)) +
+                                limits = c(0, 750)) +
   ggplot2::ggtitle('Change in prediction accuracy where\nhistoric prediction is better') +
   ggplot2::theme_void() +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
@@ -1023,34 +956,4 @@ both_cors |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/pred_corr_comparison.png',
-                height = 8, width = 16, units = 'cm')
-
-# Repeat with cutoff in modern
-both_cors <- cbind(historical_cors, modern_cors_cutoff$modern_cors_cutoff)
-colnames(both_cors) <- c('model', 'Historical', 'Modern')
-
-# Plot comparison of correlation coefficient
-both_cors |>
-  tidyr::pivot_longer(cols = Historical:Modern,
-                      names_to = 'period',
-                      values_to = 'correlation') |>
-  dplyr::mutate(model = dplyr::if_else(model == 'Climate + soil + coordinates',
-                                       'Climate + soil +\ncoordinates',
-                                       model)) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_bar(ggplot2::aes(x = model, y = correlation,
-                                 fill = period),
-                    stat = 'identity', 
-                    position = ggplot2::position_dodge(width = 1)) +
-  ggplot2::xlab('') + ggplot2::ylab('Correlation coefficient') +
-  ggplot2::scale_fill_discrete(name = 'Prediction period') +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
-                 legend.title = ggplot2::element_text(size = 10),
-                 axis.text = ggplot2::element_text(size = 8),
-                 legend.text = ggplot2::element_text(size = 8))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/density/pred/pred_corr_comparison_cutoff.png',
                 height = 8, width = 16, units = 'cm')

@@ -65,9 +65,9 @@ tune_hyper |>
                                   fill = err)) +
   ggplot2::theme_minimal()
 
-# Plot error rate for all mtry options with nodesize = 2
+# Plot error rate for all mtry options with nodesize = 1
 tune_hyper |>
-  dplyr::filter(nodesize == 2) |>
+  dplyr::filter(nodesize == 1) |>
   ggplot2::ggplot() +
   ggplot2::geom_bar(ggplot2::aes(x = mtry, y = err),
                     stat = 'identity') +
@@ -78,9 +78,7 @@ tune_hyper |>
   ggplot2::scale_color_discrete(name = '') + 
   ggplot2::theme_minimal()
 
-## Use nodesize = 2, mtry = 4 because it
-## looks like there is little difference between
-## mtry values after mtry = 4
+## Use nodesize = 1, mtry = 5
 
 #### 3. Fit random forest ####
 
@@ -88,8 +86,8 @@ tune_hyper |>
 density_rf_M_xycovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
                                                data = rf_data, # data
                                                ntree = 1000, # number of trees to grow
-                                               mtry = 4, # from above decision
-                                               nodesize = 2, # from above decision
+                                               mtry = 5, # from above decision
+                                               nodesize = 1, # from above decision
                                                importance = TRUE, # calculate variable importance
                                                forest = TRUE) # save forest variables
 

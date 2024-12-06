@@ -79,7 +79,7 @@ tune_hyper |>
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::theme_minimal()
 
-## Use nodesize = 1, mtry = 6
+## Use nodesize = 1, mtry = 4
 
 #### 3. Fit random forest ####
 
@@ -87,7 +87,7 @@ tune_hyper |>
 density_rf_M_allcovar <- randomForestSRC::rfsrc(formula = total_density ~ ., # formula
                                                 data = rf_data, # data
                                                 ntree = 1000, # higher number of trees because this is production quality
-                                                mtry = 6, # from above decision
+                                                mtry = 4, # from above decision
                                                 nodesize = 1, # from above decision
                                                 importance = TRUE, # calculate variable importance
                                                 forest = TRUE) # save forest variables
@@ -203,7 +203,7 @@ ggplot2::ggplot() +
                                     ymax = clay_data$yhat + clay_data$yhat.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % clay') + ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -227,7 +227,7 @@ ggplot2::ggplot() +
                                     ymax = sand_data$yhat + sand_data$yhat.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % sand') + ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -251,7 +251,7 @@ ggplot2::ggplot() +
                                     ymax = silt_data$yhat + silt_data$yhat.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % silt') + ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -276,7 +276,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil calcium carbonate concentration (%)') + 
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -301,7 +301,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil available water content (cm/cm)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -326,7 +326,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Fraction of grid cell in a floodplain') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -351,7 +351,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Total annual precipitation (mm/year)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -376,7 +376,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Mean annual temperature (°C)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -401,7 +401,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Precipitation seasonality (coefficient of variation)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -426,7 +426,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Temperature seasonality (standard deviation (°C))') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -451,7 +451,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Minimum annual temperature (°C)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -476,7 +476,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual temperature (°C)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -501,7 +501,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual vapor pressure deficit (hPa)') +
   ggplot2::ylab('Predicted total stem density (stems/ha)') +
-  ggplot2::ylim(c(274, 369)) +
+  ggplot2::ylim(c(272, 357)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
