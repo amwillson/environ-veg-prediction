@@ -792,6 +792,29 @@ p10
 pp4 <- cowplot::plot_grid(p9, p10, nrow = 1)
 pp4
 
+# Figure for paper of total stem density
+stem_density_agg2 |>
+  dplyr::select(-taxon, -stem_density) |>
+  dplyr::distinct() |>
+  dplyr::mutate(total_stem_density = dplyr::if_else(total_stem_density > 750, 750, total_stem_density)) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = total_stem_density)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(name = 'stems/ha',
+                                palette = 'Greens',
+                                direction = 1,
+                                na.value = '#00000000') +
+  ggplot2::ggtitle('Modern total stem density') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_total_stem_density.png',
+                height = 10, width = 10, units = 'cm')  
+
 # How close are they in total stem density?
 stem_density_agg_comp <- stem_density_agg |>
   dplyr::select(-taxon, -stem_density) |>
@@ -912,6 +935,20 @@ fractional_composition_agg_comp |>
 
 #### 15. Save ####
 
+# Make cutoff at 750 stems/ha for each dataset
+stem_density_agg <- dplyr::mutate(stem_density_agg,
+                                  total_stem_density = 
+                                    dplyr::if_else(total_stem_density > 750,
+                                                   750,
+                                                   total_stem_density))
+
+stem_density_agg2 <- dplyr::mutate(stem_density_agg2,
+                                   total_stem_density = 
+                                     dplyr::if_else(total_stem_density > 750,
+                                                    750,
+                                                    total_stem_density))
+
+# Save dataframes
 save(stem_density_agg, fractional_composition_agg,
      file = 'data/intermediate/FIA/gridded_only_known_plots.RData')
 
