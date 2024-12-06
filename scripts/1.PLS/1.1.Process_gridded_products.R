@@ -62,9 +62,15 @@ total_density_df |>
                                 palette = 'Greens',
                                 direction = 1,
                                 na.value = '#00000000') +
-  ggplot2::ggtitle('Total stem density') +
+  ggplot2::ggtitle('Historical total stem density') +
   ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 16, hjust = 0.5, face = 'bold'))
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/historical_total_stem_density.png',
+                height = 10, width = 10, units = 'cm')
 
 #### 2. Fractional composition ####
 
