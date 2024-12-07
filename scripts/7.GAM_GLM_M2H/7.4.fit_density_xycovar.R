@@ -74,7 +74,7 @@ density_gam_M_xycovar <- mvgam::mvgam(formula = total_density ~
                                         s(y_coord),
                                       data = gam_data,
                                       burnin = 2000,
-                                      samples = 1000, # increasing samples because of ESS warning
+                                      samples = 1500, # increasing samples because of ESS warning
                                       family = mvgam::lognormal()) # Takes about 12 minutes
 
 # Check summary

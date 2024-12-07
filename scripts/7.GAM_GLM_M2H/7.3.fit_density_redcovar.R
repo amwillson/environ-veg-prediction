@@ -76,29 +76,13 @@ option1 <- mvgam::mvgam(formula = total_density ~
                         data = gam_data,
                         burnin = 1000,
                         samples = 1000, # increasing samples because of low ESS warning
-                        family = mvgam::lognormal()) # Takes about 4 minutes
+                        family = mvgam::lognormal()) # Takes about 9 minutes
 
 # Check summary
 summary(option1)
 
-# Option 2: clay, caco3, awc, flood, tmean_mean, ppt_cv
+# Option 2: clay, caco3, awc, flood, tmean_sd
 option2 <- mvgam::mvgam(formula = total_density ~
-                          s(clay) +
-                          s(caco3) +
-                          s(awc) +
-                          s(flood) +
-                          s(tmean_mean) +
-                          s(ppt_cv),
-                        data = gam_data,
-                        burnin = 1500,
-                        samples = 1000, # increasing samples because of low ESS warning
-                        family = mvgam::lognormal()) # Takes about 14 minutes
-
-# Check summary
-summary(option2)
-
-# Option 3: clay, caco3, awc, flood, tmean_sd
-option3 <- mvgam::mvgam(formula = total_density ~
                           s(clay) +
                           s(caco3) +
                           s(awc) +
@@ -107,39 +91,55 @@ option3 <- mvgam::mvgam(formula = total_density ~
                         data = gam_data,
                         burnin = 1500,
                         samples = 1000, # increasing samples because of low ESS
-                        family = mvgam::lognormal()) # Takes about 4 minutes
+                        family = mvgam::lognormal()) # Takes about 9 minutes
+
+# Check summary
+summary(option2)
+
+# Option 3: clay, caco3, awc, flood, tmax, ppt_cv
+option3 <- mvgam::mvgam(formula = total_density ~
+                          s(clay) +
+                          s(caco3) +
+                          s(awc) +
+                          s(flood) +
+                          s(tmax) +
+                          s(ppt_cv),
+                        data = gam_data,
+                        burnin = 1500,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 9.5 minutes
 
 # Check summary
 summary(option3)
 
-# Option 4: clay, caco3, awc, flood, tmax, ppt_cv
+# Option 4: clay, caco3, awc, flood, tmax, tmean_sd
 option4 <- mvgam::mvgam(formula = total_density ~
                           s(clay) +
                           s(caco3) +
                           s(awc) +
                           s(flood) +
                           s(tmax) +
-                          s(ppt_cv),
+                          s(tmean_sd),
                         data = gam_data,
-                        burnin = 1000,
+                        burnin = 1500,
                         samples = 1000, # increasing samples because of low ESS
-                        family = mvgam::lognormal()) # Takes about 4 minutes
+                        family = mvgam::lognormal()) # Takes about 9.5 minutes
 
 # Check summary
 summary(option4)
 
-# Option 5: clay, caco3, awc, flood, tmax, tmean_sd
+# Option 5: clay, caco3, awc, flood, vpdmax, ppt_cv
 option5 <- mvgam::mvgam(formula = total_density ~
                           s(clay) +
                           s(caco3) +
                           s(awc) +
                           s(flood) +
-                          s(tmax) +
-                          s(tmean_sd),
+                          s(vpdmax) +
+                          s(ppt_cv),
                         data = gam_data,
                         burnin = 1500,
                         samples = 1000, # increasing samples because of low ESS
-                        family = mvgam::lognormal()) # Takes about 5 minutes
+                        family = mvgam::lognormal()) # Takes about 10.5 minutes
 
 # Check summary
 summary(option5)
@@ -153,7 +153,7 @@ option6 <- mvgam::mvgam(formula = total_density ~
                           s(vpdmax) +
                           s(tmean_sd),
                         data = gam_data,
-                        burnin = 1500,
+                        burnin = 1000,
                         samples = 1000, # increasing samples because of low ESS
                         family = mvgam::lognormal()) # Takes about 9 minutes
 
@@ -169,31 +169,34 @@ mvgam::loo_compare(option1, option2,
                    option3, option4,
                    option5, option6)
 
-## Based on this analysis, option2 is the best
+## Based on this analysis, option3 is the best
 
 # Check whether removing the less important soil variables is better
 # Option 2b: clay, tmean_mean, ppt_cv
-option2b <- mvgam::mvgam(formula = total_density ~
-                           s(clay) +
-                           s(tmean_mean) + 
-                           s(ppt_cv),
-                         data = gam_data,
-                         family = mvgam::lognormal()) # Takes about 3 minutes
+# Option 3b: clay, caco3, awc, flood, tmax, ppt_cv
+option3b <- mvgam::mvgam(formula = total_density ~
+                          s(clay) +
+                          s(tmax) +
+                          s(ppt_cv),
+                        data = gam_data,
+                        burnin = 1500,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 9.5 minutes
 
 # Check summary
-summary(option2b)
+summary(option3b)
 
-# Compare option2 and option2b for which one is the best final model
-mvgam::loo_compare(option2, option2b)
+# Compare option3 and option3b for which one is the best final model
+mvgam::loo_compare(option3, option3b)
 
-## Based on this, option 2 is still best, indicating that the uncorrelated
+## Based on this, option 3 is still best, indicating that the uncorrelated
 ## but relatively unimportant soil variables are still contributing to better
 ## predictive performance
 
 #### 3. Save final model ####
 
 # Rename to match naming convention
-density_gam_M_redcovar <- option2
+density_gam_M_redcovar <- option3
 
 # Save
 save(density_gam_M_redcovar,
@@ -205,95 +208,95 @@ save(density_gam_M_redcovar,
 
 ## Option 1: clay, caco3, awc, flood, ppt_sum, ppt_cv
 option1_4k <- mvgam::mvgam(formula = total_density ~
-                             s(clay, k = 5) +
-                             s(caco3, k = 5) +
-                             s(awc, k = 5) +
-                             s(flood, k = 5) +
-                             s(ppt_sum, k = 5) +
-                             s(ppt_cv, k = 5),
-                           data = gam_data,
-                           burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS warning
-                           family = mvgam::lognormal()) # Takes about 1 minute
+                          s(clay, k = 5) +
+                          s(caco3, k = 5) +
+                          s(awc, k = 5) +
+                          s(flood, k = 5) +
+                          s(ppt_sum, k = 5) +
+                          s(ppt_cv, k = 5),
+                        data = gam_data,
+                        burnin = 1000,
+                        samples = 1000, # increasing samples because of low ESS warning
+                        family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
 summary(option1_4k)
 
-# Option 2: clay, caco3, awc, flood, tmean_mean, ppt_cv
+# Option 2: clay, caco3, awc, flood, tmean_sd
 option2_4k <- mvgam::mvgam(formula = total_density ~
-                             s(clay, k = 5) +
-                             s(caco3, k = 5) +
-                             s(awc, k = 5) +
-                             s(flood, k = 5) +
-                             s(tmean_mean, k = 5) +
-                             s(ppt_cv, k = 5),
-                           data = gam_data,
-                           burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS warning
-                           family = mvgam::lognormal()) # Takes about 1 minutes
+                          s(clay, k = 5) +
+                          s(caco3, k = 5) +
+                          s(awc, k = 5) +
+                          s(flood, k = 5) +
+                          s(tmean_sd, k = 5),
+                        data = gam_data,
+                        burnin = 1000,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
 summary(option2_4k)
 
-# Option 3: clay, caco3, awc, flood, tmean_sd
+# Option 3: clay, caco3, awc, flood, tmax, ppt_cv
 option3_4k <- mvgam::mvgam(formula = total_density ~
-                             s(clay, k = 5) +
-                             s(caco3, k = 5) +
-                             s(awc, k = 5) +
-                             s(flood, k = 5) +
-                             s(tmean_sd, k = 5),
-                           burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS warning
-                           data = gam_data,
-                           family = mvgam::lognormal()) # Takes about 1 minutes
+                          s(clay, k = 5) +
+                          s(caco3, k = 5) +
+                          s(awc, k = 5) +
+                          s(flood, k = 5) +
+                          s(tmax, k = 5) +
+                          s(ppt_cv, k = 5),
+                        data = gam_data,
+                        burnin = 1000,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
 summary(option3_4k)
 
-# Option 4: clay, caco3, awc, flood, tmax, ppt_cv
+# Option 4: clay, caco3, awc, flood, tmax, tmean_sd
 option4_4k <- mvgam::mvgam(formula = total_density ~
-                             s(clay, k = 5) +
-                             s(caco3, k = 5) +
-                             s(awc, k = 5) +
-                             s(flood, k = 5) +
-                             s(tmax, k = 5) +
-                             s(ppt_cv, k = 5),
-                           data = gam_data,
-                           burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS
-                           family = mvgam::lognormal()) # Takes about 1 minutes
+                          s(clay, k = 5) +
+                          s(caco3, k = 5) +
+                          s(awc, k = 5) +
+                          s(flood, k = 5) +
+                          s(tmax, k = 5) +
+                          s(tmean_sd, k = 5),
+                        data = gam_data,
+                        burnin = 1000,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
 summary(option4_4k)
 
-# Option 5: clay, caco3, awc, flood, tmax, tmean_sd
+# Option 5: clay, caco3, awc, flood, vpdmax, ppt_cv
 option5_4k <- mvgam::mvgam(formula = total_density ~
-                             s(clay, k = 5) +
-                             s(caco3, k = 5) +
-                             s(awc, k = 5) +
-                             s(flood, k = 5) +
-                             s(tmax, k = 5) +
-                             s(tmean_sd, k = 5),
-                           data = gam_data,
-                           burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS
-                           family = mvgam::lognormal()) # Takes about 1 minutes
+                          s(clay, k = 5) +
+                          s(caco3, k = 5) +
+                          s(awc, k = 5) +
+                          s(flood, k = 5) +
+                          s(vpdmax, k = 5) +
+                          s(ppt_cv, k = 5),
+                        data = gam_data,
+                        burnin = 1000,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
 summary(option5_4k)
 
-# Option 7: clay, caco3, awc, flood, vpdmax, tmean_sd
+# Option 6: clay, caco3, awc, flood, vpdmax, tmean_sd
 option6_4k <- mvgam::mvgam(formula = total_density ~
-                             s(clay, k = 5) +
-                             s(caco3, k = 5) +
-                             s(awc, k = 5) +
-                             s(flood, k = 5) +
-                             s(vpdmax, k = 5) +
-                             s(tmean_sd, k = 5),
-                           data = gam_data,
-                           burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS
-                           family = mvgam::lognormal()) # Takes about 1 minutes
+                          s(clay, k = 5) +
+                          s(caco3, k = 5) +
+                          s(awc, k = 5) +
+                          s(flood, k = 5) +
+                          s(vpdmax, k = 5) +
+                          s(tmean_sd, k = 5),
+                        data = gam_data,
+                        burnin = 1000,
+                        samples = 1000, # increasing samples because of low ESS
+                        family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
 summary(option6_4k)
@@ -307,33 +310,34 @@ mvgam::loo_compare(option1_4k, option2_4k,
                    option3_4k, option4_4k,
                    option5_4k, option6_4k)
 
-## Based on this analysis, option2 is the best
+## Based on this analysis, option3 is the best
 
 # Check whether removing the less important soil variables is better
 # Option 2b with 4 dimensional basis: clay, tmean_mean, ppt_cv
-option2b_4k <- mvgam::mvgam(formula = total_density ~
+# Option 3b with 4 dimensional basis: clay, tmax, ppt_cv
+option3b_4k <- mvgam::mvgam(formula = total_density ~
                              s(clay, k = 5) +
-                             s(tmean_mean, k = 5) +
+                             s(tmax, k = 5) +
                              s(ppt_cv, k = 5),
                            data = gam_data,
                            burnin = 1000,
-                           samples = 1000, # increasing samples because of low ESS warning
-                           family = mvgam::lognormal()) # Takes about 1 minutes
+                           samples = 1000, # increasing samples because of low ESS
+                           family = mvgam::lognormal()) # Takes about 1 minute
 
 # Check summary
-summary(option2b_4k)
+summary(option3b_4k)
 
-# Compare option2_4k and option2b_4k for which one is the best final model
-mvgam::loo_compare(option2_4k, option2b_4k)
+# Compare option3_4k and option3b_4k for which one is the best final model
+mvgam::loo_compare(option3_4k, option3b_4k)
 
-## Based on this, option 2 is still best, indicating that the uncorrelated
+## Based on this, option 3 is still best, indicating that the uncorrelated
 ## but relatively unimportant soil variables are still contributing to better
 ## predictive performance
 
 #### 5. Save final model with lower basis dimension ####
 
 # Rename to match naming convention
-density_gam_M_redcovar_4k <- option2_4k
+density_gam_M_redcovar_4k <- option3_4k
 
 # Save
 save(density_gam_M_redcovar_4k,
@@ -351,7 +355,7 @@ clay_data <- partials[[1]]$data
 caco3_data <- partials[[2]]$data
 awc_data <- partials[[3]]$data
 flood_data <- partials[[4]]$data
-tmean_data <- partials[[5]]$data
+tmax_data <- partials[[5]]$data
 ppt_cv_data <- partials[[6]]$data
 
 # Find minimum range of effect size
@@ -363,8 +367,8 @@ range(c(clay_data$.estimate - clay_data$.se,
         awc_data$.estimate + awc_data$.se,
         flood_data$.estimate - flood_data$.se,
         flood_data$.estimate + flood_data$.se,
-        tmean_data$.estimate - tmean_data$.se,
-        tmean_data$.estimate + tmean_data$.se,
+        tmax_data$.estimate - tmax_data$.se,
+        tmax_data$.estimate + tmax_data$.se,
         ppt_cv_data$.estimate - ppt_cv_data$.se,
         ppt_cv_data$.estimate + ppt_cv_data$.se))
 
@@ -377,7 +381,7 @@ ggplot2::ggplot() +
                                     ymax = clay_data$.estimate + clay_data$.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % clay') + ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.4, 0.35)) +
+  ggplot2::ylim(c(-1.6, 0.32)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -396,7 +400,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil calcium carbonate concentration (%)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.4, 0.35)) +
+  ggplot2::ylim(c(-1.6, 0.32)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -415,7 +419,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil available water content (cm/cm)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.4, 0.35)) +
+  ggplot2::ylim(c(-1.6, 0.32)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -434,7 +438,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Fraction of grid cell in a floodplain') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.4, 0.35)) +
+  ggplot2::ylim(c(-1.6, 0.32)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -443,23 +447,23 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/M/density/fit/red_covar_partial_flood.png',
                 height = 8, width = 9.5, units = 'cm')
 
-# Mean annual temperature
+# Maximum annual temperature
 ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = tmean_data$tmean_mean, y = tmean_data$.estimate)) +
-  ggplot2::geom_line(ggplot2::aes(x = tmean_data$tmean_mean, y = tmean_data$.estimate)) +
-  ggplot2::geom_ribbon(ggplot2::aes(x = tmean_data$tmean_mean,
-                                    ymin = tmean_data$.estimate - tmean_data$.se,
-                                    ymax = tmean_data$.estimate + tmean_data$.se),
+  ggplot2::geom_point(ggplot2::aes(x = tmax_data$tmax, y = tmax_data$.estimate)) +
+  ggplot2::geom_line(ggplot2::aes(x = tmax_data$tmax, y = tmax_data$.estimate)) +
+  ggplot2::geom_ribbon(ggplot2::aes(x = tmax_data$tmax,
+                                    ymin = tmax_data$.estimate - tmax_data$.se,
+                                    ymax = tmax_data$.estimate + tmax_data$.se),
                        alpha = 0.2) +
-  ggplot2::xlab('Mean annual temperature (°C)') +
+  ggplot2::xlab('Maximum annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.4, 0.35)) +
+  ggplot2::ylim(c(-1.6, 0.32)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/gam/M/density/fit/red_covar_partial_tmean_mean.png',
+                filename = 'figures/gam/M/density/fit/red_covar_partial_tmax.png',
                 height = 8, width = 9.5, units = 'cm')
 
 # Precipitation seasonality
@@ -472,7 +476,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Precipitation seasonality (CV)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.4, 0.35)) +
+  ggplot2::ylim(c(-1.6, 0.32)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -491,7 +495,7 @@ clay_data <- partials[[1]]$data
 caco3_data <- partials[[2]]$data
 awc_data <- partials[[3]]$data
 flood_data <- partials[[4]]$data
-tmean_data <- partials[[5]]$data
+tmax_data <- partials[[5]]$data
 ppt_cv_data <- partials[[6]]$data
 
 # Find maximum range of effect size
@@ -503,8 +507,8 @@ range(c(clay_data$.estimate - clay_data$.se,
         awc_data$.estimate + awc_data$.se,
         flood_data$.estimate - flood_data$.se,
         flood_data$.estimate + flood_data$.se,
-        tmean_data$.estimate - tmax_data$.se,
-        tmean_data$.estimate + tmax_data$.se,
+        tmax_data$.estimate - tmax_data$.se,
+        tmax_data$.estimate + tmax_data$.se,
         ppt_cv_data$.estimate - ppt_cv_data$.se,
         ppt_cv_data$.estimate + ppt_cv_data$.se))
 
@@ -517,7 +521,7 @@ ggplot2::ggplot() +
                                     ymax = clay_data$.estimate + clay_data$.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % clay') + ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.43, 0.351)) +
+  ggplot2::ylim(c(-1.59, 0.27)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -536,7 +540,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil calcium carbonate concentration (%)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.43, 0.351)) +
+  ggplot2::ylim(c(-1.59, 0.27)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -555,7 +559,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil available water content (cm/cm)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.43, 0.351)) +
+  ggplot2::ylim(c(-1.59, 0.27)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -574,7 +578,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Fraction of grid cell in a floodplain') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.43, 0.351)) +
+  ggplot2::ylim(c(-1.59, 0.27)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -583,17 +587,17 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/M/density/fit/red_covar_4k_partial_flood.png',
                 height = 8, width = 9.5, units = 'cm')
 
-# Mean annual temperature
+# Maximum annual temperature
 ggplot2::ggplot() +
-  ggplot2::geom_point(ggplot2::aes(x = tmean_data$tmean_mean, y = tmean_data$.estimate)) +
-  ggplot2::geom_line(ggplot2::aes(x = tmean_data$tmean_mean, y = tmean_data$.estimate)) +
-  ggplot2::geom_ribbon(ggplot2::aes(x = tmean_data$tmean_mean,
-                                    ymin = tmean_data$.estimate - tmean_data$.se,
-                                    ymax = tmean_data$.estimate + tmean_data$.se),
+  ggplot2::geom_point(ggplot2::aes(x = tmax_data$tmax, y = tmax_data$.estimate)) +
+  ggplot2::geom_line(ggplot2::aes(x = tmax_data$tmax, y = tmax_data$.estimate)) +
+  ggplot2::geom_ribbon(ggplot2::aes(x = tmax_data$tmax,
+                                    ymin = tmax_data$.estimate - tmax_data$.se,
+                                    ymax = tmax_data$.estimate + tmax_data$.se),
                        alpha = 0.2) +
   ggplot2::xlab('Mean annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.43, 0.351)) +
+  ggplot2::ylim(c(-1.59, 0.27)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -612,7 +616,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Precipitation seasonality (CV)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.43, 0.351)) +
+  ggplot2::ylim(c(-1.59, 0.27)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
