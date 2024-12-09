@@ -529,7 +529,7 @@ ggplot2::ggplot() +
                                     ymax = clay_data$.estimate + clay_data$.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % clay') + ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -547,7 +547,7 @@ ggplot2::ggplot() +
                                     ymax = sand_data$.estimate + sand_data$.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % sand') + ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -565,7 +565,7 @@ ggplot2::ggplot() +
                                     ymax = silt_data$.estimate + silt_data$.se),
                        alpha = 0.2) +
   ggplot2::xlab('Soil % silt') + ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -584,7 +584,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil calcium carbonate concentration (%)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -603,7 +603,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Soil available water content (cm/cm)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -622,7 +622,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Fraction of grid cell in a floodplain') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -641,7 +641,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Total annual precipitation (mm/year)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -660,7 +660,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Mean annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -679,7 +679,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Precipitation seasonality (CV)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -698,7 +698,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Temperature seasonality (SD (°C))') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -717,7 +717,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Minimum annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -736,7 +736,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual temperature (°C)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -755,7 +755,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Maximum annual vapor pressure deficit (hPa)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -774,7 +774,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Longitude (m)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.36, 1.22)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
@@ -793,7 +793,7 @@ ggplot2::ggplot() +
                        alpha = 0.2) +
   ggplot2::xlab('Latitude (m)') +
   ggplot2::ylab('Effect') +
-  ggplot2::ylim(c(-1.9, 1.29)) +
+  ggplot2::ylim(c(-1.36, 1.23)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8))
