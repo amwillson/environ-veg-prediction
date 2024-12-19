@@ -16,11 +16,11 @@ AW: That's fair. This is just a plot to check what the  data look like and I don
 
 Is the goal of limiting the fcomp domain to the total density domain (line ~217) to just get the data from the upper midwest? The comment is a little unclear about why you are doing this. 
 
-AW: Yes. I aedded comments to explain this
+AW: Yes. I added comments to explain this
 
 Is the reason you plot total density in 242 and 259 to make sure nothing changed when you dropped the NAs? Otherwise, why are you plotting the exact same thing twice?
 
-AW: Yes. In the first plot, there are NAs still but they're clear in color. So you see the full domain. Then I plot it again after dropping NAs to maek sure that the grid still looks the same and the dimension of the grid
+AW: Yes. In the first plot, there are NAs still but they're clear in color. So you see the full domain. Then I plot it again after dropping NAs to make sure that the grid still looks the same and the dimension of the grid
 cells hasn't changed.
 
 Species-specific relative abundance plots are in the correct spatial domain now (so that is probably what was being done ~217). Data is still within the correct boundaries both spatially and 0-1. Patterns of taxon abundance remain consistent with Paciorek et al., 2016 and earlier plots. 
@@ -126,3 +126,93 @@ My only comment on this script is that if you wanted to you could add checks to 
 AW: Thanks! Added.
 
 Again, this one is pretty straightforward so I don't have a ton of comments. 
+
+# 3 NLCD
+
+Skipping this one for now.  
+
+# 4 RF_H2M
+
+## 4.1 Fit Density All Covariates
+
+Same comments on adding where data was processed for the input section. I may stop commenting on this in future sections to limit repetition in this review. 
+
+The fitting of the random forests seems sensible and proceeded without errors. 
+
+The path for saving the RFs on line 92 is specific to your computer rather than for the project. Is this what you meant in the beginning comments about the directory being saved according to your file structure?
+
+Variable importance comments are helpful and clear and code is straightforward. The plots match both my data and the comments about the plots. 
+
+The depth and importance plots are consistent with one another and the comments and code are clear. 
+
+The partial effect plots also all look good though it would be helpful at the beginning of the code chunk to say what you are hoping to get from these plots as the comments are... sparse. 
+
+this code takes forever to run but all the plots look good. 
+
+## 4.2 Fit Density Climate Covariates
+
+This is consistent with the methodology of 4.1 and the draft methods for the paper. My only comment on this script is you may want to add an additional comment about the save path at the end when the fit is actually being saved in addition to the header comments about saving to an external hard-drive. 
+
+## 4.3 fit density redcovar
+
+Variables selected are consistent with methods. 
+Selection of node size and mtry seem reasonable. 
+See notes from previous section about saving. 
+
+## 4.4 Fit Density xy covariates
+
+Node size and mtry selection follow the same steps as previous RF fitting and seem reasonable. 
+Same comments about the saving but otherwise this one looks good. 
+
+## 4.5 Density historical predictions
+ Header comments are helpful and descriptive. 
+ The names for each random forest predictions are not particularly descriptive and may make it challenging to remember which number corresponds to which set of predictors. 
+ Otherwise the rest of the script is fairly straightforward and easy to follow. 
+ 
+## 4.6 Density Modern Predictions
+
+This is pretty much the exact same as the last script and all my comments are also the same as the last one. 
+
+## 4.7 Density all figures
+
+I still think that rf1-4 are not particularly descriptive names but otherwise all the processing and combining went smoothly and made sense. 
+The historical prediction plots look good and are relatively consistent across the methods. 
+So far the comments on the plotting code are helpful for understanding the goals of each plot. 
+Calculations of correlations are relatively straightforward and seem good. 
+Modern plots follow the same plotting procedures as the historical data and also seem to make sense and are created correctly.
+I am not sure you need to save both the log and sqrt transformed scale plots but they are created quickly so it isn't that big of a deal. If you are curious, I prefer the log one. 
+Similarly, with the change in prediction accuracy from historic to modern plots it may be helpful to only keep a couple of these for the finished github when you publish but they are great for while you are working on it. 
+
+## 4.8 Fit Abundace All Covariates
+ 
+ Selected variables are consistent with plots. 
+ 
+## 4.9 Fit Abundance Climate Covariates
+
+All analysis is consistent with previous workflow, makes sense, and is well-commented. 
+
+## 4.10 Fit Abundance Reduced Covariates
+
+Same as the previous script. 
+
+## 4.11 Fit Abundance XY Covariates
+
+Also the same as the previous script.
+
+## 4.12 Abundance Historical Predictions
+
+This is almost exactly the same as 4.5 and also seems good. It is clear, well-commented, and makes sense for what you are trying to do. 
+
+## 4.13 Abundance Modern Predictions
+
+Pretty much the same as the last script but it worked, was well-commented, and tests were all clear. 
+
+# 4.14 Abundance Figures
+
+The formatting and collating of data frames seems successful and well-commented. 
+The plots of species fractional compositions were created successfully, seem consistent with expected distributions, and were commented. Species fractional composition is also consistent across models though the colors of the scale are whitish for lower fractional compositions (which is most of them) which pretty much blend in with the grey background. 
+Scatter plots are also created successfully, clear, and consistent across models. 
+The modern predictions followed exactly the same format as the historical ones and are also just as good. For some of the really low-abundance species I am not sure the best fit line is a great representation of the model fit but you have other ones so the combination of them is helpful (See beech around line ~5230 or dogwood around 5300). 
+
+All the other plots seem to have executed correctly and are reasonable.
+

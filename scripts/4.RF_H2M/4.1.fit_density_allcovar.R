@@ -176,14 +176,14 @@ var_depth |>
   ggplot2::theme_minimal()
 
 ## For reduced covariate random forest: choose precipitation seasonality,
-## maximum annual temperature, total annual precipitaiton
+## maximum annual temperature, total annual precipitation
 ## + soil % clay, which has low minimum depth,
 ## suggesting that it provides extra information not captured by
 ## climate variables
 ## Dropping temperature seasonality because of strong
 ## correlations with other covariates
 
-#### 5. Parital effects plots ####
+#### 5. Partial effects plots ####
 
 ## Soil % clay
 # Partial effect
