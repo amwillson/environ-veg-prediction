@@ -17,28 +17,33 @@
 ## Fitted GJAM using all climate and soil covariates
 ## Used to make predictions from the main model with climate and soil
 ## covariates
+## From 7.8.fit_abundance_allcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gjam/M/abundance/climcovar.RData
 ## Fitted GJAM using only climate covariates
 ## Used to make predictions from the alternate model with only climate
 ## covariates
+## From 7.9.fit_abundance_climcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gjam/M/abundance/redcovar.RData
 ## Fitted GJAM using only the reduced set of covariates
 ## Used to make predictions from the alternate model with a reduced set
 ## of covariates
+## From 7.10.fit_abundance_redcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gjam/M/abundance/xycovar.RData
 ## Fitted GJAM using all the soil and climate covariates plus
 ## the latitude and longtiude of the grid cell
 ## Used to make predictions from the alternate model including grid
 ## cell coordinates and environmental covariates
+## From 7.11.fit_abundance_xycovar.R
 
 ## Input: data/processed/FIA/xydata_out.RData
 ## Dataframe containing the out-of-sample modern (FIA)
 ## vegetation, soil, and climate data
 ## The covariates are used to make predictions of the out-of-sample
 ## modern vegetation data
+## From 2.4.Split_data.R
 
 ## Output: out/gjam/M/abundance/predicted_modern_gjam1.RData
 ## Dataframe of observed vegetation, soil, and climate data and

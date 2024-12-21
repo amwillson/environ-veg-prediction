@@ -23,6 +23,7 @@
 ## Input: data/processed/PLS/xydata_in.RData
 ## Dataframe of in-sample grid cells with historical (PLS) era
 ## vegetation, soil, and climate data
+## From 1.3.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/allcovar.RData
 ## Fitted GJAM object saved to external hard drive
@@ -91,6 +92,7 @@ abund_gjam_H_allcovar <- gjam::gjam(formula = ~ clay + sand + silt + caco3 + awc
 gjam::gjamPlot(abund_gjam_H_allcovar)
 
 # Save
+# Change directory according to your file structure
 save(abund_gjam_H_allcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/allcovar.RData')
 

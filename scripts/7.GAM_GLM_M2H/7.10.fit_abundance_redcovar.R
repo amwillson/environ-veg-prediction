@@ -28,6 +28,7 @@
 ## Input: data/processed/FIA/xydata_in.RData
 ## Dataframe of in-sample grid cells with modern (FIA) era
 ## vegetation, soil, and climate data
+## From 2.4.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gjam/M/abundance/redcovar.RData
 ## Fitted GJAM object saved to external hard drive
@@ -95,6 +96,7 @@ abund_gjam_M_redcovar <- gjam::gjam(formula = ~ silt +
 gjam::gjamPlot(abund_gjam_M_redcovar)
 
 # Save
+# Change directory according to your file structure
 save(abund_gjam_M_redcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gjam/M/abundance/redcovar.RData')
 

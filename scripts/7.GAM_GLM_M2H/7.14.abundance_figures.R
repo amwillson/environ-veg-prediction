@@ -22,43 +22,51 @@
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical relative abundances from the out-of-sample 
 ## grid cells using the main model with climate and soil covariates
+## From 7.12.abundance_historical_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_historical_gjam2.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical relative abundances from the out-of-sample 
 ## grid cells using the alternate model with only climate covariates
+## From 7.12.abundance_historical_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_historical_gjam3.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical relative abundances from the out-of-sample 
 ## grid cells using the alternate model with only the reduced set of covariates
+## From 7.12.abundance_historical_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_historical_gjam4.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical relative abundances from the out-of-sample 
 ## grid cells using the alternate model with the soil and climate 
 ## covariates as well as the latitude and the longitude of the grid cell
+## From 7.12.abundance_historical_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_modern_gjam1.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern relative abundances from the out-of-sample 
 ## grid cells using the main model with climate and soil covariates
+## From 7.13.abundance_modern_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_modern_gjam2.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern relative abundances from the out-of-sample 
 ## grid cells using the alternate model with only climate covariates
+## From 7.13.abundance_modern_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_modern_gjam3.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern relative abundances from the out-of-sample 
 ## grid cells using the alternate model with only the reduced set of covariates
+## From 7.13.abundance_modern_predictions.R
 
 ## Input: out/gjam/M/abundance/predicted_modern_gjam4.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern relative abundances from the out-of-sample 
 ## grid cells using the alternate model with the soil and climate 
 ## covariates as well as the latitude and the longitude of the grid cell
+## From 7.13.abundance_modern_predictions.R
 
 ## Output: none except figures saved in figure/ directory
 
