@@ -12,10 +12,6 @@
 ## 2. Load NLCD rasters
 ## 3. Combine and format
 ## 4. Plot 300 m resolution
-## 5. Format Illinois at 60 m resolution
-## 6. Plot Illinois at 60 m resolution
-## 7. Format Wisconsin at 60 m resolution
-## 8. Plot Wisconsin at 60 m resolution
 
 ## Input: data/raw/HydroRIVERS_v10_na.gdb/HydroRIVERS_v10_na.gdb
 ## Geodatabase of river locations
@@ -49,7 +45,9 @@
 ## NLCD raster for southern Minnesota
 ## Downloaded from https://www.mrlc.gov/viewer/
 
-## Output: 
+## Output: data/processed/nlcd/nlcd_lc_1985.RData
+## Processed NLCD data at 300 m resolution for all 5 states
+## Not used again, only saved so that figures can be reproduced quickly
 
 rm(list = ls())
 
@@ -156,7 +154,9 @@ legend <- legend |>
   # Take only land cover types in our dataset
   dplyr::filter(ID %in% lc_1985$ID) |>
   # Convert ID to factor to match NLCD data
-  dplyr::mutate(ID = as.factor(ID))
+  dplyr::mutate(ID = as.factor(ID)) |>
+  # Make labels sentence case
+  dplyr::mutate(Class = stringr::str_to_sentence(Class))
 
 # Add actual land cover class to NLCD data
 # instead of just the ID number
@@ -171,7 +171,7 @@ save(lc_1985,
 #### 4. Plot 300 m resolution #### 
 
 # Plot all land cover classes
-lc_1985 |>
+p1 <- lc_1985 |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
@@ -182,12 +182,26 @@ lc_1985 |>
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
                  legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
+                 legend.text = ggplot2::element_text(size = 6))
+p1
 
 # Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
                 filename = 'figures/nlcd/all_cover_1985.png',
-                height = 15, width = 16, units = 'cm')
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = '/Volumes/FileBackup/SDM_bigdata/nlcd_svgs/all_cover_1985.svg',
+                height = 10, width = 10, units = 'cm')
+
+# Save legend separately (because it throws off proportions)
+leg <- ggpubr::get_legend(p = p1)
+ggpubr::as_ggplot(leg)
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/nlcd/all_cover_legend.png',
+                height = 10, width = 4, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = '/Volumes/FileBackup/SDM_bigdata/nlcd_svgs/all_cover_legend.svg',
+                height = 10, width = 4, units = 'cm')
 
 # Take only rivers of order 1-3
 rr <- dplyr::filter(rivers_cropped, ORD_CLAS %in% 1:3)
@@ -197,39 +211,39 @@ lc_1985 |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
-  ggplot2::geom_sf(data = rr, color = 'blue', alpha = 0.5,
-                   size = 1) +
+  ggplot2::geom_sf(data = rr, color = 'blue', size = 0.05) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend$Class,
                              values = legend$Color) +
   ggplot2::ggtitle('Land cover, 1985') +
   ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 16, hjust = 0.5),
                  legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
+                 legend.text = ggplot2::element_text(size = 6))
 
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/all_cover_rivers_1985.png',
-                height = 15, width = 16, units = 'cm')
+# Save (saving at larger size because it will be supplementary)
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = 'figures/nlcd/all_cover_rivers_1985.png')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = '/Volumes/FileBackup/SDM_bigdata/nlcd_svgs/all_cover_rivers_1985.svg')
 
 # Legend of only classes of interest
 legend_sub <- dplyr::filter(legend,
-                            Class %in% c('Deciduous Forest',
-                                         'Evergreen Forest',
-                                         'Mixed Forest',
-                                         'Shrub/Scrub',
-                                         'Grassland/Herbaceous',
-                                         'Woody Wetlands'))
+                            Class %in% c('Deciduous forest',
+                                         'Evergreen forest',
+                                         'Mixed forest',
+                                         'Shrub/scrub',
+                                         'Grassland/herbaceous',
+                                         'Woody wetlands'))
 
 # Plot only land cover classes corresponding to our ecosystems of interest
 lc_1985 |>
-  dplyr::filter(Class %in% c('Deciduous Forest',
-                             'Evergreen Forest',
-                             'Mixed Forest',
-                             'Shrub/Scrub',
-                             'Grassland/Herbaceous',
-                             'Woody Wetlands')) |>
+  dplyr::filter(Class %in% c('Deciduous forest',
+                             'Evergreen forest',
+                             'Mixed forest',
+                             'Shrub/scrub',
+                             'Grassland/herbaceous',
+                             'Woody wetlands')) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
@@ -240,213 +254,70 @@ lc_1985 |>
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
                  legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
+                 legend.text = ggplot2::element_text(size = 6))
 
 # Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
                 filename = 'figures/nlcd/red_cover_1985.png',
-                height = 15, width = 16, units = 'cm')
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = '/Volumes/FileBackup/SDM_bigdata/nlcd_svgs/red_cover_1985.svg',
+                height = 10, width = 10, units = 'cm')
 
 # Add in rivers
 lc_1985 |>
-  dplyr::filter(Class %in% c('Deciduous Forest',
-                             'Evergreen Forest',
-                             'Mixed Forest',
-                             'Shrub/Scrub',
-                             'Grassland/Herbaceous',
-                             'Woody Wetlands')) |>
+  dplyr::filter(Class %in% c('Deciduous forest',
+                             'Evergreen forest',
+                             'Mixed forest',
+                             'Shrub/scrub',
+                             'Grassland/herbaceous',
+                             'Woody wetlands')) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
-  
-  ggplot2::geom_sf(data = rr, color = 'blue', alpha = 0.5,
-                   size = 1) +
+  ggplot2::geom_sf(data = rr, color = 'blue', size = 0.05) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend_sub$Class,
                              values = legend_sub$Color) +
   ggplot2::ggtitle('Land cover, 1985') +
   ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 16, hjust = 0.5),
                  legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
+                 legend.text = ggplot2::element_text(size = 6))
 
 # Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/red_cover_rivers_1985.png',
-                height = 15, width = 16, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = 'figures/nlcd/red_cover_rivers_1985.png')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = '/Volumes/FileBackup/SDM_bigdata/nlcd_svgs/red_cover_rivers_1985.svg')
 
 # Add smaller rivers (especially for Illinois)
 rr <- dplyr::filter(rivers_cropped, ORD_CLAS %in% 1:4)
 
 # Add in smaller rivers
 lc_1985 |>
-  dplyr::filter(Class %in% c('Deciduous Forest',
-                             'Evergreen Forest',
-                             'Mixed Forest',
-                             'Shrub/Scrub',
-                             'Grassland/Herbaceous',
-                             'Woody Wetlands')) |>
+  dplyr::filter(Class %in% c('Deciduous forest',
+                             'Evergreen forest',
+                             'Mixed forest',
+                             'Shrub/scrub',
+                             'Grassland/herbaceous',
+                             'Woody wetlands')) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
   
-  ggplot2::geom_sf(data = rr, color = 'blue', alpha = 0.5,
-                   size = 1) +
+  ggplot2::geom_sf(data = rr, color = 'blue', size = 0.05) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend_sub$Class,
                              values = legend_sub$Color) +
   ggplot2::ggtitle('Land cover, 1985') +
   ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 16, hjust = 0.5),
                  legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
+                 legend.text = ggplot2::element_text(size = 6))
 
 # Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/red_cover_rivers4_1985.png',
-                height = 15, width = 16, units = 'cm')
-
-#### 5. Format Illinois at 60 m resolution ####
-
-# Reproject to EPSG:3175 (all PalEON data in this projection)
-rast4d <- terra::project(rast4c, 'EPSG:3175')
-# Reduce the resolution of the data (fewer grid cells)
-# by a factor of 2: 60 x 60 m resolution
-# fun = modal means using mode to scale up
-rast4e <- terra::aggregate(rast4d, fact = 2,
-                           fun = 'modal')
-# Convert to dataframe
-rast4f <- terra::as.data.frame(rast4e, xy = TRUE)
-# Change column names
-colnames(rast4f) <- c('x', 'y', 'ID')
-# Convert to simple features
-rast4g <- sf::st_as_sf(rast4f, coords = c('x', 'y'),
-                       crs = 'EPSG:3175')
-
-# Map of Wisconsin
-wisconsin_map <- sf::st_as_sf(maps::map(database = 'state',
-                                        regions = 'wisconsin',
-                                        plot = FALSE, fill = TRUE))
-# Change projection
-wisconsin_map <- sf::st_transform(wisconsin_map, crs = 'EPSG:3175')
-
-# Remove any grid cells not occurring within outline of states
-rast4h <- sf::st_intersection(rast4g, wisconsin_map)
-# Convert back to dataframe
-wisconsin_lc_1985 <- sfheaders::sf_to_df(rast4h, fill = TRUE)
-
-# Add actual land cover class to NLCD  data
-wisconsin_lc_1985 <- dplyr::left_join(x = wisconsin_lc_1985,
-                                      y = dplyr::select(legend, ID, Class),
-                                      by = 'ID')
-
-# Save
-save(wisconsin_lc_1985,
-     file = 'data/processed/nlcd/nlcd_wisconsin_lc_1985.RData')
-
-#### 6. Plot Wisconsin at 60 m resolution ####
-
-# Plot all land cover classes
-wisconsin_lc_1985 |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(data = wisconsin_map, color = NA, fill = 'grey85') +
-  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
-  ggplot2::geom_sf(data = wisconsin_map, color = 'black', fill = NA) +
-  ggplot2::scale_fill_manual(limits = legend_wi$Class,
-                             values = legend_wi$Color) +
-  ggplot2::ggtitle('Land cover, 1985') +
-  ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
-                 legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/wisconsin_all_cover_1985.png',
-                height = 10, width = 10, units = 'cm')
-
-# Take only rivers of order 1-4
-rr <- dplyr::filter(rivers_cropped, ORD_CLAS %in% 1:4)
-
-# Add rivers into above plot
-wisconsin_lc_1985 |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(data = wisconsin_map, color = NA, fill = 'grey85') +
-  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
-  ggplot2::geom_sf(data = rr, color = 'blue', alpha = 0.5,
-                   size = 1) +
-  ggplot2::geom_sf(data = wisconsin_map, color = 'black', fill = NA) +
-  ggplot2::scale_fill_manual(limits = legend_wi$Class,
-                             values = legend_wi$Color) +
-  ggplot2::ggtitle('Land cover, 1985') +
-  ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
-                 legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/wisconsin_all_cover_rivers_1985.png',
-                height = 10, width = 10, units = 'cm')
-
-# Legend of only classes of interest
-legend_sub <- dplyr::filter(legend,
-                            Class %in% c('Deciduous Forest',
-                                         'Evergreen Forest',
-                                         'Mixed Forest',
-                                         'Shrub/Scrub',
-                                         'Grassland/Herbaceous',
-                                         'Woody Wetlands'))
-
-# Plot only land cover classes corresponding to our ecosystems of interest
-wisconsin_lc_1985 |>
-  dplyr::filter(Class %in% c('Deciduous Forest',
-                             'Evergreen Forest',
-                             'Mixed Forest',
-                             'Shrub/Scrub',
-                             'Grassland/Herbaceous',
-                             'Woody Wetlands')) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(data = wisconsin_map, color = NA, fill = 'grey85') +
-  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
-  ggplot2::geom_sf(data = wisconsin_map, color = 'black', fill = NA) +
-  ggplot2::scale_fill_manual(limits = legend_sub$Class,
-                             values = legend_sub$Color) +
-  ggplot2::ggtitle('Land cover, 1985') +
-  ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
-                 legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/wisconsin_red_cover_1985.png',
-                height = 10, width = 10, units = 'cm')
-
-# Add in rivers
-wisconsin_lc_1985 |>
-  dplyr::filter(Class %in% c('Deciduous Forest',
-                             'Evergreen Forest',
-                             'Mixed Forest',
-                             'Shrub/Scrub',
-                             'Grassland/Herbaceous',
-                             'Woody Wetlands')) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(data = wisconsin_map, color = NA, fill = 'grey85') +
-  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
-  
-  ggplot2::geom_sf(data = rr, color = 'blue', alpha = 0.5,
-                   size = 1) +
-  ggplot2::geom_sf(data = wisconsin_map, color = 'black', fill = NA) +
-  ggplot2::scale_fill_manual(limits = legend_sub$Class,
-                             values = legend_sub$Color) +
-  ggplot2::ggtitle('Land cover, 1985') +
-  ggplot2::theme_void() +
-  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
-                 legend.title = ggplot2::element_blank(),
-                 legend.text = ggplot2::element_text(size = 10))
-
-# Save
-ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/nlcd/wisconsin_red_cover_rivers_1985.png',
-                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = 'figures/nlcd/red_cover_rivers4_1985.png')
+ggplot2::ggsave(plot = ggplot2::last_plot() + ggplot2::theme(legend.position = 'none'),
+                filename = '/Volumes/FileBackup/SDM_bigdata/nlcd_svgs/red_cover_rivers4_1985.svg')

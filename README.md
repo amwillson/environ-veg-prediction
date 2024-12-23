@@ -377,7 +377,73 @@ Code for processing data, fitting models, making out-of-sample predictions, and 
 
 ### 3.NLCD
 
-**PLACEHOLDER**
+- **3.1.Plot_IL_LC_1985.R**: Mapping central Illinois at 30 m resolution. Same as step 3.1.Plot_LC_1985.R but only for a portion of Illinois and with no aggregation.
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_PbV7RYKpbYgOXQRMcA2D/Annual_NLCD_LndCov_1985_CU_C1V0_PbV7RYKpbYgOXQRMcA2D.tiff: NLCD raster for Illinois. Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_illinois_lc_1985.RData: Processed NLCD data for 30 m resolution for southwestern Illinois. Not used again, only saved so that figures can be reproduced quickly
+- **3.1.Plot_LC_1985.R**: Mapping land cover class from NLCD 1985. Choosing 1985 simple because it's the earliest year of the time series
+    - Inputs:
+        - data/raw/HydroRIVERS_v10_na.gdb/HydroRIVERS_v10_na.gdb: Geodatabase of river locations. Downloaded from https://www.hydrosheds.org/products/hydrorivers
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_4huSzSwuyTP2jbX8It5J/Annual_NLCD_LndCov_1985_CU_C1V0_4huSzSwuyTP2jbX8It5J.tiff: NLCD raster for Upper Michigan. Downloadedd from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_9ZXc4bOuLO4vdXXqNbSO/Annual_NLCD_LndCov_1985_CU_C1V0_9ZXc4bOuLO4vdXXqNbSO.tiff: NLCD raster for northern Minnesota. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_b5GgTPUIDunbqFkYYgzP/Annual_NLCD_LndCov_1985_CU_C1V0_b5GgTPUIDunbqFkYYgzP.tiff: NLCD raster for Indiana. Downloaded from https://www.mrlc.org/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/Annual_NLCD_LndCov_1985_CU_C1V0_eVPLkoltuvcg6gKKypSU.tiff: NLCD raster for Wisconsin. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_PbV7RYKpbYgOXQRMcA2D/Annual_NLCD_LndCov_1985_CU_C1V0_PbV7RYKpbYgOXQRMcA2D.tiff: NLCD raster for Illinois. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_To6BNjHHiRaLtuUjkReu/Annual_NLCD_LndCov_1985_CU_C1V0_To6BNjHHiRaLtuUjkReu.tiff: NLCD raster for Lower Michigan. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_v4ffXdyI2mi2ILtcwIQW/Annual_NLCD_LndCov_1985_CU_C1V0_v4ffXdyI2mi2ILtcwIQW.tiff: NLCD raster for southern Minnesota: Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_lc_1985.RData: Processed NLCD data at 300 m resolution for all 5 states. Not used again, only saved so that figures can be reproduced quickly
+- **3.1.Plot_WI_LC_1985.R**: Mapping southwestern Wisconsin at 30 m resolution. Same as step 3.1.Plot_LC_1985.R but only for a portion of Wisconsin and with no aggregation
+    - Inputs:
+        - Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/Annual_NLCD_LndCov_1985_CU_C1V0_eVPLkoltuvcg6gKKypSU.tiff: NLCD raster for Wisconsin
+    - Outputs:
+        - data/processed/nlcd/nlcd_wisconsin_lc_1985.RData: Processed NLCD data at 30 m resolution for southwestern Wisconsin. Not used again, only saved so that figures can be reproduced quickly
+- **3.2.Plot_IL_LC_2023.R**: Mapping central Illinois at 30 m resolution. Same as step 3.2.Plot_LC_2023.R but only for a portion of Illinois and with no aggregation.
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_PbV7RYKpbYgOXQRMcA2D/Annual_NLCD_LndCov_2023_CU_C1V0_PbV7RYKpbYgOXQRMcA2D.tiff: NLCD raster for Illinois. Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_illinois_lc_2023.RData: Processed NLCD data for 30 m resolution for southwestern Illinois. Not used again, only saved so that figures can be reproduced quickly
+- **3.2.Plot_LC_2023.R**: Mapping land cover class from NLCD 2023. Choosing 2023 simply because it's the latest year of the time series
+    - Inputs:
+        - data/raw/HydroRIVERS_v10_na.gdb/HydroRIVERS_v10_na.gdb: Geodatabase of river locations. Downloaded from https://www.hydrosheds.org/products/hydrorivers
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_4huSzSwuyTP2jbX8It5J/Annual_NLCD_LndCov_2023_CU_C1V0_4huSzSwuyTP2jbX8It5J.tiff: NLCD raster for Upper Michigan. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_9ZXc4bOuLO4vdXXqNbSO/Annual_NLCD_LndCov_2023_CU_C1V0_9ZXc4bOuLO4vdXXqNbSO.tiff: NLCD raster for northern Minnesota. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_b5GgTPUIDunbqFkYYgzP/Annual_NLCD_LndCov_2023_CU_C1V0_b5GgTPUIDunbqFkYYgzP.tiff: NLCD raster for Indiana. Downloaded from https://www.mrlc.org/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/Annual_NLCD_LndCov_2023_CU_C1V0_eVPLkoltuvcg6gKKypSU.tiff: NLCD raster for Wisconsin. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_PbV7RYKpbYgOXQRMcA2D/Annual_NLCD_LndCov_2023_CU_C1V0_PbV7RYKpbYgOXQRMcA2D.tiff: NLCD raster for Illinois. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_To6BNjHHiRaLtuUjkReu/Annual_NLCD_LndCov_2023_CU_C1V0_To6BNjHHiRaLtuUjkReu.tiff: NLCD raster for Lower Michigan. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_v4ffXdyI2mi2ILtcwIQW/Annual_NLCD_LndCov_2023_CU_C1V0_v4ffXdyI2mi2ILtcwIQW.tiff: NLCD raster for southern Minnesota: Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_lc_2023.RData: Processed NLCD data at 300 m resolution for all 5 states. Not used again, only saved so that figures can be reproduced quickly
+- **3.2.Plot_WI_LC_2023.R**: Mapping southwestern Wisconsin at 30 m resolution. Same as step 3.2.Plot_LC_2023.R but only for a portion of Wisconsin and with no aggregation
+    - Inputs:
+        - Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/Annual_NLCD_LndCov_2023_CU_C1V0_eVPLkoltuvcg6gKKypSU.tiff: NLCD raster for Wisconsin
+    - Outputs:
+        - data/processed/nlcd/nlcd_wisconsin_lc_2023.RData: Processed NLCD data at 30 m resolution for southwestern Wisconsin. Not used again, only saved so that figures can be reproduced quickly
+- **3.3.Plot_IL_TCC.R**: Mapping southwestern Illinois at 30 m resolution. Same as step 3.3.Plot_TCC.R but only for a portion of Illinois and with no aggregation
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/Annual_NLCD_LndCov_2021_CU_C1V0_eVPLkoltuvcg6gKKypSU.tiff: NLCD tree cover raster for Illinois. Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_illinois_tcc_2021.RData: Processed NLCD tree cover at 30 m resolution for southwestern Illinois. Note used again, only saved so that figures can be reproduced quickly
+- **3.3.Plot_TCC.R**: Mapping percent tree cover from NLCD 2021. Choosing 2021 becauase it's the most recent year available
+    - Inputs:
+        - data/raw/HydroRIVERS_v10_na.gdb/HydroRIVERS_v10_na.gdb: Geodatabase of river locations. Downloaded from https://www.hydrosheds.org/products/hydrorivers
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_4huSzSwuyTP2jbX8It5J/nlcd_tcc_conus_2021_v2021-4_4huSzSwuyTP2jbX8It5J.tiff: NLCD tree cover raster for Upper Michigan. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_9ZXc4bOuLO4vdXXqNbSO/nlcd_tcc_conus_2021_v2021-4_9ZXc4bOuLO4vdXXqNbSO.tiff: NLCD tree cover raster for Upper Michigan. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_9ZXc4bOuLO4vdXXqNbSO/nlcd_tcc_conus_2021_v2021-4_9ZXc4bOuLO4vdXXqNbSO.tiff: NLCD tree cover raster for northern Minnesota. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_b5GgTPUIDunbqFkYYgzP/nlcd_tcc_conus_2021_v2021-4_b5GgTPUIDunbqFkYYgzP.tiff: NLCD tree cover raster for Indiana. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/nlcd_tcc_conus_2021_v2021-4_eVPLkoltuvcg6gKKypSU.tiff: NLCD tree cover raster for Wisconsin. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_PbV7RYKpbYgOXQRMcA2D/nlcd_tcc_conus_2021_v2021-4_PbV7RYKpbYgOXQRMcA2D.tiff: NLCD tree cover raster for Illinois. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_To6BNjHHiRaLtuUjkReu/nlcd_tcc_conus_2021_v2021-4_To6BNjHHiRaLtuUjkReu.tiff: NLCD tree cover raster for Lower Michigan. Downloaded from https://www.mrlc.gov/viewer/
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_v4ffXdyI2mi2ILtcwIQW/nlcd_tcc_conus_2021_v2021-4_v4ffXdyI2mi2ILtcwIQW.tiff: NLCD tree cover raster for southern Minnesota. Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_tcc_2021.RData: Processed NLCD tree cover at 300 m resolution for all 5 states. Not used again, only saved so that figures can be reproduced quickly
+- **3.3.Plot_WI_TCC.R**: Mapping southwestern Wisconsin at 30 m resolution. Same as step 3.3.Plot_TCC.R but only for a portion of Wisconsin and with no aggregation
+    - Inputs:
+        - /Volumes/FileBackup/SDM_bigdata/NLCD_eVPLkoltuvcg6gKKypSU/Annual_NLCD_LndCov_2021_CU_C1V0_eVPLkoltuvcg6gKKypSU.tiff: NLCD tree cover raster for Wisconsin. Downloaded from https://www.mrlc.gov/viewer/
+    - Outputs:
+        - data/processed/nlcd/nlcd_wisconsin_tcc_2021.RData: Processed NLCD tree cover at 30 m resolution for southwestern Wisconsin. Not used again, only saved so that figures can be reproduced quickly
 
 ### 4.RF_H2M
 
