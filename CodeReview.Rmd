@@ -222,7 +222,7 @@ This is almost exactly the same as 4.5 and also seems good. It is clear, well-co
 
 Pretty much the same as the last script but it worked, was well-commented, and tests were all clear. 
 
-# 4.14 Abundance Figures
+## 4.14 Abundance Figures
 
 The formatting and collating of data frames seems successful and well-commented. 
 The plots of species fractional compositions were created successfully, seem consistent with expected distributions, and were commented. Species fractional composition is also consistent across models though the colors of the scale are whitish for lower fractional compositions (which is most of them) which pretty much blend in with the grey background. 
@@ -231,3 +231,60 @@ The modern predictions followed exactly the same format as the historical ones a
 
 All the other plots seem to have executed correctly and are reasonable.
 
+# 5 RF Modern to Historical
+
+## 5.1 Fit Density All Covariates
+
+Parameter adjustment continued as in previous sections. Variable importance matches what is commented in the code. These partial effects plots are going much faster than the previous ones which is nice. The rest of the scri[t was pretty similar to previous scripts and 
+
+## 5.2 Fit Density Climate Covariates
+
+This one was fairly straightforward but everything ran as intended, was well-commented, and made logical sense. 
+
+## 5.3 Fit Density Reduced Covariates
+
+Pretty much the exact same as the last script. Still ok. 
+
+## 5.4 Fit Density XY Covariates
+
+Same as the last 2. Still fine. 
+
+## 5.5 Density Historical Predictions
+
+All of the prediction-making seems good. The correct modern-trained models were loaded and all of the new data is the PLS data so the code is doing what it says it should be doing. 
+
+## 5.6 Modern Density Predictions
+Correct (modern-trained) models loaded and correct out-of-sample moderns test data used. They are also saved in a reasonable place.
+
+## 5.7 Density Figures
+
+Plots seem reasonable and results are consistent with the results we have discussed. I am a little surprised that the modern predicted minus observed are so far from the 1:1 line in 423-482, do you know why that is?
+
+## 5.8 Fit Abundance All Covariates
+
+Variable importancce consistent with comments. 
+The partial effects plots loaded correctly and seem good.
+
+## 5.9 Fit Abundance Climate Covariates
+
+All code in this section progressed similarly to previous sections and was logical and did what was described in the methods. 
+
+## 5.10 Fit abundance reduced covariates
+ 
+ Pretty much the same as the previous section but it went well and made sense. 
+ 
+## 5.11 Fit Abundance XY covariates
+
+Appropriate variables were selected, fitting was logical and methodology was consistent with previous sections.
+
+## 5.12 Abundance historical predictions
+
+Appropriate models loaded and correct data used to predict. Models saved in logical locations. The code does what it says it does. 
+
+## 5.13 Abundance Modern Predictions
+
+Appropriate models loaded and correct data used to predict. Models saved in logical locations. The code does what it says it does. 
+
+## 5.14 Abundance Figures
+
+Formatting of results is logical and consistent with previous methodology. Plots seem appropriate for checking that predictions are reasonable as well as visualizing differences in predictive accuracy.Lots of plots.
