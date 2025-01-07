@@ -260,6 +260,8 @@ Correct (modern-trained) models loaded and correct out-of-sample moderns test da
 
 Plots seem reasonable and results are consistent with the results we have discussed. I am a little surprised that the modern predicted minus observed are so far from the 1:1 line in 423-482, do you know why that is?
 
+AW: I think this is because the observed relationship between climate & vegetation is much weaker in the modern period, so predictions based on environmental conditions don't do as good of a job as in the past overall. In addition to this, the predictions are worst in the historical savanna.
+
 ## 5.8 Fit Abundance All Covariates
 
 Variable importancce consistent with comments. 
