@@ -16,40 +16,47 @@
 ## Fitted GAM using all climate and soil covariates
 ## Used to make predictions from the main model with climate and soil
 ## covariates
+## From 7.1.fit_density_allcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/climcovar.RData
 ## Fitted GAM using only climate covariates
 ## Used to make predictions from the alternate model with only climate
 ## covariates
+## From 7.2.fit_density_climcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar.RData
 ## Fitted GAM using only the reduced set of covariates
 ## Used to make predictions from the alternate model with a reduced set
 ## of covariates
+## From 7.3.fit_density_redcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/xycovar.RData
 ## Fitted GAM using all the soil and climate covariates plus
 ## the latitude and longtiude of the grid cell
 ## Used to make predictions from the alternate model including grid
 ## cell coordinates and environmental covariates
+## From 7.4.fit_density_xycovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/allcovar_4k.RData
 ## Fitted GAM using all climate and soil covariates fit with lower maximum
 ## basis dimensionality
 ## Used to make predictions from the main model with climate and soil
 ## covariates but reducing overfitting
+## From 7.1.fit_density_allcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/climcovar_4k.RData
 ## Fitted GAM using only climate covariates fit with lower maximum
 ## basis dimensionality
 ## Used to make predictions from the alternate model with only climate
 ## covariates but reducing overfitting
+## From 7.2.fit_density_climcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar_4k.RData
 ## Fitted GAM using only the reduced set of covariates fit with lower
 ## maximum basis dimensionality
 ## Used to make predictions from the alternate model with a reduced set
 ## of covariates but reducing overfitting
+## From 7.3.fit_density_redcovar.R
 
 ## Input: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/xycovar_4k.RData
 ## Fitted GAM using all the soil and climate covariates plus
@@ -57,18 +64,21 @@
 ## basis dimensionality
 ## Used to make predictions from the alternate model including grid
 ## cell coordinates and environmental covariates
+## From 7.4.fit_density_xycovar.R
 
 ## Input: data/processed/FIA/xydata_out.RData
 ## Dataframe containing the out-of-sample modern (FIA)
 ## vegetation, soil, and climate data
 ## The covariates are used to make predictions of the out-of-sample
 ## modern vegetation data
+## From 2.4.Split_data.R
 
 ## Input: data/processed/PLS/xydata_out.RData
 ## Dataframe containing the out-of-sample historical (PLS)
 ## vegetation, soil, and climate data
 ## Used to make sure the FIA columns are in the same order
 ## I'm pretty sure this isn't necessary though
+## From 1.3.Split_data.R
 
 ## Output: out/gam/M/density/predicted_modern_gam1.RData
 ## Dataframe of observed vegetation, soil, and climate data and

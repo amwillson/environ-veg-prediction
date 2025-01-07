@@ -22,44 +22,52 @@
 ## Dataframe with observed historical out-of-sample vegetation, soil, 
 ## and climate data as well as predicted historical relative
 ## abundances from main model with soil and climate covariates
+## From 5.12.abundance_historical_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_historical_rf2.RData
 ## Dataframe with observed historical out-of-sample vegetation, soil,
 ## and climate data as well as predicted historical relative
 ## abundances from alternate model with only climate covariates
+## From 5.12.abundance_historical_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_historical_rf3.RData
 ## Dataframe with observed historical out-of-sample vegetation, soil,
 ## and climate data as well as predicted historical relative
 ## abundances from alternate model with the reduced set
 ## of covariates
+## From 5.12.abundance_historical_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_historical_rf4.RData
 ## Dataframe with observed historical out-of-sample vegetation, soil,
 ## and climate data as well as predicted historical relative
 ## abundances from alternate model with soil and climate covariates
 ## as well as latitude and longitude of the grid cell
+## From 5.12.abundance_historical_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_modern_rf1.RData
 ## Dataframe with observed modern out-of-sample vegetation, soil,
 ## and climate data as well as predicted modern relative
 ## abundances from main model with soil and climate covariates
+## From 5.13.abundance_modern_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_modern_rf2.RData
 ## Dataframe with observed modern out-of-sample vegetation, soil,
 ## and climate data as well as predicted modern relative abundances
 ## from alterate model with only climate covariates
+## From 5.13.abundance_modern_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_modern_rf3.RData
 ## Dataframe with observed modern out-of-sample vegetation, soil,
 ## and climate data as well as predicted modern relative abundances
 ## from alternate model with the reduced set of covariates
+## From 5.13.abundance_modern_prediction.R
 
 ## Input: out/rf/M/abundance/predicted_modern_rf4.RData
 ## Dataframe with observed modern out-of-sample vegetation, soil,
 ## and climate data as well as predicted modern relative abundances
 ## from alternate model with soil and climate covariates as well
 ## as latitude and longitude of the grid cell
+## From 5.13.abundance_modern_prediction.R
 
 ## Output: none except figures saved in figure/ directory
 

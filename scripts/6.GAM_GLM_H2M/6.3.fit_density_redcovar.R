@@ -23,6 +23,7 @@
 ## Input: data/processed/PLS/xydata_in.RData
 ## Dataframe of in-sample grid cells with historical (PLS) era
 ## vegetation, soil, and climate data
+## From 1.3.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData
 ## Fitted GAM object saved to external hard drive
@@ -224,6 +225,7 @@ mvgam::loo_compare(option2, option2b)
 density_gam_H_redcovar <- option2
 
 # Save
+# Change directory according to your file structure
 save(density_gam_H_redcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar.RData')
 
@@ -375,6 +377,7 @@ mvgam::loo_compare(option5_4k, option5b_4k)
 density_gam_H_redcovar_4k <- option5_4k
 
 # Save
+# Change directory according to your file structure
 save(density_gam_H_redcovar_4k,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gam/H/density/redcovar_4k.RData')
 
