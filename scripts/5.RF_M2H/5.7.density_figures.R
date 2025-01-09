@@ -183,7 +183,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2h_pred_space_facets.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 4. Plot historical predicted versus observed ####
 
@@ -248,7 +248,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2h_predvobs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Plot observed - predicted over space
 # Shows spatial distribution of model error
@@ -297,7 +297,7 @@ pred_historical |>
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2h_pred-obs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 #### 5. Calculate historical r ####
 
@@ -426,7 +426,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2m_pred_space_facets.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 9. Plot modern predicted vs observed ####
 
@@ -491,7 +491,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2m_predvobs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Plot observed - predicted over space
 # Shows spatial distribution of model error
@@ -579,7 +579,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2m_pred-obs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Facets with log transformation
 pred_modern |>
