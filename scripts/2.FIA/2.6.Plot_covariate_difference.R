@@ -72,7 +72,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_ppt_sum)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = 'mm/year') +
+  ggplot2::scale_fill_gradient2(name = 'mm/year',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in total annual precipitation from\nhistorical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -90,7 +92,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_tmean_mean)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = '°C') +
+  ggplot2::scale_fill_gradient2(name = '°C',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in mean annual temperature from\nhistorical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -108,7 +112,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_ppt_cv)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = 'CV') +
+  ggplot2::scale_fill_gradient2(name = 'CV',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in precipitation seasonality from\nhistorical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -126,7 +132,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_tmean_sd)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = 'SD (°C)') +
+  ggplot2::scale_fill_gradient2(name = 'SD (°C)',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in temperature seasonality from\nhistorical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -144,7 +152,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_tmin)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = '°C') +
+  ggplot2::scale_fill_gradient2(name = '°C',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in minimum annual temperature from\nhistorical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -162,7 +172,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_tmax)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = '°C') +
+  ggplot2::scale_fill_gradient2(name = '°C',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in maximum annual temperature from\nhistorical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -180,7 +192,9 @@ clim |>
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff_vpdmax)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
-  ggplot2::scale_fill_gradient2(name = '°C') +
+  ggplot2::scale_fill_gradient2(name = '°C',
+                                low = scales::muted('blue'),
+                                high = scales::muted('red')) +
   ggplot2::ggtitle('Change in maximum annual vapor pressure deficit\nfrom historical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
