@@ -195,7 +195,7 @@ clim |>
   ggplot2::scale_fill_gradient2(name = '°C',
                                 low = scales::muted('blue'),
                                 high = scales::muted('red')) +
-  ggplot2::ggtitle('Change in maximum annual vapor pressure deficit\nfrom historical to modern period') +
+  ggplot2::ggtitle('Change in maximum annual vapor pressure\ndeficit from historical to modern period') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
                  legend.title = ggplot2::element_text(size = 10),

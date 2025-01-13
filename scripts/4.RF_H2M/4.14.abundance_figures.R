@@ -3218,7 +3218,7 @@ pred_historical |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/abundance/pred/h2h_pred-obs_facets_ash.png',
+                filename = 'figures/rf/H/abundance/pred/h2h_pred-obs_facets_dogwood.png',
                 width = 15, height = 15, units = 'cm')
 
 # Elm
@@ -7011,7 +7011,7 @@ pred_modern |>
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/rf/H/abundance/pred/h2m_pred-obs_facets_ash.png',
+                filename = 'figures/rf/H/abundance/pred/h2m_pred-obs_facets_dogwood.png',
                 width = 15, height = 15, units = 'cm')
 
 # Elm

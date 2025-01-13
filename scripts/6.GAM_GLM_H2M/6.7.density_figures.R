@@ -287,24 +287,26 @@ pred_historical |>
                 fit = dplyr::if_else(fit == 'estimate_gam3',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = predicted)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_distiller(name = 'Total stem\ndensity',
                                 palette = 'Greens',
-                                direction = 1,
-                                transform = 'sqrt') +
+                                direction = 1) +
   ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::ggtitle('Historical predictions') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_pred_space_facets.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Plot predictions over space with all three models with lower basis dimension
 pred_historical_4k |>
@@ -322,24 +324,26 @@ pred_historical_4k |>
                 fit = dplyr::if_else(fit == 'estimate_gam3_4k',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = predicted)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_distiller(name = 'Total stem\ndensity',
                                 palette = 'Greens',
-                                direction = 1,
-                                transform = 'sqrt') +
+                                direction = 1) +
   ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::ggtitle('Historical predictions (k = 5)') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_pred_space_facets_4k.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 4. Plot historical predicted versus observed ####
 
@@ -560,16 +564,18 @@ pred_historical |>
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
+  ggplot2::ggtitle('Historical predictions') +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cutoff at 750 stems/ha
 pred_historical |>
@@ -599,17 +605,19 @@ pred_historical |>
   ggplot2::facet_wrap(~fit, nrow = 2) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Historical predictions') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_facets_cutoff.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # All three models with lower basis dimensionality
 pred_historical_4k |>
@@ -639,16 +647,18 @@ pred_historical_4k |>
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
+  ggplot2::ggtitle('Historical predictions (k = 5)') +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_facets_4k.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cutoff at 750 stems/ha
 pred_historical_4k |>
@@ -678,17 +688,19 @@ pred_historical_4k |>
   ggplot2::facet_wrap(~fit, nrow = 2) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Historical predictions (k = 5)') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_predvobs_facets_4k_cutoff.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Plot observed - predicted over space
 # Shows spatial distribution of model error
@@ -790,6 +802,7 @@ pred_historical |>
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::facet_wrap(~fit, nrow = 2) +
   ggplot2::scale_fill_gradient2(name = 'sqrt(Observed-\nPredicted)') +
+  ggplot2::ggtitle('Historical predictions') +
   ggplot2::theme_void() +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
@@ -798,7 +811,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_pred-obs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # All three models with lower basis dimension
 pred_historical_4k |>
@@ -823,15 +836,87 @@ pred_historical_4k |>
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::facet_wrap(~fit, nrow = 2) +
   ggplot2::scale_fill_gradient2(name = 'sqrt(Observed-\nPredicted)') +
+  ggplot2::ggtitle('Historical predictions (k = 5)') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2h_pred-obs_facets_4k.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
+
+# All three models with 750 cutoff
+pred_historical |>
+  dplyr::filter(estimate_gam1 <= 750 &
+                  estimate_gam2 <= 750 &
+                  estimate_gam3 <= 750) |>
+  tidyr::pivot_longer(cols = diff1:diff3,
+                      names_to = 'fit',
+                      values_to = 'diff') |>
+  dplyr::mutate(fit = dplyr::if_else(fit == 'diff1',
+                                     'Climate + soil',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff2',
+                                     'Climate only',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff3',
+                                     'Uncorrelated\ncovariates',
+                                     fit)) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Historical predictions') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 8),
+                 strip.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/gam/H/density/pred/h2h_pred-obs_facets_cutoff.png',
+                width = 15, height = 15, units = 'cm')
+
+# All three models with lower basis dimension
+pred_historical_4k |>
+  dplyr::filter(estimate_gam1_4k <= 750 &
+                  estimate_gam2_4k <= 750 &
+                  estimate_gam3_4k <= 750) |>
+  tidyr::pivot_longer(cols = diff1:diff3,
+                      names_to = 'fit',
+                      values_to = 'diff') |>
+  dplyr::mutate(fit = dplyr::if_else(fit == 'diff1',
+                                     'Climate + soil',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff2',
+                                     'Climate only',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff3',
+                                     'Uncorrelated\ncovariates',
+                                     fit)) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Historical predictions (k = 5)') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 8),
+                 strip.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/gam/H/density/pred/h2h_pred-obs_facets_4k_cutoff.png',
+                width = 15, height = 15, units = 'cm')
 
 #### 5. Calculate historical r ####
 
@@ -1045,24 +1130,26 @@ pred_modern |>
                 fit = dplyr::if_else(fit == 'estimate_gam3',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = predicted)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_distiller(name = 'Total stem\ndensity',
                                 palette = 'Greens',
-                                direction = 1,
-                                transform = 'sqrt') +
+                                direction = 1) +
   ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::ggtitle('Modern predictions') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_pred_space_facets.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Plot predictions over space with all three models with lower basis dimension
 pred_modern_4k |>
@@ -1080,24 +1167,26 @@ pred_modern_4k |>
                 fit = dplyr::if_else(fit == 'estimate_gam3_4k',
                                      'Uncorrelated\ncovariates',
                                      fit)) |>
+  dplyr::filter(predicted <= 750) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = predicted)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_distiller(name = 'Total stem\ndensity',
                                 palette = 'Greens',
-                                direction = 1,
-                                transform = 'sqrt') +
+                                direction = 1) +
   ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::ggtitle('Modern predictions (k = 5)') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_pred_space_facets_4k.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 9. Plot modern predicted versus observed ####
 
@@ -1317,11 +1406,13 @@ pred_modern |>
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
+  ggplot2::ggtitle('Modern predictions') +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
@@ -1356,17 +1447,19 @@ pred_modern |>
   ggplot2::facet_wrap(~fit, nrow = 2) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Modern predictions') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_facets_cutoff.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # All three models with lower basis dimensionality
 pred_modern_4k |>
@@ -1435,17 +1528,19 @@ pred_modern_4k |>
   ggplot2::facet_wrap(~fit, nrow = 2) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Modern predictions (k = 5)') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_predvobs_facets_4k_cutoff.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Plot observed - predicted over space
 pred_modern |>
@@ -1588,6 +1683,76 @@ pred_modern_4k |>
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gam/H/density/pred/h2m_pred-obs_facets_4k.png',
                 width = 20, height = 20, units = 'cm')
+
+# All three models with cutoff at 750
+pred_modern |>
+  dplyr::filter(estimate_gam1 <= 750 &
+                  estimate_gam2 <= 750 &
+                  estimate_gam3 <= 750) |>
+  tidyr::pivot_longer(cols = diff1:diff3,
+                      names_to = 'fit',
+                      values_to = 'diff') |>
+  dplyr::mutate(fit = dplyr::if_else(fit == 'diff1',
+                                     'Climate + soil',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff2',
+                                     'Climate only',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff3',
+                                     'Uncorrelated\ncovariates',
+                                     fit)) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Modern predictions') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 8),
+                 strip.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/gam/H/density/pred/h2m_pred-obs_facets_cutoff.png',
+                width = 15, height = 15, units = 'cm')
+
+# All three models with lower basis dimension
+pred_modern_4k |>
+  dplyr::filter(estimate_gam1_4k <= 750 &
+                  estimate_gam2_4k <= 750 &
+                  estimate_gam3_4k <= 750) |>
+  tidyr::pivot_longer(cols = diff1:diff3,
+                      names_to = 'fit',
+                      values_to = 'diff') |>
+  dplyr::mutate(fit = dplyr::if_else(fit == 'diff1',
+                                     'Climate + soil',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff2',
+                                     'Climate only',
+                                     fit),
+                fit = dplyr::if_else(fit == 'diff3',
+                                     'Uncorrelated\ncovariates',
+                                     fit)) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = diff)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::facet_wrap(~fit, nrow = 2) +
+  ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Modern predictions (k = 5)') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 8),
+                 strip.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/gam/H/density/pred/h2m_pred-obs_facets_4k_cutoff.png',
+                width = 15, height = 15, units = 'cm')
 
 #### 10. Calculate modern r ####
 
