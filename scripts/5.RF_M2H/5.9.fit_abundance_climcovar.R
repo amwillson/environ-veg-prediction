@@ -15,6 +15,7 @@
 ## Input: data/processed/FIA/xydata_in.RData
 ## Dataframe of in-sample grid cells with modern (FIA) era
 ## vegetation, soil, and climate data
+## From 2.4.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/rf/M/abundance/climcovar.RData
 ## Fitted random forest object saved to external hard drive
@@ -115,5 +116,6 @@ abund_rf_M_climcovar <- randomForestSRC::rfsrc(formula = Multivar(Ash, Basswood,
                                                forest = TRUE) # save forest variables
 
 # Save
+# Change directory according to your file structure
 save(abund_rf_M_climcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/rf/M/abundance/climcovar.RData')

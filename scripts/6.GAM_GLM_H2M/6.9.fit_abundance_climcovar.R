@@ -22,6 +22,7 @@
 ## Input: data/processed/PLS/xydata_in.RData
 ## Dataframe of in-sample grid cells with historical (PLS) era
 ## vegetation, soil, and climate data
+## From 1.3.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/climcovar.RData
 ## Fitted GJAM object saved to external hard drive
@@ -89,6 +90,7 @@ abund_gjam_H_climcovar <- gjam::gjam(formula = ~ pptsum + tmean + pptcv +
 gjam::gjamPlot(abund_gjam_H_climcovar)
 
 # Save
+# Change directory according to your file structure
 save(abund_gjam_H_climcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gjam/H/abundance/climcovar.RData')
 

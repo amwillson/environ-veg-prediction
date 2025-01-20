@@ -137,9 +137,13 @@ Skipping this one for now.
 
 Same comments on adding where data was processed for the input section. I may stop commenting on this in future sections to limit repetition in this review. 
 
+AW: Heard. I added this to all scripts in sections 4-7.
+
 The fitting of the random forests seems sensible and proceeded without errors. 
 
 The path for saving the RFs on line 92 is specific to your computer rather than for the project. Is this what you meant in the beginning comments about the directory being saved according to your file structure?
+
+AW: Yes.
 
 Variable importance comments are helpful and clear and code is straightforward. The plots match both my data and the comments about the plots. 
 
@@ -147,17 +151,23 @@ The depth and importance plots are consistent with one another and the comments 
 
 The partial effect plots also all look good though it would be helpful at the beginning of the code chunk to say what you are hoping to get from these plots as the comments are... sparse. 
 
+AW: I added a comment explaining the relevance of the partial effects plots.
+
 this code takes forever to run but all the plots look good. 
 
 ## 4.2 Fit Density Climate Covariates
 
 This is consistent with the methodology of 4.1 and the draft methods for the paper. My only comment on this script is you may want to add an additional comment about the save path at the end when the fit is actually being saved in addition to the header comments about saving to an external hard-drive. 
 
+AW: Changed!
+
 ## 4.3 fit density redcovar
 
 Variables selected are consistent with methods. 
 Selection of node size and mtry seem reasonable. 
 See notes from previous section about saving. 
+
+Aw: Changed in all scripts in sections 4-7
 
 ## 4.4 Fit Density xy covariates
 
@@ -181,7 +191,12 @@ So far the comments on the plotting code are helpful for understanding the goals
 Calculations of correlations are relatively straightforward and seem good. 
 Modern plots follow the same plotting procedures as the historical data and also seem to make sense and are created correctly.
 I am not sure you need to save both the log and sqrt transformed scale plots but they are created quickly so it isn't that big of a deal. If you are curious, I prefer the log one. 
+
+AW: Thank you! I wasn't sure what looked best/was most interpretable so I saved both, so I appreciate the feedback!
+
 Similarly, with the change in prediction accuracy from historic to modern plots it may be helpful to only keep a couple of these for the finished github when you publish but they are great for while you are working on it. 
+
+AW: That makes sense thank you!
 
 ## 4.8 Fit Abundace All Covariates
  

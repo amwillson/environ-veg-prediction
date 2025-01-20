@@ -22,91 +22,107 @@
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample 
 ## grid cells using the main model with climate and soil covariates
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam2.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample 
 ## grid cells using the alternate model with only climate covariates
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam3.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample 
 ## grid cells using the alternate model with only the reduced set of covariates
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam4.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample
 ## grid cells using the alternate model with the soil and climate
 ## covariates as well as the latitude and the longitude of the grid cell
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam1_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample
 ## grid cells using the main model with climate and soil covariates
 ## with lower maximum basis dimensionality
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam2_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample
 ## grid cells using the alternate model with only climate covariates
 ## with lower maximum basis dimensionality
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam3_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample
 ## grid cells using the alternate model with only the reduced set of covariates
 ## with lower maximum basis dimensionality
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_historical_gam4_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted historical total stem density from the out-of-sample
 ## grid cells using the alternate model with the soil and climate
 ## covariates as well as the latitude and the longitude of the grid cell
+## From 7.5.density_historical_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam1.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample 
 ## grid cells using the main model with climate and soil covariates
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam2.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample 
 ## grid cells using the alternate model with only climate covariates
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam3.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample 
 ## grid cells using the alternate model with only the reduced set of covariates
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam4.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample
 ## grid cells using the alternate model with the soil and climate
 ## covariates as well as the latitude and the longitude of the grid cell
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam1_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample
 ## grid cells using the main model with climate and soil covariates
 ## with lower maximum basis dimensionality
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam2_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample
 ## grid cells using the alternate model with only climate covariates
 ## with lower maximum basis dimensionality
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam3_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample
 ## grid cells using the alternate model with only the reduced set of covariates
 ## with lower maximum basis dimensionality
+## From 7.6.density_modern_predictions.R
 
 ## Input: out/gam/M/density/predicted_modern_gam4_4k.RData
 ## Dataframe of observed vegetation, soil, and climate data and
 ## predicted modern total stem density from the out-of-sample
 ## grid cells using the alternate model with the soil and climate
 ## covariates as well as the latitude and the longitude of the grid cell
+## From 7.6.density_modern_predictions.R
 
 ## Output: none except figures saved in figure/ directory
 

@@ -23,6 +23,7 @@
 ## Input: data/processed/FIA/xydata_in.RData
 ## Dataframe of in-sample grid cells with modern (FIA) era
 ## vegetation, soil, and climate data
+## From 2.4.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar.RData
 ## Fitted GAM object saved to external hard drive
@@ -199,6 +200,7 @@ mvgam::loo_compare(option3, option3b)
 density_gam_M_redcovar <- option3
 
 # Save
+# Change directory according to your file structure
 save(density_gam_M_redcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar.RData')
 
@@ -340,6 +342,7 @@ mvgam::loo_compare(option3_4k, option3b_4k)
 density_gam_M_redcovar_4k <- option3_4k
 
 # Save
+# Change directory according to your file structure
 save(density_gam_M_redcovar_4k,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gam/M/density/redcovar_4k.RData')
 

@@ -16,6 +16,7 @@
 ## Input: data/processed/PLS/xydata_in.RData
 ## Dataframe of in-sample grid cells with historical (PLS) era
 ## vegetation, soil, and climate data
+## From 1.3.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar.RData
 ## Fitted GAM object saved to external hard drive
@@ -66,6 +67,7 @@ density_gam_H_climcovar <- mvgam::mvgam(formula = total_density ~
 summary(density_gam_H_climcovar)
 
 # Save
+# Change directory according to your file structure
 save(density_gam_H_climcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar.RData')
 
@@ -90,6 +92,7 @@ density_gam_H_climcovar_4k <- mvgam::mvgam(formula = total_density ~
 summary(density_gam_H_allcovar_4k)
 
 # Save
+# Change directory according to your file structure
 save(density_gam_H_climcovar_4k,
      file = '/Volumes/FileBackup/SDM_bigdata/out/gam/H/density/climcovar_4k.RData')
 

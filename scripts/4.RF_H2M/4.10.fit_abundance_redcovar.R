@@ -22,6 +22,7 @@
 ## Input: data/processed/PLS/xydata_in.RData
 ## Dataframe of in-sample grid cells with historical (PLS) era
 ## vegetation, soil, and climate data
+## From 1.3.Split_data.R
 
 ## Output: /Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/redcovar.RData
 ## Fitted random forest object saved to external hard drive
@@ -118,5 +119,6 @@ abund_rf_H_redcovar <- randomForestSRC::rfsrc(formula = Multivar(Ash, Basswood, 
                                               forest = TRUE) # save forest variables
 
 # Save
+# Change directory according to your file structure
 save(abund_rf_H_redcovar,
      file = '/Volumes/FileBackup/SDM_bigdata/out/rf/H/abundance/redcovar.RData')
