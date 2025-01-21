@@ -235,7 +235,7 @@ All the other plots seem to have executed correctly and are reasonable.
 
 ## 5.1 Fit Density All Covariates
 
-Parameter adjustment continued as in previous sections. Variable importance matches what is commented in the code. These partial effects plots are going much faster than the previous ones which is nice. The rest of the scri[t was pretty similar to previous scripts and 
+Parameter adjustment continued as in previous sections. Variable importance matches what is commented in the code. These partial effects plots are going much faster than the previous ones which is nice. The rest of the script was pretty similar to previous scripts and 
 
 ## 5.2 Fit Density Climate Covariates
 
@@ -290,3 +290,71 @@ Appropriate models loaded and correct data used to predict. Models saved in logi
 ## 5.14 Abundance Figures
 
 Formatting of results is logical and consistent with previous methodology. Plots seem appropriate for checking that predictions are reasonable as well as visualizing differences in predictive accuracy.Lots of plots.
+
+# 6 GAM GLM Historical to Modern
+
+## 6.1 Fit Density all covariates
+
+What was your takeaway from the initial GAM smooth plots? GAM fitting is consistent with methods and code comments. The partial effects plots are all created correctly. 
+
+## 6.2 Fit density climate covariates
+
+Line 90 - This should be climcovar instead of allcovar. 
+Otherwise the GAM fitting is consistent with previous sections and logical. What is the reason you are looking at the ranges of effects sizes? Also, what is the goal of the partial effects plots? Are you just curious or checking for pattern or overall fit?
+
+## 6.3 Fit density reduced covariates
+
+Each model was fit successfully.  The description of the loo output was helpful. Output descriptions fit the descriptions in the comments (i.e. 2 continues to be best. )
+
+In my run through it says that option 6_4k is best rather than 5. Maybe just because of random sampling. 
+
+All of the plots were created and run successfully and there are no obvious output errors. 
+
+## 6.4 Fit Density XY Covariates
+Line 65 is missing an estimated runtime. Perhaps because it created the convergence errors that are described in the following comments.If you are not doing anything with this model and just left it to show this then why are you saving the whole GAM output in line 72-73?
+
+## 6.5 Density Historical Predictions
+
+Correct data and models used to make each prediction. Code is logical, easy to follow, and well-commented. 
+
+## 6.6 Density Modern Predictions
+
+Correct data is used to make each prediction. It is a little confusing to load in the pls data since you really aren't using it for anything other than checking the column names match. Making sure the column names are consistent seems like a data processing script step more than a prediction
+script step. Other than that, all the model names are consistent with the names in the historical predictions, the correct data is being used to make predictions, and the code is clear and well-commented. 
+
+## 6.7 Density Figures
+
+Plots are created correctly and describe model fit well. For some of the scatterplots it is challenging to see the point density when all the points are overlapping. If these plots make it to publication maybe changing the transparency or something would help?
+
+The change in prediction accuracy from historic to modern plots are quite striking and I look forward to seeing the final versions.
+
+All the plots were created correctly and describe interesting parts of the model fitting. 
+
+## 6.8 Fit Abundance All Covariates
+
+These ones may also benefit from an estimated time to run. A very long estimated time to run.
+
+GJAM diagnostic plots all look good for the first one. Sensitivity outputs are consistent with comments. Plots are created successfully and seem interesting for understanding model fit though there is a lot going on and the formatting is challenging to display but that is only a problem if they will be used in publication. 
+
+## 6.9 Fit Abundance Climate Covariates
+
+Model fitting is consistent with previous methodology though a time estimate here certainly wouldn't go amiss. Model seems to have been fit correctly and all plots show no obvious issues. 
+
+## 6.10 Fit Abundance Reduced Covariates
+  Fitting procedure was consistent with previous runs and variables used in fitting are consistent with comments. All plots look reasonable and code is well-commented. 
+  
+## 6.11 Fit Abundance XY Covariates
+
+Fitting procedure still consistent with previous scripts. Plots seem reasonable and file structures look good. 
+
+## 6.12 Abundance Historical Predictions
+
+Correct data used for predicting. Everything runs successfully and looks good. Unit checks all passed. 
+
+## 6.13 Abundance Modern Predictions
+
+Correct (fia) data used for predictions. Everything suns successfully and looks good. Unit checks all passed. I will just mention again that, as in previous sections, the model naming does not follow best practices of informative and descriptive naming. 
+
+## 6.14 Abundance Figures
+
+Historical to historical plots created successfully and look reasonable. Correlations for h2h created successfully and seem to vary widely. A chart seems like an inefficient way to portray this info but I don't think this is in going in the text of the paper so it should be OK. Historic to modern predictions created successfully and look reasonable. Comparison plots also look good. 
