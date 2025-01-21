@@ -712,7 +712,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -744,7 +744,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -776,7 +776,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -808,7 +808,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -840,7 +840,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -872,7 +872,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -904,7 +904,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -936,7 +936,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -968,7 +968,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1000,7 +1000,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1032,7 +1032,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1064,7 +1064,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1096,7 +1096,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1128,7 +1128,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1160,7 +1160,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1192,7 +1192,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1224,7 +1224,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1256,7 +1256,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1288,7 +1288,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1320,7 +1320,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1352,7 +1352,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1915,7 +1915,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ash, y = pred)) +
@@ -1950,7 +1950,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Basswood, y = pred)) +
@@ -1985,7 +1985,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Beech, y = pred)) +
@@ -2020,7 +2020,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Birch, y = pred)) +
@@ -2055,7 +2055,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Cherry, y = pred)) +
@@ -2090,7 +2090,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Dogwood, y = pred)) +
@@ -2125,7 +2125,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Elm, y = pred)) +
@@ -2160,7 +2160,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Fir, y = pred)) +
@@ -2195,7 +2195,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hemlock, y = pred)) +
@@ -2230,7 +2230,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hickory, y = pred)) +
@@ -2265,7 +2265,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ironwood, y = pred)) +
@@ -2300,7 +2300,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Maple, y = pred)) +
@@ -2335,7 +2335,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Oak, y = pred)) +
@@ -2370,7 +2370,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Pine, y = pred)) +
@@ -2405,7 +2405,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Spruce, y = pred)) +
@@ -2440,7 +2440,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Tamarack, y = pred)) +
@@ -2475,7 +2475,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Walnut, y = pred)) +
@@ -2510,7 +2510,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = oh, y = pred)) +
@@ -2545,7 +2545,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = gum, y = pred)) +
@@ -2580,7 +2580,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = cedar, y = pred)) +
@@ -2615,7 +2615,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = poplar, y = pred)) +
@@ -3035,7 +3035,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3064,7 +3064,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3093,7 +3093,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3122,7 +3122,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3151,7 +3151,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3180,7 +3180,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3209,7 +3209,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3238,7 +3238,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3267,7 +3267,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3296,7 +3296,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3325,7 +3325,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3354,7 +3354,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3383,7 +3383,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3412,7 +3412,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3441,7 +3441,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3470,7 +3470,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3499,7 +3499,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3528,7 +3528,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3557,7 +3557,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3586,7 +3586,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3615,7 +3615,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4492,8 +4492,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4524,8 +4524,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4556,8 +4556,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4588,8 +4588,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4620,8 +4620,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4652,8 +4652,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4684,8 +4684,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4716,8 +4716,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4748,8 +4748,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4780,8 +4780,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4812,8 +4812,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4844,8 +4844,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4876,8 +4876,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4908,8 +4908,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4940,8 +4940,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -4972,8 +4972,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -5004,8 +5004,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -5036,8 +5036,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -5068,8 +5068,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -5100,8 +5100,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -5132,8 +5132,8 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncovariates', fit)) |>
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = pred)) +
@@ -5695,7 +5695,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ash, y = pred)) +
@@ -5730,7 +5730,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Basswood, y = pred)) +
@@ -5765,7 +5765,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Beech, y = pred)) +
@@ -5800,7 +5800,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Birch, y = pred)) +
@@ -5835,7 +5835,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Cherry, y = pred)) +
@@ -5870,7 +5870,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Dogwood, y = pred)) +
@@ -5905,7 +5905,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Elm, y = pred)) +
@@ -5940,7 +5940,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Fir, y = pred)) +
@@ -5975,7 +5975,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hemlock, y = pred)) +
@@ -6010,7 +6010,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hickory, y = pred)) +
@@ -6045,7 +6045,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ironwood, y = pred)) +
@@ -6080,7 +6080,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Maple, y = pred)) +
@@ -6115,7 +6115,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Oak, y = pred)) +
@@ -6150,7 +6150,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Pine, y = pred)) +
@@ -6185,7 +6185,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Spruce, y = pred)) +
@@ -6220,7 +6220,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Tamarack, y = pred)) +
@@ -6255,7 +6255,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Walnut, y = pred)) +
@@ -6290,7 +6290,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = oh, y = pred)) +
@@ -6325,7 +6325,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = gum, y = pred)) +
@@ -6360,7 +6360,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = cedar, y = pred)) +
@@ -6395,7 +6395,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = poplar, y = pred)) +
@@ -6834,7 +6834,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6863,7 +6863,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6892,7 +6892,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6921,7 +6921,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6950,7 +6950,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6979,7 +6979,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7008,7 +7008,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7037,7 +7037,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7066,7 +7066,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7095,7 +7095,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7124,7 +7124,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7153,7 +7153,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7182,7 +7182,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7211,7 +7211,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7240,7 +7240,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7269,7 +7269,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7298,7 +7298,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7327,7 +7327,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7356,7 +7356,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7385,7 +7385,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7414,7 +7414,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8294,7 +8294,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8325,7 +8325,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8356,7 +8356,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8387,7 +8387,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8418,7 +8418,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8449,7 +8449,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8480,7 +8480,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8511,7 +8511,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8542,7 +8542,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8573,7 +8573,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8604,7 +8604,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8635,7 +8635,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8666,7 +8666,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8697,7 +8697,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8728,7 +8728,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8759,7 +8759,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8790,7 +8790,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8821,7 +8821,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8852,7 +8852,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8883,7 +8883,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8914,7 +8914,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -10692,7 +10692,7 @@ both_cors |>
                 period = sub(pattern = '.*_', replacement = '', x = fit_period),
                 fit = dplyr::if_else(fit == 'corr1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'corr2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'corr3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'corr3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'corr4', 'Climate + soil +\ncoordinates', fit),
                 period = dplyr::if_else(period == 'historical', 'Historical', 'Modern')) |>
   ggplot2::ggplot() +
