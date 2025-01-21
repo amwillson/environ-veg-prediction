@@ -297,10 +297,21 @@ Formatting of results is logical and consistent with previous methodology. Plots
 
 What was your takeaway from the initial GAM smooth plots? GAM fitting is consistent with methods and code comments. The partial effects plots are all created correctly. 
 
+AW: It is recommended by Nicholas Clark to plot the smooths first to make sure that the smooths fit by the model are consistent. Additionally, it gives an idea of how many knots you might want.
+
 ## 6.2 Fit density climate covariates
 
 Line 90 - This should be climcovar instead of allcovar. 
-Otherwise the GAM fitting is consistent with previous sections and logical. What is the reason you are looking at the ranges of effects sizes? Also, what is the goal of the partial effects plots? Are you just curious or checking for pattern or overall fit?
+
+AW: Fixed!
+
+Otherwise the GAM fitting is consistent with previous sections and logical. What is the reason you are looking at the ranges of effects sizes? 
+
+AW: I used the ranges to scale the partial effects plots to the maximum effect size across covariates. I added an explanation of this
+
+Also, what is the goal of the partial effects plots? Are you just curious or checking for pattern or overall fit?
+
+AW: It allows you to see how each covariate affects total stem density according to the model. Originally, I was going to include these fitted relationships in the supplement to explain trends in predictions but there is so much to include in the supplement that I ended up cutting this. I think it is helpful to understand the effect of each covariate on the response variable because the fitted relationships are so complicated that looking at parameter estimates is not very helpful.
 
 ## 6.3 Fit density reduced covariates
 
@@ -308,10 +319,14 @@ Each model was fit successfully.  The description of the loo output was helpful.
 
 In my run through it says that option 6_4k is best rather than 5. Maybe just because of random sampling. 
 
+AW: This isn't too surprising seeing as precipitation seasonality and temperature seasonality are very highly correlated. There should be very minimal difference between the leave-one-out accuracy of these models.
+
 All of the plots were created and run successfully and there are no obvious output errors. 
 
 ## 6.4 Fit Density XY Covariates
 Line 65 is missing an estimated runtime. Perhaps because it created the convergence errors that are described in the following comments.If you are not doing anything with this model and just left it to show this then why are you saving the whole GAM output in line 72-73?
+
+AW: I don't know why I saved it lol...
 
 ## 6.5 Density Historical Predictions
 
@@ -326,7 +341,11 @@ script step. Other than that, all the model names are consistent with the names 
 
 Plots are created correctly and describe model fit well. For some of the scatterplots it is challenging to see the point density when all the points are overlapping. If these plots make it to publication maybe changing the transparency or something would help?
 
+AW: Yes, totally fair. I included the best fit lines as a summary but I understand that the points are still hard to see.
+
 The change in prediction accuracy from historic to modern plots are quite striking and I look forward to seeing the final versions.
+
+AW: Thank you! Exciting!
 
 All the plots were created correctly and describe interesting parts of the model fitting. 
 
@@ -334,14 +353,19 @@ All the plots were created correctly and describe interesting parts of the model
 
 These ones may also benefit from an estimated time to run. A very long estimated time to run.
 
+AW: Sorry. I will add a note to the top that says to expect these to take a long time.
+
 GJAM diagnostic plots all look good for the first one. Sensitivity outputs are consistent with comments. Plots are created successfully and seem interesting for understanding model fit though there is a lot going on and the formatting is challenging to display but that is only a problem if they will be used in publication. 
+
+AW: Like with the GAMs, I had to cut these from the supplement because there is so much that needs to be in the supplement.
 
 ## 6.9 Fit Abundance Climate Covariates
 
 Model fitting is consistent with previous methodology though a time estimate here certainly wouldn't go amiss. Model seems to have been fit correctly and all plots show no obvious issues. 
 
 ## 6.10 Fit Abundance Reduced Covariates
-  Fitting procedure was consistent with previous runs and variables used in fitting are consistent with comments. All plots look reasonable and code is well-commented. 
+
+Fitting procedure was consistent with previous runs and variables used in fitting are consistent with comments. All plots look reasonable and code is well-commented. 
   
 ## 6.11 Fit Abundance XY Covariates
 
