@@ -217,7 +217,9 @@ pred_historical |>
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/h2h_predvobs_allcovar.png',
                 height = 10, width = 10, units = 'cm')
-
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/rf/H/density/pred/h2h_predvobs_allcovar.svg',
+                height = 9, width = 10, units = 'cm')
 # All four models
 pred_historical |>
   tidyr::pivot_longer(cols = pred_out_rf1:pred_out_rf4,
@@ -277,6 +279,9 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/h2h_pred-obs_allcovar.png',
+                width = 10, height = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/rf/H/density/pred/h2h_pred-obs_allcovar.svg',
                 width = 10, height = 10, units = 'cm')
 
 # All four models
@@ -474,6 +479,9 @@ pred_modern |>
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/h2m_predvobs_allcovar.png',
                 height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/rf/H/density/pred/h2m_predvobs_allcovar.svg',
+                height = 9, width = 10, units = 'cm')
 
 # All four models
 pred_modern |>
@@ -534,6 +542,9 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/density/pred/h2m_pred-obs_allcovar.png',
+                width = 10, height = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/rf/H/density/pred/h2m_pred-obs_allcovar.svg',
                 width = 10, height = 10, units = 'cm')
 
 # Plot with color legend log transformation
