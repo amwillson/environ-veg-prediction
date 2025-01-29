@@ -11,6 +11,10 @@
 ## This is effectively a GLM SDM, but allowing for the multivariate
 ## response variable
 
+## NOTE that this model will take a long time (up to several hours)
+## to run. The number of iterations can be reduced for assessment,
+## but convergence and parameter estimation are likely to suffer
+
 ## NOTE that the GJAM is saved to an external hard
 ## drive. The object isn't THAT big, so it can be saved locally,
 ## but I elected to save it externally. The directory should be

@@ -89,7 +89,7 @@ density_gam_H_climcovar_4k <- mvgam::mvgam(formula = total_density ~
                                            family = mvgam::lognormal()) # Takes about 5 minutes
 
 # Check summary
-summary(density_gam_H_allcovar_4k)
+summary(density_gam_H_climcovar_4k)
 
 # Save
 # Change directory according to your file structure
@@ -113,6 +113,8 @@ tmax_data <- partials[[6]]$data
 vpd_data <- partials[[7]]$data
 
 # Find maximum range of effect size
+# This lets me scale the partial effects plots to the maximum
+# possible effect size across covariates
 range(c(ppt_data$.estimate - ppt_data$.se,
         ppt_data$.estimate + ppt_data$.se,
         tmean_data$.estimate - tmean_data$.se,
