@@ -814,6 +814,9 @@ stem_density_agg2 |>
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/data/modern_total_stem_density.png',
                 height = 10, width = 10, units = 'cm')  
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_total_stem_density.svg',
+                height = 10, width = 10, units = 'cm')
 
 # How close are they in total stem density?
 stem_density_agg_comp <- stem_density_agg |>

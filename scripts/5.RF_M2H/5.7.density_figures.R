@@ -175,15 +175,17 @@ pred_historical |>
                                 palette = 'Greens',
                                 direction = 1) +
   ggplot2::facet_wrap(~fit) +
+  ggplot2::ggtitle('Historical predictions') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2h_pred_space_facets.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 4. Plot historical predicted versus observed ####
 
@@ -238,17 +240,19 @@ pred_historical |>
   ggplot2::facet_wrap(~fit) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Historical predictions') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2h_predvobs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Plot observed - predicted over space
 # Shows spatial distribution of model error
@@ -290,14 +294,16 @@ pred_historical |>
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::facet_wrap(~fit) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Historical predictions') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2h_pred-obs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 #### 5. Calculate historical r ####
 
@@ -418,15 +424,17 @@ pred_modern |>
                                 palette = 'Greens',
                                 direction = 1) +
   ggplot2::facet_wrap(~fit) +
+  ggplot2::ggtitle('Modern predictions') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2m_pred_space_facets.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 9. Plot modern predicted vs observed ####
 
@@ -481,17 +489,19 @@ pred_modern |>
   ggplot2::facet_wrap(~fit) +
   ggplot2::scale_color_discrete(name = '') +
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Modern predictions') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2m_predvobs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Plot observed - predicted over space
 # Shows spatial distribution of model error
@@ -571,15 +581,17 @@ pred_modern |>
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::facet_wrap(~fit) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted') +
+  ggplot2::ggtitle('Modern predictions') +
   ggplot2::theme_void() +
-  ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
-                 strip.text = ggplot2::element_text(size = 12))
+                 strip.text = ggplot2::element_text(size = 10))
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/M/density/pred/m2m_pred-obs_facets.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Facets with log transformation
 pred_modern |>

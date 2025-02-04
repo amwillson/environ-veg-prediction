@@ -712,7 +712,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -725,7 +725,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Ash historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -734,7 +734,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_ash.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Basswood
 pred_historical |>
@@ -744,7 +744,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -757,7 +757,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Basswood') +
+  ggplot2::ggtitle('Basswood historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -766,7 +766,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_basswood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Beech
 pred_historical |>
@@ -776,7 +776,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -789,7 +789,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Beech') +
+  ggplot2::ggtitle('Beech historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -798,7 +798,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_beech.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Birch
 pred_historical |>
@@ -808,7 +808,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -821,7 +821,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Birch') +
+  ggplot2::ggtitle('Birch historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -830,7 +830,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_birch.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Cherry
 pred_historical |>
@@ -840,7 +840,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -853,7 +853,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cherry') +
+  ggplot2::ggtitle('Cherry historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -862,7 +862,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_cherry.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Dogwood
 pred_historical |>
@@ -872,7 +872,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -885,7 +885,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Dogwood') +
+  ggplot2::ggtitle('Dogwood historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -894,7 +894,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_dogwood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Elm
 pred_historical |>
@@ -904,7 +904,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -917,7 +917,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Elm') +
+  ggplot2::ggtitle('Elm historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -926,7 +926,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_elm.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Fir
 pred_historical |>
@@ -936,7 +936,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -949,7 +949,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Fir') +
+  ggplot2::ggtitle('Fir historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -958,7 +958,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_fir.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Hemlock
 pred_historical |>
@@ -968,7 +968,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -981,7 +981,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hemlock') +
+  ggplot2::ggtitle('Hemlock historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -990,7 +990,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_hemlock.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Hickory
 pred_historical |>
@@ -1000,7 +1000,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1013,7 +1013,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hickory') +
+  ggplot2::ggtitle('Hickory historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1022,7 +1022,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_hickory.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Ironwood
 pred_historical |>
@@ -1032,7 +1032,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1045,7 +1045,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ironwood') +
+  ggplot2::ggtitle('Ironwood historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1054,7 +1054,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_ironwood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Maple
 pred_historical |>
@@ -1064,7 +1064,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1077,7 +1077,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Maple') +
+  ggplot2::ggtitle('Maple historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1086,7 +1086,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_maple.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Oak
 pred_historical |>
@@ -1096,7 +1096,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1109,7 +1109,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Oak historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1118,7 +1118,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_oak.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Pine
 pred_historical |>
@@ -1128,7 +1128,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1141,7 +1141,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Pine') +
+  ggplot2::ggtitle('Pine historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1150,7 +1150,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_pine.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Spruce
 pred_historical |>
@@ -1160,7 +1160,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1173,7 +1173,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Spruce') +
+  ggplot2::ggtitle('Spruce historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1182,7 +1182,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_spruce.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Tamarack
 pred_historical |>
@@ -1192,7 +1192,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1205,7 +1205,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Tamarack') +
+  ggplot2::ggtitle('Tamarack historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1214,7 +1214,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_tamarack.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Walnut
 pred_historical |>
@@ -1224,7 +1224,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1237,7 +1237,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Walnut') +
+  ggplot2::ggtitle('Walnut historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1246,7 +1246,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_walnut.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Other hardwood
 pred_historical |>
@@ -1256,7 +1256,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1269,7 +1269,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Other hardwood taxa') +
+  ggplot2::ggtitle('Other hardwood taxa historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1278,7 +1278,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_oh.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Black gum/sweet gum
 pred_historical |>
@@ -1288,7 +1288,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1301,7 +1301,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Black gum/sweet gum') +
+  ggplot2::ggtitle('Black gum/sweet gum historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1310,7 +1310,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_gum.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Cedar/juniper
 pred_historical |>
@@ -1320,7 +1320,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1333,7 +1333,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cedar/juniper') +
+  ggplot2::ggtitle('Cedar/juniper historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1342,7 +1342,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_cedar.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Poplar/tulip poplar
 pred_historical |>
@@ -1352,7 +1352,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -1365,7 +1365,7 @@ pred_historical |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Poplar/tulip poplar') +
+  ggplot2::ggtitle('Poplar/tulip poplar historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -1374,7 +1374,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred_space_facets_poplar.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 4. Plot historical predicted versus observed ####
 
@@ -1915,7 +1915,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ash, y = pred)) +
@@ -1930,7 +1930,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Ash historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -1940,7 +1940,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_ash.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Basswood
 pred_historical |>
@@ -1950,7 +1950,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Basswood, y = pred)) +
@@ -1965,7 +1965,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Basswood') +
+  ggplot2::ggtitle('Basswood historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -1975,7 +1975,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_basswood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Beech
 pred_historical |>
@@ -1985,7 +1985,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Beech, y = pred)) +
@@ -2000,7 +2000,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Beech') +
+  ggplot2::ggtitle('Beech historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2010,7 +2010,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_beech.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Birch
 pred_historical |>
@@ -2020,7 +2020,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Birch, y = pred)) +
@@ -2035,7 +2035,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Birch') +
+  ggplot2::ggtitle('Birch historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2045,7 +2045,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_birch.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Cherry
 pred_historical |>
@@ -2055,7 +2055,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Cherry, y = pred)) +
@@ -2070,7 +2070,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Cherry') +
+  ggplot2::ggtitle('Cherry historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2080,7 +2080,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_cherry.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Dogwood
 pred_historical |>
@@ -2090,7 +2090,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Dogwood, y = pred)) +
@@ -2105,7 +2105,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Dogwood') +
+  ggplot2::ggtitle('Dogwood historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2115,7 +2115,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_dogwood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Elm
 pred_historical |>
@@ -2125,7 +2125,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Elm, y = pred)) +
@@ -2140,7 +2140,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Elm') +
+  ggplot2::ggtitle('Elm historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2150,7 +2150,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_elm.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Fir
 pred_historical |>
@@ -2160,7 +2160,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Fir, y = pred)) +
@@ -2175,7 +2175,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Fir') +
+  ggplot2::ggtitle('Fir historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2185,7 +2185,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_fir.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Hemlock
 pred_historical |>
@@ -2195,7 +2195,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hemlock, y = pred)) +
@@ -2210,7 +2210,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Hemlock') +
+  ggplot2::ggtitle('Hemlock historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2220,7 +2220,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_hemlock.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Hickory
 pred_historical |>
@@ -2230,7 +2230,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hickory, y = pred)) +
@@ -2245,7 +2245,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Hickory') +
+  ggplot2::ggtitle('Hickory historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2255,7 +2255,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_hickory.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Ironwood
 pred_historical |>
@@ -2265,7 +2265,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ironwood, y = pred)) +
@@ -2280,7 +2280,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Ironwood') +
+  ggplot2::ggtitle('Ironwood historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2290,7 +2290,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_ironwood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Maple
 pred_historical |>
@@ -2300,7 +2300,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Maple, y = pred)) +
@@ -2315,7 +2315,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Maple') +
+  ggplot2::ggtitle('Maple historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2325,7 +2325,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_maple.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Oak
 pred_historical |>
@@ -2335,7 +2335,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Oak, y = pred)) +
@@ -2350,7 +2350,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Oak historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2360,7 +2360,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_oak.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Pine
 pred_historical |>
@@ -2370,7 +2370,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Pine, y = pred)) +
@@ -2385,7 +2385,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Pine') +
+  ggplot2::ggtitle('Pine historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2395,7 +2395,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_pine.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Spruce
 pred_historical |>
@@ -2405,7 +2405,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Spruce, y = pred)) +
@@ -2420,7 +2420,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Spruce') +
+  ggplot2::ggtitle('Spruce historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2430,7 +2430,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_spruce.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Tamarack
 pred_historical |>
@@ -2440,7 +2440,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Tamarack, y = pred)) +
@@ -2455,7 +2455,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Tamarack') +
+  ggplot2::ggtitle('Tamarack historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2465,7 +2465,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_tamarack.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Walnut
 pred_historical |>
@@ -2475,7 +2475,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Walnut, y = pred)) +
@@ -2490,7 +2490,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Walnut') +
+  ggplot2::ggtitle('Walnut historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2500,7 +2500,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_walnut.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Other hardwood
 pred_historical |>
@@ -2510,7 +2510,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = oh, y = pred)) +
@@ -2525,7 +2525,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Other hardwood taxa') +
+  ggplot2::ggtitle('Other hardwood taxa historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2535,7 +2535,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_oh.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Black gum/sweet gum
 pred_historical |>
@@ -2545,7 +2545,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = gum, y = pred)) +
@@ -2560,7 +2560,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Black gum/sweet gum') +
+  ggplot2::ggtitle('Black gum/sweet gum historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2570,7 +2570,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_gum.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Cedar/juniper
 pred_historical |>
@@ -2580,7 +2580,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = cedar, y = pred)) +
@@ -2595,7 +2595,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Cedar/juniper') +
+  ggplot2::ggtitle('Cedar/juniper historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2605,7 +2605,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_cedar.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Poplar/tulip poplar
 pred_historical |>
@@ -2615,7 +2615,7 @@ pred_historical |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = poplar, y = pred)) +
@@ -2630,7 +2630,7 @@ pred_historical |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Poplar/tulip poplar') +
+  ggplot2::ggtitle('Poplar/tulip poplar historical predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -2640,7 +2640,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_predvobs_facets_poplar.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 ## Plot observed - predicted over space for each taxon for primary model
 ## Shows spatial distribution of model error
@@ -3035,7 +3035,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3045,7 +3045,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Ash historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3054,7 +3054,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_ash.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Basswood
 pred_historical |>
@@ -3064,7 +3064,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3074,7 +3074,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Basswood') +
+  ggplot2::ggtitle('Basswood historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3083,7 +3083,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_basswood.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Beech
 pred_historical |>
@@ -3093,7 +3093,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3103,7 +3103,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Beech') +
+  ggplot2::ggtitle('Beech historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3112,7 +3112,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_beech.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Birch
 pred_historical |>
@@ -3122,7 +3122,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3132,7 +3132,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Birch') +
+  ggplot2::ggtitle('Birch historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3141,7 +3141,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_birch.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cherry
 pred_historical |>
@@ -3151,7 +3151,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3161,7 +3161,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cherry') +
+  ggplot2::ggtitle('Cherry historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3170,7 +3170,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_cherry.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Dogwood
 pred_historical |>
@@ -3180,7 +3180,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3190,7 +3190,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Dogwood') +
+  ggplot2::ggtitle('Dogwood historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3199,7 +3199,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_dogwood.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Elm
 pred_historical |>
@@ -3209,7 +3209,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3219,7 +3219,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Elm') +
+  ggplot2::ggtitle('Elm historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3228,7 +3228,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_elm.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Fir
 pred_historical |>
@@ -3238,7 +3238,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3248,7 +3248,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Fir') +
+  ggplot2::ggtitle('Fir historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3257,7 +3257,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_fir.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Hemlock
 pred_historical |>
@@ -3267,7 +3267,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3277,7 +3277,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hemlock') +
+  ggplot2::ggtitle('Hemlock historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3286,7 +3286,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_hemlock.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Hickory
 pred_historical |>
@@ -3296,7 +3296,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3306,7 +3306,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hickory') +
+  ggplot2::ggtitle('Hickory historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3315,7 +3315,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_hickory.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Ironwood
 pred_historical |>
@@ -3325,7 +3325,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3335,7 +3335,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ironwood') +
+  ggplot2::ggtitle('Ironwood historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3344,7 +3344,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_ironwood.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Maple
 pred_historical |>
@@ -3354,7 +3354,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3364,7 +3364,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Maple') +
+  ggplot2::ggtitle('Maple historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3373,7 +3373,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_maple.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Oak
 pred_historical |>
@@ -3383,7 +3383,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3393,7 +3393,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Oak historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3402,7 +3402,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_oak.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Pine
 pred_historical |>
@@ -3412,7 +3412,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3422,7 +3422,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Pine') +
+  ggplot2::ggtitle('Pine historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3431,7 +3431,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_pine.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Spruce
 pred_historical |>
@@ -3441,7 +3441,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3451,7 +3451,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Spruce') +
+  ggplot2::ggtitle('Spruce historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3460,7 +3460,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_spruce.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Tamarack
 pred_historical |>
@@ -3470,7 +3470,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3480,7 +3480,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Tamarack') +
+  ggplot2::ggtitle('Tamarack historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3489,7 +3489,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_tamarack.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Walnut
 pred_historical |>
@@ -3499,7 +3499,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3509,7 +3509,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Walnut') +
+  ggplot2::ggtitle('Walnut historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3518,7 +3518,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_walnut.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Other hardwood
 pred_historical |>
@@ -3528,7 +3528,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3538,7 +3538,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Other hardwood taxa') +
+  ggplot2::ggtitle('Other hardwood taxa historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3547,7 +3547,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_oh.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Black gum/sweet gum
 pred_historical |>
@@ -3557,7 +3557,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3567,7 +3567,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Black gum/sweet gum') +
+  ggplot2::ggtitle('Black gum/sweet gum historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3576,7 +3576,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_gum.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cedar/juniper
 pred_historical |>
@@ -3586,7 +3586,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3596,7 +3596,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cedar/juniper') +
+  ggplot2::ggtitle('Cedar/juniper historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3605,7 +3605,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_cedar.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Poplar/tulip poplar
 pred_historical |>
@@ -3615,7 +3615,7 @@ pred_historical |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -3625,7 +3625,7 @@ pred_historical |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Poplar/tulip poplar') +
+  ggplot2::ggtitle('Poplar/tulip poplar historical predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -3634,7 +3634,7 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2h_pred-obs_facets_poplar.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 #### 5. Calculate historical r ####
 
@@ -4492,7 +4492,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4505,7 +4505,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Ash modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4514,7 +4514,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_ash.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Basswood
 pred_modern |>
@@ -4524,7 +4524,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4537,7 +4537,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Basswood') +
+  ggplot2::ggtitle('Basswood modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4546,7 +4546,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_basswood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Beech
 pred_modern |>
@@ -4556,7 +4556,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4569,7 +4569,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Beech') +
+  ggplot2::ggtitle('Beech modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4578,7 +4578,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_beech.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Birch
 pred_modern |>
@@ -4588,7 +4588,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4601,7 +4601,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Birch') +
+  ggplot2::ggtitle('Birch modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4610,7 +4610,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_birch.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Cherry
 pred_modern |>
@@ -4620,7 +4620,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4633,7 +4633,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cherry') +
+  ggplot2::ggtitle('Cherry modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4642,7 +4642,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_cherry.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Dogwood
 pred_modern |>
@@ -4652,7 +4652,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4665,7 +4665,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Dogwood') +
+  ggplot2::ggtitle('Dogwood modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4674,7 +4674,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_dogwood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Elm
 pred_modern |>
@@ -4684,7 +4684,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4697,7 +4697,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Elm') +
+  ggplot2::ggtitle('Elm modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4706,7 +4706,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_elm.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Fir
 pred_modern |>
@@ -4716,7 +4716,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4729,7 +4729,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Fir') +
+  ggplot2::ggtitle('Fir modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4738,7 +4738,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_fir.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Hemlock
 pred_modern |>
@@ -4748,7 +4748,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4761,7 +4761,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hemlock') +
+  ggplot2::ggtitle('Hemlock modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4770,7 +4770,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_hemlock.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Hickory
 pred_modern |>
@@ -4780,7 +4780,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4793,7 +4793,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hickory') +
+  ggplot2::ggtitle('Hickory modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4802,7 +4802,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_hickory.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Ironwood
 pred_modern |>
@@ -4812,7 +4812,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4825,7 +4825,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ironwood') +
+  ggplot2::ggtitle('Ironwood modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4834,7 +4834,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_ironwood.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Maple
 pred_modern |>
@@ -4844,7 +4844,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4857,7 +4857,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Maple') +
+  ggplot2::ggtitle('Maple modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4866,7 +4866,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_maple.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Oak
 pred_modern |>
@@ -4876,7 +4876,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4889,7 +4889,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Oak modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4898,7 +4898,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_oak.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Pine
 pred_modern |>
@@ -4908,7 +4908,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4921,7 +4921,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Pine') +
+  ggplot2::ggtitle('Pine modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4930,7 +4930,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_pine.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Spruce
 pred_modern |>
@@ -4940,7 +4940,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4953,7 +4953,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Spruce') +
+  ggplot2::ggtitle('Spruce modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4962,7 +4962,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_spruce.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Tamarack
 pred_modern |>
@@ -4972,7 +4972,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -4985,7 +4985,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Tamarack') +
+  ggplot2::ggtitle('Tamarack modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -4994,7 +4994,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_tamarack.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Walnut
 pred_modern |>
@@ -5004,7 +5004,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -5017,7 +5017,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Walnut') +
+  ggplot2::ggtitle('Walnut modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -5026,7 +5026,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_walnut.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Other hardwood
 pred_modern |>
@@ -5036,7 +5036,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -5049,7 +5049,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Other hardwood taxa') +
+  ggplot2::ggtitle('Other hardwood taxa modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -5058,7 +5058,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_oh.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Black gum/sweet gum
 pred_modern |>
@@ -5068,7 +5068,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -5081,7 +5081,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Black gum/sweet gum') +
+  ggplot2::ggtitle('Black gum/sweet gum modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -5090,7 +5090,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_gum.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Cedar/juniper
 pred_modern |>
@@ -5100,7 +5100,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -5113,7 +5113,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cedar/juniper') +
+  ggplot2::ggtitle('Cedar/juniper modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -5122,7 +5122,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_cedar.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 # Poplar/tulip poplar
 pred_modern |>
@@ -5132,7 +5132,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncovariates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -5145,7 +5145,7 @@ pred_modern |>
                                 transform = 'sqrt') +
   ggplot2::facet_wrap(~fit) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Poplar/tulip poplar') +
+  ggplot2::ggtitle('Poplar/tulip poplar modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -5154,7 +5154,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred_space_facets_poplar.png',
-                height = 20, width = 20, units = 'cm')
+                height = 15, width = 15, units = 'cm')
 
 #### 9. Plot modern predicted vs observed ####
 
@@ -5695,7 +5695,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ash, y = pred)) +
@@ -5710,7 +5710,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Ash modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5720,7 +5720,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_ash.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Basswood
 pred_modern |>
@@ -5730,7 +5730,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Basswood, y = pred)) +
@@ -5745,7 +5745,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Basswood') +
+  ggplot2::ggtitle('Basswood modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5755,7 +5755,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_basswood.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Beech
 pred_modern |>
@@ -5765,7 +5765,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Beech, y = pred)) +
@@ -5780,7 +5780,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Beech') +
+  ggplot2::ggtitle('Beech modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5790,7 +5790,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_beech.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Birch
 pred_modern |>
@@ -5800,7 +5800,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Birch, y = pred)) +
@@ -5815,7 +5815,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Birch') +
+  ggplot2::ggtitle('Birch modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5825,7 +5825,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_birch.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cherry
 pred_modern |>
@@ -5835,7 +5835,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Cherry, y = pred)) +
@@ -5850,7 +5850,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Cherry') +
+  ggplot2::ggtitle('Cherry modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5860,7 +5860,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_cherry.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Dogwood
 pred_modern |>
@@ -5870,7 +5870,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Dogwood, y = pred)) +
@@ -5885,7 +5885,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Dogwood') +
+  ggplot2::ggtitle('Dogwood modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5895,7 +5895,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_dogwood.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Elm
 pred_modern |>
@@ -5905,7 +5905,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Elm, y = pred)) +
@@ -5920,7 +5920,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Elm modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5930,7 +5930,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_elm.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Fir
 pred_modern |>
@@ -5940,7 +5940,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Fir, y = pred)) +
@@ -5955,7 +5955,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Fir') +
+  ggplot2::ggtitle('Fir modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -5965,7 +5965,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_fir.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Hemlock
 pred_modern |>
@@ -5975,7 +5975,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hemlock, y = pred)) +
@@ -5990,7 +5990,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Hemlock') +
+  ggplot2::ggtitle('Hemlock modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6000,7 +6000,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_hemlock.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Hickory
 pred_modern |>
@@ -6010,7 +6010,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Hickory, y = pred)) +
@@ -6025,7 +6025,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Hickory') +
+  ggplot2::ggtitle('Hickory modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6035,7 +6035,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_hickory.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Ironwood
 pred_modern |>
@@ -6045,7 +6045,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Ironwood, y = pred)) +
@@ -6060,7 +6060,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Ironwood') +
+  ggplot2::ggtitle('Ironwood modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6070,7 +6070,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_ironwood.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Maple
 pred_modern |>
@@ -6080,7 +6080,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Maple, y = pred)) +
@@ -6095,7 +6095,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Maple') +
+  ggplot2::ggtitle('Maple modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6105,7 +6105,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_maple.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Oak
 pred_modern |>
@@ -6115,7 +6115,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Oak, y = pred)) +
@@ -6130,7 +6130,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Oak modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6140,7 +6140,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_oak.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Pine
 pred_modern |>
@@ -6150,7 +6150,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Pine, y = pred)) +
@@ -6165,7 +6165,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Pine') +
+  ggplot2::ggtitle('Pine modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6175,7 +6175,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_pine.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Spruce
 pred_modern |>
@@ -6185,7 +6185,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Spruce, y = pred)) +
@@ -6200,7 +6200,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Spruce') +
+  ggplot2::ggtitle('Spruce modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6210,7 +6210,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_spruce.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Tamarack
 pred_modern |>
@@ -6220,7 +6220,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Tamarack, y = pred)) +
@@ -6235,7 +6235,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Tamarack') +
+  ggplot2::ggtitle('Tamarack modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6245,7 +6245,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_tamarack.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Walnut
 pred_modern |>
@@ -6255,7 +6255,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = Walnut, y = pred)) +
@@ -6270,7 +6270,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Walnut') +
+  ggplot2::ggtitle('Walnut modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6280,7 +6280,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_walnut.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Other hardwood
 pred_modern |>
@@ -6290,7 +6290,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = oh, y = pred)) +
@@ -6305,7 +6305,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Other hardwood taxa') +
+  ggplot2::ggtitle('Other hardwood taxa modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6315,7 +6315,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_oh.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Black gum/sweet gum
 pred_modern |>
@@ -6325,7 +6325,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = gum, y = pred)) +
@@ -6340,7 +6340,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Black gum/sweet gum') +
+  ggplot2::ggtitle('Black gum/sweet gum modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6350,7 +6350,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_gum.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cedar/juniper
 pred_modern |>
@@ -6360,7 +6360,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = cedar, y = pred)) +
@@ -6375,7 +6375,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Cedar/juniper') +
+  ggplot2::ggtitle('Cedar/juniper modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6385,7 +6385,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_cedar.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Poplar/tulip poplar
 pred_modern |>
@@ -6395,7 +6395,7 @@ pred_modern |>
                       values_to = 'pred') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred1', 'CLimate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = poplar, y = pred)) +
@@ -6410,7 +6410,7 @@ pred_modern |>
   ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
   tune::coord_obs_pred() +
   ggplot2::theme_minimal() +
-  ggplot2::ggtitle('Poplar/tulip poplar') +
+  ggplot2::ggtitle('Poplar/tulip poplar modern predictions') +
   ggplot2::theme(axis.title = ggplot2::element_text(size = 10),
                  axis.text = ggplot2::element_text(size = 8),
                  legend.text = ggplot2::element_text(size = 10),
@@ -6420,7 +6420,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_predvobs_facets_poplar.png',
-                width = 20, height = 20, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 ## Plot observed - predicted over space for each taxon for primary model
 ## Shows spatial distribution of model error
@@ -6834,7 +6834,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6844,7 +6844,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ash') +
+  ggplot2::ggtitle('Ash modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -6853,7 +6853,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_ash.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Basswood
 pred_modern |>
@@ -6863,7 +6863,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6873,7 +6873,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Basswood') +
+  ggplot2::ggtitle('Basswood modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -6882,7 +6882,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_basswood.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Beech
 pred_modern |>
@@ -6892,7 +6892,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6902,7 +6902,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Beech') +
+  ggplot2::ggtitle('Beech modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -6911,7 +6911,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_beech.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Birch
 pred_modern |>
@@ -6921,7 +6921,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6931,7 +6931,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Birch') +
+  ggplot2::ggtitle('Birch modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -6940,7 +6940,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_birch.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cherry
 pred_modern |>
@@ -6950,7 +6950,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6960,7 +6960,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cherry') +
+  ggplot2::ggtitle('Cherry modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -6969,7 +6969,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_cherry.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Dogwood
 pred_modern |>
@@ -6979,7 +6979,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -6989,7 +6989,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Dogwood') +
+  ggplot2::ggtitle('Dogwood modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -6998,7 +6998,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_dogwood.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Elm
 pred_modern |>
@@ -7008,7 +7008,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7018,7 +7018,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Elm') +
+  ggplot2::ggtitle('Elm modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7027,7 +7027,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_elm.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Fir
 pred_modern |>
@@ -7037,7 +7037,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7047,7 +7047,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Fir') +
+  ggplot2::ggtitle('Fir modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7056,7 +7056,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_fir.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Hemlock
 pred_modern |>
@@ -7066,7 +7066,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7076,7 +7076,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hemlock') +
+  ggplot2::ggtitle('Hemlock modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7085,7 +7085,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_hemlock.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Hickory
 pred_modern |>
@@ -7095,7 +7095,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7105,7 +7105,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Hickory') +
+  ggplot2::ggtitle('Hickory modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7114,7 +7114,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_hickory.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Ironwood
 pred_modern |>
@@ -7124,7 +7124,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7134,7 +7134,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Ironwood') +
+  ggplot2::ggtitle('Ironwood modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7143,7 +7143,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_ironwood.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Maple
 pred_modern |>
@@ -7153,7 +7153,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7163,7 +7163,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Maple') +
+  ggplot2::ggtitle('Maple modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7172,7 +7172,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_maple.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Oak
 pred_modern |>
@@ -7182,7 +7182,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7192,7 +7192,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Oak modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7201,7 +7201,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_oak.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Pine
 pred_modern |>
@@ -7211,7 +7211,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7221,7 +7221,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Pine') +
+  ggplot2::ggtitle('Pine modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7230,7 +7230,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_pine.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Spruce
 pred_modern |>
@@ -7240,7 +7240,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7250,7 +7250,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Spruce') +
+  ggplot2::ggtitle('Spruce modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7259,7 +7259,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_spruce.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Tamarack
 pred_modern |>
@@ -7269,7 +7269,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7279,7 +7279,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Tamarack') +
+  ggplot2::ggtitle('Tamarack modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7288,7 +7288,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_tamarack.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Walnut
 pred_modern |>
@@ -7298,7 +7298,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7308,7 +7308,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Walnut') +
+  ggplot2::ggtitle('Walnut modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7317,7 +7317,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_walnut.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Other hardwood
 pred_modern |>
@@ -7327,7 +7327,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7337,7 +7337,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Other hardwood taxa') +
+  ggplot2::ggtitle('Other hardwood taxa modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7346,7 +7346,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_oh.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Black gum/sweet gum
 pred_modern |>
@@ -7356,7 +7356,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7366,7 +7366,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Black gum/sweet gum') +
+  ggplot2::ggtitle('Black gum/sweet gum modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7375,7 +7375,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_gum.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Cedar/juniper
 pred_modern |>
@@ -7385,7 +7385,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7395,7 +7395,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Cedar/juniper') +
+  ggplot2::ggtitle('Cedar/juniper modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7404,7 +7404,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_cedar.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 # Poplar/tulip poplar
 pred_modern |>
@@ -7414,7 +7414,7 @@ pred_modern |>
                       values_to = 'diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -7424,7 +7424,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Poplar/tulip poplar') +
+  ggplot2::ggtitle('Poplar/tulip poplar modern predictions') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  strip.text = ggplot2::element_text(size = 10),
@@ -7433,7 +7433,7 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/gjam/H/abundance/pred/h2m_pred-obs_facets_poplar.png',
-                width = 10, height = 10, units = 'cm')
+                width = 15, height = 15, units = 'cm')
 
 #### 10. Calculate modern r ####
 
@@ -8294,7 +8294,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ash_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ash_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ash_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ash_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8325,7 +8325,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Basswood_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Basswood_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Basswood_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Basswood_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8356,7 +8356,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Beech_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Beech_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Beech_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Beech_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8387,7 +8387,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Birch_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Birch_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Birch_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Birch_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8418,7 +8418,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Cherry_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Cherry_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Cherry_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Cherry_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8449,7 +8449,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Dogwood_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Dogwood_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Dogwood_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Dogwood_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8480,7 +8480,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Elm_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Elm_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Elm_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Elm_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8511,7 +8511,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Fir_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Fir_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Fir_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Fir_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8542,7 +8542,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hemlock_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hemlock_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hemlock_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hemlock_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8573,7 +8573,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Hickory_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Hickory_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Hickory_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Hickory_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8604,7 +8604,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Ironwood_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Ironwood_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Ironwood_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Ironwood_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8635,7 +8635,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Maple_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Maple_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Maple_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Maple_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8666,7 +8666,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Oak_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Oak_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Oak_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Oak_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8697,7 +8697,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Pine_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Pine_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Pine_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Pine_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8728,7 +8728,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Spruce_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Spruce_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Spruce_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Spruce_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8759,7 +8759,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Tamarack_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Tamarack_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Tamarack_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Tamarack_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8790,7 +8790,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'Walnut_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'Walnut_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'Walnut_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'Walnut_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8821,7 +8821,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'oh_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'oh_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'oh_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'oh_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'oh_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8852,7 +8852,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'gum_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'gum_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'gum_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'gum_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'gum_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8883,7 +8883,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'cedar_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'cedar_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'cedar_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'cedar_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -8914,7 +8914,7 @@ preds |>
                       names_to = 'fit', values_to = 'pred_diff') |>
   dplyr::mutate(fit = dplyr::if_else(fit == 'poplar_pred_diff1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred_diff2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'poplar_pred_diff3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'poplar_pred_diff3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'poplar_pred_diff4', 'Climate + soil +\ncoordinates', fit)) |>
   ggplot2::ggplot() +
   ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
@@ -10692,7 +10692,7 @@ both_cors |>
                 period = sub(pattern = '.*_', replacement = '', x = fit_period),
                 fit = dplyr::if_else(fit == 'corr1', 'Climate + soil', fit),
                 fit = dplyr::if_else(fit == 'corr2', 'Climate only', fit),
-                fit = dplyr::if_else(fit == 'corr3', 'Reduced covariates', fit),
+                fit = dplyr::if_else(fit == 'corr3', 'Uncorrelated covariates', fit),
                 fit = dplyr::if_else(fit == 'corr4', 'Climate + soil +\ncoordinates', fit),
                 period = dplyr::if_else(period == 'historical', 'Historical', 'Modern')) |>
   ggplot2::ggplot() +
