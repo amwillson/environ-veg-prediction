@@ -382,3 +382,73 @@ Correct (fia) data used for predictions. Everything suns successfully and looks 
 ## 6.14 Abundance Figures
 
 Historical to historical plots created successfully and look reasonable. Correlations for h2h created successfully and seem to vary widely. A chart seems like an inefficient way to portray this info but I don't think this is in going in the text of the paper so it should be OK. Historic to modern predictions created successfully and look reasonable. Comparison plots also look good. 
+
+## 7.1 Fit Density All Covariates
+
+First GAM fit successfully and the summary output seems reasonable. 
+Second GAM fit successfully and summary seems reasonable. 
+The partial effects plots also seem ok. 
+
+## 7.2 Fit density climate covariates
+
+Model fitting and plots look fine. File/saving structure looks reasonable. 
+
+## 7.3 Fit density reduced covariates
+
+I got a couple diverging chains from the first gam (option 1) but only 11/4000 so I doubt that will affect the result much. Option 3 had 22/4000 chains diverge but again, pretty low proportion of chains. Option 4 had 11/4000 diverge. Option 5 had 61/4000 samples, and options 6 only has 2/4000 diverge. Each of these is less than 2% of chains and probably do not have a huge impact on the results but I am interested to see what the final fit will be. 
+I also got option 3 as the best option from CV and it had a relatively low percent of diverging chains. 3b had no diverging chains but had a worse CV than option 3. 
+
+For the 4k models, each model fit correctly with no divergences and I also got that option 3 was the best. 
+
+Partial effect plots seem fine. 
+
+## 7.4 Fit density XY covariates
+
+Both models fit without any surprises and the partial effects plots look fine.
+
+## 7.5 Density Historical Predictions
+I got an error loading allcovar_4k.RData that is is an unknown type. I am going to re-run that model and re-save it to see if that helps. Having where each input was generated in the heading was very helpful for this. I redid that model and now it is loading correctly. That was probably just a weird one-off error but I will leave my comments about it in the code review for the sake of completeness. 
+
+Correct (pls) data used to make historical predictions for each model. No more issues with this script. 
+
+## 7.6 Density Modern Predictions
+
+Correct data used to make predictions. Outputs are stored in a reasonable location. Gam names (1-4) still are not descriptive but documentation on what is different between each gam is readily available. 
+
+## 7.7 Density Figures
+
+Plots look reasonable and are a meaningful representation of model output. All unit tests passed. 
+
+## 7.8 Fit abundance all covariates
+
+This model keeps giving me the error Error in chol.default(SS): the leading minot of order 3 (other times 1) is not positive. I have run it a couple times and it either causes that error with a 3 or a 1, or it causes the r session to terminate. This only happens on my computer and this model is not in the text of the paper so Alyssa sent me the output when she runs it and we are going to move forward.
+
+The rest of the code was completed successfully and looks reasonable. 
+
+## 7.9
+ 
+ This one gave me the same error but with order 14. Alyssa sent me an rdata file of the fit model and otherwise the plots look reasonable. 
+ 
+## 7.10 Fit abundance reduced covariates
+
+Same error with model fitting as 7.8. Alyssa sent me her rdata again and everything worked with that data. 
+
+## 7.11 Fit abundance xy covariates
+
+Same error but this time order 7. With Alyssa's data everything looks good. Plots look normal, comments are reasonable, and file structures match previous scripts.
+
+## 7.12 Abundance Historical Predictions
+
+Correct historical data used to make predictions. Sum-to-one unit checks all passed. Historical predictions made successfully. 
+
+## 7.13 Abundance Modern Predictions
+
+Correct modern data used for predictions. All data frames had sums of roughly one. Comments and saving paths look good. 
+
+## 7.14 Abundance Figures
+
+Historical - Row combination checks all passed. Fraction of total stems (historical) all look reasonable. Predicted vs. observed plots look like they have been made correctly. Spatial plots also look good. Correlations successfully calculated and reasonable. 
+
+Modern - Row combination checks all passed. Fractional density plots look good. There is a typo in all the faceted predicted vs. observed plots where the first L in climate + soil is also capitalized. The typo is only in the pred_modern ones from lines 5691-6424
+
+Both - Change in relative abundance plots were created successfully and look reasonable. Change in prediction accuracy plots were created successfully but it is challenging to make out changes in the faceted versions since the plots are small when faceted and so much of them is grey/white that you can't really make out where the blue or red parts are. Correlation bar-plots look good. 
