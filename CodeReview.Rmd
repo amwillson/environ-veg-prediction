@@ -425,6 +425,8 @@ This model keeps giving me the error Error in chol.default(SS): the leading mino
 
 The rest of the code was completed successfully and looks reasonable. 
 
+AW: I'm pretty sure this error typically arises when one of the categories in your proportional data is much different from the other proportions. This would make sense since most taxa have low abundance and a few taxa are much more abundant. I haven't run into this problem for this project, so I was very surprised by this issue arising here. Models continue to fit with no issues for me.
+
 ## 7.9
  
  This one gave me the same error but with order 14. Alyssa sent me an rdata file of the fit model and otherwise the plots look reasonable. 

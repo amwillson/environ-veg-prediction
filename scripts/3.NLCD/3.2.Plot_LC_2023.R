@@ -173,7 +173,6 @@ save(lc_2023,
 # Plot all land cover classes
 p1 <- lc_2023 |>
   ggplot2::ggplot() +
-  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend$Class,
@@ -237,7 +236,6 @@ lc_2023 |>
                              'Grassland/herbaceous',
                              'Woody wetlands')) |>
   ggplot2::ggplot() +
-  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend_sub$Class,

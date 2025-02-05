@@ -172,8 +172,8 @@ save(lc_1985,
 
 # Plot all land cover classes
 p1 <- lc_1985 |>
+  dplyr::mutate(Class = stringr::str_to_sentence(Class)) |>
   ggplot2::ggplot() +
-  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend$Class,
@@ -238,6 +238,7 @@ legend_sub <- dplyr::filter(legend,
 
 # Plot only land cover classes corresponding to our ecosystems of interest
 lc_1985 |>
+  dplyr::mutate(Class = stringr::str_to_sentence(Class)) |>
   dplyr::filter(Class %in% c('Deciduous forest',
                              'Evergreen forest',
                              'Mixed forest',
@@ -245,7 +246,6 @@ lc_1985 |>
                              'Grassland/herbaceous',
                              'Woody wetlands')) |>
   ggplot2::ggplot() +
-  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Class)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_manual(limits = legend_sub$Class,

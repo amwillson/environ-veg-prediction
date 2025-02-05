@@ -61,7 +61,8 @@ total_density_df |>
   ggplot2::scale_fill_distiller(name = 'stems/ha',
                                 palette = 'Greens',
                                 direction = 1,
-                                na.value = '#00000000') +
+                                na.value = '#00000000',
+                                limits = c(0, 750)) +
   ggplot2::ggtitle('Historical total stem density') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),

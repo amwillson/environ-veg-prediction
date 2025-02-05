@@ -804,7 +804,8 @@ stem_density_agg2 |>
   ggplot2::scale_fill_distiller(name = 'stems/ha',
                                 palette = 'Greens',
                                 direction = 1,
-                                na.value = '#00000000') +
+                                na.value = '#00000000',
+                                limits = c(0, 750)) +
   ggplot2::ggtitle('Modern total stem density') +
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
@@ -816,7 +817,7 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 height = 10, width = 10, units = 'cm')  
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/data/modern_total_stem_density.svg',
-                height = 10, width = 10, units = 'cm')
+                height = 12, width = 12, units = 'cm')
 
 # How close are they in total stem density?
 stem_density_agg_comp <- stem_density_agg |>
@@ -936,7 +937,114 @@ fractional_composition_agg_comp |>
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 16, hjust = 0.5, face = 'bold'))
 
-#### 15. Save ####
+#### 15. Smoothed total stem density ####
+
+# Load PLS data to extract grid
+load('data/intermediate/PLS/xydata.RData')
+
+# Prepare total stem density for interpolating
+stem_density_for_interpolating <- stem_density_agg2 |>
+  dplyr::select(-taxon, -stem_density) |>
+  dplyr::distinct() |>
+  dplyr::mutate(total_stem_density = dplyr::if_else(total_stem_density > 750, 750, total_stem_density))
+
+# Make simple features
+stem_density_sf <- sf::st_as_sf(stem_density_for_interpolating,
+                                coords = c('x', 'y'),
+                                crs = 'EPSG:3175')
+
+
+# Keep only the coordinate columns
+full_grid <- dplyr::select(xydata, x, y)
+
+# Make grid simple features
+full_grid_sf <- sf::st_as_sf(full_grid,
+                             coords = c('x', 'y'),
+                             crs = 'EPSG:3175')
+
+# Perform IDW interpolating using the paleon full grid
+idw_model <- gstat::idw(total_stem_density ~ 1, 
+                        stem_density_sf, 
+                        newdata = full_grid_sf)
+
+# Convert the interpolated result to a dataframe
+idw_df <- sfheaders::sf_to_df(idw_model, fill = TRUE)
+idw_df <- idw_df |>
+  dplyr::select(var1.pred, x, y) |>
+  dplyr::rename(total_stem_density = var1.pred)
+
+idw_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = total_stem_density)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(name = 'stems/ha',
+                                palette = 'Greens',
+                                direction = 1,
+                                na.value = '#00000000',
+                                limits = c(0, 750)) +
+  ggplot2::ggtitle('Modern total stem density') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_total_stem_density_interpolated.png',
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_total_stem_density_interpolated.svg',
+                height = 12, width = 12, units = 'cm')
+
+### Moving window averaging
+
+# Convert to simple features
+idw_sf <- sf::st_as_sf(idw_df,
+                       coords = c('x', 'y'),
+                       crs = 'EPSG:3175')
+
+# Define a neighborhood radius
+radius <- 16000
+
+# Calculate the moving window average
+idw_sf <- idw_sf |>
+  dplyr::mutate(
+    smoothed_stem_density = sapply(
+      sf::st_is_within_distance(idw_sf, dist = radius),
+      function(neighbors) mean(idw_sf$total_stem_density[neighbors], na.rm = TRUE)
+    )
+  )
+
+# Convert to dataframe
+smooth_df <- sfheaders::sf_to_df(idw_sf, fill = TRUE)
+
+# Plot
+smooth_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = smoothed_stem_density)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(name = 'stems/ha',
+                                palette = 'Greens',
+                                direction = 1,
+                                na.value = '#00000000',
+                                limits = c(0, 750)) +
+  ggplot2::ggtitle('Modern total stem density') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_total_stem_density_interpolated_smoothed.png',
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_total_stem_density_interpolated_smoothed.svg',
+                height = 12, width = 12, units = 'cm')
+
+#### 16. Save ####
 
 # Make cutoff at 750 stems/ha for each dataset
 stem_density_agg <- dplyr::mutate(stem_density_agg,
