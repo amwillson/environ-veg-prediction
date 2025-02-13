@@ -325,6 +325,28 @@ density_fcomp_df |>
   ggplot2::theme_void() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 16, hjust = 0.5, face = 'bold'))
 
+# Plot oak relative abundance
+density_fcomp_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Oak)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(limits = c(0, 1),
+                                name = 'Fraction total\nstems',
+                                na.value = '#00000000',
+                                palette = 'Blues',
+                                direction = 1) +
+  ggplot2::ggtitle('Historical oak relative abundance') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 8))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/historical_oak_abundance.svg',
+                height = 12, width = 12, units = 'cm')
+
 #### 4. Save ####
 
 save(density_fcomp_df,

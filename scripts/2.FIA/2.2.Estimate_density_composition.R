@@ -22,7 +22,9 @@
 ## 12. Average plots in each grid cell
 ## 13. Plot plot-level variables
 ## 14. Plot grid-level variables
-## 15. Save
+## 15. Smoothed total stem density
+## 16. Smoothed oak relative abundance
+## 17. Save
 
 ## Input: data/intermediate/FIA/combined_COND_PLOT_TREE_SPECIES.RData
 ## Contains all the tree and plot information necessary
@@ -1044,7 +1046,126 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/data/modern_total_stem_density_interpolated_smoothed.svg',
                 height = 12, width = 12, units = 'cm')
 
-#### 16. Save ####
+#### 16. Smoothed oak relative abundance ####
+
+# Prepare oak relative abundance for interpolating
+oak_abundance_for_interpolating <- fractional_composition_agg2 |>
+  dplyr::filter(taxon == 'Oak') |>
+  dplyr::select(-taxon, -stem_density, -total_stem_density) |>
+  dplyr::distinct()
+
+oak_abundance_for_interpolating |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = fcomp)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(name = 'Fraction total\nstems',
+                                palette = 'Blues',
+                                direction = 1,
+                                na.value = '#00000000',
+                                limits = c(0, 1)) +
+  ggplot2::ggtitle('Modern oak relative abundance') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_oak_relative_abundance.png',
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_oak_relative_abundance.svg',
+                height = 12, width = 12, units = 'cm')
+
+# Make simple features
+oak_abundance_sf <- sf::st_as_sf(oak_abundance_for_interpolating,
+                                 coords = c('x', 'y'),
+                                 crs = 'EPSG:3175')
+
+# Perform IDW interpolating using the paleon full grid
+idw_model <- gstat::idw(fcomp ~ 1,
+                        oak_abundance_sf,
+                        newdata = full_grid_sf)
+
+# Convert the interpolated result to a dataframe
+idw_df <- sfheaders::sf_to_df(idw_model, fill = TRUE)
+idw_df <- idw_df |>
+  dplyr::select(var1.pred, x, y) |>
+  dplyr::rename(relative_abundance = var1.pred)
+
+idw_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = relative_abundance)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(name = 'Fraction total\nstems',
+                                palette = 'Blues',
+                                direction = 1,
+                                na.value = '#00000000',
+                                limits = c(0, 1)) +
+  ggplot2::ggtitle('Modern oak relative abundance') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_oak_relative_abundance_interpolated.png',
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_oak_relative_abundance_interpolated.svg',
+                height = 12, width = 12, units = 'cm')
+
+### Moving window averaging
+
+# Convert to simple features
+idw_sf <- sf::st_as_sf(idw_df,
+                       coords = c('x', 'y'),
+                       crs = 'EPSG:3175')
+
+# Define a neighborhood radius
+radius <- 16000
+
+# Calculate the moving window average
+idw_sf <- idw_sf |>
+  dplyr::mutate(
+    smoothed_relative_abundance = sapply(
+      sf::st_is_within_distance(idw_sf, dist = radius),
+      function(neighbors) mean(idw_sf$relative_abundance[neighbors], na.rm = TRUE)
+    )
+  )
+
+# Convert to dataframe
+smooth_df <- sfheaders::sf_to_df(idw_sf, fill = TRUE)
+
+# Plot
+smooth_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = smoothed_relative_abundance)) +
+  ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
+  ggplot2::scale_fill_distiller(name = 'Fraction total\nstems',
+                                palette = 'Blues',
+                                direction = 1,
+                                na.value = '#00000000',
+                                limits = c(0, 1)) +
+  ggplot2::ggtitle('Modern oak relative abundance') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 12, hjust = 0.5),
+                 legend.title = ggplot2::element_text(size = 10),
+                 legend.text = ggplot2::element_text(size = 10))
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_oak_relative_abundance_interpolated_smoothed.png',
+                height = 10, width = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/data/modern_oak_relative_abundadncce_interpolated_smoothed.svg',
+                height = 12, width = 12, units = 'cm')
+
+#### 17. Save ####
 
 # Make cutoff at 750 stems/ha for each dataset
 stem_density_agg <- dplyr::mutate(stem_density_agg,

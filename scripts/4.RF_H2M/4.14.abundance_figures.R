@@ -2881,9 +2881,12 @@ pred_historical |>
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Oak_diff1)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
-                                limits = c(-1, 1)) +
+                                limits = c(-1, 1),
+                                low = scales::muted(red),
+                                high = scales::muted(blue),
+                                mid = 'white') +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Historical') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5))
@@ -2891,6 +2894,9 @@ pred_historical |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/abundance/pred/h2h_pred-obs_allcovar_oak.png',
+                width = 10, height = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/rf/H/abundance/pred/h2h_pred-obs_allcovar_oak.svg',
                 width = 10, height = 10, units = 'cm')
 
 # Pine
@@ -6676,7 +6682,7 @@ pred_modern |>
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1)) +
   ggplot2::theme_void() +
-  ggplot2::ggtitle('Oak') +
+  ggplot2::ggtitle('Modern') +
   ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                  legend.text = ggplot2::element_text(size = 8),
                  plot.title = ggplot2::element_text(size = 12, hjust = 0.5))
@@ -6684,6 +6690,9 @@ pred_modern |>
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
                 filename = 'figures/rf/H/abundance/pred/h2m_pred-obs_allcovar_oak.png',
+                width = 10, height = 10, units = 'cm')
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/rf/H/abundance/pred/h2m_pred-obs_allcovar_oak.svg',
                 width = 10, height = 10, units = 'cm')
 
 # Pine
