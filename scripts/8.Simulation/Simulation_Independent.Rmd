@@ -1,0 +1,858 @@
+---
+title: "Independent environmental & ecosystem change"
+author: "Alyssa Willson"
+date: "2025-12-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+set.seed(2)
+```
+
+
+# Purpose
+
+The purpose of this workflow is to provide a simple demonstration of the reason why models like species distribution models fail to predict change in ecosystems when alternate ecosystem states (AESs) exist. The switch from one state to another is not a function of climate alone, but a function of feedback regimes that change through spatially contagious ecological processes and of initial conditions. The simulations show that even if the fit between environmental and response variables lead to accurate prediction in one time period, this does not necessarily mean that environmental conditions will be good predictors of the response variable at another time step. 
+
+The general workflow serves as a set of hypotheses against which we will evaluate the predictive power of species distribution models fit to the environment vegetation relationship of real data (Upper Midwest USA [UMW] stem density and community composition) at one time period and predicting another time period. This particular iteration shows one extreme: environmental conditions and the response variable are completely independent and only appear to be related to one another. We know our empirical system is not exactly like this. In the UMW, the distribution of savanna and forest ecosystem states is driven by a combination of environmental gradients and feedbacks maintaining distinct states in similar environmental conditions. Therefore, this hypothetical simulation should be interpreted as one extreme.
+
+# Approach
+
+## Initial conditions
+
+I simulate a 1D vector of initial ecosystem states. The ecosystem state is binary, representing distinct alternate states. I refer to the alternate states as savanna and forest, but they can be any AESs. I define the initial conditions such that across 1D space, savanna is adjacent to savanna and forest is adjacent to forest. They meet in the middle, comparable to an ecotone.
+
+```{r initial conditions, echo=FALSE}
+# Number of locations in 1D space
+nloc <- 100
+
+# Number of time steps
+ntime <- 150
+
+# Create 0s and 1s
+binary_response <- c(rep(0, times = nloc/2),
+                     rep(1, times = nloc/2))
+```
+
+```{r, echo=FALSE}
+# Plot for clarity
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = factor(binary_response)),
+                     color = 'black') +
+  ggplot2::scale_fill_manual(limits = factor(c(0, 1)),
+                             values = c('#94bd46', '#1a5200'),
+                             name = 'State',
+                             labels = c('Savanna', 'Forest')) +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90))
+```
+
+Now that I have the initial ecosystem state, I create the initial continuous response variable. The continuous response variable is a proxy for ecosystem state and is bimodal, with modes indicating different AESs. In this case, I refer to this variable as stem density, with low stem density indicative of the savanna ecosystem state and high stem density indicative of the forest ecosystem state. I define the distributions of stem density values based on observations of stem density in the savanna and forest ecosystems of the UMW.
+
+```{r initial stem density, echo=FALSE}
+# Generate continuous response variable from binary
+cont_response <- c(runif(n = nloc/2, min = 1, max = 47),
+                   rnorm(n = nloc/2, mean = 250, sd = 75))
+
+# Plot
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = cont_response),
+                     color = 'black') +
+  ggplot2::scale_fill_distiller(name = 'stems/ha',
+                                palette = 'Greens',
+                                direction = 1) +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90))
+
+# Density plot showing bimodality
+ggplot2::ggplot() +
+  ggplot2::geom_density(ggplot2::aes(x = cont_response)) +
+  ggplot2::xlab('Stem density') +
+  ggplot2::theme_minimal()
+```
+
+Now, I simulate environmental variables that would explain the distribution of ecosystem states/stem density at the first time step. At this first time step, I've chosen to simulate savanna in left cells and forest in right cells. Therefore, I will make a couple variables that follow left-to-right gradients. The first few (x1-x3) variables show a smooth left-to-right gradient with various amounts of random noise added. The last two variables (x4 and x5) are made to show a jump between the savanna and forest states (low values in one state and high values in the other) instead of a smooth gradient. These variables demonstrate that environmental conditions that could support either ecosystem state can show similar patterns in one time step. These types of variables are often chosen to explain the distribution of ecosystems/vegetation across space and used to make predictions of how ecosystems will change with climate change. In reality, the environmental conditions could support either ecosystem state.
+
+```{r initial environment, echo=FALSE}
+# Gradient from 0 to 1
+base_var <- seq(from = 0, to = 1, length.out = nloc)
+
+# Add a small amount of random noise
+var1 <- base_var + rnorm(n = length(base_var),
+                         mean = 0,
+                         sd = 0.15)
+var2 <- rev(base_var) + rnorm(n = length(base_var),
+                              mean = 0,
+                              sd = 0.25)
+var3 <- exp(base_var) + rnorm(n = length(base_var),
+                         mean = 0,
+                         sd = 0.25)
+
+# A more dramatic difference between savanna and forest
+base_var2 <- c(rep(0, times = nloc/2), rep(1, times = nloc/2))
+var4 <- base_var2 + rnorm(n = length(base_var2),
+                          mean = 0,
+                          sd = 0.25)
+var5 <- rev(base_var2) + rnorm(n = length(base_var2),
+                               mean = 0,
+                               sd = 0.5)
+
+# Plot initial values
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = var1),
+                     color = 'black') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 1') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Blues') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = var1),
+                     color = 'black') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 2') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Greens') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = var3),
+                     color = 'black') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 3') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Purples') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = var4),
+                     color = 'black') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 4') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Reds') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
+                                  y = 1,
+                                  fill = var5),
+                     color = 'black') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 5') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Oranges') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+```
+
+## Process evolution
+
+Next, I evolve the system over time. Independent and response variables are evolved completely independently of each other. The change in independent variables does not affect the change in the response variable.
+
+### Response variable
+
+For the response variable, this involves simultaneously evolving the ecosystem state and total stem density, both dependent on the previous time step and surrounding grid cells. First, I evolve ecosystem state. The ecosystem state at each time step after the first (i.e., 2:T) depends on the ecosystem state at the same location and at adjacent locations in the previous time step. If the previous state was savanna (0) and it is surrounded by savanna, then the state at the current time step will be savanna (0). Same with forest. If the previous state was savanna (0), but the savanna was adjacent to forest (1), then the state at the current time step has an equal probability of being savanna (0) or forest (1).
+
+Then, I evolve stem density. The stem density is dependent on both the stem density at the previous time step and the ecosystem state. If the ecosystem state remains the same from the previous to the current time step, then the stem density is the same with some random variation added. If the ecosystem state shifts from one state to the other, then the stem density is adjusted accordingly by redrawing randomly from the distribution of stem densities appropriate for the new ecosystem state. So, if a location shifts from savanna to forest, for instance, the stem density is randomly drawn from $\sim N(250,75)$.
+
+This is done for `r ntime` time steps, with `r ntime` being chosen arbitrarily. The process produces change in ecosystem state over time across our 1D space. Code is shown below for clarity of the process.
+
+```{r setup simulation, echo=FALSE}
+# Initialize matrices
+sim_binary <- matrix(, nrow = ntime,
+                     ncol = nloc)
+sim_binary[1,] <- binary_response
+
+sim_cont <- matrix(, nrow = ntime,
+                   ncol = nloc)
+sim_cont[1,] <- cont_response
+
+x1_mat <- x2_mat <- x3_mat <- x4_mat <- x5_mat <-
+  matrix(, nrow = ntime,
+         ncol = nloc)
+x1_mat[1,] <- var1
+x2_mat[1,] <- var2
+x3_mat[1,] <- var3
+x4_mat[1,] <- var4
+x5_mat[1,] <- var5
+```
+
+```{r ecosystem evolution}
+# Loop over each row (time step) after initial conditions
+for(i in 2:ntime){
+  # Loop over each column (location)
+  for(j in 1:nloc){
+    # Take adjacent locations from the previous time step,
+    # accounting for edges at j = 1 and j = nloc
+    if(j == 1) prev <- sim_binary[i-1,c(j,j+1)]
+    if(!(j %in% c(1, nloc))) prev <- sim_binary[i-1,c(j-1,j,j+1)]
+    if(j == nloc) prev <- sim_binary[i-1,c(j-1,j)]
+    
+    ## Determine current and new states
+    
+    if(length(unique(prev)) == 1){
+      # If all adjacent cells are 0, then new step is 0
+      if(unique(prev) == 0) curr <- 0
+      # If all adjacent cells are 1, then new step is 1
+      if(unique(prev) == 1) curr <- 1
+    }
+    # If adjacent cells are a mix, then the new step is a 50/50 chance of
+    # staying the same state vs switching
+    if(length(unique(prev)) > 1) curr <- sample(x = c(0, 1), size = 1)
+      
+    # Previous stem density
+    prev_density <- sim_cont[i-1,j]
+      
+    # If the state is the same, then randomly vary density
+    if(sim_binary[i-1,j] == curr) curr_density <- rnorm(n = 1,
+                                                        mean = prev_density,
+                                                        sd = 5)
+      
+    # Adjustments to ensure we maintain bimodality
+    if(curr == 0 & curr_density > 47) curr_density <- 47
+    if(curr == 0 & curr_density < 1) curr_density <- 1
+    if(curr == 1 & curr_density < 150) curr_density <- 150
+      
+    # If there was a state shift, create a new stem density
+    if(sim_binary[i-1,j] != curr){
+      # If the state is savanna, draw from savanna distribution
+      if(curr == 0) curr_density <- runif(n = 1, min = 1, max = 47)
+      # If the state is forest, draw from forest distribution
+      if(curr == 1) curr_density <- rnorm(n = 1, mean = 250, sd = 75)
+    }
+      
+    # Update the matrices
+    sim_binary[i,j] <- curr
+    sim_cont[i,j] <- curr_density
+  }
+}
+```
+
+This provides us with both binary ecosystem state and continuous stem density that is dependent both on the previous state of the system and surrounding locations, representing spatially dependent feedbacks and disturbance regimes.
+
+```{r formatting, echo=FALSE}
+# Melt matrices
+sim_binary_df <- reshape2::melt(sim_binary)
+sim_cont_df <- reshape2::melt(sim_cont)
+
+# Add column names
+colnames(sim_binary_df) <- colnames(sim_cont_df) <-
+  c('time', 'space', 'value')
+```
+
+```{r ecosystem evolution plot, echo=FALSE}
+# Plot
+sim_binary_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = factor(value)),
+                     color = 'black') +
+  ggplot2::scale_fill_manual(limits = factor(c(0, 1)),
+                             values = c('#94bd46', '#1a5200'),
+                             name = 'State',
+                             labels = c('Savanna', 'Forest')) +
+  ggplot2::scale_y_reverse() +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+```
+
+```{r nforest, echo=FALSE}
+nforest <- length(which(dplyr::filter(sim_binary_df, time == ntime)$value == 1)) / nloc * 100
+nsavanna <- 100 - nforest
+change_savanna <- 50 - nsavanna
+```
+
+With this process evolution, the initial timestep has 50% forest grid cells and the final timestep has `r nforest`% forest grid cells, representing a loss of `r change_savanna`% of total savanna area in the hypothetical simulation.
+
+```{r density evolution plot, echo=FALSE}
+# Plot
+sim_cont_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = value),
+                     color = 'black') +
+  ggplot2::scale_y_reverse() +
+  ggplot2::scale_fill_distiller(name = 'stems/ha',
+                                palette = 'Greens',
+                                direction = 1) +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::theme_void() +
+  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+```
+
+### Independent variables
+
+At the same time, the independent variables are independently evolved over time. The independent variables in our case represent the abiotic environment experienced by these ecosystems, and the abiotic conditions that are typically used to explain spatiotemporal patterns in ecosystem state. Some of these variables change over time, sometimes directionally, sometimes not. Some of these variables do not change over time. This is reflected in the evolution process shown below.
+
+```{r environment evolution}
+# Loop over each row (time step) after initial conditions
+for(i in 2:nrow(x1_mat)){
+  # Loop over each column (location)
+  for(j in 1:ncol(x1_mat)){
+    # Increasing pattern for variables 1 and 4
+    # Very small changes or else you get really large change over 150 time steps
+    # (temporal change far exceeds spatial change)
+    x1_mat[i,j] <- x1_mat[i-1,j] + rnorm(n = 1,
+                                         mean = 0.003,
+                                         sd = 0.01)
+    x4_mat[i,j] <- x4_mat[i-1,j] + rnorm(n = 1,
+                                         mean = 0.003,
+                                         sd = 0.01)
+    # Random change for variables 2 and 3
+    x2_mat[i,j] <- x2_mat[i-1,j] + rnorm(n = 1,
+                                         mean = 0,
+                                         sd = 0.02)
+    x3_mat[i,j] <- x3_mat[i-1,j] + rnorm(n = 1,
+                                         mean = 0,
+                                         sd = 0.02)
+    
+    # No change in variable 5
+    x5_mat[i,j] <- x5_mat[i-1,j]
+  }
+}
+```
+
+I want to check the independent variables for a few things. First, I make the same type of plots to make sure the spatiotemporal gradients look like what we expect to see. Next, I compare the environmental variables between the first and last time step to make sure that the change over time is not so dramatic as to be unrealistic.
+
+```{r formatting environment, echo=FALSE}
+# Melt matrices
+x1_df <- reshape2::melt(x1_mat)
+x2_df <- reshape2::melt(x2_mat)
+x3_df <- reshape2::melt(x3_mat)
+x4_df <- reshape2::melt(x4_mat)
+x5_df <- reshape2::melt(x5_mat)
+
+# Add column names
+colnames(x1_df) <- colnames(x2_df) <- colnames(x3_df) <-
+  colnames(x4_df) <- colnames(x5_df) <-
+  c('time', 'space', 'value')
+```
+
+```{r environment evolution plot, echo=FALSE}
+# Variable 1 plot
+x1_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = value),
+                     color = 'black') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Blues') +
+  ggplot2::scale_y_reverse() +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 1') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+
+# Variable 2 plot
+x2_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = value),
+                     color = 'black') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Greens') +
+  ggplot2::scale_y_reverse() +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 2') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+
+# Variable 3 plot
+x3_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = value),
+                     color = 'black') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Purples') +
+  ggplot2::scale_y_reverse() +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 3') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+
+# Variable 4 plot
+x4_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = value),
+                     color = 'black') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Reds') +
+  ggplot2::scale_y_reverse() +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 4') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+
+# Variable 5 plot
+x5_df |>
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(ggplot2::aes(x = factor(space),
+                                  y = time,
+                                  fill = value),
+                     color = 'black') +
+  ggplot2::scale_fill_distiller(name = '',
+                                palette = 'Oranges') +
+  ggplot2::scale_y_reverse() +
+  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
+  ggplot2::ggtitle('Variable 5') +
+  ggplot2::theme_void() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 axis.title = ggplot2::element_text(size = 12),
+                 axis.title.y = ggplot2::element_text(angle = 90),
+                 axis.text.y = ggplot2::element_text(size = 10))
+```
+
+```{r environment check plots, echo=FALSE}
+final1 <- x1_mat[150,]
+final2 <- x2_mat[150,]
+final3 <- x3_mat[150,]
+final4 <- x4_mat[150,]
+final5 <- x5_mat[150,]
+
+# Plotting change in environment over space for first and last time period
+
+# Variable 1
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = var1),
+                      color = 'black') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = var1),
+                     color = 'black') +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = final1),
+                      color = 'red') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = final1),
+                     color = 'red') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 1') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Initial', y = var1),
+                       fill = NA, color = 'black') +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Final', y = final1),
+                       fill = NA, color = 'red') +
+  ggplot2::xlab('Timestep') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 1') +
+  ggplot2::scale_x_discrete(limits = c('Initial', 'Final')) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+# Variable 2
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = var2),
+                      color = 'black') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = var2),
+                     color = 'black') +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = final2),
+                      color = 'red') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = final2),
+                     color = 'red') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 2') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Initial', y = var2),
+                       fill = NA, color = 'black') +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Final', y = final2),
+                       fill = NA, color = 'red') +
+  ggplot2::xlab('Timestep') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 2') +
+  ggplot2::scale_x_discrete(limits = c('Initial', 'Final')) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+# Variable 3
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = var3),
+                      color = 'black') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = var3),
+                     color = 'black') +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = final3),
+                      color = 'red') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = final3),
+                     color = 'red') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 3') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Initial', y = var3),
+                       fill = NA, color = 'black') +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Final', y = final3),
+                       fill = NA, color = 'red') +
+  ggplot2::xlab('Timestep') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 3') +
+  ggplot2::scale_x_discrete(limits = c('Initial', 'Final')) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+# Variable 4
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = var4),
+                      color = 'black') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = var4),
+                     color = 'black') +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = final4),
+                      color = 'red') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = final4),
+                     color = 'red') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 4') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Initial', y = var4),
+                       fill = NA, color = 'black') +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Final', y = final4),
+                       fill = NA, color = 'red') +
+  ggplot2::xlab('Timestep') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 4') +
+  ggplot2::scale_x_discrete(limits = c('Initial', 'Final')) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+# Variable 5
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = var5),
+                      color = 'black') +
+  ggplot2::geom_line(ggplot2::aes(x = 1:100,
+                                  y = var5),
+                     color = 'black') +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = final5),
+                      color = 'red') +
+  ggplot2::geom_point(ggplot2::aes(x = 1:100,
+                                   y = final5),
+                      color = 'red') +
+  ggplot2::xlab('Space') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 5') +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Initial', y = var5),
+                       fill = NA, color = 'black') +
+  ggplot2::geom_violin(ggplot2::aes(x = 'Final', y = final5),
+                       fill = NA, color = 'red') +
+  ggplot2::xlab('Timestep') + ggplot2::ylab('Value') +
+  ggplot2::ggtitle('Variable 5') +
+  ggplot2::scale_x_discrete(limits = c('Initial', 'Final')) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
+```
+
+```{r combine, echo=FALSE}
+simulation <- sim_cont_df |>
+  dplyr::rename(density = value) |>
+  dplyr::full_join(y = dplyr::rename(x1_df, var1 = value),
+                   by = c('time', 'space')) |>
+  dplyr::full_join(y = dplyr::rename(x2_df, var2 = value),
+                   by = c('time', 'space')) |>
+  dplyr::full_join(y = dplyr::rename(x3_df, var3 = value),
+                   by = c('time', 'space')) |>
+  dplyr::full_join(y = dplyr::rename(x4_df, var4 = value),
+                   by = c('time', 'space')) |>
+  dplyr::full_join(y = dplyr::rename(x5_df, var5 = value),
+                   by = c('time', 'space'))
+```
+
+# Model fitting
+
+Now that I have independent and response variables over time, I want to fit a model describing the relationship between the environment and stem density at the first time step. Then, I will use this relationship to try to predict stem density in the final time step, similar to how we often fit space-for-time substitution models. I compare the prediction accuracy from out-of-sample locations in the first time step to the same locations in the last time step.
+
+```{r select oos, echo=FALSE}
+oos_rows <- sample(x = 1:nloc,
+                   size = round(nloc * 0.3),
+                   replace = FALSE)
+
+simulation_in1 <- simulation |>
+  dplyr::filter(time == 1) |>
+  dplyr::arrange(space) |>
+  dplyr::filter(!(space %in% oos_rows))
+simulation_oos1 <- simulation |>
+  dplyr::filter(time == 1) |>
+  dplyr::arrange(space) |>
+  dplyr::filter(space %in% oos_rows)
+simulation_ooslast <- simulation |>
+  dplyr::filter(time == ntime) |>
+  dplyr::arrange(space) |>
+  dplyr::filter(space %in% oos_rows)
+```
+
+```{r fit glm, echo=FALSE}
+# Fit generalized linear model
+fit_glm <- glm(formula = density ~ var1 + var2 + var3 + var4 + var5,
+               data = simulation_in1,
+               family = gaussian(link = 'log'))
+summary(fit_glm)
+```
+
+```{r fit rf, echo=FALSE}
+# First tune hyperparameters
+tune_rf <- randomForestSRC::tune(formula = density ~ var1 + var2 + var3 + var4 + var5,
+                                 ntreeTry = 500,
+                                 data = simulation_in1)
+
+fit_rf <- randomForestSRC::rfsrc(formula = density ~ var1 + var2 + var3 + var4 + var5,
+                                 ntree = 1000,
+                                 nodesize = tune_rf$optimal[1],
+                                 mtry = tune_rf$optimal[2],
+                                 data = simulation_in1)
+fit_rf
+```
+
+```{r fit gam, echo=FALSE, include=FALSE}
+fit_gam <- mvgam::mvgam(formula = density ~
+                          s(var1) +
+                          s(var2) +
+                          s(var3) +
+                          s(var4) +
+                          s(var5),
+                        data = dplyr::select(simulation_in1, -time),
+                        burnin = 1000,
+                        samples = 1000,
+                        family = mvgam::lognormal())
+```
+
+# Prediction
+
+Now, I can make out-of-sample predictions from these models at the first and last time step. The exact same grid cells are predicted in each time step. Overall lower explanatory power from the models fit to these simulations should be expected compared to the models fit to empirical data. This is because there is no true explanatory power in the simulations: environmental conditions are completely independent of stem density. In our accompanying empirical system, some of the spatial gradient of savanna and forest ecosystems is explained by environmental conditions, so explanatory power in the timestep in which the model was fit should be higher.
+
+```{r predict, echo=FALSE}
+# Predict first time step
+pred_historical_glm <- predict(object = fit_glm,
+                               newdata = dplyr::select(simulation_oos1,
+                                                       var1:var5),
+                               type = 'response')
+pred_historical_rf <- randomForestSRC::predict.rfsrc(object = fit_rf,
+                                                     newdata = dplyr::select(simulation_oos1, var1:var5))
+pred_historical_gam <- mvgam::predictions(model = fit_gam,
+                                          newdata = dplyr::select(simulation_oos1, var1:var5))
+
+# Predict last time step
+pred_modern_glm <- predict(object = fit_glm,
+                           newdata = dplyr::select(simulation_ooslast,
+                                                   var1:var5),
+                           type = 'response')
+pred_modern_rf <- randomForestSRC::predict.rfsrc(object = fit_rf,
+                                                 newdata = dplyr::select(simulation_ooslast, var1:var5))
+pred_modern_gam <- mvgam::predictions(model = fit_gam,
+                                      newdata = dplyr::select(simulation_ooslast,
+                                                              var1:var5))
+```
+
+```{r plot first step prediciton, echo=FALSE}
+# Plots of prediction accuracy in first time step
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = simulation_oos1$density,
+                                   y = pred_historical_glm)) +
+  ggplot2::geom_abline() +
+  ggplot2::geom_smooth(ggplot2::aes(x = simulation_oos1$density,
+                                    y = pred_historical_glm),
+                       method = 'lm', se = FALSE) +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions from first time step',
+                   subtitle = 'Generalized linear model') +
+  tune::coord_obs_pred() +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = simulation_oos1$density,
+                                   y = pred_historical_rf$predicted)) +
+  ggplot2::geom_abline() +
+  ggplot2::geom_smooth(ggplot2::aes(x = simulation_oos1$density,
+                                    y = pred_historical_rf$predicted),
+                       method = 'lm', se = FALSE) +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions from first time step',
+                   subtitle = 'Random forest') +
+  tune::coord_obs_pred() +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = simulation_oos1$density,
+                                   y = pred_historical_gam$estimate)) +
+  ggplot2::geom_abline() +
+  ggplot2::geom_smooth(ggplot2::aes(x = simulation_oos1$density,
+                                    y = pred_historical_gam$estimate),
+                       method = 'lm', se = FALSE) +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions from first time step',
+                   subtitle = 'Generalized additive model') +
+  tune::coord_obs_pred() +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+```
+
+```{r plot modern predictiosn, echo=FALSE}
+# Plots of prediction accuracy in final step
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = simulation_ooslast$density,
+                                   y = pred_modern_glm)) +
+  ggplot2::geom_abline() +
+  ggplot2::geom_smooth(ggplot2::aes(x = simulation_ooslast$density,
+                                    y = pred_modern_glm),
+                       method = 'lm', se = FALSE) +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions from final time step',
+                   subtitle = 'Generalized linear model') +
+  tune::coord_obs_pred() +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = simulation_ooslast$density,
+                                   y = pred_modern_rf$predicted)) +
+  ggplot2::geom_abline() +
+  ggplot2::geom_smooth(ggplot2::aes(x = simulation_ooslast$density,
+                                    y = pred_modern_rf$predicted),
+                       method = 'lm', se = FALSE) +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions from final time step',
+                   subtitle = 'Random forest') +
+  tune::coord_obs_pred() +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+
+ggplot2::ggplot() +
+  ggplot2::geom_point(ggplot2::aes(x = simulation_ooslast$density,
+                                   y = pred_modern_gam$estimate)) +
+  ggplot2::geom_abline() +
+  ggplot2::geom_smooth(ggplot2::aes(x = simulation_ooslast$density,
+                                    y = pred_modern_gam$estimate),
+                       method = 'lm', se = FALSE) +
+  ggplot2::xlab('Observed') + ggplot2::ylab('Predicted') +
+  ggplot2::ggtitle('Predictions from final time step',
+                   subtitle = 'Generalized additive model') +
+  tune::coord_obs_pred() +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+                 plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+```
+
+```{r correlations, echo=FALSE, results='asis'}
+corr_historical_lm <- round(cor(simulation_oos1$density,
+                                pred_historical_glm), 
+                            digits = 3)
+corr_historical_rf <- round(cor(simulation_oos1$density,
+                                pred_historical_rf$predicted), 
+                            digits = 3)
+corr_historical_gam <- round(cor(simulation_oos1$density,
+                                 pred_historical_gam$estimate), digits = 3)
+
+corr_modern_lm <- round(cor(simulation_ooslast$density,
+                            pred_modern_glm),
+                        digits = 3)
+corr_modern_rf <- round(cor(simulation_ooslast$density,
+                            pred_modern_rf$predicted),
+                        digits = 3)
+corr_modern_gam <- round(cor(simulation_ooslast$density,
+                             pred_modern_gam$estimate),
+                         digits = 3)
+
+# Combine in dataframe
+model_col <- c('Generalized linear model',
+               'Random forest',
+               'Generalized additive model')
+historical_col <- c(corr_historical_lm,
+                    corr_historical_rf,
+                    corr_historical_gam)
+modern_col <- c(corr_modern_lm,
+                corr_modern_rf,
+                corr_modern_gam)
+
+corr_df <- as.data.frame(cbind(model_col, historical_col, modern_col))
+colnames(corr_df) <- c('Model', 'Initial time step', 'Final time step')
+
+# Make table
+knitr::kable(corr_df,
+             caption = 'Correlation between predicted and observed stem density')
+```
+
