@@ -17,7 +17,7 @@ set.seed(1)
 
 #### 1. Define initial stem density ####
 
-# Generate continuous repsonse variable (stem density) 
+# Generate continuous response variable (stem density) 
 # from ecosystem state
 cont_response <- c(runif(n = nloc/2, min = 1, max = 47),
                    rnorm(n = nloc/2, mean = 250, sd = 75))
@@ -42,7 +42,7 @@ ggplot2::ggplot() +
   ggplot2::xlab('Stem density') +
   ggplot2::theme_minimal()
 
-#### 2. Define initial envirnomental conditions ####
+#### 2. Define initial environmental conditions ####
 
 ## This is the simplest possible case where environmental conditions
 ## simply show gradients from left to right
@@ -188,7 +188,7 @@ for(i in 2:ntime){
     if(curr == 0 & curr_density < 1) curr_density <- 1
     if(curr == 1 & curr_density < 150) curr_density <- 150
     
-    # If there was a state shift, create a new stem densi
+    # If there was a state shift, create a new stem density
     if(prev != curr){
       # If the state is savanna, draw from savanna distribution
       if(curr == 0) curr_density <- runif(n = 1,
@@ -241,8 +241,8 @@ for(i in 2:ntime){
   # Loop over each column (location)
   for(j in 1:nloc){
     # Increasing pattern for variables 1 and 4
-    # Very small chanegs or else you get really
-    # lareg chanegs over 150 time steps
+    # Very small changes or else you get really
+    # large changes over 150 time steps
     # (temporal change far exceeds spatial change)
     x1_mat[i,j] <- x1_mat[i-1,j] + rnorm(n = 1,
                                          mean = 0.003,
