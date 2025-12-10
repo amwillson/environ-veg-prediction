@@ -14,7 +14,7 @@ set.seed(2)
 
 # Purpose
 
-The purpose of this workflow is to provide a simple demonstration of the reason why models like species distribution models fail to predict change in ecosystems when alternate ecosystem states (AESs) exist. The switch from one state to another is not a function of climate alone, but a function of feedback regimes that change through spatially contagious ecological processes and of initial conditions. The simulations show that even if the fit between environmental and response variables lead to accurate prediction in one time period, this does not necessarily mean that environmental conditions will be good predictors of the response variable at another time step. 
+The purpose of this workflow is to provide a simple demonstration of the reason why models like species distribution models fail to predict change in ecosystems when alternate ecosystem states (AESs) exist. The switch from one state to another is not a function of climate alone, but a function of feedback regimes that change through spatially contagious ecological processes and depend on initial conditions. The simulations show that even if the fit between environmental and response variables lead to accurate prediction in one time period, this does not necessarily mean that environmental conditions will be good predictors of the response variable at another time step. 
 
 The general workflow serves as a set of hypotheses against which we will evaluate the predictive power of species distribution models fit to the environment vegetation relationship of real data (Upper Midwest USA [UMW] stem density and community composition) at one time period and predicting another time period. This particular iteration shows one extreme: environmental conditions and the response variable are completely independent and only appear to be related to one another. We know our empirical system is not exactly like this. In the UMW, the distribution of savanna and forest ecosystem states is driven by a combination of environmental gradients and feedbacks maintaining distinct states in similar environmental conditions. Therefore, this hypothetical simulation should be interpreted as one extreme.
 
@@ -212,6 +212,9 @@ x5_mat[1,] <- var5
 ```
 
 ```{r ecosystem evolution}
+# Reset seed to ensure this always stays the same across scripts
+set.seed(15)
+
 # Loop over each row (time step) after initial conditions
 for(i in 2:ntime){
   # Loop over each column (location)

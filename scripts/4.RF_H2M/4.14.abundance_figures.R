@@ -2877,13 +2877,13 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
 # Oak
 pred_historical |>
   ggplot2::ggplot() +
-  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey95') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Oak_diff1)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
                                 limits = c(-1, 1),
-                                low = scales::muted(red),
-                                high = scales::muted(blue),
+                                low = scales::muted('red'),
+                                high = scales::muted('blue'),
                                 mid = 'white') +
   ggplot2::theme_void() +
   ggplot2::ggtitle('Historical') +
@@ -6676,7 +6676,7 @@ ggplot2::ggsave(plot = ggplot2::last_plot(),
 # Oak
 pred_modern |>
   ggplot2::ggplot() +
-  ggplot2::geom_sf(data = states, color = NA, fill = 'grey85') +
+  ggplot2::geom_sf(data = states, color = NA, fill = 'grey95') +
   ggplot2::geom_tile(ggplot2::aes(x = x, y = y, fill = Oak_diff1)) +
   ggplot2::geom_sf(data = states, color = 'black', fill = NA) +
   ggplot2::scale_fill_gradient2(name = 'Observed-\nPredicted',
