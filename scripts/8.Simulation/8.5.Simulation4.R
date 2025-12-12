@@ -1,7 +1,8 @@
-#### Simulation 2
+#### Simulation 4
 #### Initial stem density is explained by initial environmental
 #### conditions, in addition to ecosystem state
-#### Environmental & ecosystem change independent of each other
+#### Environment does not change over time, while
+#### ecosystem does change
 
 rm(list = ls())
 
@@ -29,7 +30,7 @@ ggplot2::ggplot() +
                                   y = 1,
                                   fill = cont_response),
                      color = 'black') +
-  ggplot2::scale_fill_distiller(name = 'stems/ha',
+  ggplot2::scale_fill_distiller(name = 'stems/ha/',
                                 palette = 'Greens',
                                 direction = 1) +
   ggplot2::xlab('Space') + ggplot2::ylab('Time') +
@@ -49,6 +50,7 @@ ggplot2::ggplot() +
 ## state transition in Simulation 1
 ## but also includes environmental variables correlated with
 ## stem density in the first time period
+## This is the same as Simulation 2
 
 # Gradient from 0 to 1 representing smooth left-right gradient
 base_var <- seq(from = 0, to = 1, length.out = nloc)
@@ -132,9 +134,9 @@ ggplot2::ggplot() +
 # Variable 4
 ggplot2::ggplot() +
   ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
-                                 y = 1,
-                                 fill = var4),
-                    color = 'black') +
+                                  y = 1,
+                                  fill = var4),
+                     color = 'black') +
   ggplot2::xlab('Space') + ggplot2::ylab('Time') +
   ggplot2::ggtitle('Variable 4') +
   ggplot2::scale_fill_distiller(name = '',
@@ -183,10 +185,10 @@ for(i in 2:ntime){
     prev <- sim_binary[i-1,j]
     curr <- sim_binary[i,j]
     
-    # Previous stem density
+    # Previous stem densit
     prev_density <- sim_cont[i-1,j]
     
-    # If the state is the same, then randomly vary density
+    # If the staet is the same, then randomly vary density
     if(prev == curr) curr_density <- rnorm(n = 1,
                                            mean = prev_density,
                                            sd = 5)
@@ -240,39 +242,25 @@ sim_cont_df |>
 
 #### 5. Environment evolution ####
 
-## This is done in a separate step to reinforce the fact
-## that the environment in no way actually explains change
-## in the ecosystem or stem density
-## Note that change in the variables appearing to explain stem density
-## in the first time step are now completely independent 
+## Note that in this case, environmental conditions do not
+## change over time
 
-# Loop over each row (time step) after initial conditions
-for(i in 2:ntime){
-  # Loop over each column (location)
-  for(j in 1:nloc){
-    # Increasing pattern for variables 1 and 4
-    # Very small changes or else you get really
-    # large changes over 150 time steps
-    # (temporal change far exceeds spatial change)
-    x1_mat[i,j] <- x1_mat[i-1,j] + rnorm(n = 1,
-                                         mean = 0.003,
-                                         sd = 0.01)
-    x4_mat[i,j] <- x4_mat[i-1,j] + rnorm(n = 1,
-                                         mean = 0.003,
-                                         sd = 0.01)
-    
-    # Random change for variables 2 and 3
-    x2_mat[i,j] <- x2_mat[i-1,j] + rnorm(n = 1,
-                                         mean = 0,
-                                         sd = 0.01)
-    x3_mat[i,j] <- x3_mat[i-1,j] + rnorm(n = 1,
-                                         mean = 0,
-                                         sd = 0.02)
-    
-    # No change in variable 5
-    x5_mat[i,j] <- x5_mat[i-1,j]
-  }
-}
+# Repeat the same environmental variable values over time
+x1_mat <- matrix(rep(x1_mat[1,], times = ntime),
+                 nrow = ntime, ncol = nloc,
+                 byrow = TRUE)
+x2_mat <- matrix(rep(x2_mat[1,], times = ntime),
+                 nrow = ntime, ncol = nloc,
+                 byrow = TRUE)
+x3_mat <- matrix(rep(x3_mat[1,], times = ntime),
+                 nrow = ntime, ncol = nloc,
+                 byrow = TRUE)
+x4_mat <- matrix(rep(x4_mat[1,], times = ntime),
+                 nrow = ntime, ncol = nloc,
+                 byrow = TRUE)
+x5_mat <- matrix(rep(x5_mat[1,], times = ntime),
+                 nrow = ntime, ncol = nloc,
+                 byrow = TRUE)
 
 #### 6. Format & visualize environmental variables ####
 
@@ -337,6 +325,7 @@ x3_df |>
                      color = 'black') +
   ggplot2::scale_fill_distiller(name = '',
                                 palette = 'Purples') +
+  ggplot2::scale_y_reverse() +
   ggplot2::xlab('Space') + ggplot2::ylab('Time') +
   ggplot2::ggtitle('Variable 3') +
   ggplot2::theme_void() +
@@ -354,6 +343,7 @@ x4_df |>
                      color = 'black') +
   ggplot2::scale_fill_distiller(name = '',
                                 palette = 'Reds') +
+  ggplot2::scale_y_reverse() +
   ggplot2::xlab('Space') + ggplot2::ylab('Time') +
   ggplot2::ggtitle('Variable 4') +
   ggplot2::theme_void() +
@@ -371,6 +361,7 @@ x5_df |>
                      color = 'black') +
   ggplot2::scale_fill_distiller(name = '',
                                 palette = 'Oranges') +
+  ggplot2::scale_y_reverse() +
   ggplot2::xlab('Space') + ggplot2::ylab('Time') +
   ggplot2::ggtitle('Variable 5') +
   ggplot2::theme_void() +
@@ -397,4 +388,4 @@ simulations <- sim_cont_df |>
 
 # Save
 save(simulations,
-     file = 'out/simulation/sim2.RData')
+     file = 'out/simulation/sim4.RData')
