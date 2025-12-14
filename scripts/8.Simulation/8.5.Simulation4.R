@@ -185,10 +185,10 @@ for(i in 2:ntime){
     prev <- sim_binary[i-1,j]
     curr <- sim_binary[i,j]
     
-    # Previous stem densit
+    # Previous stem density
     prev_density <- sim_cont[i-1,j]
     
-    # If the staet is the same, then randomly vary density
+    # If the state is the same, then randomly vary density
     if(prev == curr) curr_density <- rnorm(n = 1,
                                            mean = prev_density,
                                            sd = 5)

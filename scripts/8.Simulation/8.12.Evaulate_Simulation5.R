@@ -1,14 +1,15 @@
-#### Analyzing Simulation 2
+#### Analyzing Simulation 5
 #### Fitting models and predicting stem density
-#### Assumptions for Simulation 2 are as follows:
+#### Assumptions for Simulation 5 are as follows:
 #### 1. Environment changes over time
-#### 2. Ecosystem change is independent of environmental change
-#### 3. Initial stem density is explained by environment
+#### 2. Environmental change leads to ecosystem change
+#### 3. Stem density is randomly drawn within each ecosystem state
+####    (not related to the environment in its own right)
 
 rm(list = ls())
 
-# Load output from Simulation 2
-load('out/simulation/sim2.RData')
+# Load output from Simulation 5
+load('out/simulation/sim5.RData')
 
 # Number of locations
 nloc <- 100
@@ -82,10 +83,10 @@ fit_rf
 
 # Fit GAM
 fit_gam <- mvgam::mvgam(formula = density ~
-                          s(var1, k = 4) + 
-                          s(var2, k = 4) + 
+                          s(var1, k = 4) +
+                          s(var2, k = 4) +
                           s(var3, k = 4) +
-                          s(var4, k = 4) + 
+                          s(var4, k = 4) +
                           s(var5, k = 4),
                         data = dplyr::select(simulation_in1, -time),
                         burnin = 10000,
@@ -242,11 +243,9 @@ ggplot2::ggplot() +
 # GLM
 corr_1_lm <- cor(simulation_oos1$density,
                  pred_1_glm)
-
 # RF
 corr_1_rf <- cor(simulation_oos1$density,
                  pred_1_rf$predicted)
-
 # GAM
 corr_1_gam <- cor(simulation_oos1$density,
                   pred_1_gam$estimate)
@@ -256,11 +255,9 @@ corr_1_gam <- cor(simulation_oos1$density,
 # GLM
 corr_final_lm <- cor(simulation_ooslast$density,
                      pred_final_glm)
-
 # RF
 corr_final_rf <- cor(simulation_ooslast$density,
                      pred_final_rf$predicted)
-
 # GAM
 corr_final_gam <- cor(simulation_ooslast$density,
                       pred_final_gam$estimate)

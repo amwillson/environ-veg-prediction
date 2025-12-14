@@ -1,14 +1,14 @@
-#### Analyzing Simulation 2
+#### Analyzing Simulation 4
 #### Fitting models and predicting stem density
-#### Assumptions for Simulation 2 are as follows:
-#### 1. Environment changes over time
-#### 2. Ecosystem change is independent of environmental change
+#### Assumptions for Simulation 4 are as follows:
+#### 1. Environment does not change over time
+#### 2. Ecosystem does change over time, independently of environment
 #### 3. Initial stem density is explained by environment
 
 rm(list = ls())
 
-# Load output from Simulation 2
-load('out/simulation/sim2.RData')
+# Load output from Simulation 4
+load('out/simulation/sim4.RData')
 
 # Number of locations
 nloc <- 100
@@ -82,10 +82,10 @@ fit_rf
 
 # Fit GAM
 fit_gam <- mvgam::mvgam(formula = density ~
-                          s(var1, k = 4) + 
-                          s(var2, k = 4) + 
+                          s(var1, k = 4) +
+                          s(var2, k = 4) +
                           s(var3, k = 4) +
-                          s(var4, k = 4) + 
+                          s(var4, k = 4) +
                           s(var5, k = 4),
                         data = dplyr::select(simulation_in1, -time),
                         burnin = 10000,
@@ -126,14 +126,14 @@ pred_final_glm <- predict(object = fit_glm,
 # RF
 pred_final_rf <- randomForestSRC::predict.rfsrc(object = fit_rf,
                                                 newdata = dplyr::select(simulation_ooslast,
-                                                                        var1:var5))
+                                                                    var1:var5))
 
 # GAM
 pred_final_gam <- mvgam::predictions(model = fit_gam,
                                      newdata = dplyr::select(simulation_ooslast,
                                                              var1:var5))
 
-#### 6. Evaluate predictions ####
+#### 6. Evalulate predictions ####
 
 ## Plots of prediction accuracy from first time step
 
@@ -242,11 +242,9 @@ ggplot2::ggplot() +
 # GLM
 corr_1_lm <- cor(simulation_oos1$density,
                  pred_1_glm)
-
 # RF
 corr_1_rf <- cor(simulation_oos1$density,
                  pred_1_rf$predicted)
-
 # GAM
 corr_1_gam <- cor(simulation_oos1$density,
                   pred_1_gam$estimate)
@@ -256,11 +254,9 @@ corr_1_gam <- cor(simulation_oos1$density,
 # GLM
 corr_final_lm <- cor(simulation_ooslast$density,
                      pred_final_glm)
-
 # RF
 corr_final_rf <- cor(simulation_ooslast$density,
                      pred_final_rf$predicted)
-
 # GAM
 corr_final_gam <- cor(simulation_ooslast$density,
                       pred_final_gam$estimate)
@@ -268,7 +264,7 @@ corr_final_gam <- cor(simulation_ooslast$density,
 # Make columns for table
 model <- c('GLM', 'RF', 'GAM')
 first <- c(corr_1_lm, corr_1_rf, corr_1_gam)
-final <- c(corr_final_lm, corr_final_rf, corr_final_gam)
+final <- c(corr_final_lm, corr_final_rf,  corr_final_gam)
 
 # Combine columns
 corrs <- as.data.frame(cbind(model,

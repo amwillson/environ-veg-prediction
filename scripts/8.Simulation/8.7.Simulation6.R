@@ -1,6 +1,6 @@
 #### Simulation 6
 #### Initial stem density is explained by initial environmental
-#### conditions, in addition to ecosystem staet
+#### conditions, in addition to ecosystem state
 #### Environment change influences change in ecosystem state
 
 rm(list = ls())
@@ -187,8 +187,8 @@ ggplot2::ggplot() +
 
 # Fit "true" relationship between the binary response
 # variable and the environment
-# Assuming here that only variables 1 and 5 matter
-true_rel_bin <- glm(factor(binary_response) ~ var1 + var5,
+# Assuming here that only variables 1 and 4 matter
+true_rel_bin <- glm(factor(binary_response) ~ var1 + var4,
                     family = 'binomial')
 
 # Define true betas for binary response
@@ -196,8 +196,9 @@ true_rel_bin <- glm(factor(binary_response) ~ var1 + var5,
 # var 2-4 are 0
 true_beta_bin <- unname(c(true_rel_bin$coefficients[1], # intercept
                           true_rel_bin$coefficient[2], # variable 1
-                          0, 0, 0, # variables 2-4
-                          true_rel_bin$coefficients[3])) # variable 5
+                          0, 0, # variables 2-3
+                          true_rel_bin$coefficients[3], # variable 4
+                          0)) # variable 5
 
 # Subset only forest and only savanna stem density cells
 only_sav <- cont_response[1:(nloc/2)]

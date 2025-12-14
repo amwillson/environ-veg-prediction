@@ -179,20 +179,21 @@ ggplot2::ggplot() +
 ## I include the random noise when fitting the relationship
 ## or else you end up with singularity in the relationship
 
-# Fit "true" relationship between the binary response varaible
+# Fit "true" relationship between the binary response variable
 # and the environment
-# Assuming here that only variables 1 and 5 matter
-true_rel <- glm(factor(binary_response) ~ var1 + var5,
+# Assuming here that only variables 1 and 4 matter
+true_rel <- glm(factor(binary_response) ~ var1 + var4,
                 family = 'binomial')
 
 # Define true betas
-# var 1 and 5 are the estimates from the fitted
+# var 1 and 4 are the estimates from the fitted
 # relationship
-# var 2, 3, 4 are 0
+# var 2, 3, 5 are 0
 true_beta <- unname(c(true_rel$coefficients[1], # intercept
                       true_rel$coefficients[2], # variable 1
-                      0, 0, 0, # variables 2-4
-                      true_rel$coefficients[3])) # variable 5
+                      0, 0, # variables 2-3
+                      true_rel$coefficients[3], # variable 4
+                      0)) # variable 5
 
 #### 5. Process evolution ####
 
