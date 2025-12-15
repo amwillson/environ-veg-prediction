@@ -1,7 +1,7 @@
 #### STEP 1: Basic ecosystem state evolution
 
-## Change in ecosystem state is not depedent on the environment
-## Compatbile with all simulations except those where
+## Change in ecosystem state is not dependent on the environment
+## Compatible with all simulations except those where
 ## environment drives ecosystem state directly
 
 rm(list = ls())

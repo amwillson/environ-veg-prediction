@@ -1,6 +1,6 @@
 #### Analyzing Simulation 3
 #### Fitting models and predicting stem density
-#### Assumpstions for Simulation 3 are as follows:
+#### Assumptions for Simulation 3 are as follows:
 #### 1. Environment does not change over time
 #### 2. Ecosystem does change over time, independently of environment
 #### 3. Stem density is randomly drawn within each ecosystem state
@@ -139,7 +139,7 @@ pred_final_gam <- mvgam::predictions(model = fit_gam,
 ## Plots of prediction accuracy from first time step
 
 # GLM
-ggplot2::ggplot() +
+p_glm_1 <- ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = simulation_oos1$density,
                                    y = pred_1_glm)) +
   ggplot2::geom_abline() +
@@ -155,7 +155,7 @@ ggplot2::ggplot() +
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
 
 # RF
-ggplot2::ggplot() +
+p_rf_1 <- ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = simulation_oos1$density,
                                    y = pred_1_rf$predicted)) +
   ggplot2::geom_abline() +
@@ -171,7 +171,7 @@ ggplot2::ggplot() +
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
 
 # GAM
-ggplot2::ggplot() +
+p_gam_1 <- ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = simulation_oos1$density,
                                    y = pred_1_gam$estimate)) +
   ggplot2::geom_abline() +
@@ -186,10 +186,18 @@ ggplot2::ggplot() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
 
+# Plot together
+cowplot::plot_grid(p_glm_1, p_rf_1, p_gam_1,
+                   nrow = 1)
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/simulations/sim_3_pred_1.png')
+
 ## Plots of prediction accuracy from final time step
 
 # GLM
-ggplot2::ggplot() +
+p_glm_final <- ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = simulation_ooslast$density,
                                    y = pred_final_glm)) +
   ggplot2::geom_abline() +
@@ -205,7 +213,7 @@ ggplot2::ggplot() +
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
 
 # RF
-ggplot2::ggplot() +
+p_rf_final <- ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = simulation_ooslast$density,
                                    y = pred_final_rf$predicted)) +
   ggplot2::geom_abline() +
@@ -221,7 +229,7 @@ ggplot2::ggplot() +
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
 
 # GAM
-ggplot2::ggplot() +
+p_gam_final <- ggplot2::ggplot() +
   ggplot2::geom_point(ggplot2::aes(x = simulation_ooslast$density,
                                    y = pred_final_gam$estimate)) +
   ggplot2::geom_abline() +
@@ -235,6 +243,14 @@ ggplot2::ggplot() +
   ggplot2::theme_minimal() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
+
+# Plot together
+cowplot::plot_grid(p_glm_final, p_rf_final, p_gam_final,
+                   nrow = 1)
+
+# Save
+ggplot2::ggsave(plot = ggplot2::last_plot(),
+                filename = 'figures/simulations/sim_3_pred_final.png')
 
 ## Calculate correlations between observed and predicted stem density
 
