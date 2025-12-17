@@ -213,7 +213,7 @@ sim_cont_df |>
 for(i in 2:ntime){
   # Loop over each column (location)
   for(j in 1:nloc){
-    # Increasing pattern for variables 1 and 4
+    # Increasing pattern for variables 1 and 3
     # Very small changes or else you get really
     # large changes over 150 time steps
     # (temporal change far exceeds spatial change)
@@ -224,7 +224,7 @@ for(i in 2:ntime){
                                          mean = 0.003,
                                          sd = 0.01)
     
-    # Random change for variables 2 and 3
+    # Random change for variable 2
     x2_mat[i,j] <- x2_mat[i-1,j] + rnorm(n = 1,
                                          mean = 0,
                                          sd = 0.01)

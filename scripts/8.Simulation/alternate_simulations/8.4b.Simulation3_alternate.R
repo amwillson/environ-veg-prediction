@@ -116,7 +116,7 @@ x2_mat[1,] <- var2
 for(i in 2:ntime){
   # Loop over each column (location)
   for(j in 1:nloc){
-    # Extract previosu & current ecosystem state
+    # Extract previous & current ecosystem state
     prev <- sim_binary[i-1,j]
     curr <- sim_binary[i,j]
     

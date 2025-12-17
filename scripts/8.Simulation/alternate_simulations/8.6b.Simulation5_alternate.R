@@ -117,9 +117,7 @@ ggplot2::ggplot() +
                  plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
 
 #### 4. Define relationship between environment and ecosystem ####
-## I use a subset of the variables we chose, with their
-## random variation, to fit the "true" relationship between
-## ecosystem state and the environment.
+
 ## I fit between ecosystem state and environment here
 ## because we are not trying to capture within-state variation
 ## in stem density in this simulation.
@@ -128,14 +126,13 @@ ggplot2::ggplot() +
 
 # Fit "true" relationship between the binary response variable
 # and the environment
-# Assuming here that only variables 1 and 4 matter
-true_rel <- glm(factor(binary_response) ~ var1 + var2,
-                family = 'binomial')
+# Using Firth's bias-reduced regression because the penalized
+# likelihood helps when there is a really good fit between the
+# predictor and response (which is what we want here)
+true_rel <- logistf::logistf(binary_response ~ var1 + var2,
+                             control = logistf::logistf.control(maxit = 1000))
 
 # Define true betas
-# var 1 and 4 are the estimates from the fitted
-# relationship
-# var 2, 3, 5 are 0
 true_beta <- unname(true_rel$coefficients)
 
 #### 5. Process evolution ####
@@ -182,9 +179,7 @@ for(i in 2:nrow(sim_binary)){
     curr <- round(plogis(true_beta[1] +
                            true_beta[2] * x1_mat[i,j] +
                            true_beta[3] * x2_mat[i,j]))
-    
-    ## Change in stem density based on ecosystem state
-    
+
     # Previous stem density
     prev_density <- sim_cont[i-1,j]
     

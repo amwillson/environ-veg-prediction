@@ -16,6 +16,11 @@ nloc <- 100
 # Number of time steps
 ntime <- 150
 
+# First three time steps
+first_steps <- 1:3
+# Last three time steps
+last_steps <- (ntime-2):ntime
+
 # Set seed
 set.seed(12)
 
@@ -28,19 +33,19 @@ oos_rows <- sample(x = 1:nloc,
 
 # Take in-sample cells from first time period
 simulation_in1 <- simulations |>
-  dplyr::filter(time == 1) |>
+  dplyr::filter(time %in% first_steps) |>
   dplyr::arrange(space) |>
   dplyr::filter(!(space %in% oos_rows))
 
 # Out-of-sample from first time period
 simulation_oos1 <- simulations |>
-  dplyr::filter(time == 1) |>
+  dplyr::filter(time %in% first_steps) |>
   dplyr::arrange(space) |>
   dplyr::filter(space %in% oos_rows)
 
 # Out-of-sample from final time period
 simulation_ooslast <- simulations |>
-  dplyr::filter(time == ntime) |>
+  dplyr::filter(time %in% last_steps) |>
   dplyr::arrange(space) |>
   dplyr::filter(space %in% oos_rows)
 
@@ -49,7 +54,7 @@ simulation_ooslast <- simulations |>
 # Fit generalized linear model
 fit_glm <- glm(formula = density ~ var1 + var2 + var3,
                data = simulation_in1,
-               family = gaussian(link = 'log'))
+               family = gaussian(link = 'identity'))
 
 # Look at summary
 summary(fit_glm)
@@ -80,13 +85,13 @@ fit_rf
 
 # Fit GAM
 fit_gam <- mvgam::mvgam(formula = density ~
-                          s(var1, k = 4) + 
-                          s(var2, k = 4) + 
-                          s(var3, k = 4),
+                          s(var1, k = 3) + # decreased knots because of convergence issues
+                          s(var2, k = 3) + # ""
+                          s(var3, k = 3),  # ""
                         data = dplyr::select(simulation_in1, -time),
-                        burnin = 10000,
-                        samples = 5000,
-                        family = mvgam::lognormal())
+                        burnin = 20000,
+                        samples = 20000,
+                        family = gaussian())
 
 # Look at summary
 summary(fit_gam)

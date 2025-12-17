@@ -1,26 +1,20 @@
-#### Analyzing Simulation 3- alternate
+#### Analyzing Simulation 6- alternate
 #### Fitting models and predicting stem density
-#### Assumpstions for Simulation 3 are as follows:
-#### 1. Environment does not change over time
-#### 2. Ecosystem does change over time, independently of environment
-#### 3. Stem density is randomly drawn within each ecosystem state
-####    (not related to the environment in its own right)
-#### 4. Alterate has fewer environmental variables
+#### Assumptinos for Simulation 6 are as follows:
+#### 1. Environment changes over time
+#### 2. Environmental change leads to ecosystem change
+#### 3. Stem density is explained by environment
+#### 4. Alternate has fewer environmental variables
 
 rm(list = ls())
 
-# Load output from Simulation 3
-load('out/simulation/sim3_alt.RData')
+# Load output from Simulation 6
+load('out/simulation/sim6_alt2.RData')
 
 # Number of locations
 nloc <- 100
 # Number of time steps
 ntime <- 150
-
-# First three time steps
-first_steps <- 1:3
-# Last three time steps
-last_steps <- (ntime-2):ntime
 
 # Set seed
 set.seed(12)
@@ -34,19 +28,19 @@ oos_rows <- sample(x = 1:nloc,
 
 # Take in-sample cells from first time period
 simulation_in1 <- simulations |>
-  dplyr::filter(time %in% first_steps) |>
+  dplyr::filter(time == 1) |>
   dplyr::arrange(space) |>
   dplyr::filter(!(space %in% oos_rows))
 
 # Out-of-sample from first time period
 simulation_oos1 <- simulations |>
-  dplyr::filter(time %in% first_steps) |>
+  dplyr::filter(time == 1) |>
   dplyr::arrange(space) |>
   dplyr::filter(space %in% oos_rows)
 
 # Out-of-sample from final time period
 simulation_ooslast <- simulations |>
-  dplyr::filter(time %in% last_steps) |>
+  dplyr::filter(time == ntime) |>
   dplyr::arrange(space) |>
   dplyr::filter(space %in% oos_rows)
 
@@ -62,7 +56,7 @@ summary(fit_glm)
 
 #### 3. Fit random forest ####
 
-# Tune hyperparametrs
+# Tune hyperparameters
 tune_rf <- randomForestSRC::tune(formula = density ~
                                    var1 + var2,
                                  ntreeTry = 500,
@@ -86,11 +80,11 @@ fit_rf
 
 # Fit GAM
 fit_gam <- mvgam::mvgam(formula = density ~
-                          s(var1, k = 3) + # reducing k because of convergence issues
-                          s(var2, k = 3),  # ""
+                          s(var1, k = 4) +
+                          s(var2, k = 4),
                         data = dplyr::select(simulation_in1, -time),
-                        burnin = 20000,
-                        samples = 10000,
+                        burnin = 10000,
+                        samples = 5000,
                         family = gaussian())
 
 # Look at summary
@@ -103,36 +97,36 @@ summary(fit_gam)
 # GLM
 pred_1_glm <- predict(object = fit_glm,
                       newdata = dplyr::select(simulation_oos1,
-                                              var1, var2),
+                                              var1:var2),
                       type = 'response')
 
 # RF
 pred_1_rf <- randomForestSRC::predict.rfsrc(object = fit_rf,
                                             newdata = dplyr::select(simulation_oos1,
-                                                                    var1, var2))
+                                                                    var1:var2))
 
 # GAM
 pred_1_gam <- mvgam::predictions(model = fit_gam,
                                  newdata = dplyr::select(simulation_oos1,
-                                                         var1, var2))
+                                                         var1:var2))
 
 ## Predict out-of-sample locations from final time step
 
 # GLM
 pred_final_glm <- predict(object = fit_glm,
                           newdata = dplyr::select(simulation_ooslast,
-                                                  var1, var2),
+                                                  var1:var2),
                           type = 'response')
 
 # RF
 pred_final_rf <- randomForestSRC::predict.rfsrc(object = fit_rf,
                                                 newdata = dplyr::select(simulation_ooslast,
-                                                                        var1, var2))
+                                                                        var1:var2))
 
 # GAM
 pred_final_gam <- mvgam::predictions(model = fit_gam,
                                      newdata = dplyr::select(simulation_ooslast,
-                                                             var1, var2))
+                                                             var1:var2))
 
 #### 6. Evaluate predictions ####
 
@@ -192,7 +186,7 @@ cowplot::plot_grid(p_glm_1, p_rf_1, p_gam_1,
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/simulations/sim_3_alt_pred_1.png')
+                filename = 'figures/simulations/sim_6_alt_pred_1.png')
 
 ## Plots of prediction accuracy from final time step
 
@@ -244,13 +238,13 @@ p_gam_final <- ggplot2::ggplot() +
   ggplot2::theme(plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
                  plot.subtitle = ggplot2::element_text(size = 12, hjust = 0.5))
 
-# Plot grid
+# Plot together
 cowplot::plot_grid(p_glm_final, p_rf_final, p_gam_final,
                    nrow = 1)
 
 # Save
 ggplot2::ggsave(plot = ggplot2::last_plot(),
-                filename = 'figures/simulations/sim_3_alt_pred_final.png')
+                filename = 'figures/simulations/sim_6_alt_pred_final.png')
 
 ## Calculate correlations between observed and predicted stem density
 

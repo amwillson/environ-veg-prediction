@@ -70,29 +70,21 @@ ggplot2::ggplot() +
 ## with stem density in the first time period
 ## This is the same as Simulation 2
 
-# Gradient from 0 to 1 representing smooth left-right gradient
-base_var <- seq(from = 0, to = 1, length.out = nloc)
-
-# Add a small amount of random noise
-var1 <- base_var + rnorm(n = length(base_var),
-                         mean = 0,
-                         sd = 0.1)
-
 # Variable correlated with stem density
-base_var2 <- scales::rescale(cont_response, to = c(0, 1))
+base_var1 <- scales::rescale(cont_response, to = c(0, 1))
 
 # Add a small amount of random noise
-var2 <- base_var2 + rnorm(n = length(base_var),
+var1 <- base_var1 + rnorm(n = length(base_var1),
                           mean = 0,
                           sd = 0.1)
 
 # Variables with more stark change between locations of
 # initial ecosystem states
-base_var3 <- c(rep(0, times = nloc/2),
+base_var2 <- c(rep(0, times = nloc/2),
                rep(1, times = nloc/2))
 
 # Add random noise
-var3 <- base_var3 + rnorm(n = length(base_var),
+var2 <- base_var2 + rnorm(n = length(base_var2),
                           mean = 0,
                           sd = 0.1)
 
@@ -128,30 +120,51 @@ ggplot2::ggplot() +
                  axis.title.y = ggplot2::element_text(angle = 90),
                  plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
 
-# Variable 3
-ggplot2::ggplot() +
-  ggplot2::geom_tile(ggplot2::aes(x = factor(1:nloc),
-                                  y = 1,
-                                  fill = var3),
-                     color = 'black') +
-  ggplot2::xlab('Space') + ggplot2::ylab('Time') +
-  ggplot2::ggtitle('Variable 3') +
-  ggplot2::scale_fill_distiller(name = '',
-                                palette = 'Purples') +
-  ggplot2::theme_void() +
-  ggplot2::theme(axis.title = ggplot2::element_text(size = 12),
-                 axis.title.y = ggplot2::element_text(angle = 90),
-                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5))
-
 #### 4. Define relationship between environment and ecosystem ####
+## I define the relationship in two steps: one for
+## ecosystem state and one for stem density within the forest
 
-## The relationship is fit between the stem density and the
-## environmental conditions
-## I'm only fitting the "true" relationship with variables 2 and 3
-## Basically variable 1 is being used as a "red herring"
-true_rel <- lm(cont_response ~ var2 + var3)
+## The first part is equivalent to ecosystem state prediction
+## in Simulation 5
 
-# Extract true beta coefficients
+# Fit "true" relationship between the binary response
+# variable and the environment
+# Assuming here that only variables 1 and 4 matter
+#true_rel_bin <- glm(factor(binary_response) ~ var1 + var3,
+#                    family = 'binomial')
+#true_rel_bin <- logistf::logistf(binary_response ~ var1 + var3,
+#                                 control = logistf::logistf.control(maxit = 1000))
+
+# Define true betas for binary response
+# vars 1 & 5 are the estimates from the fitted model
+# var 2-4 are 0
+#true_beta_bin <- unname(c(true_rel_bin$coefficients[1], # intercept
+#                          true_rel_bin$coefficient[2], # variable 1
+#                          0, # variables 2-3
+#                          true_rel_bin$coefficients[3])) # variable 4
+
+# Subset only forest and only savanna stem density cells
+#only_sav <- cont_response[1:(nloc/2)]
+#only_for <- cont_response[(nloc/2+1):nloc]
+
+# Fit "true" relationship between environment and
+# the continuous response variable
+#true_rel_cont_sav <- lm(only_sav ~ var2[1:(nloc/2)])
+#true_rel_cont_for <- lm(only_for ~ var2[(nloc/2+1):nloc])
+
+# Define true betas for continuous response
+# var 2 is the estimate from the model
+# vars 1 and 3-5 are 0
+#true_beta_cont_sav <- unname(c(true_rel_cont_sav$coefficients[1], # intercept
+#                               0, # variable 1
+#                               true_rel_cont_sav$coefficients[2], # variable 2
+#                               0)) # variables 3-5
+#true_beta_cont_for <- unname(c(true_rel_cont_for$coefficients[1], # intercept
+#                               0, # variable 1
+#                               true_rel_cont_for$coefficients[2], # variable 2
+#                               0)) # variables 3-5
+
+true_rel <- lm(cont_response ~ var1 + var2)
 true_beta <- unname(true_rel$coefficients)
 
 #### 5. Process evolution ####
@@ -165,12 +178,12 @@ sim_cont <- matrix(, nrow = ntime,
                    ncol = nloc)
 sim_cont[1,] <- cont_response
 
-x1_mat <- x2_mat <- x3_mat <-
+x1_mat <- x2_mat <- #x3_mat <-
   matrix(, nrow = ntime,
          ncol = nloc)
 x1_mat[1,] <- var1
 x2_mat[1,] <- var2
-x3_mat[1,] <- var3
+#x3_mat[1,] <- var3
 
 # Set seed again
 set.seed(1)
@@ -181,45 +194,54 @@ for(i in 2:nrow(sim_binary)){
   for(j in 1:ncol(sim_binary)){
     #### Environmental change
     
-    # Increasing pattern for variables 1 and 3
+    # Increasing pattern for variables 1 and 5
     x1_mat[i,j] <- x1_mat[i-1,j] + rnorm(n = 1,
                                          mean = 0.003,
                                          sd = 0.01)
-    x3_mat[i,j] <- x3_mat[i-1,j] + rnorm(n = 1,
+    x2_mat[i,j] <- x2_mat[i-1,j] + rnorm(n = 1,
                                          mean = 0.003,
                                          sd = 0.01)
     
-    # Less change for variable 2
-    x2_mat[i,j] <- x2_mat[i-1,j] + rnorm(n = 1,
-                                         mean = 0,
-                                         sd = 0.01)
+    # Random change for variables 2 and 3
+    #x2_mat[i,j] <- x2_mat[i-1,j] + rnorm(n = 1,
+    #                                     mean = 0,
+    #                                     sd = 0.01)
     
-    # Combine variables for prediction
-    xs <- as.data.frame(cbind(x2_mat[i,j], x3_mat[i,j]))
-    colnames(xs) <- c('var2', 'var3')
+    #### Dependent change in ecosystem state
     
-    #### Dependent change in stem density
+    # Previous ecosystem state
+    prev <- sim_binary[i-1,j]
     
-    curr_density <- unname(predict(object = true_rel,
-                                   newdata = xs)) +
-      rnorm(n = 1, mean = 0, sd = 1)
-      
-    #curr_density <- true_beta[1] +
-    #  true_beta[2] * x2_mat[i,j] +
-    #  true_beta[3] * x3_mat[i,j] +
-      # Random noise
-    #rnorm(n = 1, mean = 0, sd = sd(cont_response) * 0.05)
+    # Ecosystem state is a function of the environment
+    # Predicted based on fitted coefficients
+    curr_density <- true_beta[1] +
+                           true_beta[2] * x1_mat[i,j] +
+                           true_beta[3] * x2_mat[i,j]
     
-    # Adjustments to maintain realistic stem densities
-    if(curr_density < 1) curr_density <- 1
-    if(curr_density < 150 & curr_density > 50) curr_density <- 150
+    ## Change in stem density based on ecosystem state
+    ## and environmental conditions
     
-    # Assign ecosystem state
-    if(curr_density < 150) curr <- 0
-    if(curr_density >= 150) curr <- 1
+    # If the state is savanna, use savanna relationship
+    #if(curr == 0) curr_density <-
+    #  true_beta_cont_sav[1] +
+    #  true_beta_cont_sav[2] * x1_mat[i,j] +
+    #  true_beta_cont_sav[3] * x2_mat[i,j] +
+    #  true_beta_cont_sav[4] * x3_mat[i,j]
+    
+    # If the state is forest, use forest relationship
+    #if(curr == 1) curr_density <-
+    #  true_beta_cont_for[1] +
+    #  true_beta_cont_for[2] * x1_mat[i,j] +
+    #  true_beta_cont_for[3] * x2_mat[i,j] +
+    #  true_beta_cont_for[4] * x3_mat[i,j]
+    
+    # Adjustments to ensure that we maintain bimodality
+    #if(curr == 0 & curr_density > 47) curr_density <- 47
+    #if(curr == 0 & curr_density < 1) curr_density <- 1
+    #if(curr == 1 & curr_density < 150) curr_density <- 150
     
     # Update matrices
-    sim_binary[i,j] <- curr
+    #sim_binary[i,j] <- curr
     sim_cont[i,j] <- curr_density
   }
 }
@@ -284,12 +306,12 @@ sim_cont_df |>
 # Melt matrices
 x1_df <- reshape2::melt(x1_mat)
 x2_df <- reshape2::melt(x2_mat)
-x3_df <- reshape2::melt(x3_mat)
+#x3_df <- reshape2::melt(x3_mat)
 
 # Add column names
 colnames(x1_df) <- c('time', 'space', 'var1')
 colnames(x2_df) <- c('time', 'space', 'var2')
-colnames(x3_df) <- c('time', 'space', 'var3')
+#colnames(x3_df) <- c('time', 'space', 'var3')
 
 ## Plot predictor variables over time
 
@@ -355,10 +377,10 @@ simulations <- sim_cont_df |>
   dplyr::full_join(y = x1_df,
                    by = c('time', 'space')) |>
   dplyr::full_join(y = x2_df,
-                   by = c('time', 'space')) |>
+                   by = c('time', 'space')) #|>
   dplyr::full_join(y = x3_df,
                    by = c('time', 'space'))
 
 # Save
 save(simulations,
-     file = 'out/simulation/sim6_alt.RData')
+     file = 'out/simulation/sim6_alt2.RData')
