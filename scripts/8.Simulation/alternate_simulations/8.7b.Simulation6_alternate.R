@@ -204,19 +204,13 @@ for(i in 2:nrow(sim_binary)){
                                    newdata = xs)) +
       rnorm(n = 1, mean = 0, sd = 1)
       
-    #curr_density <- true_beta[1] +
-    #  true_beta[2] * x2_mat[i,j] +
-    #  true_beta[3] * x3_mat[i,j] +
-      # Random noise
-    #rnorm(n = 1, mean = 0, sd = sd(cont_response) * 0.05)
-    
     # Adjustments to maintain realistic stem densities
     if(curr_density < 1) curr_density <- 1
-    if(curr_density < 150 & curr_density > 50) curr_density <- 150
+    #if(curr_density < 150 & curr_density > 100) curr_density <- 150
     
     # Assign ecosystem state
-    if(curr_density < 150) curr <- 0
-    if(curr_density >= 150) curr <- 1
+    if(curr_density < 50) curr <- 0
+    if(curr_density >= 50) curr <- 1
     
     # Update matrices
     sim_binary[i,j] <- curr
